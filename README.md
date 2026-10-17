@@ -20,6 +20,20 @@ playback reporting.
 > You **need** access to a [Jellyfin](https://jellyfin.org) server. sombrAMP plays your own music from it and
 > doesn't connect to any streaming service.
 
+## Downloads
+
+The **sombrAMP builds** workflow (`.github/workflows/sombramp.yml`) builds Android and Windows on every push and
+attaches them to the run on the repository's Actions tab:
+
+- **sombrAMP-android**: a release APK. Allow installing from your browser or file manager, then open it. It has
+  the same app ID as Finamp, so uninstall Finamp first if you have it.
+- **sombrAMP-windows**: the app folder. Unzip it anywhere and run `Finamp.exe`; nothing to install.
+- **sombrAMP-windows-msix**: an installer. It is signed with the test certificate in `windows/runner/resources`
+  (password `finamp`), so Windows only installs it after that certificate is added to *Local Machine → Trusted
+  People*.
+
+Signing with your own keys is optional; the repository secrets it reads are listed at the top of the workflow.
+
 ## The design
 
 Everything comes from System S; nothing in the look is new to this app.

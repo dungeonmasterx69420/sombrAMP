@@ -1,0 +1,143 @@
+name: sombrAMP builds
+
+# Release builds of sombrAMP for Android and Windows, uploaded as artifacts of each run.
+#
+# Optional repository secrets:
+#   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD
+#     sign the APK with your own key. Without them each build gets a throwaway key, so a newer build only
+#     installs over an older one after uninstalling it.
+#   WINDOWS_MSIX_CERTIFICATE_BASE64, WINDOWS_MSIX_CERTIFICATE_PASSWORD
+#     sign the MSIX with your own certificate instead of the test certificate in windows/runner/resources.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '*.*.*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.7'
+
+jobs:
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v6
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Free up disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/share/swift /usr/local/.ghcup /usr/local/julia* /usr/local/share/powershell
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Set up signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          keystore="$RUNNER_TEMP/release.jks"
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$keystore"
+            alias="$KEY_ALIAS"
+            store_password="$KEYSTORE_PASSWORD"
+            key_password="${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+            echo "The APK is signed with the release key from the repository secrets." >> "$GITHUB_STEP_SUMMARY"
+          else
+            alias=sombramp
+            store_password="$(openssl rand -hex 16)"
+            key_password="$store_password"
+            keytool -genkeypair -keystore "$keystore" -storetype PKCS12 -alias "$alias" -keyalg RSA -keysize 2048 \
+              -validity 10000 -storepass "$store_password" -keypass "$key_password" -dname "CN=sombrAMP"
+            echo "::warning::No ANDROID_KEYSTORE_BASE64 secret: this APK is signed with a throwaway key."
+            echo "The APK is signed with a throwaway key. To install a later build over it, uninstall this one first, or add the ANDROID_KEYSTORE_* secrets." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          {
+            echo "storeFile=$keystore"
+            echo "storePassword=$store_password"
+            echo "keyAlias=$alias"
+            echo "keyPassword=$key_password"
+          } > android/key.properties
+
+      - run: flutter build apk --release --no-pub
+
+      - name: Name the APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk "sombrAMP-${GITHUB_REF_NAME//\//-}-android.apk"
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: sombrAMP-android
+          path: sombrAMP-*-android.apk
+          compression-level: 0 # an APK is already compressed
+
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - name: Support long paths
+        run: git config --system core.longpaths true
+
+      - name: Clone repository
+        uses: actions/checkout@v6
+
+      - name: Set up Rust (for smtc_windows)
+        uses: hecrj/setup-rust-action@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - run: flutter pub get
+
+      - run: flutter build windows --release --no-pub
+
+      # The folder runs as is: unzip it and start Finamp.exe. No certificate needed.
+      - uses: actions/upload-artifact@v6
+        with:
+          name: sombrAMP-windows
+          path: build/windows/x64/runner/Release/
+
+      - name: Build the MSIX installer
+        shell: bash
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.WINDOWS_MSIX_CERTIFICATE_BASE64 }}
+          CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_MSIX_CERTIFICATE_PASSWORD }}
+        run: |
+          if [ -n "$CERTIFICATE_BASE64" ]; then
+            echo "$CERTIFICATE_BASE64" | base64 -d > "$RUNNER_TEMP/msix.pfx"
+            dart run msix:create --install-certificate false \
+              --certificate-path "$RUNNER_TEMP/msix.pfx" --certificate-password "$CERTIFICATE_PASSWORD"
+          else
+            dart run msix:create --install-certificate false
+            echo "The MSIX is signed with the test certificate in windows/runner/resources (CN=Finamp); Windows only installs it after that certificate is trusted." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          mv build/windows/x64/runner/Release/finamp.msix "sombrAMP-${GITHUB_REF_NAME//\//-}-windows.msix"
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: sombrAMP-windows-msix
+          path: sombrAMP-*-windows.msix
+          compression-level: 0 # an MSIX is already compressed
