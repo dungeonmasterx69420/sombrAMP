@@ -7,7 +7,7 @@
     "unknownName": "Ukjent navn",
     "album": "Album",
     "albumArtist": "Albumsartist",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Nedlastninger",
     "settings": "Innstillinger",
     "sortBy": "Sorter etter",
@@ -171,7 +171,7 @@
     },
     "playButtonLabel": "Spill",
     "stackTrace": "Stabelspor",
-    "applicationLegalese": "Lisensiert MPL 2.0, med kildekode tilgjengelig på\n\ngithub.com/jmshrv/finamp",
+    "applicationLegalese": "Lisensiert MPL 2.0, med kildekode tilgjengelig på\n\ngithub.com/dungeonmasterx69420/sombrAMP",
     "transcoding": "Transkoding",
     "addDownloads": "Legg til nedlastinger",
     "downloadsQueued": "Nedlastinger lagt til.",
@@ -221,7 +221,7 @@
     "@playNext": {
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
-    "noMusicLibrariesBody": "Finamp fant ingen musikkbibliotek. Forsikre deg om at din Jellyfin-tjener inneholder minst ett bibliotek med innholdstype satt til «Musikk».",
+    "noMusicLibrariesBody": "sombrAMP fant ingen musikkbibliotek. Forsikre deg om at din Jellyfin-tjener inneholder minst ett bibliotek med innholdstype satt til «Musikk».",
     "disableGesture": "Skru av håndvendinger",
     "noMusicLibrariesTitle": "Ingen musikkbibliotek",
     "@noMusicLibrariesTitle": {
@@ -238,9 +238,9 @@
     },
     "loginFlowWelcomeHeading": "Velkommen til",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
-    "about": "Om Finamp",
+    "about": "Om sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -248,9 +248,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Bidra til Finamp på GitHub:",
+    "aboutContributionLink": "Bidra til sombrAMP på GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Les de siste utgivelsesnotatene:",
     "@aboutReleaseNotes": {
@@ -260,7 +260,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Takk for at du bruker Finamp!",
+    "aboutThanks": "Takk for at du bruker sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },

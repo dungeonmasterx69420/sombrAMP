@@ -3,7 +3,7 @@
     "artists": "Umělci",
     "clear": "Vymazat",
     "downloads": "Stahování",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "album": "Album",
     "albumArtist": "Umělec alba",
     "errorScreenError": "Při načítání seznamu chyb došlo k chybě! Vytvořte prosím problém na GitHubu a vymažte data aplikace",
@@ -227,12 +227,12 @@
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
     "confirm": "Potvrdit",
-    "noMusicLibrariesBody": "Finamp nenalezl žádné hudební knihovny. Ujistěte se prosím, že váš server Jellyfin obsahuje alespoň jednu knihovnu s typem obsahu nastaveným na „Hudba“.",
+    "noMusicLibrariesBody": "sombrAMP nenalezl žádné hudební knihovny. Ujistěte se prosím, že váš server Jellyfin obsahuje alespoň jednu knihovnu s typem obsahu nastaveným na „Hudba“.",
     "interactions": "Interakce",
-    "about": "O aplikaci Finamp",
-    "aboutContributionLink": "Přispějte do Finampu na GitHubu:",
+    "about": "O aplikaci sombrAMP",
+    "aboutContributionLink": "Přispějte do sombrAMPu na GitHubu:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Přečtěte si informace o posledním vydání:",
     "@aboutReleaseNotes": {
@@ -308,13 +308,13 @@
     "@loginFlowAccountSelectionHeading": {
         "description": "Heading for the account selection step during the login flow."
     },
-    "aboutThanks": "Děkujeme za používání Finampu!",
+    "aboutThanks": "Děkujeme za používání sombrAMPu!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
     "loginFlowWelcomeHeading": "Vítejte v aplikaci {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "connectingToServer": "Připojování k serveru…",
     "@connectingToServer": {
@@ -454,7 +454,7 @@
     "@queueRestoreButtonLabel": {
         "description": "Button to restore archived now playing queue, overwriting current queue"
     },
-    "reportQueueToServerSubtitle": "Pokud je tato možnost povolena, odešle Finamp aktuální frontu na server. Tato funkce může zlepšit vzdálené ovládání a umožnit serverové obnovení fronty. Povoleno vždy, pokud je povolena možnost „Přehrát na“.",
+    "reportQueueToServerSubtitle": "Pokud je tato možnost povolena, odešle sombrAMP aktuální frontu na server. Tato funkce může zlepšit vzdálené ovládání a umožnit serverové obnovení fronty. Povoleno vždy, pokud je povolena možnost „Přehrát na“.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1387,7 +1387,7 @@
     "@normalizationGain": {
         "description": "Label for the feature chips showing the normalization gain / LUFS offset of a track"
     },
-    "playbackSpeedControlSettingDescription": "Automaticky:\nFinamp se pokusí rozpoznat, zda je přehrávaná skladba podcast nebo audiokniha (její část). Za takový případ se považuje, pokud je stopa delší než {trackDuration} minut, pokud je album stopy delší než {albumDuration} hodin nebo pokud má stopa přiřazen alespoň jeden z těchto žánrů: {genreList}\nV nabídce na obrazovce přehrávače se pak zobrazí ovládací prvky rychlosti přehrávání.\n\nZobrazené:\nOvládací prvky rychlosti přehrávání v nabídce obrazovky přehrávače budou vždy zobrazeny.\n\nSkryté:\nOvládací prvky rychlosti přehrávání v nabídce obrazovky přehrávače budou vždy skryté.",
+    "playbackSpeedControlSettingDescription": "Automaticky:\nsombrAMP se pokusí rozpoznat, zda je přehrávaná skladba podcast nebo audiokniha (její část). Za takový případ se považuje, pokud je stopa delší než {trackDuration} minut, pokud je album stopy delší než {albumDuration} hodin nebo pokud má stopa přiřazen alespoň jeden z těchto žánrů: {genreList}\nV nabídce na obrazovce přehrávače se pak zobrazí ovládací prvky rychlosti přehrávání.\n\nZobrazené:\nOvládací prvky rychlosti přehrávání v nabídce obrazovky přehrávače budou vždy zobrazeny.\n\nSkryté:\nOvládací prvky rychlosti přehrávání v nabídce obrazovky přehrávače budou vždy skryté.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1662,7 +1662,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Povolí funkci „Přehrát na“ služby Jellyfin (vzdálené ovládání aplikace Finamp z jiného klienta). Zakažte, pokud vaše reverzní proxy nebo server nepodporuje websockety.",
+    "enablePlayonSubtitle": "Povolí funkci „Přehrát na“ služby Jellyfin (vzdálené ovládání aplikace sombrAMP z jiného klienta). Zakažte, pokud vaše reverzní proxy nebo server nepodporuje websockety.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1719,7 +1719,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Vytvořte prosím problém na „github.com/jmshrv/finamp“ i s protokoly (použijte tlačítko níže) a snímkem této stránky, abychom chybu mohli opravit co nejrychleji to bude možné.",
+    "startupErrorCallToAction": "Vytvořte prosím problém na „github.com/dungeonmasterx69420/sombrAMP“ i s protokoly (použijte tlačítko níže) a snímkem této stránky, abychom chybu mohli opravit co nejrychleji to bude možné.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1764,7 +1764,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "Automaticky znovu načíst frontu při změně zdroje (např. povolený offline režim nebo přepnutí adresy serveru). Pokud je zakázáno, Finamp se vás nejprve zeptá.",
+    "autoReloadQueueSubtitle": "Automaticky znovu načíst frontu při změně zdroje (např. povolený offline režim nebo přepnutí adresy serveru). Pokud je zakázáno, sombrAMP se vás nejprve zeptá.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2122,7 +2122,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Opravdu chcete povolit sdílení serveru, i když se nacházíte v režimu offline? Tato možnost způsobí, že bude Finamp odesílat data přes místní síť.",
+    "serverSharingMenuConfirmationDialogText": "Opravdu chcete povolit sdílení serveru, i když se nacházíte v režimu offline? Tato možnost způsobí, že bude sombrAMP odesílat data přes místní síť.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2150,7 +2150,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Funguje to tak, že aplikace naslouchá požadavkům na vyhledání serveru od ostatních klientů v místní síti a poté na tyto požadavky odpovídá nakonfigurovanou adresou vašeho serveru Jellyfin.\nPokud máte nastavenou jak místní, tak veřejnou adresu, Finamp poskytne klientovi, který o ně požádal, obě adresy.",
+    "serverSharingMenuDetails": "Funguje to tak, že aplikace naslouchá požadavkům na vyhledání serveru od ostatních klientů v místní síti a poté na tyto požadavky odpovídá nakonfigurovanou adresou vašeho serveru Jellyfin.\nPokud máte nastavenou jak místní, tak veřejnou adresu, sombrAMP poskytne klientovi, který o ně požádal, obě adresy.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2190,7 +2190,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Pokud se pokoušíte přihlásit do jiného klienta Jellyfin pomocí Rychlého připojení, můžete zadat nebo vložit 6ciferný kód do pole výše. Tím autorizujete žádost druhého klienta a přihlásíte se do stejného účtu, který používáte v aplikaci Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Pokud se pokoušíte přihlásit do jiného klienta Jellyfin pomocí Rychlého připojení, můžete zadat nebo vložit 6ciferný kód do pole výše. Tím autorizujete žádost druhého klienta a přihlásíte se do stejného účtu, který používáte v aplikaci sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2356,7 +2356,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Varování: Server Jellyfin je nejspíše nesprávně nastaven a nevypočívává hashe rozmazání.  To zabraňuje aplikaci Finamp v deduplikaci stahování obrázků.  Opravte prosím server a spusťte opravu stahování.",
+    "missingBlurhashWarning": "Varování: Server Jellyfin je nejspíše nesprávně nastaven a nevypočívává hashe rozmazání.  To zabraňuje aplikaci sombrAMP v deduplikaci stahování obrázků.  Opravte prosím server a spusťte opravu stahování.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -2499,11 +2499,11 @@
     },
     "useMonochromeIcon": "Použít monochromatické logo",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Toto ovlivní pouze ikonu v aplikaci, ne ikonu na domovské obrazovce.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "playbackActionPageMoveWithinQueue": "Přesunout uvnitř fronty",
     "@playbackActionPageMoveWithinQueue": {
@@ -2845,11 +2845,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Řekněte „Hej Siri, přehraj [skladbu/umělce/album] v aplikaci Finamp]“",
+    "carPlaySiriHint": "Řekněte „Hej Siri, přehraj [skladbu/umělce/album] v aplikaci sombrAMP]“",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Otevřete aplikaci Finamp na vašem telefonu a přihlaste se do vašeho serveru Jellyfin.",
+    "carPlayLoginPrompt": "Otevřete aplikaci sombrAMP na vašem telefonu a přihlaste se do vašeho serveru Jellyfin.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3415,7 +3415,7 @@
     },
     "libraryQualifierActive": "Aktivní",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "offlineSortFallback": "Řazení dle {onlineSort} je k dispozici pouze online.  V současné době se používá výchozí pořadí",
     "@offlineSortFallback": {
@@ -3654,7 +3654,7 @@
     "perTabGridModeScreen": "Nastavit typy zobrazení dle karty",
     "perTabAlbumGrid": "Alba pouze v mřížce",
     "quickSettingsScreen": "Rychlá nastavení",
-    "quickSettingsScreenDescription": "Přizpůsobte si Finamp pomocí těchto základních možností. Kdykoli se sem můžete vrátit skrze nastavení.",
+    "quickSettingsScreenDescription": "Přizpůsobte si sombrAMP pomocí těchto základních možností. Kdykoli se sem můžete vrátit skrze nastavení.",
     "quickSettingsTabsLink": "Přesunout a skrýt karty",
     "quickSettingsTranscodeLink": "Všechna nastavení překódování",
     "quickSettingsLayoutLink": "Všechna nastavení rozložení a motivu",

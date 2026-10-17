@@ -22,7 +22,7 @@
     "@startMixNoTracksArtist": {
         "description": "Snackbar message that shows when the user presses the instant mix button with no artists selected"
     },
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "clear": "مسح",
     "shuffleAll": "تشغيل الكل عشوائيًا",
     "startMixNoTracksAlbum": "اضغط مطولاً على ألبوم لإضافته أو إزالته من منشئ المزيج قبل بدء المزيج",
@@ -230,7 +230,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "يرجى فتح تذكرة (issue) على \"github.com/jmshrv/finamp\" مع إرفاق سجلات الأخطاء (استخدم الزر أدناه) ولقطة شاشة لهذه الصفحة، حتى نتمكن من إصلاح المشكلة بأسرع وقت ممكن.",
+    "startupErrorCallToAction": "يرجى فتح تذكرة (issue) على \"github.com/dungeonmasterx69420/sombrAMP\" مع إرفاق سجلات الأخطاء (استخدم الزر أدناه) ولقطة شاشة لهذه الصفحة، حتى نتمكن من إصلاح المشكلة بأسرع وقت ممكن.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -238,7 +238,7 @@
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
     },
-    "about": "حول Finamp",
+    "about": "حول sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -246,9 +246,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "ساهم في تطوير Finamp على GitHub:",
+    "aboutContributionLink": "ساهم في تطوير sombrAMP على GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "اقرأ الملاحظات حول أحدث إصدار:",
     "@aboutReleaseNotes": {
@@ -258,7 +258,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "شكراً لاستخدامك Finamp!",
+    "aboutThanks": "شكراً لاستخدامك sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -268,7 +268,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -471,7 +471,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "تلقائي:\nيحاول Finamp تحديد ما إذا كان المقطع الصوتي الذي تستمع إليه هو بودكاست أو (جزءًا من) كتاب صوتي. يُعتبر هذا صحيحًا إذا كان طول المقطع الصوتي أكثر من {trackDuration} دقيقة، أو إذا كان طول ألبوم المقطع الصوتي أكثر من {albumDuration} ساعة، أو إذا كان المقطع الصوتي مصنفًا ضمن أحد الأنواع التالية على الأقل: {genreList}.\nستظهر عناصر التحكم في سرعة التشغيل في شاشة المشغل.\n\nعرض:\nستظهر عناصر التحكم في سرعة التشغيل دائمًا في شاشة المشغل.\n\nإخفاء:\nعناصر التحكم في سرعة التشغيل مخفية دائمًا في شاشة المشغل.",
+    "playbackSpeedControlSettingDescription": "تلقائي:\nيحاول sombrAMP تحديد ما إذا كان المقطع الصوتي الذي تستمع إليه هو بودكاست أو (جزءًا من) كتاب صوتي. يُعتبر هذا صحيحًا إذا كان طول المقطع الصوتي أكثر من {trackDuration} دقيقة، أو إذا كان طول ألبوم المقطع الصوتي أكثر من {albumDuration} ساعة، أو إذا كان المقطع الصوتي مصنفًا ضمن أحد الأنواع التالية على الأقل: {genreList}.\nستظهر عناصر التحكم في سرعة التشغيل في شاشة المشغل.\n\nعرض:\nستظهر عناصر التحكم في سرعة التشغيل دائمًا في شاشة المشغل.\n\nإخفاء:\nعناصر التحكم في سرعة التشغيل مخفية دائمًا في شاشة المشغل.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -545,11 +545,11 @@
     },
     "useMonochromeIcon": "استخدم شعار أحادي اللون",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "هذا يؤثر فقط على الأيقونة داخل التطبيق، وليس على الأيقونة في شاشة التطبيقات.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "الإفتراضي",
     "useDefaultButton": "إعادة الضبط إلى لون التمييز الافتراضي",
@@ -1003,7 +1003,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "عند تفعيل هذا الخيار، سيرسل Finamp قائمة التشغيل الحالية إلى الخادم. يُحسّن هذا من إمكانيات التحكم عن بُعد، ويتيح استعادة قائمة التشغيل من الخادم. هذا الخيار دوما مفعّل عند تفعيل ميزة \"تشغيل على\".",
+    "reportQueueToServerSubtitle": "عند تفعيل هذا الخيار، سيرسل sombrAMP قائمة التشغيل الحالية إلى الخادم. يُحسّن هذا من إمكانيات التحكم عن بُعد، ويتيح استعادة قائمة التشغيل من الخادم. هذا الخيار دوما مفعّل عند تفعيل ميزة \"تشغيل على\".",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1031,7 +1031,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "يُفعّل هذا الخيار ميزة \"تشغيل على\" في Jellyfin (التحكم عن بُعد في Finamp من عميل آخر). عطّل هذا الخيار إذا كان خادمك أو البروكسي العكسي لا يدعم بروتوكول WebSockets.",
+    "enablePlayonSubtitle": "يُفعّل هذا الخيار ميزة \"تشغيل على\" في Jellyfin (التحكم عن بُعد في sombrAMP من عميل آخر). عطّل هذا الخيار إذا كان خادمك أو البروكسي العكسي لا يدعم بروتوكول WebSockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1172,7 +1172,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "تعذر على Finamp العثور على أي مكتبات موسيقية. يرجى التأكد من أن خادم Jellyfin الخاص بك يحتوي على مكتبة واحدة على الأقل بنوع محتوى \"موسيقى\".",
+    "noMusicLibrariesBody": "تعذر على sombrAMP العثور على أي مكتبات موسيقية. يرجى التأكد من أن خادم Jellyfin الخاص بك يحتوي على مكتبة واحدة على الأقل بنوع محتوى \"موسيقى\".",
     "refresh": "تحديث",
     "moreInfo": "مزيد من المعلومات",
     "volumeNormalizationSettingsTitle": "توحيد مستوى الصوت",
@@ -2334,7 +2334,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "إعادة تحميل قائمة الانتظار تلقائيًا عند تغيير المصدر (مثل تفعيل الوضع غير المتصل أو تغيير عنوان الخادم). في حال التعطيل، سيقوم Finamp بسؤالك بدلاً من ذلك.",
+    "autoReloadQueueSubtitle": "إعادة تحميل قائمة الانتظار تلقائيًا عند تغيير المصدر (مثل تفعيل الوضع غير المتصل أو تغيير عنوان الخادم). في حال التعطيل، سيقوم sombrAMP بسؤالك بدلاً من ذلك.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2538,7 +2538,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "هل أنت متأكد من رغبتك في تفعيل مشاركة الخادم على الرغم من أنك في وضع \"عدم الاتصال\"؟ سيؤدي هذا إلى قيام Finamp بإرسال البيانات عبر الشبكة المحلية.",
+    "serverSharingMenuConfirmationDialogText": "هل أنت متأكد من رغبتك في تفعيل مشاركة الخادم على الرغم من أنك في وضع \"عدم الاتصال\"؟ سيؤدي هذا إلى قيام sombrAMP بإرسال البيانات عبر الشبكة المحلية.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2566,7 +2566,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "تعمل هذه الميزة من خلال الاستماع لطلبات اكتشاف الخادم من التطبيقات الأخرى على الشبكة المحلية، ثم الرد عليها بالعنوان الذي تم إعداده لخادم Jellyfin الخاص بك.\nإذا قمت بإعداد عنوان محلي وعام معًا، فسيقوم Finamp بتوفيرهما معًا للتطبيق الذي أرسل الطلب.",
+    "serverSharingMenuDetails": "تعمل هذه الميزة من خلال الاستماع لطلبات اكتشاف الخادم من التطبيقات الأخرى على الشبكة المحلية، ثم الرد عليها بالعنوان الذي تم إعداده لخادم Jellyfin الخاص بك.\nإذا قمت بإعداد عنوان محلي وعام معًا، فسيقوم sombrAMP بتوفيرهما معًا للتطبيق الذي أرسل الطلب.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2606,7 +2606,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "إذا كنت تحاول تسجيل الدخول إلى تطبيق Jellyfin آخر عبر \"الاتصال السريع\"، فيمكنك إدخال الرمز المكون من 6 أرقام أو لصقه في الحقل أعلاه. سيؤدي هذا إلى اعتماد طلب تسجيل دخول التطبيق الآخر، وتسجيل دخولك بنفس الحساب الذي تستخدمه في Finamp.",
+    "quickConnectAuthorizationMenuDescription": "إذا كنت تحاول تسجيل الدخول إلى تطبيق Jellyfin آخر عبر \"الاتصال السريع\"، فيمكنك إدخال الرمز المكون من 6 أرقام أو لصقه في الحقل أعلاه. سيؤدي هذا إلى اعتماد طلب تسجيل دخول التطبيق الآخر، وتسجيل دخولك بنفس الحساب الذي تستخدمه في sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2751,7 +2751,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "تحذير: يبدو أن خادم Jellyfin غير مهيأ بشكل صحيح ولا يقوم بحساب الـ blurhashes. هذا يمنع Finamp من إلغاء تكرار صور التنزيلات. يرجى تصحيح إعدادات الخادم وتشغيل عملية إصلاح التنزيلات.",
+    "missingBlurhashWarning": "تحذير: يبدو أن خادم Jellyfin غير مهيأ بشكل صحيح ولا يقوم بحساب الـ blurhashes. هذا يمنع sombrAMP من إلغاء تكرار صور التنزيلات. يرجى تصحيح إعدادات الخادم وتشغيل عملية إصلاح التنزيلات.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },

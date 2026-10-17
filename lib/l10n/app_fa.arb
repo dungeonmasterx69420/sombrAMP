@@ -67,7 +67,7 @@
     },
     "aboutContributionLink": "در فین‌امپ روی گیت‌هاب مشارکت کنید:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutTranslations": "فین‌امپ را در ترجمه به زبان خود یاری کنید:",
     "@aboutTranslations": {
@@ -75,7 +75,7 @@
     },
     "loginFlowWelcomeHeading": "خوش آمدید به {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowGetStarted": "آغاز کنید!",
     "@loginFlowGetStarted": {
@@ -439,7 +439,7 @@
         "placeholders": {
             "sourceCodeLink": {
                 "type": "String",
-                "example": "https://github.com/jmshrv/finamp"
+                "example": "https://github.com/dungeonmasterx69420/sombrAMP"
             }
         }
     },
@@ -1531,7 +1531,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "لطفاً مسئله‌ای به همراه وقایع (از دکمه زیر استفاده کنید) و نماگرفت در \"github.com/jmshrv/finamp\" مطرح کنید تا بتوانیم در اسرع وقت آن را حل کنیم.",
+    "startupErrorCallToAction": "لطفاً مسئله‌ای به همراه وقایع (از دکمه زیر استفاده کنید) و نماگرفت در \"github.com/dungeonmasterx69420/sombrAMP\" مطرح کنید تا بتوانیم در اسرع وقت آن را حل کنیم.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1663,12 +1663,12 @@
     },
     "useMonochromeIcon": "استفاده از لوگو سیاه و سفید",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "amoledThemeSubtitle": "پالت رنگی تاریک را با سیاه مطلق جایگزین میکند.",
     "useMonochromeIconSubtitle": "فقط بر لوگو درون برنامه اثر میگزارد، نه ایکون برنامه.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "radio": "رادیو",
     "@radio": {

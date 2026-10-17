@@ -118,7 +118,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
         downloadLocationsMap: fields[15] == null
             ? {}
             : (fields[15] as Map).cast<String, DownloadLocation>(),
-        useCoverAsBackground: fields[16] == null ? true : fields[16] as bool,
+        useCoverAsBackground: fields[16] == null ? false : fields[16] as bool,
         playerScreenCoverMinimumPadding: fields[48] == null
             ? 1.5
             : (fields[48] as num).toDouble(),
@@ -414,7 +414,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
             ? DefaultSettings.accentColor
             : fields[132] as Color?,
         themeMode: fields[133] == null
-            ? ThemeMode.system
+            ? ThemeMode.dark
             : fields[133] as ThemeMode,
         amoledTheme: fields[148] == null ? false : fields[148] as bool,
         locale: fields[134] == null

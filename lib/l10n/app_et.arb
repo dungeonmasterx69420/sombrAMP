@@ -33,7 +33,7 @@
     },
     "sortOrder": "Sortimisjärjestus",
     "clear": "Puhasta",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Allalaadimised",
     "settings": "Seaded",
     "offlineMode": "Võrguühenduseta režiim",
@@ -211,7 +211,7 @@
     "bufferDuration": "Puhvri kestus",
     "disableGestureSubtitle": "Määrab, kas puuteviiped on keelatud.",
     "bufferDurationSubtitle": "Puhverdamise kestus sekundites. Vajab taaskäivitamist.",
-    "about": "Finampi teave",
+    "about": "sombrAMPi teave",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -223,9 +223,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Panusta Finampi arendusse GitHubis:",
+    "aboutContributionLink": "Panusta sombrAMPi arendusse GitHubis:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Loe viimaseid versioonimärkmeid:",
     "@aboutReleaseNotes": {
@@ -235,7 +235,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Täname, et kasutad Finampi!",
+    "aboutThanks": "Täname, et kasutad sombrAMPi!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -407,7 +407,7 @@
     "@playerScreenMinimumCoverPaddingEditorSubtitle": {
         "description": "Subtitle for the editor that allows the user to set the minimum padding around the album cover on the player screen."
     },
-    "playbackSpeedControlSettingDescription": "Automaatne\nFinamp proovib automaatselt tuvastada, kas mängitav klipp on podcast või audioraamat. Tuvastus toimub, kui klipp on pikem kui {trackDuration} minutit, kui klipi album on pikem kui {albumDuration} tundi või kui klipile on määratud üks neist žanritest: {genreList}\nTaasesitus kiiruse nuppe näidatakse sel juhul mängija vaate menüüs.\n\nNäidatud:\nTaasesitus kiiruse nuppe näidatakse alati mängija vaate menüüs.\n\nPeidetud:\nTaasesitus kiiruse nuppe ei näidata kunagi mängija vaate menüüs.",
+    "playbackSpeedControlSettingDescription": "Automaatne\nsombrAMP proovib automaatselt tuvastada, kas mängitav klipp on podcast või audioraamat. Tuvastus toimub, kui klipp on pikem kui {trackDuration} minutit, kui klipi album on pikem kui {albumDuration} tundi või kui klipile on määratud üks neist žanritest: {genreList}\nTaasesitus kiiruse nuppe näidatakse sel juhul mängija vaate menüüs.\n\nNäidatud:\nTaasesitus kiiruse nuppe näidatakse alati mängija vaate menüüs.\n\nPeidetud:\nTaasesitus kiiruse nuppe ei näidata kunagi mängija vaate menüüs.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -624,12 +624,12 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
     "adaptive": "Kohanduv",
-    "startupErrorCallToAction": "Palun loo veateade lehel \\\"github.com/jmshrv/finamp\\\", lisades logid (kasuta allolevat nuppu) ja ekraanipildi sellest lehest, et saaksime vea võimalikult kiiresti parandada.",
+    "startupErrorCallToAction": "Palun loo veateade lehel \\\"github.com/dungeonmasterx69420/sombrAMP\\\", lisades logid (kasuta allolevat nuppu) ja ekraanipildi sellest lehest, et saaksime vea võimalikult kiiresti parandada.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -767,11 +767,11 @@
     },
     "useMonochromeIcon": "Kasuta mustvalget logo",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "See muudab ainult rakendusesisest ikooni, mitte rakenduse käivitusikooni.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Vaikimisi",
     "useDefaultButton": "Lähtesta vaikimisi rõhuvärvile",
@@ -1016,7 +1016,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Kui lubatud, saadab Finamp praeguse järjekorra serverisse. See võib parandada kaugjuhtimist ja võimaldada järjekorra taastamist serveri poolelt. Alati lubatud, kui funktsioon 'Eelista seadmes' on lubatud.",
+    "reportQueueToServerSubtitle": "Kui lubatud, saadab sombrAMP praeguse järjekorra serverisse. See võib parandada kaugjuhtimist ja võimaldada järjekorra taastamist serveri poolelt. Alati lubatud, kui funktsioon 'Eelista seadmes' on lubatud.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1044,7 +1044,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Lubab Jellyfini funktsiooni 'Esita seadmes' (Finampi kaugjuhtimine teisest kliendist). Lülita see välja, kui sinu pöördproksi või server ei toeta Websocketeid.",
+    "enablePlayonSubtitle": "Lubab Jellyfini funktsiooni 'Esita seadmes' (sombrAMPi kaugjuhtimine teisest kliendist). Lülita see välja, kui sinu pöördproksi või server ei toeta Websocketeid.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1230,7 +1230,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "Finamp ei leidnud ühtegi muusikakogu. Veendu, et sinu Jellyfini serveris on vähemalt üks kogu, mille sisu tüübiks on määratud „Muusika”.",
+    "noMusicLibrariesBody": "sombrAMP ei leidnud ühtegi muusikakogu. Veendu, et sinu Jellyfini serveris on vähemalt üks kogu, mille sisu tüübiks on määratud „Muusika”.",
     "refresh": "Värskenda",
     "moreInfo": "Lisateave",
     "volumeNormalizationSettingsTitle": "Helitugevuse normaliseerimine",
@@ -2287,7 +2287,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "Värskenda järjekorda automaatselt, kui allikas muutub (nt võrguühenduseta režiim või serveri aadressi vahetus). Kui see on väljas, küsib Finamp kinnitust.",
+    "autoReloadQueueSubtitle": "Värskenda järjekorda automaatselt, kui allikas muutub (nt võrguühenduseta režiim või serveri aadressi vahetus). Kui see on väljas, küsib sombrAMP kinnitust.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2521,7 +2521,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Kas oled kindel, et soovid lubada serveri jagamise ka võrguühenduseta režiimis? See tähendab, et Finamp saadab andmeid läbi kohaliku võrgu.",
+    "serverSharingMenuConfirmationDialogText": "Kas oled kindel, et soovid lubada serveri jagamise ka võrguühenduseta režiimis? See tähendab, et sombrAMP saadab andmeid läbi kohaliku võrgu.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2549,7 +2549,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "See toimib, kuulates teiste seadmete päringuid kohalikus võrgus ning vastates neile sinu Jellyfini serveri aadressiga.\nKui sul on seadistatud nii kohalik kui ka avalik aadress, edastab Finamp mõlemad.",
+    "serverSharingMenuDetails": "See toimib, kuulates teiste seadmete päringuid kohalikus võrgus ning vastates neile sinu Jellyfini serveri aadressiga.\nKui sul on seadistatud nii kohalik kui ka avalik aadress, edastab sombrAMP mõlemad.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2589,7 +2589,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Kui proovid sisse logida teise Jellyfini klienti kiirühenduse kaudu, sisesta 6-kohaline kood ülaltoodud väljale. See kinnitab teise seadme sisselogimispäringu ja logib selle sisse samale kontole, mida kasutad Finampis.",
+    "quickConnectAuthorizationMenuDescription": "Kui proovid sisse logida teise Jellyfini klienti kiirühenduse kaudu, sisesta 6-kohaline kood ülaltoodud väljale. See kinnitab teise seadme sisselogimispäringu ja logib selle sisse samale kontole, mida kasutad sombrAMPis.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },

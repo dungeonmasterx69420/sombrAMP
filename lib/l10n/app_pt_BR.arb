@@ -13,7 +13,7 @@
     "music": "Música",
     "clear": "Limpar",
     "shuffleAll": "Misturar Tudo",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Downloads",
     "settings": "Configurações",
     "offlineMode": "Modo Offline",
@@ -223,14 +223,14 @@
     "@playNext": {
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
-    "noMusicLibrariesBody": "O Finamp não conseguiu encontrar nenhuma biblioteca de música. Certifique-se de que o seu servidor Jellyfin tenha pelo menos uma biblioteca com o tipo de conteúdo definido como \"Música\".",
+    "noMusicLibrariesBody": "O sombrAMP não conseguiu encontrar nenhuma biblioteca de música. Certifique-se de que o seu servidor Jellyfin tenha pelo menos uma biblioteca com o tipo de conteúdo definido como \"Música\".",
     "noMusicLibrariesTitle": "Sem Bibliotecas de Música",
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
     "interactions": "Interações",
     "showFastScroller": "Mostrar rolagem rápida",
-    "about": "Sobre o Finamp",
+    "about": "Sobre o sombrAMP",
     "finampTagline": "Um reprodutor de música de código aberto para Jellyfin",
     "@finampTagline": {
         "description": "Tagline / short description for the app"
@@ -239,9 +239,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Contribua com o Finamp no Github:",
+    "aboutContributionLink": "Contribua com o sombrAMP no Github:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Leia as notas da última versão:",
     "@aboutReleaseNotes": {
@@ -253,7 +253,7 @@
     },
     "loginFlowWelcomeHeading": "Bem-vindo ao {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "Sua música, do seu jeito.",
     "@loginFlowSlogan": {
@@ -775,7 +775,7 @@
     "@loginFlowLocalNetworkServers": {
         "description": "Heading for the list of servers on the local network, shown during the login flow. Should ideally have a colon at the end."
     },
-    "aboutThanks": "Obrigado por utilizar o Finamp!",
+    "aboutThanks": "Obrigado por utilizar o sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -829,7 +829,7 @@
     },
     "bufferDisableSizeConstraintsTitle": "Não limitar tamanho do buffer",
     "bufferDisableSizeConstraintsSubtitle": "Desabilita as restrições de tamanho do buffer (\"Tamanho do buffer\"). O buffer sempre será carregado de acordo com a duração configurada (\"Duração do buffer\"), mesmo para arquivos muito grandes. Pode causar travamentos. Requer reinicialização.",
-    "playbackSpeedControlSettingDescription": "Automático:\nFinamp tenta identificar se a faixa que está sendo executada é um podcat ou (parte de) um áudio-livro. Esse é considerado o caso se: a duração da faixa é superior a {trackDuration} minutos, se o álbum ao qual pertence a faixa tem duração superior a {albumDuration} horas, ou se a faixa tem pelo menos um desses gêneros atribuídos a ela ({genreList}).\nOs controles de velocidade de reprodução serão então exibidos no menu do reprodutor.\n\nSempre exibir:\nOs controles de velocidade de reprodução serão sempre exibidos no menu do reprodutor.\n\nOcultado:\nOs controles de velocidade de reprodução serão sempre ocultados.",
+    "playbackSpeedControlSettingDescription": "Automático:\nsombrAMP tenta identificar se a faixa que está sendo executada é um podcat ou (parte de) um áudio-livro. Esse é considerado o caso se: a duração da faixa é superior a {trackDuration} minutos, se o álbum ao qual pertence a faixa tem duração superior a {albumDuration} horas, ou se a faixa tem pelo menos um desses gêneros atribuídos a ela ({genreList}).\nOs controles de velocidade de reprodução serão então exibidos no menu do reprodutor.\n\nSempre exibir:\nOs controles de velocidade de reprodução serão sempre exibidos no menu do reprodutor.\n\nOcultado:\nOs controles de velocidade de reprodução serão sempre ocultados.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -902,7 +902,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Quando habilitado, Finamp irá enviar a fila atual para o servidor. Atualmente parece haver pouco uso para essa função, além de ela contribuir para um aumento no tráfego da rede.",
+    "reportQueueToServerSubtitle": "Quando habilitado, sombrAMP irá enviar a fila atual para o servidor. Atualmente parece haver pouco uso para essa função, além de ela contribuir para um aumento no tráfego da rede.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1601,7 +1601,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Por favor, crie uma issue em \"github.com/jmshrv/finamp\" com o registro de logs (use o botão abaixo) e uma captura de tela desta página, para que possamos consertar o problema o mais rápido possível.",
+    "startupErrorCallToAction": "Por favor, crie uma issue em \"github.com/dungeonmasterx69420/sombrAMP\" com o registro de logs (use o botão abaixo) e uma captura de tela desta página, para que possamos consertar o problema o mais rápido possível.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1686,11 +1686,11 @@
     "showArtistsTracksSection": "Mostrar Sessão de Músicas",
     "useMonochromeIcon": "Usar Logo Monocromática",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Isso só afeta o ícone dentro do aplicativo e não o ícone do Launcher.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Padrão",
     "colorCode": "Código de Cor (Hex)",

@@ -3,6 +3,7 @@ import 'package:finamp/components/LoginScreen/login_flow.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/screens/advanced_login_options_screen.dart';
 import 'package:finamp/screens/language_selection_screen.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
@@ -20,10 +21,14 @@ class LoginScreen extends StatelessWidget {
           surfaceTintColor: Colors.transparent,
         ),
       ),
-      child: const Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: SafeArea(child: LoginFlow()),
-        bottomNavigationBar: _LoginAuxiliaryOptions(),
+      // Signing in happens on the System S desktop.
+      child: const SystemSDesk(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          resizeToAvoidBottomInset: true,
+          body: SafeArea(child: LoginFlow()),
+          bottomNavigationBar: _LoginAuxiliaryOptions(),
+        ),
       ),
     );
   }

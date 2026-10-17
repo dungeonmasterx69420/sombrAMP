@@ -25,11 +25,9 @@ class CTAMedium extends StatelessWidget {
     final minWidth = this.minWidth ?? screenSize.width * 0.25;
     final paddingHorizontal = screenSize.width * 0.015;
     final paddingVertical = screenSize.height * 0.015;
-    final accentColor = disabled
-        ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
-        : Theme.of(context).colorScheme.primary;
 
-    return FilledButton(
+    // Styled by the theme: a System S button.
+    return OutlinedButton(
       onPressed: disabled
           ? null
           : () {
@@ -37,19 +35,8 @@ class CTAMedium extends StatelessWidget {
               onPressed();
             },
       style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           EdgeInsets.only(left: 8 + paddingHorizontal, right: 8, top: paddingVertical, bottom: paddingVertical),
-        ),
-        backgroundColor: WidgetStateProperty.all<Color>(
-          Theme.brightnessOf(context) == Brightness.dark
-              ? accentColor.withValues(alpha: disabled ? 0.05 : 0.15)
-              : Color.alphaBlend(
-                  accentColor.withValues(alpha: 0.2),
-                  Colors.white,
-                ).withValues(alpha: disabled ? 0.5 : 1.0),
         ),
       ),
       child: Container(
@@ -58,22 +45,7 @@ class CTAMedium extends StatelessWidget {
         alignment: Alignment.center,
         child: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Icon(icon, size: 24, color: accentColor, weight: 1.0),
-            const SizedBox(width: 8),
-            Text(
-              text,
-              style: TextStyle(
-                color:
-                    (Theme.brightnessOf(context) == Brightness.light
-                            ? Color.alphaBlend(accentColor.withValues(alpha: 0.33), Colors.black)
-                            : Colors.white)
-                        .withValues(alpha: disabled ? 0.5 : 1.0),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
+          children: [Icon(icon, size: 24, weight: 1.0), const SizedBox(width: 8), Text(text)],
         ),
       ),
     );

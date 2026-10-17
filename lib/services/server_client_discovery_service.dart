@@ -7,6 +7,7 @@ import 'package:finamp/services/discovery_response_parser.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 
 /// Used for discovering Jellyfin servers on the local network
 /// and for advertising the current server to other clients (discovery emulation).
@@ -105,7 +106,7 @@ class JellyfinServerClientDiscovery {
                 address: _finampUserHelper.currentUser?.publicAddress ?? _finampUserHelper.currentUser?.baseURL,
                 endpointAddress: _finampUserHelper.currentUser?.publicAddress ?? _finampUserHelper.currentUser?.baseURL,
                 id: _finampUserHelper.currentUser?.serverId,
-                name: "Shared by Finamp",
+                name: "Shared by ${Sombra.productName}",
               );
               final responseMessageActiveOrPublicAddress = jsonEncode(responseActiveOrPublicAddress);
               _clientDiscoveryLogger.info("Sending discovery response: $responseMessageActiveOrPublicAddress");
@@ -121,7 +122,7 @@ class JellyfinServerClientDiscovery {
                   address: _finampUserHelper.currentUser?.localAddress,
                   endpointAddress: _finampUserHelper.currentUser?.localAddress,
                   id: _finampUserHelper.currentUser?.serverId,
-                  name: "Shared by Finamp",
+                  name: "Shared by ${Sombra.productName}",
                 );
                 final responseMessageLocalAddress = jsonEncode(responseLocalAddress);
                 _clientDiscoveryLogger.finest(

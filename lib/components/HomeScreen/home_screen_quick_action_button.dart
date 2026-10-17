@@ -26,26 +26,10 @@ class HomeScreenQuickActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accentColor = disabled
-        ? ColorScheme.of(context).primary.withValues(alpha: 0.5)
-        : ColorScheme.of(context).primary;
-
+    // Colours come from the System S button theme, so they invert while pressed.
     final buttonChildren = [
-      Icon(icon, size: 16, color: accentColor, weight: 1.0, applyTextScaling: true),
-      Text(
-        text,
-        style: TextStyle(
-          color:
-              (Theme.brightnessOf(context) == Brightness.light
-                      ? Color.alphaBlend(accentColor.withValues(alpha: 0.33), Colors.black)
-                      : Colors.white)
-                  .withValues(alpha: disabled ? 0.5 : 1.0),
-          fontSize: 13,
-          height: 0.9,
-          fontWeight: FontWeight.w500,
-        ),
-        textAlign: TextAlign.center,
-      ),
+      Icon(icon, size: 16, weight: 1.0, applyTextScaling: true),
+      Text(text, style: const TextStyle(fontSize: 14, height: 0.9), textAlign: TextAlign.center),
     ];
 
     final buttonContent = vertical
@@ -80,7 +64,7 @@ class HomeScreenQuickActionButton extends StatelessWidget {
                   FeedbackHelper.feedback(FeedbackType.selection);
                   onSecondaryPressed!();
                 },
-          child: FilledButton(
+          child: OutlinedButton(
             onPressed: disabled
                 ? null
                 : () {
@@ -89,19 +73,8 @@ class HomeScreenQuickActionButton extends StatelessWidget {
                   },
 
             style: ButtonStyle(
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(isDesktop ? 8 : 12)),
-              ),
               padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
                 EdgeInsets.symmetric(horizontal: 8, vertical: isDesktop ? 16 : 8),
-              ),
-              backgroundColor: WidgetStateProperty.all<Color>(
-                Theme.brightnessOf(context) == Brightness.dark
-                    ? accentColor.withValues(alpha: disabled ? 0.05 : 0.15)
-                    : Color.alphaBlend(
-                        accentColor.withValues(alpha: 0.2),
-                        Colors.white,
-                      ).withValues(alpha: disabled ? 0.5 : 1.0),
               ),
             ),
             child: buttonContent,

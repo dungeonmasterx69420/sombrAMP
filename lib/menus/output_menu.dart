@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:finamp/color_schemes.g.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:finamp/components/Buttons/cta_medium.dart';
 import 'package:finamp/components/Shortcuts/global_shortcut_manager.dart';
 import 'package:finamp/components/Shortcuts/music_control_shortcuts.dart';
@@ -176,7 +176,7 @@ class OutputMenuHeader extends ConsumerWidget {
                     return AirPlayRoutePickerView(
                       key: ValueKey(ref.watch(localThemeProvider).primary),
                       tintColor: ref.watch(localThemeProvider).primary,
-                      activeTintColor: jellyfinBlueColor,
+                      activeTintColor: SystemSTheme.of(context).phosphorInk,
                       onShowPickerView: () => FeedbackHelper.feedback(FeedbackType.selection),
                     );
                   },

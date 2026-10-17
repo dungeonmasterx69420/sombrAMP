@@ -36,7 +36,7 @@
     "music": "Musique",
     "clear": "Effacer",
     "shuffleAll": "Tout mélanger",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Téléchargements",
     "settings": "Réglages",
     "offlineMode": "Mode hors-ligne",
@@ -228,10 +228,10 @@
     "@noMusicLibrariesTitle": {
         "description": "Titre du message affiché sur l'écran de vues lorsque aucune bibliothèque musicale n'a été trouvée."
     },
-    "noMusicLibrariesBody": "Finamp n'a pas trouvé de bibliothèques musicales. Veuillez vous assurer que votre serveur Jellyfin contient au moins une bibliothèque avec le type de contenu défini sur \"Musique\".",
+    "noMusicLibrariesBody": "sombrAMP n'a pas trouvé de bibliothèques musicales. Veuillez vous assurer que votre serveur Jellyfin contient au moins une bibliothèque avec le type de contenu défini sur \"Musique\".",
     "refresh": "Rafraîchir",
-    "about": "À propos de Finamp",
-    "aboutThanks": "Merci d'utiliser Finamp !",
+    "about": "À propos de sombrAMP",
+    "aboutThanks": "Merci d'utiliser sombrAMP !",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -247,9 +247,9 @@
     "@finampTagline": {
         "description": "Tagline / short description for the app"
     },
-    "aboutContributionLink": "Contribuez à Finamp sur GitHub :",
+    "aboutContributionLink": "Contribuez à sombrAMP sur GitHub :",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Lisez les dernières notes de version :",
     "@aboutReleaseNotes": {
@@ -273,7 +273,7 @@
     },
     "loginFlowWelcomeHeading": "Bienvenue sur {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "aboutContributionPrompt": "Créé par des gens géniaux sur leur temps libre.\nVous pourriez être l’un d’entre eux !",
     "@aboutContributionPrompt": {
@@ -540,7 +540,7 @@
     "@loginFlowCustomUser": {
         "description": "Label for a button that allows the user to enter a custom username/password, for example if their user account is hidden."
     },
-    "playbackSpeedControlSettingDescription": "Automatique:\nFinamp essaie d’identifier si le titre joué est un podcast ou un chapitre d’un livre audio. C’est le cas si le titre dure plus de {trackDuration} minutes, si l’album dure plus de {albumDuration} heures ou qu’au moins un de ces genres est assigné au titre : {genreList}\nLes contrôles de vitesse de lecture seront alors affichés dans le menu du lecteur.\n\nAffichés :\nLes contrôles de vitesse de lecture seront toujours affichés dans le menu du lecteur.\n\nCachés :\nLes contrôles de vitesse de lecture seront toujours cachés dans le menu du lecteur.",
+    "playbackSpeedControlSettingDescription": "Automatique:\nsombrAMP essaie d’identifier si le titre joué est un podcast ou un chapitre d’un livre audio. C’est le cas si le titre dure plus de {trackDuration} minutes, si l’album dure plus de {albumDuration} heures ou qu’au moins un de ces genres est assigné au titre : {genreList}\nLes contrôles de vitesse de lecture seront alors affichés dans le menu du lecteur.\n\nAffichés :\nLes contrôles de vitesse de lecture seront toujours affichés dans le menu du lecteur.\n\nCachés :\nLes contrôles de vitesse de lecture seront toujours cachés dans le menu du lecteur.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -755,7 +755,7 @@
     "@autoloadLastQueueOnStartupSubtitle": {
         "description": "Description of the setting to restore last queue on startup"
     },
-    "reportQueueToServerSubtitle": "Lorsqu'il est activé, Finamp envoie la file d'attente actuelle au serveur. Cela améliore le contrôle à distance et permet la restauration de la file d'attente côté serveur. Cette option est toujours activée si la fonctionnalité « Lecture activée » est activée.",
+    "reportQueueToServerSubtitle": "Lorsqu'il est activé, sombrAMP envoie la file d'attente actuelle au serveur. Cela améliore le contrôle à distance et permet la restauration de la file d'attente côté serveur. Cette option est toujours activée si la fonctionnalité « Lecture activée » est activée.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1570,7 +1570,7 @@
     "@librarySelectError": {
         "description": "Error shown when the library select screen fails to load."
     },
-    "startupErrorCallToAction": "Veuillez créer un ticket sur \"github.com/jmshrv/finamp\" avec les logs (utilisez le bouton ci-dessous) et une capture d'écran de cette page, afin que nous puissions le résoudre le plus rapidement possible.",
+    "startupErrorCallToAction": "Veuillez créer un ticket sur \"github.com/dungeonmasterx69420/sombrAMP\" avec les logs (utilisez le bouton ci-dessous) et une capture d'écran de cette page, afin que nous puissions le résoudre le plus rapidement possible.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1586,7 +1586,7 @@
     "@playOnStaleDelaySubtitle": {
         "description": "Description of the setting that controls how long a PlayOn remote session is considered active"
     },
-    "enablePlayonSubtitle": "Activer la fonction 'Play On' de Jellyfin (contrôle à distance de Finamp depuis un autre client). Désactivez cette option si votre serveur ou proxy inverse ne prend pas en charge les websockets.",
+    "enablePlayonSubtitle": "Activer la fonction 'Play On' de Jellyfin (contrôle à distance de sombrAMP depuis un autre client). Désactivez cette option si votre serveur ou proxy inverse ne prend pas en charge les websockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1806,7 +1806,7 @@
     "@artistScreen": {
         "description": "Name for the view/screen that shows artists"
     },
-    "autoReloadQueueSubtitle": "Recharge automatiquement la file d'attente lorsque la source change (par exemple, mode hors ligne activé ou changement d'adresse de serveur). Si cette option est désactivée, Finamp vous le signalera.",
+    "autoReloadQueueSubtitle": "Recharge automatiquement la file d'attente lorsque la source change (par exemple, mode hors ligne activé ou changement d'adresse de serveur). Si cette option est désactivée, sombrAMP vous le signalera.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2100,7 +2100,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Êtes-vous sûr de vouloir activer le partage de serveur même si vous êtes en mode hors ligne ? Finamp enverra alors des données sur le réseau local.",
+    "serverSharingMenuConfirmationDialogText": "Êtes-vous sûr de vouloir activer le partage de serveur même si vous êtes en mode hors ligne ? sombrAMP enverra alors des données sur le réseau local.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2128,7 +2128,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Il fonctionne en écoutant les requêtes de découverte de serveur des autres clients du réseau local, puis en répondant à ces requêtes avec l'adresse configurée de votre serveur Jellyfin.\nSi vous avez configuré une adresse locale et une adresse publique, Finamp les fournira au client demandeur.",
+    "serverSharingMenuDetails": "Il fonctionne en écoutant les requêtes de découverte de serveur des autres clients du réseau local, puis en répondant à ces requêtes avec l'adresse configurée de votre serveur Jellyfin.\nSi vous avez configuré une adresse locale et une adresse publique, sombrAMP les fournira au client demandeur.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2168,7 +2168,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Si vous essayez de vous connecter à un autre client Jellyfin via Quick Connect, vous pouvez saisir ou coller le code à 6 chiffres dans le champ ci-dessus. Cela autorisera la demande de connexion de l'autre client et vous connectera au même compte que celui que vous utilisez pour Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Si vous essayez de vous connecter à un autre client Jellyfin via Quick Connect, vous pouvez saisir ou coller le code à 6 chiffres dans le champ ci-dessus. Cela autorisera la demande de connexion de l'autre client et vous connectera au même compte que celui que vous utilisez pour sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2370,7 +2370,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Avertissement : Le serveur Jellyfin semble mal configuré et ne calcule pas les flous de hachage. Cela empêche Finamp de dédupliquer les téléchargements d'images. Veuillez corriger le serveur et effectuer une réparation des téléchargements.",
+    "missingBlurhashWarning": "Avertissement : Le serveur Jellyfin semble mal configuré et ne calcule pas les flous de hachage. Cela empêche sombrAMP de dédupliquer les téléchargements d'images. Veuillez corriger le serveur et effectuer une réparation des téléchargements.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -2513,11 +2513,11 @@
     },
     "useMonochromeIcon": "Utiliser un logo monochrome",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Cela n'affecte que l'icône dans l'application, et non l'icône de lancement.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "playbackActionPageMoveWithinQueue": "Déplacer dans la file d'attente",
     "@playbackActionPageMoveWithinQueue": {
@@ -2859,11 +2859,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Dites « Hey Siri, joue [morceau/artiste/album] sur Finamp »",
+    "carPlaySiriHint": "Dites « Hey Siri, joue [morceau/artiste/album] sur sombrAMP »",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Ouvrez l'application Finamp sur votre téléphone pour vous connecter à votre serveur Jellyfin.",
+    "carPlayLoginPrompt": "Ouvrez l'application sombrAMP sur votre téléphone pour vous connecter à votre serveur Jellyfin.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -2999,7 +2999,7 @@
     },
     "libraryQualifierActive": "Actif",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "retry": "Réessayer",
     "removeFilters": "Retirer des filtres",
@@ -3668,7 +3668,7 @@
     "perTabGridModeScreen": "Définir les types d'affichage par onglet",
     "perTabAlbumGrid": "Albums affichés uniquement sous forme de grille",
     "quickSettingsScreen": "Réglages rapides",
-    "quickSettingsScreenDescription": "Personnalisez Finamp selon vos préférences grâce à ces options principales. Vous pouvez revenir ici à tout moment via le menu « Paramètres ».",
+    "quickSettingsScreenDescription": "Personnalisez sombrAMP selon vos préférences grâce à ces options principales. Vous pouvez revenir ici à tout moment via le menu « Paramètres ».",
     "quickSettingsTabsLink": "Réorganiser et masquer les onglets",
     "quickSettingsTranscodeLink": "Tous les paramètres de transcodage",
     "quickSettingsLayoutLink": "Tous les paramètres de mise en page et de thème",

@@ -24,6 +24,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_media_kit/just_audio_media_kit.dart';
 import 'package:logging/logging.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 
 import 'android_auto_helper.dart';
 import 'finamp_settings_helper.dart';
@@ -302,7 +303,7 @@ class MusicPlayerBackgroundTask extends BaseAudioHandler with SeekHandler, Queue
 
     if (Platform.isWindows || Platform.isLinux) {
       _audioServiceBackgroundTaskLogger.info("Initializing media-kit for Windows/Linux");
-      JustAudioMediaKit.title = "Finamp";
+      JustAudioMediaKit.title = Sombra.productName;
       JustAudioMediaKit.prefetchPlaylist = true; // cache upcoming tracks, enable gapless playback
       JustAudioMediaKit.bufferSize = FinampSettingsHelper.finampSettings.bufferSizeMegabytes * 1024 * 1024;
       JustAudioMediaKit.ensureInitialized(linux: true, windows: true, macOS: false, iOS: false, android: false);

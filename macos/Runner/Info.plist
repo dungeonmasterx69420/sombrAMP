@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Finamp</string>
+	<string>sombrAMP</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>sombrAMP</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -37,7 +37,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I don&apos;t know why this permission is being requested, you should probably deny it. If you can, create a GitHub issue with a screenshot of this message.</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Finamp can use your media library to store downloaded songs. If you don&apos;t want this, Finamp can also download songs to the app&apos;s internal directory, which doesn&apos;t use any permissions.</string>
+	<string>sombrAMP can use your media library to store downloaded songs. If you don&apos;t want this, sombrAMP can also download songs to the app&apos;s internal directory, which doesn&apos;t use any permissions.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

@@ -34,7 +34,7 @@
     "music": "Musiikki",
     "clear": "Tyhjennä",
     "offlineMode": "Offline-tila",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "sortOrder": "Järjestys",
     "album": "Albumi",
     "albumArtist": "Albumin artisti",
@@ -187,7 +187,7 @@
     "disableGesture": "Poista eleet käytöstä",
     "disableGestureSubtitle": "Poistaa eleet käytöstä.",
     "noItem": "Ei kohdetta",
-    "noMusicLibrariesBody": "Finamp ei löytänyt musiikkikirjastoja. Varmista, että Jellyfin-palvelimellasi on vähintään yksi kirjasto, jonka sisältötyypiksi on asetettu \"Musiikki\".",
+    "noMusicLibrariesBody": "sombrAMP ei löytänyt musiikkikirjastoja. Varmista, että Jellyfin-palvelimellasi on vähintään yksi kirjasto, jonka sisältötyypiksi on asetettu \"Musiikki\".",
     "instantMix": "Välitön sekoitus",
     "startingInstantMix": "Käynnistetään välitön sekoitus.",
     "addToMix": "Lisää Sekoitukseen",
@@ -272,7 +272,7 @@
     },
     "loginFlowWelcomeHeading": "Tervetuloa sovellukseen {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "changeLanguage": "Vaihda kieltä",
     "@changeLanguage": {
@@ -286,11 +286,11 @@
     "@loginFlowQuickConnectPrompt": {
         "description": "Text shown above the quick connect code. The full message will be 'Use Quick Connect code {code}'. The code will be a 6-digit number. Ideally, 'Quick Connect' should be capitalized and translated exactly as it is in the Jellyfin web UI."
     },
-    "about": "Tietoa Finampista",
+    "about": "Tietoa sombrAMPista",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
-    "aboutThanks": "Kiitos, että käytät Finampia!",
+    "aboutThanks": "Kiitos, että käytät sombrAMPia!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -342,9 +342,9 @@
     "@login": {
         "description": "Label for the login button."
     },
-    "aboutContributionLink": "Osallistu Finampin kehittämiseen GitHubissa:",
+    "aboutContributionLink": "Osallistu sombrAMPin kehittämiseen GitHubissa:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "serverUrlInfoButtonTooltip": "Apua palvelinosoitteen syöttämiseen",
     "@serverUrlInfoButtonTooltip": {
@@ -1023,7 +1023,7 @@
     "@showNullLibraryItemsTitle": {
         "description": "Title of setting that shows tracks/albums from an unknown library in all libraries when on, or in no libraries when off."
     },
-    "playbackSpeedControlSettingDescription": "Automaattinen:\nFinamp yrittää tunnistaa, onko toistamasi kappale podcast tai äänikirja(n osa). Tämän katsotaan tapahtuvan, jos kappale on pidempi kuin {trackDuration} minuutti(a), tai jos kappaleen albumi on pidempi kuin {albumDuration} tunti(a), tai jos kappaleella on ainakin yksi näistä tyylilajeista: {genreList}\nToistonopeuden säätimet ovat tällöin esillä soittimen valikossa.\n\nEsillä:\nToistonopeuden säätimet ovat aina esillä soittimen valikossa.\n\nPiilotettu:\nToistonopeuden säätimet ovat aina piilossa soittimen valikossa.",
+    "playbackSpeedControlSettingDescription": "Automaattinen:\nsombrAMP yrittää tunnistaa, onko toistamasi kappale podcast tai äänikirja(n osa). Tämän katsotaan tapahtuvan, jos kappale on pidempi kuin {trackDuration} minuutti(a), tai jos kappaleen albumi on pidempi kuin {albumDuration} tunti(a), tai jos kappaleella on ainakin yksi näistä tyylilajeista: {genreList}\nToistonopeuden säätimet ovat tällöin esillä soittimen valikossa.\n\nEsillä:\nToistonopeuden säätimet ovat aina esillä soittimen valikossa.\n\nPiilotettu:\nToistonopeuden säätimet ovat aina piilossa soittimen valikossa.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1084,7 +1084,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Kun valittu, Finamp lähettää nykyisen jonon palvelimelle. Tämä voi parantaa kauko-ohjausta ja sallii jonon palauttamisen palvelimen puolella. Aina päällä, kun 'Toista laitteella'-ominaisuus on käytössä.",
+    "reportQueueToServerSubtitle": "Kun valittu, sombrAMP lähettää nykyisen jonon palvelimelle. Tämä voi parantaa kauko-ohjausta ja sallii jonon palauttamisen palvelimen puolella. Aina päällä, kun 'Toista laitteella'-ominaisuus on käytössä.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1655,7 +1655,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Kytkee Jellyfinin 'Toista laitteella'-ominaisuuden päälle. (Finampin etäohjaus toisella laitteella). Poista käytöstä, jos käänteinen välityspalvelin tai palvelin ei tue WebSocketeja.",
+    "enablePlayonSubtitle": "Kytkee Jellyfinin 'Toista laitteella'-ominaisuuden päälle. (sombrAMPin etäohjaus toisella laitteella). Poista käytöstä, jos käänteinen välityspalvelin tai palvelin ei tue WebSocketeja.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1717,7 +1717,7 @@
         "description": "The title for the error screen that shows when startup fails."
     },
     "exportLogs": "Tallenna lokit",
-    "startupErrorCallToAction": "Ole hyvä ja luo tiketti osoitteessa \"github.com/jmshrv/finamp\", ja liitä mukaan lokitiedot (käytä nappia alla). Liitä myös näyttökuva tästä sivusta, jotta voimme korjata vian mahdollisimman sujuvasti.",
+    "startupErrorCallToAction": "Ole hyvä ja luo tiketti osoitteessa \"github.com/dungeonmasterx69420/sombrAMP\", ja liitä mukaan lokitiedot (käytä nappia alla). Liitä myös näyttökuva tästä sivusta, jotta voimme korjata vian mahdollisimman sujuvasti.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -2054,7 +2054,7 @@
     "preferLocalNetworkEnableSwitchTitle": "Suosi paikallisverkkoa",
     "preferLocalNetworkPublicAddressSettingDescription": "Ensisijainen osoite, jota käytetään yhdistettäessä Jellyfin-palvelimelle",
     "preferLocalNetworkTargetAddressLocalSettingDescription": "Jellyfin-palvelimen kohdeosoite paikallisessa verkossasi",
-    "autoReloadQueueSubtitle": "Lataa jonon automaattisesti uudelleen kun lähde muuttuu (eli kun offline-tila kytketään päälle, tai palvelinosoite muuttuu esim verkon vaihdon takia). Jos kytketty pois päältä, Finamp kysyy tätä erikseen joka kerta.",
+    "autoReloadQueueSubtitle": "Lataa jonon automaattisesti uudelleen kun lähde muuttuu (eli kun offline-tila kytketään päälle, tai palvelinosoite muuttuu esim verkon vaihdon takia). Jos kytketty pois päältä, sombrAMP kysyy tätä erikseen joka kerta.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2066,7 +2066,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "clearQueueOnStopEventTitle": "Tyhjennä jono kun Finamp pysäytetään sovelluksen ulkopuolelta",
+    "clearQueueOnStopEventTitle": "Tyhjennä jono kun sombrAMP pysäytetään sovelluksen ulkopuolelta",
     "@clearQueueOnStopEventTitle": {
         "description": "Title for the setting that controls if OS stop commands clear the queue."
     },
@@ -2132,7 +2132,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Oletko varma, että haluat kytkeä palvelimen jaon päälle, vaikka olet offline-tilassa? Tämä saa Finampin lähettämään dataa paikallisverkossa.",
+    "serverSharingMenuConfirmationDialogText": "Oletko varma, että haluat kytkeä palvelimen jaon päälle, vaikka olet offline-tilassa? Tämä saa sombrAMPin lähettämään dataa paikallisverkossa.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2160,7 +2160,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Tämä toimii kuuntelemalla muiden asiakkaiden lähettämiä palvelimen löytöpyyntöjä paikallisverkossa, ja sitten vastaamalla noihin pyyntöihin Jellyfin palvelimen asetetulla osoittella.\nJos sinulla on sekä paikallinen, että julkinen osoite määritetty, Finamp lähettää molemmat pyytävälle clientille.",
+    "serverSharingMenuDetails": "Tämä toimii kuuntelemalla muiden asiakkaiden lähettämiä palvelimen löytöpyyntöjä paikallisverkossa, ja sitten vastaamalla noihin pyyntöihin Jellyfin palvelimen asetetulla osoittella.\nJos sinulla on sekä paikallinen, että julkinen osoite määritetty, sombrAMP lähettää molemmat pyytävälle clientille.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2200,7 +2200,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Jos yrität kirjautua toiseen Jellyfin-clientiin pikayhdistämistä käyttäen, voit syöttää tai liittää 6-merkkisen koodin kenttään yllä. Tämä vahvistaa toisen clientin kirjautumisen, ja kirjaa tämän sisään samalla tilillä, jolla käytät Finampia.",
+    "quickConnectAuthorizationMenuDescription": "Jos yrität kirjautua toiseen Jellyfin-clientiin pikayhdistämistä käyttäen, voit syöttää tai liittää 6-merkkisen koodin kenttään yllä. Tämä vahvistaa toisen clientin kirjautumisen, ja kirjaa tämän sisään samalla tilillä, jolla käytät sombrAMPia.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2455,7 +2455,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Varoitus: Jellyfin-palvelin näyttää olevan väärin määritelty, eikä laske blurhash-arvoja.  Tämä estää Finampia poistamasta kuvien päällekkäisiä latauksia.  Korjaa palvelinasetukset ja suorita latausten korjaus.",
+    "missingBlurhashWarning": "Varoitus: Jellyfin-palvelin näyttää olevan väärin määritelty, eikä laske blurhash-arvoja.  Tämä estää sombrAMPia poistamasta kuvien päällekkäisiä latauksia.  Korjaa palvelinasetukset ja suorita latausten korjaus.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -2505,11 +2505,11 @@
     },
     "useMonochromeIcon": "Käytä yksiväristä logoa",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Tämä vaikuttaa vain ikoniin sovelluksen sisällä, ei sovelluksen käynnistysikoniin.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "playbackActionPageMoveWithinQueue": "Siirrä jonon sisällä",
     "@playbackActionPageMoveWithinQueue": {
@@ -2851,11 +2851,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Sano \"Hei Siri, toista [track/artist/album] Finampissa\"",
+    "carPlaySiriHint": "Sano \"Hei Siri, toista [track/artist/album] sombrAMPissa\"",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Avaa Finamp-sovellus puhelimessasi kirjautuaksesi Jellyfin-palvelimelle.",
+    "carPlayLoginPrompt": "Avaa sombrAMP-sovellus puhelimessasi kirjautuaksesi Jellyfin-palvelimelle.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3421,7 +3421,7 @@
     },
     "libraryQualifierActive": "Aktiivinen",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "offlineSortFallback": "Lajittelutapa {onlineSort} on käytettävissä vain online-tilassa.  Palataan oletusjärjestykseen",
     "@offlineSortFallback": {
@@ -3660,7 +3660,7 @@
     "perTabGridModeScreen": "Aseta näkymätyyppi välilehtikohtaisesti",
     "perTabAlbumGrid": "Albumit vain ruudukossa",
     "quickSettingsScreen": "Pika-asetukset",
-    "quickSettingsScreenDescription": "Räätälöi Finamp mieleiseksesi näillä perusasetuksilla. Voit palata tänne milloin vain Asetukset-valikon kautta.",
+    "quickSettingsScreenDescription": "Räätälöi sombrAMP mieleiseksesi näillä perusasetuksilla. Voit palata tänne milloin vain Asetukset-valikon kautta.",
     "quickSettingsTabsLink": "Järjestä ja piilota välilehtiä",
     "quickSettingsTranscodeLink": "Kaikki uudelleenkoodausasetukset",
     "quickSettingsLayoutLink": "Kaikki asettelu- ja teema-asetukset",

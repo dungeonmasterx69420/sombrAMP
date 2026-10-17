@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:finamp/color_schemes.g.dart';
 import 'package:finamp/components/Buttons/finamp_extended_floating_action_button.dart';
 import 'package:finamp/components/PlayerScreen/player_screen_appbar_title.dart';
-import 'package:finamp/extensions/color_extensions.dart';
 import 'package:finamp/extensions/string.dart';
 import 'package:finamp/l10n/app_localizations.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:finamp/main.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/models/jellyfin_models.dart';
@@ -92,7 +91,7 @@ class _LyricsScreenContentState extends ConsumerState<_LyricsScreenContent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: AirPlayRoutePickerView(
                   tintColor: IconTheme.of(context).color ?? Colors.white,
-                  activeTintColor: jellyfinBlueColor,
+                  activeTintColor: SystemSTheme.of(context).phosphorInk,
                   onShowPickerView: () => FeedbackHelper.feedback(FeedbackType.selection),
                 ),
               ),
@@ -462,9 +461,8 @@ class _LyricLine extends ConsumerWidget {
     final currentLineStyle = unSyncedStyle;
     final lowlightStyle = unSyncedStyle.copyWith(color: Colors.grey);
     // ensure we use a highlight color that has decent contrast against the non-cue current line text color
-    final highlightColor = Theme.of(context).colorScheme.primary.contrastAgainst(currentLineStyle.color!) < 1.25
-        ? jellyfinBlueColor
-        : Theme.of(context).colorScheme.primary;
+    // The line being sung is live, so it glows in the phosphor.
+    final highlightColor = SystemSTheme.of(context).phosphorInk;
     // final cueHighlightStyle = currentLineStyle.copyWith(color: Theme.of(context).colorScheme.primary);
     final cueHighlightStyle = currentLineStyle.copyWith(color: highlightColor);
     final cueGreyStyle = currentLineStyle.copyWith(color: Colors.white);

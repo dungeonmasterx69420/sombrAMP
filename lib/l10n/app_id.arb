@@ -7,7 +7,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Silakan buat issue di \"github.com/jmshrv/finamp\" dengan log (gunakan tombol di bawah) dan tangkapan layar halaman ini, agar kami dapat memperbaikinya secepat mungkin.",
+    "startupErrorCallToAction": "Silakan buat issue di \"github.com/dungeonmasterx69420/sombrAMP\" dengan log (gunakan tombol di bawah) dan tangkapan layar halaman ini, agar kami dapat memperbaikinya secepat mungkin.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -15,7 +15,7 @@
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
     },
-    "about": "Tentang Finamp",
+    "about": "Tentang sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -23,9 +23,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Berkontribusi ke Finamp di GitHub:",
+    "aboutContributionLink": "Berkontribusi ke sombrAMP di GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Baca catatan rilis terbaru:",
     "@aboutReleaseNotes": {
@@ -35,7 +35,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Terima kasih telah menggunakan Finamp!",
+    "aboutThanks": "Terima kasih telah menggunakan sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -45,7 +45,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -209,7 +209,7 @@
     "sortOrder": "Urutan",
     "sortBy": "Urutkan berdasarkan",
     "title": "Judul",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "@finamp": {
         "description": "App name, possibly translated"
     },
@@ -423,7 +423,7 @@
         "placeholders": {
             "sourceCodeLink": {
                 "type": "String",
-                "example": "https://github.com/jmshrv/finamp"
+                "example": "https://github.com/dungeonmasterx69420/sombrAMP"
             }
         }
     },
@@ -469,7 +469,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "Otomatis:\nFinamp mencoba mengidentifikasi apakah trek yang Anda putar adalah podcast atau (bagian dari) buku audio. Ini dianggap demikian jika trek lebih panjang dari {trackDuration} menit, jika album trek tersebut lebih panjang dari {albumDuration} jam, atau jika trek memiliki setidaknya satu genre berikut: {genreList}\nKontrol kecepatan pemutaran kemudian akan ditampilkan di menu layar pemutar.\n\nDitampilkan:\nKontrol kecepatan pemutaran akan selalu ditampilkan di menu layar pemutar.\n\nDisembunyikan:\nKontrol kecepatan pemutaran di menu layar pemutar selalu disembunyikan.",
+    "playbackSpeedControlSettingDescription": "Otomatis:\nsombrAMP mencoba mengidentifikasi apakah trek yang Anda putar adalah podcast atau (bagian dari) buku audio. Ini dianggap demikian jika trek lebih panjang dari {trackDuration} menit, jika album trek tersebut lebih panjang dari {albumDuration} jam, atau jika trek memiliki setidaknya satu genre berikut: {genreList}\nKontrol kecepatan pemutaran kemudian akan ditampilkan di menu layar pemutar.\n\nDitampilkan:\nKontrol kecepatan pemutaran akan selalu ditampilkan di menu layar pemutar.\n\nDisembunyikan:\nKontrol kecepatan pemutaran di menu layar pemutar selalu disembunyikan.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -553,11 +553,11 @@
     },
     "useMonochromeIcon": "Gunakan logo monokrom",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Ini hanya memengaruhi ikon di dalam aplikasi, bukan ikon peluncur.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Default",
     "useDefaultButton": "Reset ke warna aksen default",
@@ -1030,7 +1030,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Jika diaktifkan, Finamp akan mengirim antrean saat ini ke server. Ini dapat meningkatkan kontrol jarak jauh dan memungkinkan pemulihan antrean dari sisi server. Selalu aktif jika fitur 'Play On' diaktifkan.",
+    "reportQueueToServerSubtitle": "Jika diaktifkan, sombrAMP akan mengirim antrean saat ini ke server. Ini dapat meningkatkan kontrol jarak jauh dan memungkinkan pemulihan antrean dari sisi server. Selalu aktif jika fitur 'Play On' diaktifkan.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1058,7 +1058,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Mengaktifkan fitur 'Play On' Jellyfin (mengendalikan Finamp dari jarak jauh melalui client lain). Nonaktifkan ini jika reverse proxy atau server Anda tidak mendukung websocket.",
+    "enablePlayonSubtitle": "Mengaktifkan fitur 'Play On' Jellyfin (mengendalikan sombrAMP dari jarak jauh melalui client lain). Nonaktifkan ini jika reverse proxy atau server Anda tidak mendukung websocket.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1244,7 +1244,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "Finamp tidak dapat menemukan pustaka musik apa pun. Pastikan server Jellyfin Anda berisi setidaknya satu pustaka dengan jenis konten diatur ke \"Musik\".",
+    "noMusicLibrariesBody": "sombrAMP tidak dapat menemukan pustaka musik apa pun. Pastikan server Jellyfin Anda berisi setidaknya satu pustaka dengan jenis konten diatur ke \"Musik\".",
     "refresh": "Segarkan",
     "moreInfo": "Info lebih lanjut",
     "volumeNormalizationSettingsTitle": "Normalisasi volume",
@@ -2301,7 +2301,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "Otomatis Memuat Ulang Antrean ketika sumber berubah (misal: mode offline diaktifkan atau alamat server berubah). Jika nonaktif, Finamp akan menampilkan pesan kepada Anda.",
+    "autoReloadQueueSubtitle": "Otomatis Memuat Ulang Antrean ketika sumber berubah (misal: mode offline diaktifkan atau alamat server berubah). Jika nonaktif, sombrAMP akan menampilkan pesan kepada Anda.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2535,7 +2535,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Apakah anda yakin ingin mengaktifkan berbagi server meskipun anda berada dalam Mode Offline? Tindakan ini akan membuat Finamp mengirimkan data melalui jaringan lokal.",
+    "serverSharingMenuConfirmationDialogText": "Apakah anda yakin ingin mengaktifkan berbagi server meskipun anda berada dalam Mode Offline? Tindakan ini akan membuat sombrAMP mengirimkan data melalui jaringan lokal.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2563,7 +2563,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Ini bekerja dengan mendengarkan permintaan penemuan server dari client lain di jaringan lokal, lalu membalas permintaan tersebut dengan alamat server Jellyfin Anda yang telah dikonfigurasi.\nJika Anda mengonfigurasi alamat lokal dan publik, Finamp akan memberikan keduanya kepada client yang meminta.",
+    "serverSharingMenuDetails": "Ini bekerja dengan mendengarkan permintaan penemuan server dari client lain di jaringan lokal, lalu membalas permintaan tersebut dengan alamat server Jellyfin Anda yang telah dikonfigurasi.\nJika Anda mengonfigurasi alamat lokal dan publik, sombrAMP akan memberikan keduanya kepada client yang meminta.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2603,7 +2603,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Jika Anda mencoba masuk ke client Jellyfin lain melalui Quick Connect, Anda dapat memasukkan atau menempelkan kode 6 digit ke kolom di atas. Ini akan mengotorisasikan permintaan masuk dari client lain, dan membuat Anda masuk ke akun yang sama dengan yang Anda gunakan untuk Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Jika Anda mencoba masuk ke client Jellyfin lain melalui Quick Connect, Anda dapat memasukkan atau menempelkan kode 6 digit ke kolom di atas. Ini akan mengotorisasikan permintaan masuk dari client lain, dan membuat Anda masuk ke akun yang sama dengan yang Anda gunakan untuk sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2748,7 +2748,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Peringatan: Server Jellyfin tampaknya salah dikonfigurasi dan tidak menghitung blurhash. Ini mencegah Finamp menghilangkan duplikasi unduhan gambar. Silakan perbaiki server lalu jalankan perbaikan unduhan.",
+    "missingBlurhashWarning": "Peringatan: Server Jellyfin tampaknya salah dikonfigurasi dan tidak menghitung blurhash. Ini mencegah sombrAMP menghilangkan duplikasi unduhan gambar. Silakan perbaiki server lalu jalankan perbaikan unduhan.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -3464,17 +3464,17 @@
     },
     "libraryQualifierActive": "Aktif",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "voiceSearch": "Pencarian Suara",
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Ucapkan \"Hey Siri, putar [track/artis/album] di Finamp\"",
+    "carPlaySiriHint": "Ucapkan \"Hey Siri, putar [track/artis/album] di sombrAMP\"",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Buka aplikasi Finamp di ponsel Anda untuk masuk ke server Jellyfin Anda.",
+    "carPlayLoginPrompt": "Buka aplikasi sombrAMP di ponsel Anda untuk masuk ke server Jellyfin Anda.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3715,7 +3715,7 @@
     "perTabGridModeScreen": "Atur tipe tampilan per-tab",
     "perTabAlbumGrid": "Album hanya dalam bentuk kisi",
     "quickSettingsScreen": "Pengaturan Cepat",
-    "quickSettingsScreenDescription": "Atur Finamp sesuai keinginan anda dengan pilihan utama berikut. Kembali ke sini kapan saja via Pengaturan.",
+    "quickSettingsScreenDescription": "Atur sombrAMP sesuai keinginan anda dengan pilihan utama berikut. Kembali ke sini kapan saja via Pengaturan.",
     "quickSettingsTabsLink": "Atur ulang dan sembunyikan tab",
     "quickSettingsTranscodeLink": "Semua pengaturan transcoding",
     "quickSettingsLayoutLink": "Semua pengaturan tata letak dan tema",

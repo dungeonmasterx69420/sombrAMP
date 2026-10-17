@@ -233,7 +233,7 @@
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
-    "about": "Finamp பற்றி சில தகவல்கள்",
+    "about": "sombrAMP பற்றி சில தகவல்கள்",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -243,7 +243,7 @@
     },
     "aboutContributionLink": "கிட்அப்பில் ஃபினாம்பிற்கு பங்களிக்கவும்:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "back": "பின்",
     "@back": {
@@ -251,7 +251,7 @@
     },
     "loginFlowWelcomeHeading": "{styledName} க்கு வருக",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "உங்கள் இசை, நீங்கள் விரும்பும் விதம்.",
     "@loginFlowSlogan": {
@@ -462,7 +462,7 @@
         "placeholders": {
             "sourceCodeLink": {
                 "type": "String",
-                "example": "https://github.com/jmshrv/finamp"
+                "example": "https://github.com/dungeonmasterx69420/sombrAMP"
             }
         }
     },
@@ -1498,7 +1498,7 @@
     "@albumScreen": {
         "description": "Name for the view/screen that shows albums"
     },
-    "startupErrorCallToAction": "பதிவுகள் (கீழே உள்ள பொத்தானைப் பயன்படுத்தவும்) மற்றும் இந்த பக்கத்தின் திரை சாட்டுடன் \"github.com/jmshrv/finamp\" இல் ஒரு சிக்கலை உருவாக்கவும், இதன் மூலம் அதை விரைவில் சரிசெய்ய முடியும்.",
+    "startupErrorCallToAction": "பதிவுகள் (கீழே உள்ள பொத்தானைப் பயன்படுத்தவும்) மற்றும் இந்த பக்கத்தின் திரை சாட்டுடன் \"github.com/dungeonmasterx69420/sombrAMP\" இல் ஒரு சிக்கலை உருவாக்கவும், இதன் மூலம் அதை விரைவில் சரிசெய்ய முடியும்.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -2343,11 +2343,11 @@
     },
     "useMonochromeIcon": "மோனோக்ரோம் லோகோவைப் பயன்படுத்தவும்",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "இது பயன்பாட்டில் உள்ள ஐகானை மட்டுமே பாதிக்கும், துவக்கி ஐகானை அல்ல.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "இயல்புநிலை",
     "useDefaultButton": "இயல்புநிலை உச்சரிப்பு நிறத்திற்கு மீட்டமைக்கவும்",
@@ -2710,7 +2710,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "எச்சரிக்கை: செல்லிஃபின் சேவையகம் தவறாக உள்ளமைக்கப்பட்டதாகத் தெரிகிறது மற்றும் மங்கலானதைக் கணக்கிடவில்லை. இது படப் பதிவிறக்கங்களை நகலெடுப்பதில் இருந்து Finamp ஐத் தடுக்கிறது. தயவு செய்து சர்வரை சரிசெய்து பதிவிறக்கம் பழுதுபார்க்கவும்.",
+    "missingBlurhashWarning": "எச்சரிக்கை: செல்லிஃபின் சேவையகம் தவறாக உள்ளமைக்கப்பட்டதாகத் தெரிகிறது மற்றும் மங்கலானதைக் கணக்கிடவில்லை. இது படப் பதிவிறக்கங்களை நகலெடுப்பதில் இருந்து sombrAMP ஐத் தடுக்கிறது. தயவு செய்து சர்வரை சரிசெய்து பதிவிறக்கம் பழுதுபார்க்கவும்.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -3426,7 +3426,7 @@
     },
     "libraryQualifierActive": "செயலில்",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "voiceSearch": "குரல் தேடல்",
     "@voiceSearch": {
@@ -3436,7 +3436,7 @@
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "உங்கள் செல்லிஃபின் சர்வரில் உள்நுழைய உங்கள் மொபைலில் Finamp பயன்பாட்டைத் திறக்கவும்.",
+    "carPlayLoginPrompt": "உங்கள் செல்லிஃபின் சர்வரில் உள்நுழைய உங்கள் மொபைலில் sombrAMP பயன்பாட்டைத் திறக்கவும்.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },

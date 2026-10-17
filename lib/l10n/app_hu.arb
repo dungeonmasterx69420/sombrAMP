@@ -16,7 +16,7 @@
     "criticRating": "Kritikusok értékelése",
     "dateAdded": "Hozzáadás dátuma",
     "datePlayed": "Utolsó lejátszás dátuma",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "genres": "Műfajok",
     "logs": "Naplók",
     "startMixNoTracksAlbum": "Nyomd meg hosszan az albumot, hogy hozzáadja vagy eltávolítsa a mixkészítőből, mielőtt elkezdené a keverést",
@@ -220,7 +220,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Kérjük, jelezze a hibát a \"github.com/jmshrv/finamp\" oldalon, csatolva a naplóbejegyzéseket (használd az alábbi gombot) és egy képernyőképet, hogy a lehető leggyorsabban meg tudjuk javítani.",
+    "startupErrorCallToAction": "Kérjük, jelezze a hibát a \"github.com/dungeonmasterx69420/sombrAMP\" oldalon, csatolva a naplóbejegyzéseket (használd az alábbi gombot) és egy képernyőképet, hogy a lehető leggyorsabban meg tudjuk javítani.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -228,7 +228,7 @@
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
     },
-    "about": "Finamp névjegy",
+    "about": "sombrAMP névjegy",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -236,9 +236,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Közreműködés a Finamp fejlesztésében a GitHubon:",
+    "aboutContributionLink": "Közreműködés a sombrAMP fejlesztésében a GitHubon:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "A legutóbbi kiadási megjegyzések:",
     "@aboutReleaseNotes": {
@@ -248,7 +248,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Köszönjük, hogy a Finampot használja!",
+    "aboutThanks": "Köszönjük, hogy a sombrAMPot használja!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -258,7 +258,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -515,7 +515,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "A várólista automatikus újratöltése forrásváltozáskor (pl. offline mód engedélyezve vagy szervercím váltáskor). Ha le van tiltva, a Finamp ehelyett figyelmeztetést fog küldeni.",
+    "autoReloadQueueSubtitle": "A várólista automatikus újratöltése forrásváltozáskor (pl. offline mód engedélyezve vagy szervercím váltáskor). Ha le van tiltva, a sombrAMP ehelyett figyelmeztetést fog küldeni.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -589,7 +589,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Biztosan engedélyezi a szervermegosztást offline módban is? Ez azt eredményezi, hogy a Finamp a helyi hálózaton keresztül fog adatokat küldeni.",
+    "serverSharingMenuConfirmationDialogText": "Biztosan engedélyezi a szervermegosztást offline módban is? Ez azt eredményezi, hogy a sombrAMP a helyi hálózaton keresztül fog adatokat küldeni.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -617,7 +617,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Úgy működik, hogy figyeli a helyi hálózat más klienseinek szerver kéréseit, majd ezekre a Jellyfin-kiszolgáló beállított címével válaszol.\nHa helyi és nyilvános cím is van beállítva, a Finamp mindkettőt megadja a kérő kliensnek.",
+    "serverSharingMenuDetails": "Úgy működik, hogy figyeli a helyi hálózat más klienseinek szerver kéréseit, majd ezekre a Jellyfin-kiszolgáló beállított címével válaszol.\nHa helyi és nyilvános cím is van beállítva, a sombrAMP mindkettőt megadja a kérő kliensnek.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -657,7 +657,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Ha egy másik Jellyfin kliensbe próbál bejelentkezni a gyors kapcsoldás segítségével, akkor a fenti mezőbe beírhatja vagy beillesztheti a 6 számjegyű kódot. Ez engedélyezi a másik kliens kérését, és bejelentkezik ugyanabba a fiókba, amelyet a Finamphoz használ.",
+    "quickConnectAuthorizationMenuDescription": "Ha egy másik Jellyfin kliensbe próbál bejelentkezni a gyors kapcsoldás segítségével, akkor a fenti mezőbe beírhatja vagy beillesztheti a 6 számjegyű kódot. Ez engedélyezi a másik kliens kérését, és bejelentkezik ugyanabba a fiókba, amelyet a sombrAMPhoz használ.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -746,7 +746,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "Automatikus:\nA Finamp megpróbálja azonosítani, hogy a lejátszott dal podcast vagy hangoskönyv (része). Ez akkor történik így, ha a dal hosszabb, mint {trackDuration} perc, ha a dal albuma hosszabb, mint {albumDuration} óra, vagy ha a dalhoz legalább egy ilyen műfaj van hozzárendelve: {genreList}\nEkkor a lejátszás sebességének vezérlése megjelenik a lejátszó képernyőmenüjében.\n\nMegjelenítve:\nA lejátszási sebességvezérlők mindig megjelennek a lejátszási képernyő menüjében.\n\nElrejtve:\nA lejátszási sebességvezérlők a lejátszási képernyő menüjében mindig el lesznek rejtve.",
+    "playbackSpeedControlSettingDescription": "Automatikus:\nA sombrAMP megpróbálja azonosítani, hogy a lejátszott dal podcast vagy hangoskönyv (része). Ez akkor történik így, ha a dal hosszabb, mint {trackDuration} perc, ha a dal albuma hosszabb, mint {albumDuration} óra, vagy ha a dalhoz legalább egy ilyen műfaj van hozzárendelve: {genreList}\nEkkor a lejátszás sebességének vezérlése megjelenik a lejátszó képernyőmenüjében.\n\nMegjelenítve:\nA lejátszási sebességvezérlők mindig megjelennek a lejátszási képernyő menüjében.\n\nElrejtve:\nA lejátszási sebességvezérlők a lejátszási képernyő menüjében mindig el lesznek rejtve.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1071,7 +1071,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "A Finamp nem talált zenei könyvtárakat. Kérjük, győződjön meg róla, hogy a Jellyfin szervere tartalmaz legalább egy olyan könyvtárat, amelynek tartalomtípusa \"Zene\".",
+    "noMusicLibrariesBody": "A sombrAMP nem talált zenei könyvtárakat. Kérjük, győződjön meg róla, hogy a Jellyfin szervere tartalmaz legalább egy olyan könyvtárat, amelynek tartalomtípusa \"Zene\".",
     "refresh": "Frissítés",
     "moreInfo": "Több információ",
     "volumeNormalizationSettingsTitle": "Hangerő normalizálás",
@@ -1383,7 +1383,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Ha engedélyezve van, a Finamp elküldi az aktuális várólistát a szervernek. Ez javíthatja a távoli vezérlést, és lehetővé teszi a várólista szerveroldali helyreállítását. Mindig engedélyezve van, ha a 'Play On' funkció engedélyezve van.",
+    "reportQueueToServerSubtitle": "Ha engedélyezve van, a sombrAMP elküldi az aktuális várólistát a szervernek. Ez javíthatja a távoli vezérlést, és lehetővé teszi a várólista szerveroldali helyreállítását. Mindig engedélyezve van, ha a 'Play On' funkció engedélyezve van.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1411,7 +1411,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Engedélyezi a Jellyfin 'Play On' funkcióját (a Finamp távvezérlése egy másik kliensről). Kapcsolja ki, ha a fordított proxy vagy a kiszolgáló nem támogatja a websocketeket.",
+    "enablePlayonSubtitle": "Engedélyezi a Jellyfin 'Play On' funkcióját (a sombrAMP távvezérlése egy másik kliensről). Kapcsolja ki, ha a fordított proxy vagy a kiszolgáló nem támogatja a websocketeket.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },

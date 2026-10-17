@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 
 import '../models/jellyfin_models.dart';
 import 'finamp_user_helper.dart';
@@ -695,7 +696,7 @@ Future<String> getAuthHeader({required String deviceId}) async {
     authHeader = '${authHeader}Token="${finampUserHelper.currentUser!.accessToken}", ';
   }
 
-  authHeader = '${authHeader}Client="Finamp", ';
+  authHeader = '${authHeader}Client="${Sombra.productName}", ';
 
   final deviceInfo = await getDeviceInfo(deviceId: deviceId);
   authHeader = '${authHeader}Device="${deviceInfo.name}",DeviceId="${deviceInfo.id}", ';
