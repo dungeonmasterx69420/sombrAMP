@@ -168,13 +168,14 @@ class DiscordRpc {
     final activeAddressIsPrivate = isAddressInLocalAddressRange(activeAddress);
 
     bool forcePublicAddress = false;
-    bool skipUrlGetting = false;
+    // Subsonic image URLs contain the user's credentials, so they must not be shared
+    bool skipUrlGetting = _finampUserHelper.currentUser!.isSubsonic;
 
     if (activeAddressIsPrivate) {
       final publicAddress = _finampUserHelper.currentUser!.publicAddress;
       final publicAddressIsPrivate = isAddressInLocalAddressRange(publicAddress);
       forcePublicAddress = true;
-      skipUrlGetting = publicAddressIsPrivate;
+      skipUrlGetting = skipUrlGetting || publicAddressIsPrivate;
     }
 
     if (!skipUrlGetting) {

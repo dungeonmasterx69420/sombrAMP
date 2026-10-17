@@ -149,6 +149,8 @@ dependencies:
   visibility_detector: ^0.4.0+2
   gaimon: ^1.4.0
   http: ^1.4.0
+  # Used for Subsonic token authentication
+  crypto: ^3.0.6
   app_links: ^6.4.0
   flutter_discord_rpc: ^1.0.0
   shared_preferences: ^2.5.3

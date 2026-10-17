@@ -1580,7 +1580,8 @@ class DownloadsSyncService {
       final artist = (item.artists?.isNotEmpty ?? false) ? "${item.artists?.first} - " : "";
       final originalFilename = item.mediaSources?.firstWhere((e) => e.type.toLowerCase() == "default").name;
       fileName = _filesystemSafe(
-        "${originalFilename ?? "$indexNumber$artist${item.name}"}_${item.id.raw.substring(0, 8)}",
+        // Subsonic track ids can be shorter than 8 characters
+        "${originalFilename ?? "$indexNumber$artist${item.name}"}_${item.id.raw.length > 8 ? item.id.raw.substring(0, 8) : item.id.raw}",
       )!;
       final pathSegments = [_filesystemSafe(item.albumArtist), _filesystemSafe(item.album)];
       // if (item.parentIndexNumber != null) {

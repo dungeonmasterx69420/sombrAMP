@@ -49,6 +49,7 @@ class FinampUser {
     required this.serverId,
     this.currentViewId,
     this.views = const {},
+    this.serverType = ServerType.jellyfin,
   });
 
   @HiveField(0)
@@ -85,6 +86,13 @@ class FinampUser {
   @HiveField(9, defaultValue: DefaultSettings.preferLocalNetwork)
   bool preferLocalNetwork;
 
+  /// The API spoken by this user's server.  Users created before Subsonic support was added are always Jellyfin users.
+  @Enumerated(EnumType.ordinal)
+  ServerType serverType;
+
+  @ignore
+  bool get isSubsonic => serverType == ServerType.subsonic;
+
   // We only need 1 user, the current user
   final Id isarId = 0;
   String get isarViews => jsonEncode(views);
@@ -102,6 +110,16 @@ class FinampUser {
     preferLocalNetwork = newPreferLocalNetwork ?? preferLocalNetwork;
     GetIt.instance<FinampUserHelper>().saveUser(this);
   }
+}
+
+/// The kind of server a [FinampUser] is logged into.
+enum ServerType {
+  /// A Jellyfin server, accessed through the native Jellyfin API.
+  jellyfin,
+
+  /// A server implementing the Subsonic API, such as Navidrome.  Jellyfin requests are translated into
+  /// Subsonic requests by `SubsonicJellyfinApi`.
+  subsonic,
 }
 
 class DefaultSettings {

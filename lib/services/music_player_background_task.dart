@@ -28,6 +28,9 @@ import 'package:rxdart/rxdart.dart';
 import 'android_auto_helper.dart';
 import 'finamp_settings_helper.dart';
 import 'metadata_provider.dart';
+import 'subsonic/subsonic_api.dart';
+import 'subsonic/subsonic_ids.dart';
+import 'subsonic/subsonic_jellyfin_api.dart';
 
 enum FadeDirection { fadeIn, fadeOut, none }
 
@@ -1400,6 +1403,11 @@ class MusicPlayerBackgroundTask extends BaseAudioHandler with SeekHandler, Queue
     // 0.18), the value would be wrong if changed while a track was playing since
     // Hive is bad at multi-isolate stuff.
 
+    final subsonicServer = finampUserHelper.currentUser!.subsonicServer();
+    if (subsonicServer != null) {
+      return _subsonicTrackUri(subsonicServer, mediaItem);
+    }
+
     final parsedBaseUrl = Uri.parse(finampUserHelper.currentUser!.baseURL);
 
     List<String> builtPath = List.from(parsedBaseUrl.pathSegments);
@@ -1447,6 +1455,22 @@ class MusicPlayerBackgroundTask extends BaseAudioHandler with SeekHandler, Queue
       userInfo: parsedBaseUrl.userInfo,
       pathSegments: builtPath,
       queryParameters: queryParameters,
+    );
+  }
+
+  /// Subsonic servers stream and transcode tracks through a single endpoint.  Transcoded tracks are streamed
+  /// progressively instead of through HLS, so seeking in them only works once the server has cached the transcode.
+  Uri _subsonicTrackUri(SubsonicServer server, MediaItem mediaItem) {
+    final id = SubsonicIds.parse(mediaItem.extras!["itemJson"]["Id"] as String).id;
+    if (!(mediaItem.extras!["shouldTranscode"] as bool)) {
+      return SubsonicApi.streamUri(server, id, format: SubsonicApi.originalFormat);
+    }
+    final format = FinampSettingsHelper.finampSettings.transcodingStreamingFormat;
+    return SubsonicApi.streamUri(
+      server,
+      id,
+      format: format.codec,
+      maxBitRate: format.lossless ? null : FinampSettingsHelper.finampSettings.transcodeBitrate ~/ 1000,
     );
   }
 

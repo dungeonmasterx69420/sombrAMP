@@ -28,12 +28,45 @@ import 'downloads_service_backend.dart';
 import 'finamp_settings_helper.dart';
 import 'finamp_user_helper.dart';
 import 'jellyfin_api.dart' as jellyfin_api;
+import 'subsonic/subsonic_api.dart';
+import 'subsonic/subsonic_ids.dart';
+import 'subsonic/subsonic_jellyfin_api.dart';
+import 'subsonic/subsonic_mapper.dart';
 
 class JellyfinApiHelper {
-  final jellyfinApi = jellyfin_api.JellyfinApi.create(
+  final _jellyfinApi = jellyfin_api.JellyfinApi.create(
     inForeground: true,
     verboseLogging: FinampSettingsHelper.finampSettings.verboseLogging,
   );
+
+  /// Talks to Subsonic servers (like Navidrome) through the same interface as Jellyfin servers.
+  late final _subsonicApi = SubsonicJellyfinApi(
+    baseUrl: () => baseUrlTemp ?? Uri.parse(_finampUserHelper.currentUser!.baseURL),
+    // While logging in, there are no stored credentials yet.  They're passed to the authentication request instead.
+    credentials: () => baseUrlTemp == null ? _finampUserHelper.currentUser?.subsonicCredentials : null,
+  );
+
+  /// The API for the server we're currently talking to.
+  jellyfin_api.JellyfinApi get jellyfinApi => isSubsonic ? _subsonicApi : _jellyfinApi;
+
+  /// The kind of server we're currently talking to.  While logging in, this is the kind of server found at
+  /// [baseUrlTemp], otherwise it's the server of the current user.
+  ServerType get serverType {
+    final baseUrlTemp = this.baseUrlTemp;
+    if (baseUrlTemp != null) {
+      return _detectedServerTypes[baseUrlTemp.toString()] ?? ServerType.jellyfin;
+    }
+    return _finampUserHelper.currentUser?.serverType ?? ServerType.jellyfin;
+  }
+
+  bool get isSubsonic => serverType == ServerType.subsonic;
+
+  /// The kinds of servers found while logging in, by base URL
+  final Map<String, ServerType> _detectedServerTypes = {};
+
+  /// The kind of server found at [baseUrl] while logging in, if it was checked.
+  ServerType? detectedServerType(String baseUrl) => _detectedServerTypes[baseUrl];
+
   static final _jellyfinApiHelperLogger = Logger("JellyfinApiHelper");
 
   // Stores the ids of the artists that the user selected to mix
@@ -126,15 +159,20 @@ class JellyfinApiHelper {
     );
     GetIt.instance.registerSingleton(isar);
     GetIt.instance.registerSingleton(FinampUserHelper(deviceId: input.$4));
-    await GetIt.instance<FinampUserHelper>().setAuthHeader();
+    final userHelper = GetIt.instance<FinampUserHelper>();
+    await userHelper.setAuthHeader();
     jellyfin_api.JellyfinApi backgroundApi = jellyfin_api.JellyfinApi.create(
       inForeground: false,
       verboseLogging: input.$6,
     );
+    final subsonicBackgroundApi = SubsonicJellyfinApi(
+      baseUrl: () => Uri.parse(userHelper.currentUser!.baseURL),
+      credentials: () => userHelper.currentUser?.subsonicCredentials,
+    );
     await for (var request in requestPort) {
       var (func, outputPort) = request as (Future<dynamic> Function(jellyfin_api.JellyfinApi), SendPort);
       try {
-        var output = await func(backgroundApi);
+        var output = await func((userHelper.currentUser?.isSubsonic ?? false) ? subsonicBackgroundApi : backgroundApi);
         outputPort.send(output);
       } catch (e, stack) {
         _jellyfinApiHelperLogger.severe("Error processing background request - $e", e, stack);
@@ -561,7 +599,7 @@ class JellyfinApiHelper {
       return null;
     }
 
-    var request = jellyfinApi.getPublicServerInfo();
+    var request = _loadServerPublicInfoOfAnyType();
     if (timeout != null) {
       request = request.timeout(
         timeout,
@@ -577,6 +615,45 @@ class JellyfinApiHelper {
     return publicSystemInfoResult;
   }
 
+  /// While logging in, we don't know which kind of server we're talking to yet.  Try Jellyfin first, then Subsonic,
+  /// and remember what we found for the rest of the login.
+  Future<dynamic> _loadServerPublicInfoOfAnyType() async {
+    final baseUrl = baseUrlTemp;
+    if (baseUrl == null) {
+      return jellyfinApi.getPublicServerInfo();
+    }
+    Object jellyfinError;
+    StackTrace jellyfinStackTrace;
+    try {
+      final response = await _jellyfinApi.getPublicServerInfo();
+      if (isJellyfinPublicInfo(response)) {
+        _detectedServerTypes[baseUrl.toString()] = ServerType.jellyfin;
+        return response;
+      }
+      throw const FormatException("Server did not return Jellyfin server info");
+    } catch (e, stackTrace) {
+      jellyfinError = e;
+      jellyfinStackTrace = stackTrace;
+    }
+    PublicSystemInfoResult? subsonicInfo;
+    try {
+      subsonicInfo = await _subsonicApi.publicServerInfoFor(baseUrl);
+    } catch (e) {
+      _jellyfinApiHelperLogger.fine("No Subsonic server found at ${baseUrl.host} either: $e");
+    }
+    if (subsonicInfo == null) {
+      // Report why connecting as a Jellyfin server failed, since that's the more common kind of server
+      Error.throwWithStackTrace(jellyfinError, jellyfinStackTrace);
+    }
+    _jellyfinApiHelperLogger.info("Found a Subsonic server (${subsonicInfo.productName}) at ${baseUrl.host}");
+    _detectedServerTypes[baseUrl.toString()] = ServerType.subsonic;
+    return subsonicInfo.toJson();
+  }
+
+  /// Whether [response] is Jellyfin's public server info.  Other servers may answer the request with something else,
+  /// e.g. Navidrome redirects it to its web app, which Chopper passes on as a plain string.
+  static bool isJellyfinPublicInfo(Object? response) => response is Map<String, dynamic> && response["Id"] is String;
+
   /// Fetch the public server info from a given URL.
   /// Can be used to check if the server is online / the URL is correct.
   /// Since we're potentially looking multiple servers, while the user is entering another base URL, we use a custom http client for this request.
@@ -585,17 +662,40 @@ class JellyfinApiHelper {
     final requestUrl = customServerUrl.replace(
       pathSegments: customServerUrl.pathSegments.followedBy(["System", "Info", "Public"]),
     );
+    if (_finampUserHelper.currentUser?.isSubsonic ?? false) {
+      return _subsonicApi.publicServerInfoFor(customServerUrl);
+    }
     final httpClient = ChopperClient().httpClient; // http? where we're going, we don't need http
     final response = await httpClient.get(requestUrl);
-    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
 
     if (response.statusCode == 200) {
-      PublicSystemInfoResult publicSystemInfoResult = PublicSystemInfoResult.fromJson(responseJson);
+      Object? responseJson;
+      try {
+        responseJson = jsonDecode(response.body);
+      } on FormatException {
+        responseJson = null;
+      }
+      if (isJellyfinPublicInfo(responseJson)) {
+        PublicSystemInfoResult publicSystemInfoResult = PublicSystemInfoResult.fromJson(
+          responseJson as Map<String, dynamic>,
+        );
+        _detectedServerTypes[customServerUrl.toString()] = ServerType.jellyfin;
 
-      return publicSystemInfoResult;
-    } else {
-      return Future.error(response);
+        return publicSystemInfoResult;
+      }
     }
+
+    // Not a Jellyfin server, but it might be a Subsonic server shared by another Finamp client
+    try {
+      final subsonicInfo = await _subsonicApi.publicServerInfoFor(customServerUrl);
+      if (subsonicInfo != null) {
+        _detectedServerTypes[customServerUrl.toString()] = ServerType.subsonic;
+        return subsonicInfo;
+      }
+    } catch (e) {
+      _jellyfinApiHelperLogger.fine("No Subsonic server found at ${customServerUrl.host} either: $e");
+    }
+    return Future.error(response);
   }
 
   /// Fetch all public users from the server.
@@ -690,6 +790,7 @@ class JellyfinApiHelper {
       accessToken: newUserAuthenticationResult.accessToken!,
       serverId: newUserAuthenticationResult.serverId!,
       views: {},
+      serverType: serverType,
     );
 
     await _finampUserHelper.saveUser(newUser);
@@ -1112,6 +1213,14 @@ class JellyfinApiHelper {
   }
 
   Future<bool> _pingSpecificServer(String url) async {
+    if (isSubsonic) {
+      try {
+        return await _subsonicApi.isReachable(Uri.parse(url)).timeout(const Duration(seconds: 3));
+      } catch (e) {
+        _jellyfinApiHelperLogger.fine("Couldn't reach Subsonic server: $e");
+        return false;
+      }
+    }
     final client = ChopperClient(
       baseUrl: Uri.tryParse(url),
       client: http.IOClient(HttpClient()..connectionTimeout = const Duration(seconds: 3)),
@@ -1175,6 +1284,16 @@ class JellyfinApiHelper {
       return null;
     }
 
+    final subsonicServer = _finampUserHelper.currentUser!.subsonicServer(forcePublicAddress: forcePublicAddress);
+    if (subsonicServer != null) {
+      final coverArtId = SubsonicMapper.coverArtId(item);
+      if (coverArtId == null) {
+        return null;
+      }
+      final sizes = [maxWidth, maxHeight].nonNulls;
+      return SubsonicApi.coverArtUri(subsonicServer, coverArtId, size: sizes.isEmpty ? null : sizes.max);
+    }
+
     final parsedBaseUrl = forcePublicAddress
         ? Uri.parse(_finampUserHelper.currentUser!.publicAddress)
         : Uri.parse(_finampUserHelper.currentUser!.baseURL);
@@ -1229,6 +1348,20 @@ class JellyfinApiHelper {
 
   /// Returns the correct URL for the given item.
   Uri getTrackDownloadUrl({required BaseItemDto item, required DownloadProfile? transcodingProfile}) {
+    final subsonicServer = _finampUserHelper.currentUser!.subsonicServer();
+    if (subsonicServer != null) {
+      final id = SubsonicIds.parse(item.id.raw).id;
+      if (transcodingProfile != null && transcodingProfile.codec != FinampTranscodingCodec.original) {
+        return SubsonicApi.streamUri(
+          subsonicServer,
+          id,
+          format: transcodingProfile.codec.name,
+          maxBitRate: transcodingProfile.stereoBitrate ~/ 1000,
+        );
+      }
+      return SubsonicApi.streamUri(subsonicServer, id, format: SubsonicApi.originalFormat);
+    }
+
     Uri uri = Uri.parse(_finampUserHelper.currentUser!.baseURL);
 
     if (transcodingProfile != null && transcodingProfile.codec != FinampTranscodingCodec.original) {
