@@ -17,20 +17,33 @@ class $ImagesGen {
   /// File path: images/album_white.png
   AssetGenImage get albumWhite => const AssetGenImage('images/album_white.png');
 
-  /// File path: images/finamp.png
-  AssetGenImage get finamp => const AssetGenImage('images/finamp.png');
-
   /// File path: images/finamp_cropped.png
-  AssetGenImage get finampCroppedPng => const AssetGenImage('images/finamp_cropped.png');
-
-  /// File path: images/finamp_cropped.svg
-  String get finampCroppedSvg => 'images/finamp_cropped.svg';
+  AssetGenImage get finampCropped => const AssetGenImage('images/finamp_cropped.png');
 
   /// File path: images/jellyfin-icon-transparent.png
   AssetGenImage get jellyfinIconTransparent => const AssetGenImage('images/jellyfin-icon-transparent.png');
 
+  /// File path: images/sombra_s_mark.svg
+  String get sombraSMark => 'images/sombra_s_mark.svg';
+
+  /// File path: images/sombra_wordmark.svg
+  String get sombraWordmark => 'images/sombra_wordmark.svg';
+
   /// List of all assets
-  List<dynamic> get values => [albumWhite, finamp, finampCroppedPng, finampCroppedSvg, jellyfinIconTransparent];
+  List<dynamic> get values => [albumWhite, finampCropped, jellyfinIconTransparent, sombraSMark, sombraWordmark];
+}
+
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  /// File path: assets/fonts/IBMPlexMono-OFL.txt
+  String get iBMPlexMonoOFL => 'assets/fonts/IBMPlexMono-OFL.txt';
+
+  /// File path: assets/fonts/PixelifySans-OFL.txt
+  String get pixelifySansOFL => 'assets/fonts/PixelifySans-OFL.txt';
+
+  /// List of all assets
+  List<String> get values => [iBMPlexMonoOFL, pixelifySansOFL];
 }
 
 class $AssetsIconGen {
@@ -55,6 +68,7 @@ class $AssetsIconGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconGen icon = $AssetsIconGen();
   static const $ImagesGen images = $ImagesGen();
 }

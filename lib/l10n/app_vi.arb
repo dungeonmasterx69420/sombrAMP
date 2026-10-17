@@ -25,7 +25,7 @@
     "music": "Nhạc",
     "clear": "Loại bỏ",
     "shuffleAll": "Trộn hết",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Tải xuống",
     "settings": "Cài đặt",
     "offlineMode": "Chế độ ngoại tuyến",
@@ -216,7 +216,7 @@
     "instantMix": "Instant Mix",
     "removeFromMix": "Loại bỏ khỏi Mix",
     "language": "Ngôn ngữ",
-    "about": "Giới thiệu về Finamp",
+    "about": "Giới thiệu về sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -224,15 +224,15 @@
     "@finampTagline": {
         "description": "Tagline / short description for the app"
     },
-    "aboutContributionLink": "Đóng góp cho Finamp trên GitHub:",
+    "aboutContributionLink": "Đóng góp cho sombrAMP trên GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutTranslations": "Giúp dịch Finamp sang ngôn ngữ của bạn:",
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Cảm ơn bạn đã sử dụng Finamp!",
+    "aboutThanks": "Cảm ơn bạn đã sử dụng sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -333,7 +333,7 @@
     },
     "loginFlowWelcomeHeading": "Chào mừng tới {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowGetStarted": "Bắt đầu!",
     "@loginFlowGetStarted": {
@@ -398,7 +398,7 @@
     "@speed": {
         "description": "Used as a placeholder in the input of the playback speed menu"
     },
-    "playbackSpeedControlSettingDescription": "Tự động:\nFinamp cố gắng xác định xem bản nhạc bạn đang phát là podcast hay (một phần) sách nói. Điều này được coi là xảy ra nếu bản nhạc dài hơn {trackDuration} phút, nếu album của bản nhạc dài hơn {albumDuration} giờ hoặc nếu bản nhạc được chỉ định ít nhất một trong các thể loại sau: {genreList}\nSau đó, điều khiển tốc độ phát lại sẽ được hiển thị trong menu màn hình trình phát.\n\nHiển thị:\nCác điều khiển tốc độ phát lại sẽ luôn được hiển thị trong menu màn hình trình phát.\n\nẨn:\nCác điều khiển tốc độ phát lại trong menu màn hình trình phát luôn bị ẩn.",
+    "playbackSpeedControlSettingDescription": "Tự động:\nsombrAMP cố gắng xác định xem bản nhạc bạn đang phát là podcast hay (một phần) sách nói. Điều này được coi là xảy ra nếu bản nhạc dài hơn {trackDuration} phút, nếu album của bản nhạc dài hơn {albumDuration} giờ hoặc nếu bản nhạc được chỉ định ít nhất một trong các thể loại sau: {genreList}\nSau đó, điều khiển tốc độ phát lại sẽ được hiển thị trong menu màn hình trình phát.\n\nHiển thị:\nCác điều khiển tốc độ phát lại sẽ luôn được hiển thị trong menu màn hình trình phát.\n\nẨn:\nCác điều khiển tốc độ phát lại trong menu màn hình trình phát luôn bị ẩn.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -469,7 +469,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Xin vui lòng tạo một báo cáo lỗi tại \"github.com/jmshrv/finamp\" kèm theo nhật kí hệ thống (sử dụng nút bên dưới) và ảnh chụp màn hình của trang này, để chúng tôi có thể khắc phục lỗi sớm nhất có thể.",
+    "startupErrorCallToAction": "Xin vui lòng tạo một báo cáo lỗi tại \"github.com/dungeonmasterx69420/sombrAMP\" kèm theo nhật kí hệ thống (sử dụng nút bên dưới) và ảnh chụp màn hình của trang này, để chúng tôi có thể khắc phục lỗi sớm nhất có thể.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -839,7 +839,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Khi bật, Finamp sẽ gửi hàng chờ hiện tại tới máy chủ. Điều này có thể cải thiện phần điều khiển từ xa và cho phép khôi phục hàng chờ một cách trực tuyến. Luôn bật nếu phần 'Phát Trên' được bật.",
+    "reportQueueToServerSubtitle": "Khi bật, sombrAMP sẽ gửi hàng chờ hiện tại tới máy chủ. Điều này có thể cải thiện phần điều khiển từ xa và cho phép khôi phục hàng chờ một cách trực tuyến. Luôn bật nếu phần 'Phát Trên' được bật.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -928,7 +928,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Bật tính năng 'Phát Trên' của Jellyfin (điều khiển từ xa Finamp từ một client khác). Tắt cái này khi reverse proxy hoặc máy chỉ của bạn không hỗ trợ websockets.",
+    "enablePlayonSubtitle": "Bật tính năng 'Phát Trên' của Jellyfin (điều khiển từ xa sombrAMP từ một client khác). Tắt cái này khi reverse proxy hoặc máy chỉ của bạn không hỗ trợ websockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1006,11 +1006,11 @@
     "@volumeNormalizationModeSelectorDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown"
     },
-    "quickConnectAuthorizationMenuDescription": "Nếu bạn đang đăng nhập vào một client Jellyfin qua Quick Connect, bạn có thể nhập hoặc dán mã 6 số vào ô dưới. Điều này sẽ uỷ quyền việc đăng nhập trên client khác, và đăng nhập bạn vào cùng một tài khoản mà bạn đang dùng cho Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Nếu bạn đang đăng nhập vào một client Jellyfin qua Quick Connect, bạn có thể nhập hoặc dán mã 6 số vào ô dưới. Điều này sẽ uỷ quyền việc đăng nhập trên client khác, và đăng nhập bạn vào cùng một tài khoản mà bạn đang dùng cho sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
-    "serverSharingMenuDetails": "Nó hoạt động bằng cách giám sát những yêu cầu phát hiện máy chủ của những client khác trên mạng nội bộ, và trả lời những yêu cầu đó bằng địa chỉ của máy chủ Jellyfin của bạn.\nNếu bạn đã cấu hình cả một địa chỉ nội bộ và công cộng, Finamp sẽ cung cấp cả 2 địa chỉ cho client yêu cầu.",
+    "serverSharingMenuDetails": "Nó hoạt động bằng cách giám sát những yêu cầu phát hiện máy chủ của những client khác trên mạng nội bộ, và trả lời những yêu cầu đó bằng địa chỉ của máy chủ Jellyfin của bạn.\nNếu bạn đã cấu hình cả một địa chỉ nội bộ và công cộng, sombrAMP sẽ cung cấp cả 2 địa chỉ cho client yêu cầu.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -1060,7 +1060,7 @@
         "description": "Description of setting controlling max concurrent downloads."
     },
     "hidePlayerBottomActionsSubtitle": "Ẩn nút hàng chờ và lời bài hát ở trong trình phát. Vuốt lên để vào hàng chờ, vuốt sang trái (dưới bìa album) để hiện lời bài hát nếu có.",
-    "serverSharingMenuConfirmationDialogText": "Bạn có muốn bật chia sẻ máy chủ kể cải khi bạn ở Chế độ Ngoại tuyến? Điều này sẽ khiến Finamp gửi dữ liệu qua mạng nội bộ.",
+    "serverSharingMenuConfirmationDialogText": "Bạn có muốn bật chia sẻ máy chủ kể cải khi bạn ở Chế độ Ngoại tuyến? Điều này sẽ khiến sombrAMP gửi dữ liệu qua mạng nội bộ.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -1077,7 +1077,7 @@
             }
         }
     },
-    "noMusicLibrariesBody": "Finamp không thể tìm bất kì thư viện nhạc nào. Hãy đảm bảo rằng máy chủ Jellyfin của bạn chứa ít nhất một thư viện với loại nội dung được đặt sang \"Music\".",
+    "noMusicLibrariesBody": "sombrAMP không thể tìm bất kì thư viện nhạc nào. Hãy đảm bảo rằng máy chủ Jellyfin của bạn chứa ít nhất một thư viện với loại nội dung được đặt sang \"Music\".",
     "runRepairWarning": "Máy chủ không thể liên lạc được để chốt lại quá trình tải về. Hãy chạy phần 'Chữa phần tải về' trong mục tải về ngay khi bạn có mạng.",
     "@runRepairWarning": {
         "description": "Message shown when an error occurs during the downloads repair step of the Isar downloads migration, which requires a server connection."
@@ -1095,7 +1095,7 @@
     "@preferQuickSyncSwitchSubtitle": {
         "description": "Description of setting that skips completed albums while syncing."
     },
-    "autoReloadQueueSubtitle": "Tự động tải lại hàng chờ khi nguồn phát thay đổi (ví dụ khi chế độ ngoại tuyến được bật hoặc địa chỉ máy chủ thay đổi). Nếu tắt, thay vào đó Finamp sẽ hỏi bạn.",
+    "autoReloadQueueSubtitle": "Tự động tải lại hàng chờ khi nguồn phát thay đổi (ví dụ khi chế độ ngoại tuyến được bật hoặc địa chỉ máy chủ thay đổi). Nếu tắt, thay vào đó sombrAMP sẽ hỏi bạn.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },

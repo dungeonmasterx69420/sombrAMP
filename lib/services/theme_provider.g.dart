@@ -269,7 +269,7 @@ class _ThemeImageProviderElement
 }
 
 String _$finampThemeFromImageHash() =>
-    r'2df81a892f2a2da45e6e351def4fe2102c0ef8df';
+    r'86e4bccda01c3f9af4942f20dea81db16b10b64b';
 
 abstract class _$FinampThemeFromImage
     extends BuildlessAutoDisposeNotifier<ColorScheme> {

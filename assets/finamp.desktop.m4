@@ -1,7 +1,7 @@
-dnl Desktop file entry for Finamp on Linux. Use m4 to generate the final file.
+dnl Desktop file entry for sombrAMP on Linux. Use m4 to generate the final file.
 [Desktop Entry]
 Type=Application
-Name=Finamp
+Name=sombrAMP
 GenericName=Music Player
 Icon=finamp
 Exec=__INSTALL_PATH__/finamp

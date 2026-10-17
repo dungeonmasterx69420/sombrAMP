@@ -21,6 +21,8 @@ import 'package:finamp/screens/volume_normalization_settings_screen.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
+import 'package:finamp/sombra/system_s.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -40,10 +42,6 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-  static const repoLink = "https://github.com/finamp-app/finamp";
-  static const releaseNotesLink = "https://github.com/finamp-app/finamp/releases";
-  static const translationsLink = "https://hosted.weblate.org/projects/finamp";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,16 +62,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               icon: const Icon(Icons.info),
               onPressed: () async {
                 final localizations = AppLocalizations.of(context)!;
-                final applicationLegalese = AppLocalizations.of(context)!.applicationLegalese(repoLink);
+                final applicationLegalese = AppLocalizations.of(context)!.applicationLegalese(Sombra.sourceCode);
                 PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
                 if (!context.mounted) return;
 
-                ThemeData theme = Theme.of(context);
-                const linkStyle = TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
+                final palette = SystemSTheme.of(context).palette;
+                // System S links: ink, underlined.
+                final linkStyle = TextStyle(color: palette.ink, decoration: TextDecoration.underline);
+                TextSpan link(String url) => TextSpan(
+                  text: url,
+                  style: linkStyle,
+                  recognizer: TapGestureRecognizer()..onTap = () async => await launchUrl(Uri.parse(url)),
+                );
 
                 showAboutDialog(
                   context: context,
-                  applicationName: packageInfo.appName,
+                  applicationName: Sombra.productName,
                   applicationVersion: packageInfo.version,
                   applicationIcon: Padding(padding: const EdgeInsets.only(top: 8.0), child: FinampIcon(56, 56)),
                   applicationLegalese: applicationLegalese,
@@ -82,50 +87,36 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        style: TextStyle(color: theme.textTheme.bodyMedium!.color),
+                        style: TextTheme.of(context).bodyMedium!.copyWith(color: palette.ink),
                         children: [
                           TextSpan(
                             text: localizations.finampTagline,
-                            style: const TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
+                          const TextSpan(text: '\n\n'),
+                          TextSpan(text: '${localizations.aboutBuiltOnFinamp}\n'),
+                          link(Sombra.finampSourceCode),
                           const TextSpan(text: '\n\n'),
                           TextSpan(text: localizations.aboutContributionPrompt),
                           const TextSpan(text: '\n\n'),
                           TextSpan(text: '${localizations.aboutContributionLink}\n'),
-                          TextSpan(
-                            text: repoLink,
-                            style: linkStyle,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                await launchUrl(Uri.parse(repoLink));
-                              },
-                          ),
-                          const TextSpan(text: '\n\n'),
-                          TextSpan(text: '${localizations.aboutTranslations}\n'),
-                          TextSpan(
-                            text: translationsLink,
-                            style: linkStyle,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                await launchUrl(Uri.parse(translationsLink));
-                              },
-                          ),
-                          const TextSpan(text: '\n\n'),
-                          TextSpan(text: '${localizations.aboutReleaseNotes}\n'),
-                          TextSpan(
-                            text: releaseNotesLink,
-                            style: linkStyle,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                await launchUrl(Uri.parse(releaseNotesLink));
-                              },
-                          ),
+                          link(Sombra.sourceCode),
                           const TextSpan(text: '\n\n\n'),
                           TextSpan(
                             text: localizations.aboutThanks,
                             style: const TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: Semantics(
+                        link: true,
+                        child: GestureDetector(
+                          onTap: () async => await launchUrl(Uri.parse(Sombra.website)),
+                          child: SombraWordmark(width: 120, color: palette.ink),
+                        ),
                       ),
                     ),
                   ],

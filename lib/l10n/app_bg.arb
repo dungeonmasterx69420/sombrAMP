@@ -18,7 +18,7 @@
     "music": "Музика",
     "clear": "Изчисти",
     "shuffleAll": "Случайното възпроизвеждане на всички",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Изтегляния",
     "settings": "Настройки",
     "offlineMode": "Офлайн режим",
@@ -248,7 +248,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Моля, създайте \"issue\" на \"github.com/jmshrv/finamp\" с прикачени лог файлове(използвайте бутонът отдолу) и скрийншот на тази страница, за да можем да поправим проблема възможно най-бързо.",
+    "startupErrorCallToAction": "Моля, създайте \"issue\" на \"github.com/dungeonmasterx69420/sombrAMP\" с прикачени лог файлове(използвайте бутонът отдолу) и скрийншот на тази страница, за да можем да поправим проблема възможно най-бързо.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -256,7 +256,7 @@
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
     },
-    "about": "Относно Finamp",
+    "about": "Относно sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -264,9 +264,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Допринесете за Finamp в GitHub:",
+    "aboutContributionLink": "Допринесете за sombrAMP в GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Бележки към версията:",
     "@aboutReleaseNotes": {
@@ -276,7 +276,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Благодаря, че използвате Finamp!",
+    "aboutThanks": "Благодаря, че използвате sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },

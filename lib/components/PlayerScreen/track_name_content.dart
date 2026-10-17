@@ -105,12 +105,7 @@ class TrackNameContent extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             PlayerButtonsMore(item: trackBaseItemDto, queueItem: currentTrack),
-            Flexible(
-              child: ArtistChips(
-                baseItem: trackBaseItemDto,
-                backgroundColor: IconTheme.of(context).color!.withValues(alpha: 0.1),
-              ),
-            ),
+            Flexible(child: ArtistChips(baseItem: trackBaseItemDto)),
             AddToPlaylistButton(item: trackBaseItemDto, queueItem: currentTrack),
           ],
         ),
@@ -119,7 +114,6 @@ class TrackNameContent extends ConsumerWidget {
             constraints: const BoxConstraints(maxWidth: 280),
             child: AlbumChips(
               baseItem: trackBaseItemDto,
-              backgroundColor: IconTheme.of(context).color!.withValues(alpha: 0.1),
               key: trackBaseItemDto.album == null ? null : ValueKey("${trackBaseItemDto.album}-album"),
             ),
           ),

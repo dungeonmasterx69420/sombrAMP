@@ -18,14 +18,22 @@ class LogoutListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
-      leading: Icon(Icons.logout, color: ref.watch(finampSettingsProvider.isOffline) ? null : Colors.red),
+      leading: Icon(
+        Icons.logout,
+        color: ref.watch(finampSettingsProvider.isOffline) ? null : Theme.of(context).colorScheme.error,
+      ),
       title: Text(
         AppLocalizations.of(context)!.logOut,
-        style: ref.watch(finampSettingsProvider.isOffline) ? null : const TextStyle(color: Colors.red),
+        style: ref.watch(finampSettingsProvider.isOffline)
+            ? null
+            : TextStyle(color: Theme.of(context).colorScheme.error),
       ),
       subtitle: ref.watch(finampSettingsProvider.isOffline)
           ? Text(AppLocalizations.of(context)!.notAvailableInOfflineMode)
-          : Text(AppLocalizations.of(context)!.logoutButtonSubtitle, style: const TextStyle(color: Colors.red)),
+          : Text(
+              AppLocalizations.of(context)!.logoutButtonSubtitle,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
       enabled: !ref.watch(finampSettingsProvider.isOffline),
       onTap: () {
         showDialog<void>(

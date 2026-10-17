@@ -254,12 +254,10 @@ class _LoginServerSelectionPageState extends ConsumerState<LoginServerSelectionP
 
     InputDecoration inputFieldDecoration(String placeholder) {
       return InputDecoration(
-        filled: true,
-        fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+        // Fill and edges come from the System S theme.
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
         label: Text(placeholder),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(16)),
         suffixIcon: IconButton(
           color: Theme.of(context).iconTheme.color,
           icon: const Icon(Icons.info),
@@ -289,7 +287,11 @@ class _LoginServerSelectionPageState extends ConsumerState<LoginServerSelectionP
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              child: Text(AppLocalizations.of(context)!.serverUrl, textAlign: TextAlign.start),
+              child: Text(
+                AppLocalizations.of(context)!.serverUrl,
+                textAlign: TextAlign.start,
+                style: TextTheme.of(context).labelMedium,
+              ),
             ),
             TextFormField(
               autocorrect: false,

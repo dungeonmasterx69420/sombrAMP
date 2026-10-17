@@ -31,6 +31,7 @@ import 'package:path/path.dart' as path_helper;
 import 'package:path_provider/path_provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 
 import '../models/music_slices.dart';
 
@@ -321,7 +322,7 @@ class QueueService {
           .toList(),
     );
     // _audioHandler.queueTitle.add(_order.originalSource.name.toString());
-    _audioHandler.queueTitle.add("Finamp");
+    _audioHandler.queueTitle.add(Sombra.productName);
 
     if (_savedQueueState == SavedQueueState.saving) {
       _saveCurrentQueue(withPosition: false);

@@ -139,7 +139,7 @@
     "artists": "Artister",
     "genres": "Genrer",
     "offlineMode": "Offlineläge",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "password": "Lösenord",
     "pathReturnSlashErrorMessage": "Sökvägar som returnerar ett \"/\" kan inte användas",
     "internalExternalIpExplanation": "Om du vill kunna komma åt din Jellyfin-server utanför hemmet så måste du använda din externa IP-adress.\n\nOm din server är på en HTTP-standardport (80 eller 443) eller Jellyfins standardport (8096) så behöver du inte ange porten.\n\nOm webbadressen är korrekt bör du se viss information om din server dyka upp under inmatningsfältet.",
@@ -221,7 +221,7 @@
     "@playNext": {
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
-    "noMusicLibrariesBody": "Finamp kunde inte hitta några musikbibliotek. Se till att din Jellyfin-server innehåller minst ett bibliotek med innehållstypen inställd på \"Musik\".",
+    "noMusicLibrariesBody": "sombrAMP kunde inte hitta några musikbibliotek. Se till att din Jellyfin-server innehåller minst ett bibliotek med innehållstypen inställd på \"Musik\".",
     "disableGesture": "Inaktivera gester",
     "noMusicLibrariesTitle": "Inga musikbibliotek",
     "@noMusicLibrariesTitle": {
@@ -229,7 +229,7 @@
     },
     "disableGestureSubtitle": "Huruvida gester ska inaktiveras.",
     "interactions": "Interaktioner",
-    "about": "Om Finamp",
+    "about": "Om sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -253,17 +253,17 @@
     "@finampTagline": {
         "description": "Tagline / short description for the app"
     },
-    "aboutContributionLink": "Bidra till Finamp på GitHub:",
+    "aboutContributionLink": "Bidra till sombrAMP på GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
-    "aboutThanks": "Tack för att du använder Finamp!",
+    "aboutThanks": "Tack för att du använder sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
     "loginFlowWelcomeHeading": "Välkommen till {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "Din musik, så som du vill ha den.",
     "@loginFlowSlogan": {
@@ -491,7 +491,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "Automatisk:\nFinamp försöker att avgöra huruvida spåret du spelar är en podcast eller (del av) en ljudbok. Detta anses vara fallet ifall spåret är längre än {trackDuration} minuter, ifall spårets album är längre än {albumDuration} timmar, eller ifall spåret har tilldelats minst en av dessa genrer: {genreList}\nReglage för uppspelningshastighet visas i så fall på uppspelningsskärmen.\n\nSynlig:\nReglage för uppspelningshastighet visas alltid på uppspelningsskärmen.\n\nDold:\nReglage för uppspelningshastighet är alltid dolt på uppspelningsskärmen.",
+    "playbackSpeedControlSettingDescription": "Automatisk:\nsombrAMP försöker att avgöra huruvida spåret du spelar är en podcast eller (del av) en ljudbok. Detta anses vara fallet ifall spåret är längre än {trackDuration} minuter, ifall spårets album är längre än {albumDuration} timmar, eller ifall spåret har tilldelats minst en av dessa genrer: {genreList}\nReglage för uppspelningshastighet visas i så fall på uppspelningsskärmen.\n\nSynlig:\nReglage för uppspelningshastighet visas alltid på uppspelningsskärmen.\n\nDold:\nReglage för uppspelningshastighet är alltid dolt på uppspelningsskärmen.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -833,7 +833,7 @@
     "@repairDownloads": {
         "description": "Tooltip for downloads repair button."
     },
-    "reportQueueToServerSubtitle": "När funktionen är aktiverad skickar Finamp den aktuella spelkön till servern. Det kan förbättra fjärrstyrning och tillåter återställning av spelkö från serversidan. Alltid aktiv ifall 'Spela på'-funktionen är aktiverad.",
+    "reportQueueToServerSubtitle": "När funktionen är aktiverad skickar sombrAMP den aktuella spelkön till servern. Det kan förbättra fjärrstyrning och tillåter återställning av spelkö från serversidan. Alltid aktiv ifall 'Spela på'-funktionen är aktiverad.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1681,7 +1681,7 @@
     "@outputMenuTitle": {
         "description": "Title for the output menu that allows the user to change the audio output device and volume"
     },
-    "enablePlayonSubtitle": "Aktiverar Jellyfins 'Spela på'-funktion (fjärrstyrning av Finamp från en annan klient). Stäng av ifall din reverse proxy eller server inte stödjer websockets.",
+    "enablePlayonSubtitle": "Aktiverar Jellyfins 'Spela på'-funktion (fjärrstyrning av sombrAMP från en annan klient). Stäng av ifall din reverse proxy eller server inte stödjer websockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1750,7 +1750,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "Återställ spelkön automatiskt när källan ändras (t ex när offlineläge aktiveras eller vid byte av serveradress). Om funktionen är avstängd så frågar Finamp dig istället.",
+    "autoReloadQueueSubtitle": "Återställ spelkön automatiskt när källan ändras (t ex när offlineläge aktiveras eller vid byte av serveradress). Om funktionen är avstängd så frågar sombrAMP dig istället.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -1771,7 +1771,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Vänligen skapa en issue på \"github.com/jmshrv/finamp\" med loggarna (använd knappen nedan) och en skärmdump av den här sidan, så att vi kan fixa det så snabbt som möjligt.",
+    "startupErrorCallToAction": "Vänligen skapa en issue på \"github.com/dungeonmasterx69420/sombrAMP\" med loggarna (använd knappen nedan) och en skärmdump av den här sidan, så att vi kan fixa det så snabbt som möjligt.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -2185,11 +2185,11 @@
     "amoledThemeSubtitle": "Ersätta det mörka temat med ett kolsvart tema.",
     "useMonochromeIcon": "Använd Monokrom Loga",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Detta påverkar endast ikonen i appen, inte ikonen i appstartaren.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "useDefaultButton": "Återställ till Förvalsaccentfärgen",
     "startRadio": "Starta Radio",
@@ -2404,7 +2404,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Är du säker på att du vill aktivera serverdelning trots att du är i Offline läge? Detta kommer att leda till att Finamp skickar data över det lokala nätverket.",
+    "serverSharingMenuConfirmationDialogText": "Är du säker på att du vill aktivera serverdelning trots att du är i Offline läge? Detta kommer att leda till att sombrAMP skickar data över det lokala nätverket.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2432,7 +2432,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Det fungerar genom att lyssna på serverupptäcktsförfrågningar från andra klienter på det lokala nätverket och sedan svara på dessa förfrågningar med den konfigurerade adressen till din Jellyfin-server.\nOm du har både en lokal och offentlig adress konfigurerad, kommer Finamp att ge båda till den begärande klienten.",
+    "serverSharingMenuDetails": "Det fungerar genom att lyssna på serverupptäcktsförfrågningar från andra klienter på det lokala nätverket och sedan svara på dessa förfrågningar med den konfigurerade adressen till din Jellyfin-server.\nOm du har både en lokal och offentlig adress konfigurerad, kommer sombrAMP att ge båda till den begärande klienten.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2472,7 +2472,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Om du försöker logga in på en annan Jellyfin-klient via Snabb Anslutning kan du ange eller klistra in den 6-siffriga koden i fältet ovan. Detta kommer att godkänna inloggningsbegäran av den andra klienten och logga in dig på samma konto som du använder för Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Om du försöker logga in på en annan Jellyfin-klient via Snabb Anslutning kan du ange eller klistra in den 6-siffriga koden i fältet ovan. Detta kommer att godkänna inloggningsbegäran av den andra klienten och logga in dig på samma konto som du använder för sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2798,17 +2798,17 @@
     },
     "libraryQualifierActive": "Aktivt",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "voiceSearch": "Röstsökning",
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Säg \"Hej Siri, spela [spår/artist/album] på Finamp\"",
+    "carPlaySiriHint": "Säg \"Hej Siri, spela [spår/artist/album] på sombrAMP\"",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Öppna Finamp-appen på din telefon för att logga in på din Jellyfin-server.",
+    "carPlayLoginPrompt": "Öppna sombrAMP-appen på din telefon för att logga in på din Jellyfin-server.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },

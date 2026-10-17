@@ -178,7 +178,7 @@
         "description": "Snackbar message that shows when the user presses the instant mix button with no albums selected"
     },
     "shuffleAll": "隨機播放全部",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "dlFailed": "{count} 失敗",
     "@dlFailed": {
         "placeholders": {
@@ -223,14 +223,14 @@
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
     "refresh": "重新載入",
-    "noMusicLibrariesBody": "Finamp 未有發現任何音樂媒體庫。請檢查 Jellyfin 伺服器上最少有一個屬於「音樂」類別的媒體庫。",
+    "noMusicLibrariesBody": "sombrAMP 未有發現任何音樂媒體庫。請檢查 Jellyfin 伺服器上最少有一個屬於「音樂」類別的媒體庫。",
     "noMusicLibrariesTitle": "沒有音樂類媒體庫",
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
     "interactions": "互動",
     "showFastScroller": "顯示快速卷軸",
-    "about": "關於 Finamp",
+    "about": "關於 sombrAMP",
     "startupErrorWorkaround": "你可嘗試透過清除資料來重設應用程式，但重設後，所有設定及已下載的檔案將會被刪除。",
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
@@ -239,17 +239,17 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "請在 github.com/jmshrv/finamp 上提交錯誤報告並附上程式記錄(!) （可使用下方按鈕）及截圖，讓我們能為你更快修正問題。",
+    "startupErrorCallToAction": "請在 github.com/dungeonmasterx69420/sombrAMP 上提交錯誤報告並附上程式記錄(!) （可使用下方按鈕）及截圖，讓我們能為你更快修正問題。",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
-    "aboutThanks": "感謝您使用 Finamp！",
+    "aboutThanks": "感謝您使用 sombrAMP！",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
     "loginFlowWelcomeHeading": "歡迎使用",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "音樂，隨心所欲。",
     "@loginFlowSlogan": {
@@ -279,9 +279,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "在 GitHub 上參與 Finamp 的開發：",
+    "aboutContributionLink": "在 GitHub 上參與 sombrAMP 的開發：",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "瀏覽最新版本的說明：",
     "@aboutReleaseNotes": {

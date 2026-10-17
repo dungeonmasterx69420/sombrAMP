@@ -77,7 +77,7 @@
     "album": "Album",
     "communityRating": "Ocjena zajednice",
     "clear": "Izbriši",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Preuzimanja",
     "settings": "Postavke",
     "offlineMode": "Izvanmrežni način rada",
@@ -223,14 +223,14 @@
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
     "refresh": "Osvježi",
-    "noMusicLibrariesBody": "Finamp nije mogao pronaći nijednu fonoteku. Provjeri sadrži li tvoj Jellyfin server barem jednu biblioteku s vrstom sadržaja postavljenom na „Glazba”.",
+    "noMusicLibrariesBody": "sombrAMP nije mogao pronaći nijednu fonoteku. Provjeri sadrži li tvoj Jellyfin server barem jednu biblioteku s vrstom sadržaja postavljenom na „Glazba”.",
     "noMusicLibrariesTitle": "Nema fonoteka",
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
     "showFastScroller": "Prikaži traku za brzo listanje",
     "interactions": "Interakcije",
-    "about": "O aplikaciji Finamp",
+    "about": "O aplikaciji sombrAMP",
     "numberAsDecibel": "{value} dB",
     "@numberAsDecibel": {
         "description": "Label for a number that represents a decibel value. The value will be the decibel value.",
@@ -419,13 +419,13 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Hvala ti što koristiš Finamp!",
+    "aboutThanks": "Hvala ti što koristiš sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
     "loginFlowWelcomeHeading": "Dobro došli u {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "serverUrlHint": "npr. demo.jellyfin.org/stable",
     "@serverUrlHint": {
@@ -681,9 +681,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Doprinesi Finampu na GitHubu:",
+    "aboutContributionLink": "Doprinesi sombrAMPu na GitHubu:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Pročitaj najnovije napomene o izdanju:",
     "@aboutReleaseNotes": {
@@ -1113,7 +1113,7 @@
             }
         }
     },
-    "reportQueueToServerSubtitle": "Kada je uključeno, Finamp će poslati trenutni red čekanja na server. To može poboljšati daljinsko upravljanje i omogućiti obnavljanja reda čekanja na strani servera. Uvijek je uključeno ako je funkcija „Reproduciraj dalje” uključena.",
+    "reportQueueToServerSubtitle": "Kada je uključeno, sombrAMP će poslati trenutni red čekanja na server. To može poboljšati daljinsko upravljanje i omogućiti obnavljanja reda čekanja na strani servera. Uvijek je uključeno ako je funkcija „Reproduciraj dalje” uključena.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1202,7 +1202,7 @@
     },
     "prioritizePlayerCover": "Daj prioritet omotu albuma",
     "prioritizePlayerCoverSubtitle": "Daj prioritet prikazivanju većeg omota albuma na ekranu playera. Nekritične kontrole će se agresivnije skrivati na malim ekranima.",
-    "serverSharingMenuDetails": "Radi tako da osluškuje zahtjeve za otkrivanje servera koje šalju drugi klijenti na lokalnoj mreži, a zatim odgovara na te zahtjeve s konfiguriranom adresom tvog Jellyfin servera.\nAko imaš konfiguriranu lokalnu i javnu adresu, Finamp će klijentu koji šalje zahtjev pružiti obje adrese.",
+    "serverSharingMenuDetails": "Radi tako da osluškuje zahtjeve za otkrivanje servera koje šalju drugi klijenti na lokalnoj mreži, a zatim odgovara na te zahtjeve s konfiguriranom adresom tvog Jellyfin servera.\nAko imaš konfiguriranu lokalnu i javnu adresu, sombrAMP će klijentu koji šalje zahtjev pružiti obje adrese.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -1332,7 +1332,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Prijavi problem na „github.com/jmshrv/finamp“ sa zapisima (koristi donji gumb) i snimkom ekrana ove stranice, kako bismo ga mogli što prije popraviti.",
+    "startupErrorCallToAction": "Prijavi problem na „github.com/dungeonmasterx69420/sombrAMP“ sa zapisima (koristi donji gumb) i snimkom ekrana ove stranice, kako bismo ga mogli što prije popraviti.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },

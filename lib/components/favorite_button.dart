@@ -45,7 +45,7 @@ class _FavoriteButtonState extends ConsumerState<FavoriteButton> {
           (!widget.showFavoriteIconOnlyWhenFilterDisabled || !ref.watch(finampSettingsProvider.onlyShowFavorites))) {
         return Icon(
           Icons.favorite,
-          color: Colors.red,
+          color: Theme.of(context).colorScheme.onSurface,
           size: widget.size ?? 24.0,
           semanticLabel: AppLocalizations.of(context)!.favorite,
         );

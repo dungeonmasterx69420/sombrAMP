@@ -5,6 +5,7 @@ import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:finamp/color_schemes.g.dart';
 
 import '../../models/finamp_models.dart';
 import '../../services/downloads_service.dart';
@@ -190,7 +191,9 @@ Column buildDownloadedItemSubtitle(BuildContext context, DownloadStub stub) {
         Text(
           libraryName,
           style: TextStyle(
-            color: isLegacyAllLibrariesDownload ? Colors.orange : Theme.of(context).textTheme.bodyMedium?.color,
+            color: isLegacyAllLibrariesDownload
+                ? Theme.of(context).colorScheme.warning
+                : Theme.of(context).textTheme.bodyMedium?.color,
           ),
         ),
       ItemFileSize(stub: stub),

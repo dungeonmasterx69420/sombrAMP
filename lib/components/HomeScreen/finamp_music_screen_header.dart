@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:finamp/components/MusicScreen/item_wrapper.dart';
 import 'package:finamp/components/finamp_app_bar_back_button.dart';
 import 'package:finamp/components/finamp_icon.dart';
-import 'package:finamp/extensions/color_extensions.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/components/icon_button_with_semantics.dart';
 import 'package:finamp/models/finamp_models.dart';
@@ -21,11 +20,11 @@ import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/music_providers.dart';
 import 'package:finamp/utils/platform_helper.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../extensions/localizations.dart';
 import '../../menus/home_section_menu.dart';
@@ -78,10 +77,10 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
   Widget build(BuildContext context, WidgetRef ref) {
     Timer? debounce;
 
-    final activeTabBackgroundColor = ColorScheme.of(context).primaryContainer;
-    final inactiveTabBackgroundColor = ColorScheme.of(context).surface;
-    Color activeTabTextColor = AtContrast.getContrastiveTintedTextColor(onBackground: activeTabBackgroundColor);
-    Color inactiveTabTextColor = AtContrast.getContrastiveTintedTextColor(onBackground: inactiveTabBackgroundColor);
+    // System S: the current tab is inverted, like the current page in the menu bar.
+    final activeTabBackgroundColor = ColorScheme.of(context).primary;
+    Color activeTabTextColor = ColorScheme.of(context).onPrimary;
+    Color inactiveTabTextColor = ColorScheme.of(context).onSurface;
 
     final statusIcon = ref.watch(finampSettingsProvider.isOffline)
         ? TablerIcons.cloud_off
@@ -127,29 +126,14 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                 if (backButtonInsteadOfTabs)
                   SizedBox(width: _upperToolbarHeight + 6, height: _upperToolbarHeight, child: FinampAppBarBackButton())
                 else
+                  // System S: the S mark on a pane, edged in ink like a button.
                   Material(
-                    elevation: 3.0,
+                    elevation: 0,
                     surfaceTintColor: Colors.transparent,
-                    shadowColor: Theme.brightnessOf(context) == Brightness.dark
-                        ? Colors.transparent
-                        : Theme.of(context).colorScheme.shadow.withValues(alpha: 0.4),
-                    color: Theme.brightnessOf(context) == Brightness.dark
-                        ? Color.alphaBlend(
-                            // only use primary accent if Finamp icon is guaranteed to look nice on it
-                            // otherwise use a static dark blue background
-                            ref.watch(finampSettingsProvider.useMonochromeIcon) ||
-                                    (!ref.watch(finampSettingsProvider.useSystemAccentColor) &&
-                                        ref.watch(finampSettingsProvider.accentColor) == null)
-                                ? ColorScheme.of(context).primary.withValues(alpha: 0.1)
-                                : Color(0xff000e2e),
-                            ColorScheme.of(context).surface,
-                          )
-                        : Colors.white,
+                    color: ColorScheme.of(context).surfaceContainer,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.circular(12.0),
-                      side: Theme.brightnessOf(context) == Brightness.dark
-                          ? BorderSide(color: ColorScheme.of(context).outline.withValues(alpha: 0.3), width: 0.5)
-                          : BorderSide.none,
+                      borderRadius: BorderRadiusGeometry.circular(10.0),
+                      side: BorderSide(color: ColorScheme.of(context).outline),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 5.0, right: 3.0, top: 5.0, bottom: 3.0),
@@ -234,19 +218,13 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                   Expanded(
                     child: GestureDetector(
                       onTap: openMenu,
-                      child: FutureBuilder(
-                        future: PackageInfo.fromPlatform(),
-                        builder: (context, asyncSnapshot) {
-                          final appName = asyncSnapshot.data?.appName ?? AppLocalizations.of(context)!.finamp;
-                          return Text(
-                            singleTabConfig?.getTitle(context.l10n) ??
-                                finampUserHelper.currentUser?.currentView?.name ??
-                                appName,
-                            style: TextStyle(fontSize: 20),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        },
+                      child: Text(
+                        singleTabConfig?.getTitle(context.l10n) ??
+                            finampUserHelper.currentUser?.currentView?.name ??
+                            Sombra.productName,
+                        style: TextTheme.of(context).titleLarge,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
@@ -357,9 +335,8 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
         if (!backButtonInsteadOfTabs)
           TabBar(
             controller: tabController,
-            indicator: BoxDecoration(borderRadius: BorderRadius.circular(8.0), color: activeTabBackgroundColor),
+            indicator: BoxDecoration(color: activeTabBackgroundColor),
             indicatorPadding: EdgeInsets.zero,
-            splashBorderRadius: BorderRadius.circular(8.0),
             labelColor: activeTabTextColor,
             // unselectedLabelColor: Colors.red, //!!! the label color is specified below, along with the font
             labelPadding: EdgeInsets.symmetric(horizontal: 4.0),
@@ -369,7 +346,7 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
             tabs: sortedTabs.map((tabType) {
               final textStyle = tabController?.index == sortedTabs.indexOf(tabType)
                   ? null
-                  : TextTheme.of(context).bodyMedium!.copyWith(color: inactiveTabTextColor);
+                  : TextTheme.of(context).labelLarge!.copyWith(color: inactiveTabTextColor);
               return Tab(
                 height: 32.0,
                 child: GestureDetector(

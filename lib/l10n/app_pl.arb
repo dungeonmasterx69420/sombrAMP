@@ -65,7 +65,7 @@
     "logOut": "Wyloguj",
     "settings": "Ustawienia",
     "unknownError": "Nieznany błąd",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "music": "Muzyka",
     "shareLogs": "Udostępnij logi",
     "list": "Lista",
@@ -229,7 +229,7 @@
     },
     "showFastScroller": "Pokaż szybkie przewijanie",
     "refresh": "Odśwież",
-    "noMusicLibrariesBody": "Finamp nie mógł znaleźć żadnych bibliotek muzycznych. Upewnij się, że serwer Jellyfin zawiera co najmniej jedną bibliotekę z typem zawartości ustawionym na \"Muzyka\".",
+    "noMusicLibrariesBody": "sombrAMP nie mógł znaleźć żadnych bibliotek muzycznych. Upewnij się, że serwer Jellyfin zawiera co najmniej jedną bibliotekę z typem zawartości ustawionym na \"Muzyka\".",
     "serverUrlHint": "np. demo.jellyfin.org/stable",
     "@serverUrlHint": {
         "description": "Hint text for the server URL input field. Should be the address to an actual, public Jellyfin server."
@@ -254,7 +254,7 @@
     "@backToServerSelection": {
         "description": "Label for the button that takes the user back to the server selection step during the login flow."
     },
-    "about": "O Finamp",
+    "about": "O sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -266,9 +266,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Wnieś swój wkład do Finamp na GitHub:",
+    "aboutContributionLink": "Wnieś swój wkład do sombrAMP na GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Przeczytaj najnowsze informacje o wydaniu:",
     "@aboutReleaseNotes": {
@@ -278,7 +278,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Dziękujemy za korzystanie z Finamp!",
+    "aboutThanks": "Dziękujemy za korzystanie z sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -513,7 +513,7 @@
     },
     "loginFlowWelcomeHeading": "Witamy w {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "orDivider": "lub",
     "@orDivider": {
@@ -725,7 +725,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Po włączeniu Finamp wyśle bieżącą kolejkę do serwera. Obecnie wydaje się to mało przydatne i zwiększa ruch sieciowy.",
+    "reportQueueToServerSubtitle": "Po włączeniu sombrAMP wyśle bieżącą kolejkę do serwera. Obecnie wydaje się to mało przydatne i zwiększa ruch sieciowy.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1355,7 +1355,7 @@
     "@downloadsWorkersSettingSubtitle": {
         "description": "Description of setting controlling download worker count."
     },
-    "playbackSpeedControlSettingDescription": "Automatycznie:\nFinamp spróbuje zidentyfikować, czy odtwarzany utwór jest podcastem lub audiobookiem. Uznaje się, że tak jest, jeśli utwór jest dłuższy niż {trackDuration} minut, jeśli album utworu jest dłuższy niż {albumDuration} godzin lub jeśli utwór ma przypisany co najmniej jeden z tych gatunków: {genreList}.\nElementy sterujące prędkością odtwarzania zostaną wyświetlone w menu ekranu odtwarzacza.\n\nPokazane:\nElementy sterujące prędkością odtwarzania będą zawsze wyświetlane w menu ekranu odtwarzacza.\n\nUkryte:\nElementy sterujące szybkością odtwarzania w menu ekranu odtwarzacza są zawsze ukryte.",
+    "playbackSpeedControlSettingDescription": "Automatycznie:\nsombrAMP spróbuje zidentyfikować, czy odtwarzany utwór jest podcastem lub audiobookiem. Uznaje się, że tak jest, jeśli utwór jest dłuższy niż {trackDuration} minut, jeśli album utworu jest dłuższy niż {albumDuration} godzin lub jeśli utwór ma przypisany co najmniej jeden z tych gatunków: {genreList}.\nElementy sterujące prędkością odtwarzania zostaną wyświetlone w menu ekranu odtwarzacza.\n\nPokazane:\nElementy sterujące prędkością odtwarzania będą zawsze wyświetlane w menu ekranu odtwarzacza.\n\nUkryte:\nElementy sterujące szybkością odtwarzania w menu ekranu odtwarzacza są zawsze ukryte.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1453,7 +1453,7 @@
     "none": "Żaden",
     "autoSwitchItemCurationTypeTitle": "Automatyczne przełączanie typu selekcji elementów",
     "performingArtist": "Występujący Artyści",
-    "startupErrorCallToAction": "Proszę założyć issue na „github.com/jmshrv/finamp”, dołączyć pliki logów (wygenerowane za pomocą przycisku poniżej) oraz dodać zrzut ekranu z tego ekranu, abyśmy mogli pomóc jak najszybciej.",
+    "startupErrorCallToAction": "Proszę założyć issue na „github.com/dungeonmasterx69420/sombrAMP”, dołączyć pliki logów (wygenerowane za pomocą przycisku poniżej) oraz dodać zrzut ekranu z tego ekranu, abyśmy mogli pomóc jak najszybciej.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1489,11 +1489,11 @@
     "amoledThemeSubtitle": "Zastępuje ciemny schemat kolorów czarnym schematem.",
     "useMonochromeIcon": "Użyj jednokolorowego logo",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Zmienia to tylko ikonę w aplikacji, a nie ikonę launchera.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Domyślne",
     "useDefaultButton": "Przywróć domyślny kolor akcentu",
@@ -1542,7 +1542,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Włącza funkcję \"Play On\" Jellyfina (zdalne sterowanie Finampa z innego klienta). Wyłącz tę opcję, jeśli Twój serwer lub reverse proxy nie obsługuje WebSocketów.",
+    "enablePlayonSubtitle": "Włącza funkcję \"Play On\" Jellyfina (zdalne sterowanie sombrAMPa z innego klienta). Wyłącz tę opcję, jeśli Twój serwer lub reverse proxy nie obsługuje WebSocketów.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },

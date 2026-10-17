@@ -17,10 +17,12 @@ class PlaybackActionPageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColorSelected = TextStyle(fontSize: 13.0, color: Theme.of(context).colorScheme.onPrimary);
-    final textColor = TextStyle(fontSize: 13.0, color: Theme.of(context).colorScheme.onSurface);
-    final buttonColorSelected = Theme.of(context).colorScheme.primary.withValues(alpha: 0.9);
-    final buttonColor = Theme.of(context).colorScheme.primary.withValues(alpha: 0.1);
+    // System S segmented options: ink-edged, the chosen one inverted.
+    final labelStyle = TextTheme.of(context).labelMedium!;
+    final textColorSelected = labelStyle.copyWith(color: Theme.of(context).colorScheme.onPrimary);
+    final textColor = labelStyle.copyWith(color: Theme.of(context).colorScheme.onSurface);
+    final buttonColorSelected = Theme.of(context).colorScheme.primary;
+    final buttonColor = Theme.of(context).colorScheme.surfaceContainer;
 
     return Padding(
       padding: compactLayout ? EdgeInsets.only(top: 4.0) : EdgeInsets.only(bottom: 4.0),
@@ -48,7 +50,8 @@ class PlaybackActionPageIndicator extends StatelessWidget {
                       color: (pageController.page ?? pageController.initialPage).round() == index
                           ? buttonColorSelected
                           : buttonColor,
-                      borderRadius: BorderRadius.circular(9999.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(color: Theme.of(context).colorScheme.outline),
                     ),
                     child: Text(
                       pages.keys.elementAt(index).toLocalisedString(context.l10n),

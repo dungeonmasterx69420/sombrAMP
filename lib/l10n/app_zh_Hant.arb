@@ -35,7 +35,7 @@
     "music": "音樂",
     "clear": "清除",
     "shuffleAll": "隨機播放全部",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "下載",
     "settings": "設置",
     "offlineMode": "離線模式",
@@ -258,7 +258,7 @@
     "@passwordHint": {
         "description": "Hint text for the password input field."
     },
-    "about": "關於 Finamp",
+    "about": "關於 sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -270,9 +270,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "在 GitHub 上為 Finamp 做出貢獻：",
+    "aboutContributionLink": "在 GitHub 上為 sombrAMP 做出貢獻：",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "閱讀最新版本說明：",
     "@aboutReleaseNotes": {
@@ -282,13 +282,13 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "感謝您使用 Finamp！",
+    "aboutThanks": "感謝您使用 sombrAMP！",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
     "loginFlowWelcomeHeading": "歡迎使用 {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "打造屬於你的音樂，隨心所欲、由你掌控。",
     "@loginFlowSlogan": {
@@ -406,7 +406,7 @@
     "@resetSettingsPromptGlobalConfirm": {
         "description": "A differently worded Confirm button to prevent the user from instandly clicking confirm because they are about to reset all settings to their default value"
     },
-    "playbackSpeedControlSettingDescription": "自動：\nFinamp 會根據音軌是否符合以下條件，自動判斷其為podcast或audiobook的一部分：音軌時長超過 {trackDuration} 分鐘、專輯總時長超過 {albumDuration} 小時，或類型包含以下任一項：{genreList}。\n播放速度控制選單將會顯示於播放介面中。\n\n顯示:\n播放介面選單中的播放速度控制功能將一律保持顯示。\n\n隱藏：\n播放介面選單中的播放速度控制功能將一律保持隱藏。",
+    "playbackSpeedControlSettingDescription": "自動：\nsombrAMP 會根據音軌是否符合以下條件，自動判斷其為podcast或audiobook的一部分：音軌時長超過 {trackDuration} 分鐘、專輯總時長超過 {albumDuration} 小時，或類型包含以下任一項：{genreList}。\n播放速度控制選單將會顯示於播放介面中。\n\n顯示:\n播放介面選單中的播放速度控制功能將一律保持顯示。\n\n隱藏：\n播放介面選單中的播放速度控制功能將一律保持隱藏。",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -772,7 +772,7 @@
             }
         }
     },
-    "reportQueueToServerSubtitle": "啟用後，Finamp 會將目前的播放佇列傳送至伺服器。這可改善遠端控制體驗，並支援伺服器端的播放佇列還原功能。若啟用「遠端播放」功能，此功能將自動啟用。",
+    "reportQueueToServerSubtitle": "啟用後，sombrAMP 會將目前的播放佇列傳送至伺服器。這可改善遠端控制體驗，並支援伺服器端的播放佇列還原功能。若啟用「遠端播放」功能，此功能將自動啟用。",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1652,7 +1652,7 @@
     "@playOnStaleDelaySubtitle": {
         "description": "Description of the setting that controls how long a PlayOn remote session is considered active"
     },
-    "enablePlayonSubtitle": "啟用 Jellyfin 的「遠端播放」功能，可從其他用戶端遠端控制 Finamp。若你的反向代理或伺服器不支援 WebSocket，請停用此功能。",
+    "enablePlayonSubtitle": "啟用 Jellyfin 的「遠端播放」功能，可從其他用戶端遠端控制 sombrAMP。若你的反向代理或伺服器不支援 WebSocket，請停用此功能。",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1709,7 +1709,7 @@
     "@libraryDownloads": {
         "description": "Title for the library downloads section on the downloads screen."
     },
-    "startupErrorCallToAction": "請在網站 \"github.com/jmshrv/finamp\" 提交問題描述並附上程式日誌檔 (可使用下方按鈕) 以及現在畫面的截圖, 以讓我們盡快修正此問題.",
+    "startupErrorCallToAction": "請在網站 \"github.com/dungeonmasterx69420/sombrAMP\" 提交問題描述並附上程式日誌檔 (可使用下方按鈕) 以及現在畫面的截圖, 以讓我們盡快修正此問題.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1934,7 +1934,7 @@
     "@genreFilterNotAvailableForAlbums": {
         "description": "Message shown when the user tries to apply a genre filter to an album."
     },
-    "autoReloadQueueSubtitle": "當來源變更時（例如啟用離線模式或切換伺服器位址），自動重新載入播放佇列。若停用此功能，Finamp 將會提示您是否要重新載入。",
+    "autoReloadQueueSubtitle": "當來源變更時（例如啟用離線模式或切換伺服器位址），自動重新載入播放佇列。若停用此功能，sombrAMP 將會提示您是否要重新載入。",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2125,7 +2125,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "您確定要在離線模式下啟用伺服器分享嗎？這將使 Finamp 在區域網路中傳輸資料。",
+    "serverSharingMenuConfirmationDialogText": "您確定要在離線模式下啟用伺服器分享嗎？這將使 sombrAMP 在區域網路中傳輸資料。",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2153,7 +2153,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "此功能會在區域網路中回應其他裝置的伺服器搜尋請求，並提供您設定的 Jellyfin 位址。\n如果同時設定了區域網路與外部網路，Finamp 會一併回傳兩者。",
+    "serverSharingMenuDetails": "此功能會在區域網路中回應其他裝置的伺服器搜尋請求，並提供您設定的 Jellyfin 位址。\n如果同時設定了區域網路與外部網路，sombrAMP 會一併回傳兩者。",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2193,7 +2193,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "若您想透過快速連接登入其他 Jellyfin 裝置，請在上方輸入 6 位數代碼。系統將授權該裝置登入，並使用您目前在 Finamp 的帳號。",
+    "quickConnectAuthorizationMenuDescription": "若您想透過快速連接登入其他 Jellyfin 裝置，請在上方輸入 6 位數代碼。系統將授權該裝置登入，並使用您目前在 sombrAMP 的帳號。",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2420,7 +2420,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "警告：偵測到 Jellyfin 伺服器未正確生成 BlurHash。這會使 Finamp 無法辨識重複圖片並導致重複下載。請修正伺服器設定並執行下載修復以清理下載內容。",
+    "missingBlurhashWarning": "警告：偵測到 Jellyfin 伺服器未正確生成 BlurHash。這會使 sombrAMP 無法辨識重複圖片並導致重複下載。請修正伺服器設定並執行下載修復以清理下載內容。",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -2502,11 +2502,11 @@
     },
     "useMonochromeIcon": "使用單色Logo",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "僅影響 App 內圖示，不會影響裝置的應用程式圖示。",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "playbackActionPageMoveWithinQueue": "調整佇列",
     "@playbackActionPageMoveWithinQueue": {
@@ -2848,11 +2848,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "你可以說Hey Siri，在Finamp播放 [歌曲/歌手/專輯]",
+    "carPlaySiriHint": "你可以說Hey Siri，在sombrAMP播放 [歌曲/歌手/專輯]",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "請在手機上開啟Finamp App，登入你的Jellyfin伺服器。",
+    "carPlayLoginPrompt": "請在手機上開啟sombrAMP App，登入你的Jellyfin伺服器。",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3418,7 +3418,7 @@
     },
     "libraryQualifierActive": "使用中",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "offlineSortFallback": "只有在線上時才能依 {onlineSort} 排序。目前將改用預設排序",
     "@offlineSortFallback": {

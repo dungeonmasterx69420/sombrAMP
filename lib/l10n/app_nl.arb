@@ -114,7 +114,7 @@
     "settings": "Instellingen",
     "offlineMode": "Offline Modus",
     "sortOrder": "Sorteervolgorde",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Downloads",
     "sortBy": "Sorteer met",
     "criticRating": "Criticusbeoordeling",
@@ -264,7 +264,7 @@
             }
         }
     },
-    "about": "Over Finamp",
+    "about": "Over sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -272,7 +272,7 @@
     "@aboutReleaseNotes": {
         "description": "Link to the release notes, shown in the about screen."
     },
-    "aboutThanks": "Bedankt voor het gebruiken van Finamp!",
+    "aboutThanks": "Bedankt voor het gebruiken van sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -369,7 +369,7 @@
     },
     "loginFlowWelcomeHeading": "Welkom bij {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "aboutTranslations": "Help Finamp vertalen in jouw taal:",
     "@aboutTranslations": {
@@ -433,9 +433,9 @@
     "@loginFlowLocalNetworkServers": {
         "description": "Heading for the list of servers on the local network, shown during the login flow. Should ideally have a colon at the end."
     },
-    "aboutContributionLink": "Draag bij aan Finamp op GitHub:",
+    "aboutContributionLink": "Draag bij aan sombrAMP op GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "connectingToServer": "Verbinden met de server…",
     "@connectingToServer": {
@@ -496,7 +496,7 @@
     },
     "addToMorePlaylistsTitle": "Toevoegen aan Meer Afspeellijsten",
     "showFastScroller": "Laat snelle scroller zien",
-    "playbackSpeedControlSettingDescription": "Automatisch:\nFinamp probeert in te schatten of het nummer waar je momenteel naar luistert een podcast is, of het (een onderdeel van) een audioboek is. Dit wordt aangenomen als het nummer langer duurt dan {trackDuration} minuten, of als het gehele album langer duurt dan {albumDuration} uur, of als het nummer tot één van de volgende genres behoort: {genreList}\nDe knoppen om de afspeelsnelheid te bedienen worden dan zichtbaar gemaakt in het muziekspeler scherm.\n\nZichtbaar:\nDe knoppen om de afspeelsnelheid te bedienen zullen altijd zichtbaar zijn in het muziekspeler scherm.\n\nVerborgen:\nDe knoppen om de afspeelsnelheid te bedienen zullen niet zichtbaar zijn in het muziekspeler scherm.",
+    "playbackSpeedControlSettingDescription": "Automatisch:\nsombrAMP probeert in te schatten of het nummer waar je momenteel naar luistert een podcast is, of het (een onderdeel van) een audioboek is. Dit wordt aangenomen als het nummer langer duurt dan {trackDuration} minuten, of als het gehele album langer duurt dan {albumDuration} uur, of als het nummer tot één van de volgende genres behoort: {genreList}\nDe knoppen om de afspeelsnelheid te bedienen worden dan zichtbaar gemaakt in het muziekspeler scherm.\n\nZichtbaar:\nDe knoppen om de afspeelsnelheid te bedienen zullen altijd zichtbaar zijn in het muziekspeler scherm.\n\nVerborgen:\nDe knoppen om de afspeelsnelheid te bedienen zullen niet zichtbaar zijn in het muziekspeler scherm.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -963,7 +963,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Als dit geactiveerd is stuurt Finamp de wachtrij naar de server. Dit kan besturing vanaf een ander apparaat verbeteren en zorgt dat de server de wachtrij kan herstellen. Staat altijd aan als 'Afspelen Op' geactiveerd is.",
+    "reportQueueToServerSubtitle": "Als dit geactiveerd is stuurt sombrAMP de wachtrij naar de server. Dit kan besturing vanaf een ander apparaat verbeteren en zorgt dat de server de wachtrij kan herstellen. Staat altijd aan als 'Afspelen Op' geactiveerd is.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1058,7 +1058,7 @@
     "@playOnReconnectionDelaySubtitle": {
         "description": "Description of the setting that controls the reconnection attempts frequency of a disconnected PlayOn session"
     },
-    "enablePlayonSubtitle": "Activeert Jellyfins 'Afspelen Op' functie (Finamp op afstand besturen vanaf een ander apparaat). Zet dit uit als je reverse proxy of server geen websockets ondersteunt.",
+    "enablePlayonSubtitle": "Activeert Jellyfins 'Afspelen Op' functie (sombrAMP op afstand besturen vanaf een ander apparaat). Zet dit uit als je reverse proxy of server geen websockets ondersteunt.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1097,7 +1097,7 @@
         "description": "'Album-based' option for the replay gain mode dropdown. In album-based mode, the album gain is always used, regardless of whether an album is playing or not."
     },
     "resetToDefaults": "Terugzetten naar standaardinstellingen",
-    "noMusicLibrariesBody": "Finamp kon geen muziekbibliotheken vinden. Zorg ervoor dat je Jellyfin server minstens één bibliotheek heeft met het type \"Muziek\".",
+    "noMusicLibrariesBody": "sombrAMP kon geen muziekbibliotheken vinden. Zorg ervoor dat je Jellyfin server minstens één bibliotheek heeft met het type \"Muziek\".",
     "volumeNormalizationModeHybrid": "Hybride (Nummer + Album)",
     "@volumeNormalizationModeHybrid": {
         "description": "'Hybrid' option for the replay gain mode dropdown. In hybrid mode, the track gain is used for regular playback, but if an album is playing (either because it's the main playback queue source, or because it was added to the queue at some point), the album gain is used instead."
@@ -1205,7 +1205,7 @@
     "@librarySelectError": {
         "description": "Error shown when the library select screen fails to load."
     },
-    "startupErrorCallToAction": "Maak aub een issue aan op \"github.com/jmshrv/finamp\" met de logs (gebruik de knop hieronder) en een schermafdruk van deze pagina, opdat we dit zo snel mogelijk kunnen oplossen.",
+    "startupErrorCallToAction": "Maak aub een issue aan op \"github.com/dungeonmasterx69420/sombrAMP\" met de logs (gebruik de knop hieronder) en een schermafdruk van deze pagina, opdat we dit zo snel mogelijk kunnen oplossen.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1568,11 +1568,11 @@
     },
     "useMonochromeIcon": "Gebruik zwart-wit logo",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Dit verandert alleen het logo in de app, niet het app icoon.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Standaard",
     "useDefaultButton": "Terug naar standaard accent kleur",

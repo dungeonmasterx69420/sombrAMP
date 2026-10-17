@@ -220,7 +220,7 @@
             }
         }
     },
-    "noMusicLibrariesBody": "Finamp は音楽ライブラリを見つけることができませんでした。Jellyfin サーバーに、コンテンツ タイプが「音楽」に設定されているライブラリが少なくとも 1 つ含まれていることを確認してください。",
+    "noMusicLibrariesBody": "sombrAMP は音楽ライブラリを見つけることができませんでした。Jellyfin サーバーに、コンテンツ タイプが「音楽」に設定されているライブラリが少なくとも 1 つ含まれていることを確認してください。",
     "showUncensoredLogMessage": "このログはあなたのログイン情報を含みます。表示しますか？",
     "applicationLegalese": "Mozilla Public License 2.0 のもとでライセンスされています。\nソースコードは {sourceCodeLink} で入手できます。",
     "customLocationsBuggy": "カスタムの場所は、非常にバグが多くなるかも知れないので 、ほとんどの場合お勧めません。ＯＳ制限 ので 、「Music」ディレクトリの仲に場所は、ジャケット画像をセーブのが止めされる。",
@@ -281,7 +281,7 @@
     },
     "aboutContributionLink": "GitHub で「フィンアンプ」に貢献する:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "最新のリリースノートを読む：",
     "@aboutReleaseNotes": {
@@ -444,7 +444,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -452,7 +452,7 @@
     "@apply": {
         "description": "Used for a button in the playback speed menu"
     },
-    "startupErrorCallToAction": "下のボタンからログとこのページのスクリーンショットを添えて「github.com/jmshrv/finamp」にIssueを作成してください。できるだけ早く修正できるよう対応します。",
+    "startupErrorCallToAction": "下のボタンからログとこのページのスクリーンショットを添えて「github.com/dungeonmasterx69420/sombrAMP」にIssueを作成してください。できるだけ早く修正できるよう対応します。",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1059,7 +1059,7 @@
     "@quickConnectAuthorizationMenuStateTitleSuccess": {
         "description": "Title for the quick connect authorization menu state info (above the input field) when the authorization was successful"
     },
-    "quickConnectAuthorizationMenuDescription": "クイックコネクトを使って他の Jellyfin クライアントにサインインするには、上の欄に6桁のコードを入力または貼り付けてください。入力後、そのクライアントのサインインが承認され、Finamp で使用しているのと同じアカウントでログインされます。",
+    "quickConnectAuthorizationMenuDescription": "クイックコネクトを使って他の Jellyfin クライアントにサインインするには、上の欄に6桁のコードを入力または貼り付けてください。入力後、そのクライアントのサインインが承認され、sombrAMP で使用しているのと同じアカウントでログインされます。",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -1250,11 +1250,11 @@
     },
     "useMonochromeIcon": "モノクロのロゴを使用する",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "これはアプリ内のアイコンにのみ影響し、ランチャーのアイコンには影響しません。",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "デフォルト",
     "useDefaultButton": "デフォルトのアクセントカラーにリセット",
@@ -2742,7 +2742,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "警告: Jellyfin サーバーの構成が間違っているようで、ブラーハッシュを計算していません。 これにより、Finamp によるイメージのダウンロードの重複が防止されます。 サーバーを修正し、ダウンロード修復を実行してください。",
+    "missingBlurhashWarning": "警告: Jellyfin サーバーの構成が間違っているようで、ブラーハッシュを計算していません。 これにより、sombrAMP によるイメージのダウンロードの重複が防止されます。 サーバーを修正し、ダウンロード修復を実行してください。",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },

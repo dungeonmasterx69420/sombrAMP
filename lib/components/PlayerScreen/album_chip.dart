@@ -12,7 +12,8 @@ import '../../services/downloads_service.dart';
 import '../../services/finamp_settings_helper.dart';
 import '../../services/jellyfin_api_helper.dart';
 
-final _borderRadius = BorderRadius.circular(4);
+// System S tags are square.
+const _borderRadius = BorderRadius.zero;
 
 class AlbumChips extends StatelessWidget {
   const AlbumChips({super.key, this.baseItem, this.backgroundColor, this.color, this.includeReleaseDate});
@@ -127,8 +128,8 @@ class _AlbumChipContent extends ConsumerWidget {
       excludeSemantics: true,
       container: true,
       child: Material(
-        color: backgroundColor ?? Colors.white.withValues(alpha: 0.1),
-        borderRadius: _borderRadius,
+        color: backgroundColor ?? ColorScheme.of(context).surfaceContainer,
+        shape: RoundedRectangleBorder(side: BorderSide(color: ColorScheme.of(context).outline)),
         child: InkWell(
           borderRadius: _borderRadius,
           onTap: item.albumId != null

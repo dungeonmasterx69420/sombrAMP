@@ -47,7 +47,7 @@
     "password": "Contrasenya",
     "logs": "Registres",
     "next": "Següent",
-    "about": "Sobre Finamp",
+    "about": "Sobre sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -59,9 +59,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Contribueix a Finamp a Github:",
+    "aboutContributionLink": "Contribueix a sombrAMP a Github:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Llegeix les últimes notes de llançament:",
     "@aboutReleaseNotes": {
@@ -71,13 +71,13 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Moltes gràcies per fer servir Finamp!",
+    "aboutThanks": "Moltes gràcies per fer servir sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
     "loginFlowWelcomeHeading": "Benvingut a {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "La teva música com la vols.",
     "@loginFlowSlogan": {
@@ -204,7 +204,7 @@
     "playButtonLabel": "Reprodueix",
     "downloads": "Descàrregues",
     "required": "Requerit",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "@finamp": {
         "description": "App name, possibly translated"
     },
@@ -411,7 +411,7 @@
         "placeholders": {
             "sourceCodeLink": {
                 "type": "String",
-                "example": "https://github.com/jmshrv/finamp"
+                "example": "https://github.com/dungeonmasterx69420/sombrAMP"
             }
         }
     },
@@ -429,7 +429,7 @@
     "viewType": "Tipus de Visualització",
     "grid": "Graella",
     "viewTypeSubtitle": "Tipus de vista per a la pantalla de música",
-    "playbackSpeedControlSettingDescription": "Automàtic:\nFinamp intenta identificar si la cançó que estàs reproduint és un pòdcast o (part) d'un audiollibre. Es considera que aquest és el cas si la cançó dura més de {trackDuration} minuts, si l'àlbum de la cançó dura més de {albumDuration} hores o si la cançó té assignat almenys un d’aquests gèneres: {genreList}.\nEls controls de velocitat de reproducció es mostraran aleshores al menú de la pantalla del reproductor.\n\nMostrat:\nEls controls de velocitat de reproducció sempre es mostraran al menú de la pantalla del reproductor.\n\nAmagat:\nEls controls de velocitat de reproducció al menú de la pantalla del reproductor sempre estaran ocults.",
+    "playbackSpeedControlSettingDescription": "Automàtic:\nsombrAMP intenta identificar si la cançó que estàs reproduint és un pòdcast o (part) d'un audiollibre. Es considera que aquest és el cas si la cançó dura més de {trackDuration} minuts, si l'àlbum de la cançó dura més de {albumDuration} hores o si la cançó té assignat almenys un d’aquests gèneres: {genreList}.\nEls controls de velocitat de reproducció es mostraran aleshores al menú de la pantalla del reproductor.\n\nMostrat:\nEls controls de velocitat de reproducció sempre es mostraran al menú de la pantalla del reproductor.\n\nAmagat:\nEls controls de velocitat de reproducció al menú de la pantalla del reproductor sempre estaran ocults.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -782,7 +782,7 @@
             }
         }
     },
-    "startupErrorCallToAction": "Sisplau crea un issue a \"github.com/jmshrv/finamp\" amb els logs (utilitza el botó de sota) i una captura de pantalla d'aquesta pàgina, de tal manera que ho puguem resoldre tan ràpid com sigui possible.",
+    "startupErrorCallToAction": "Sisplau crea un issue a \"github.com/dungeonmasterx69420/sombrAMP\" amb els logs (utilitza el botó de sota) i una captura de pantalla d'aquesta pàgina, de tal manera que ho puguem resoldre tan ràpid com sigui possible.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -898,11 +898,11 @@
     },
     "useMonochromeIcon": "Utilitzar el logotip monocrom",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Només afecta la icona dins l'aplicació, no la icona de llançament.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Predeterminat",
     "useDefaultButton": "Restableix al color d'accent predeterminat",
@@ -1821,7 +1821,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Quan està habilitat, Finamp enviarà la cua actual al servidor. Això pot millorar el control remot i permetre la restauració de la cua des del servidor. Sempre està habilitat si la funció \"Reproduir en\" està habilitada.",
+    "reportQueueToServerSubtitle": "Quan està habilitat, sombrAMP enviarà la cua actual al servidor. Això pot millorar el control remot i permetre la restauració de la cua des del servidor. Sempre està habilitat si la funció \"Reproduir en\" està habilitada.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1837,7 +1837,7 @@
     "@playOnStaleDelaySubtitle": {
         "description": "Description of the setting that controls how long a PlayOn remote session is considered active"
     },
-    "enablePlayonSubtitle": "Activa la funció \"Reproduir en\" de Jellyfin (control remot de Finamp des d'un altre client). Desactiva-la si el teu proxy invers o servidor no admet websockets.",
+    "enablePlayonSubtitle": "Activa la funció \"Reproduir en\" de Jellyfin (control remot de sombrAMP des d'un altre client). Desactiva-la si el teu proxy invers o servidor no admet websockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1920,7 +1920,7 @@
     "@shuffleSomeAlbumsToQueue": {
         "description": "Label for action that shuffles all albums of a genre and adds them at the end of the regular queue"
     },
-    "noMusicLibrariesBody": "Finamp no ha pogut trobar cap biblioteca de música. Assegureu-vos que el vostre servidor Jellyfin contingui com a mínim una biblioteca amb el tipus de contingut definit com a \"Música\".",
+    "noMusicLibrariesBody": "sombrAMP no ha pogut trobar cap biblioteca de música. Assegureu-vos que el vostre servidor Jellyfin contingui com a mínim una biblioteca amb el tipus de contingut definit com a \"Música\".",
     "playbackReportingSettingsTitle": "Informes de reproducció i \"Reproduir en\"",
     "@playbackReportingSettingsTitle": {
         "description": "Title for the playback reporting settings screen"
@@ -2562,7 +2562,7 @@
     "@ping": {
         "description": "Gets shown in the Snackbar when using the Test Connection Button inside the Network Settings. true means reachable, false means unreachable. the first value is for the public address, the second value is fot the home address."
     },
-    "autoReloadQueueSubtitle": "Torna a carregar la cua automàticament quan l'origen canviï (és a dir, quan s'habilita el mode sense connexió o l'adreça del servidor canvia). Si està desactivat, Finamp t'ho preguntarà.",
+    "autoReloadQueueSubtitle": "Torna a carregar la cua automàticament quan l'origen canviï (és a dir, quan s'habilita el mode sense connexió o l'adreça del servidor canvia). Si està desactivat, sombrAMP t'ho preguntarà.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2689,7 +2689,7 @@
             }
         }
     },
-    "serverSharingMenuConfirmationDialogText": "Estàs segur que vols habilitar la compartició del servidor tot i que estàs en mode sense connexió? Això farà que Finamp enviï dades a través de la xarxa local.",
+    "serverSharingMenuConfirmationDialogText": "Estàs segur que vols habilitar la compartició del servidor tot i que estàs en mode sense connexió? Això farà que sombrAMP enviï dades a través de la xarxa local.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2697,7 +2697,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Funciona escoltant les sol·licituds de descobriment del servidor d'altres clients a la xarxa local i responent a aquestes sol·licituds amb l'adreça configurada del teu servidor Jellyfin.\nSi teniu configurada una adreça local i una pública, Finamp proporcionarà les dues al client sol·licitant.",
+    "serverSharingMenuDetails": "Funciona escoltant les sol·licituds de descobriment del servidor d'altres clients a la xarxa local i responent a aquestes sol·licituds amb l'adreça configurada del teu servidor Jellyfin.\nSi teniu configurada una adreça local i una pública, sombrAMP proporcionarà les dues al client sol·licitant.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2709,7 +2709,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Si estàs intentant iniciar sessió a un altre client de Jellyfin mitjançant \"Connexió ràpida\", pots introduir o enganxar el codi de 6 dígits al camp superior. Això autoritzarà la sol·licitud d'inici de sessió de l'altre client i et permetrà iniciar sessió al mateix compte que estàs utilitzant per a Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Si estàs intentant iniciar sessió a un altre client de Jellyfin mitjançant \"Connexió ràpida\", pots introduir o enganxar el codi de 6 dígits al camp superior. Això autoritzarà la sol·licitud d'inici de sessió de l'altre client i et permetrà iniciar sessió al mateix compte que estàs utilitzant per a sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2773,7 +2773,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Avís: Sembla que el servidor Jellyfin està mal configurat i no calcula els desenfocaments.  Això impedeix que Finamp de-dupliqui les descàrregues d'imatges.  Si us plau, corregeix el servidor i executa una reparació de les descàrregues.",
+    "missingBlurhashWarning": "Avís: Sembla que el servidor Jellyfin està mal configurat i no calcula els desenfocaments.  Això impedeix que sombrAMP de-dupliqui les descàrregues d'imatges.  Si us plau, corregeix el servidor i executa una reparació de les descàrregues.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -2887,11 +2887,11 @@
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlaySiriHint": "Digues \"Ei Siri, reprodueix [cançó/artista/àlbum] al Finamp\"",
+    "carPlaySiriHint": "Digues \"Ei Siri, reprodueix [cançó/artista/àlbum] al sombrAMP\"",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },
-    "carPlayLoginPrompt": "Obre l'aplicació Finamp al teu telèfon per iniciar sessió al teu servidor Jellyfin.",
+    "carPlayLoginPrompt": "Obre l'aplicació sombrAMP al teu telèfon per iniciar sessió al teu servidor Jellyfin.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3457,7 +3457,7 @@
     },
     "libraryQualifierActive": "Activa",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "offlineSortFallback": "L'ordre per {onlineSort} només està disponible en línia. Actualment es torna a utilitzar l'ordre per defecte",
     "@offlineSortFallback": {

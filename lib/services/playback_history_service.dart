@@ -11,6 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 
 import '../models/finamp_models.dart';
 import '../models/jellyfin_models.dart' as jellyfin_models;
@@ -62,7 +63,7 @@ class PlaybackHistoryService {
       // stop periodic background updates if playback has ended
       _periodicUpdateTimer?.cancel();
       if (isDesktop) {
-        WindowManager.instance.setTitle("Finamp");
+        WindowManager.instance.setTitle(Sombra.productName);
       }
       return;
     }
@@ -102,7 +103,7 @@ class PlaybackHistoryService {
             currentIndex < 0 ||
             currentIndex >= _audioService.sequenceState.effectiveSequence.length) {
           if (isDesktop) {
-            WindowManager.instance.setTitle("Finamp");
+            WindowManager.instance.setTitle(Sombra.productName);
           }
           return;
         }
@@ -110,7 +111,7 @@ class PlaybackHistoryService {
           currentItem = item;
         } else {
           if (isDesktop) {
-            WindowManager.instance.setTitle("Finamp");
+            WindowManager.instance.setTitle(Sombra.productName);
           }
           return;
         }
@@ -357,7 +358,7 @@ class PlaybackHistoryService {
 
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       WindowManager.instance.setTitle(
-        "${_currentTrack?.item.item.artist != null ? '${_currentTrack?.item.item.artist} - ' : ''}${_currentTrack!.item.item.title} - Finamp",
+        "${_currentTrack?.item.item.artist != null ? '${_currentTrack?.item.item.artist} - ' : ''}${_currentTrack!.item.item.title} - ${Sombra.productName}",
       );
     }
   }
