@@ -49,7 +49,7 @@ class DownloadedIndicator extends ConsumerWidget {
           );
         case DownloadItemState.failed:
         case DownloadItemState.syncFailed:
-          return Icon(TablerIcons.download_off, color: Colors.red, size: size);
+          return Icon(TablerIcons.download_off, color: Theme.of(context).colorScheme.error, size: size);
         case DownloadItemState.complete:
         case DownloadItemState.needsRedownloadComplete:
           return Icon(TablerIcons.device_sd_card, size: size);

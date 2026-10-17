@@ -7,7 +7,6 @@ import 'package:app_links/app_links.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:collection/collection.dart';
-import 'package:finamp/color_schemes.g.dart';
 import 'package:finamp/components/Buttons/cta_medium.dart';
 import 'package:finamp/gen/assets.gen.dart';
 import 'package:finamp/hive_registrar.g.dart';
@@ -57,6 +56,8 @@ import 'package:finamp/services/playback_history_service.dart';
 import 'package:finamp/services/playon_service.dart';
 import 'package:finamp/services/queue_service.dart';
 import 'package:finamp/services/theme_provider.dart';
+import 'package:finamp/sombra/system_s.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:finamp/services/ui_overlay_setter_observer.dart';
 import 'package:finamp/services/widget_bindings_observer_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -65,7 +66,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:flutter_user_certificates_android/flutter_user_certificates_android.dart';
 import 'package:gaimon/gaimon.dart';
@@ -131,6 +131,8 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
       data.deleteSync(recursive: true);
     }
   }
+
+  _registerFontLicenses();
 
   try {
     startTime = DateTime.now();
@@ -440,7 +442,7 @@ Future<void> _setupPlaybackServices() async {
     builder: () => MusicPlayerBackgroundTask(),
     config: AudioServiceConfig(
       androidStopForegroundOnPause: FinampSettingsHelper.finampSettings.androidStopForegroundOnPause,
-      androidNotificationChannelName: "Finamp",
+      androidNotificationChannelName: Sombra.productName,
       androidNotificationIcon: "mipmap/white",
       androidNotificationChannelId: "com.unicornsonlsd.finamp.audio",
       // notificationColor: TODO use the theme color for older versions of Android,
@@ -763,7 +765,7 @@ Future<void> _migrateThemeModeLocale() async {
     var oldThemeMode = oldThemeModeBox.get("ThemeMode");
     var oldLocale = oldLocaleBox.get("Locale");
 
-    FinampSetters.setThemeMode(oldThemeMode ?? ThemeMode.system);
+    FinampSetters.setThemeMode(oldThemeMode ?? DefaultSettings.themeMode);
     FinampSetters.setLocale(oldLocale);
 
     await oldThemeModeBox.deleteFromDisk();
@@ -948,6 +950,18 @@ class _FinampState extends State<Finamp> with WindowListener {
   }
 }
 
+/// The System S typefaces ship under the SIL Open Font License, which travels with them.
+void _registerFontLicenses() {
+  for (final (font, file) in [
+    ('Pixelify Sans', 'assets/fonts/PixelifySans-OFL.txt'),
+    ('IBM Plex Mono', 'assets/fonts/IBMPlexMono-OFL.txt'),
+  ]) {
+    LicenseRegistry.addLicense(() async* {
+      yield LicenseEntryWithLineBreaks([font], await rootBundle.loadString(file));
+    });
+  }
+}
+
 class FinampApp extends ConsumerWidget {
   const FinampApp({super.key});
 
@@ -971,7 +985,7 @@ class FinampApp extends ConsumerWidget {
           )
         : null;
     return MaterialApp(
-      title: "Finamp",
+      title: Sombra.productName,
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
@@ -1017,44 +1031,11 @@ class FinampApp extends ConsumerWidget {
       initialRoute: SplashScreen.routeName,
       navigatorObservers: [SplitScreenNavigatorObserver(), KeepScreenOnObserver()],
       builder: buildPlayerSplitScreenScaffold,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        colorScheme: getColorScheme(accentColor, Brightness.light, amoledTheme),
-        appBarTheme: const AppBarThemeData(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.light,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarIconBrightness: Brightness.dark,
-          ),
-        ),
-        snackBarTheme: const SnackBarThemeData(
-          //TODO get rid of floating action buttons and re-enable the floating behavior and insetPadding
-          // behavior: SnackBarBehavior.floating,
-          elevation: 10.0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
-          // insetPadding: EdgeInsets.symmetric(
-          //   horizontal: 12.0,
-          //   vertical: 0.0,
-          // ),
-          dismissDirection: DismissDirection.horizontal,
-        ),
-        tooltipTheme: const TooltipThemeData(waitDuration: Duration(milliseconds: 800), preferBelow: false),
-        pageTransitionsTheme: transitionBuilder,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: getColorScheme(accentColor, Brightness.dark, amoledTheme),
-        snackBarTheme: const SnackBarThemeData(
-          //TODO get rid of floating action buttons and re-enable the floating behavior and insetPadding
-          // behavior: SnackBarBehavior.floating,
-          elevation: 10.0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
-          // insetPadding: EdgeInsets.symmetric(
-          //   horizontal: 12.0,
-          //   vertical: 0.0,
-          // ),
-          dismissDirection: DismissDirection.horizontal,
-        ),
+      theme: systemSThemeData(Brightness.light, accent: accentColor, pageTransitionsTheme: transitionBuilder),
+      darkTheme: systemSThemeData(
+        Brightness.dark,
+        accent: accentColor,
+        amoled: amoledTheme,
         pageTransitionsTheme: transitionBuilder,
       ),
       scrollBehavior: FinampScrollBehavior(),
@@ -1089,15 +1070,15 @@ class FinampErrorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Finamp",
+      title: Sombra.productName,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData(brightness: Brightness.light, colorScheme: lightColorScheme),
-      darkTheme: ThemeData(brightness: Brightness.dark, colorScheme: darkColorScheme),
+      theme: systemSThemeData(Brightness.light),
+      darkTheme: systemSThemeData(Brightness.dark),
       supportedLocales: AppLocalizations.supportedLocales,
       home: ErrorScreen(error: error, trace: trace),
       scaffoldMessengerKey: GlobalSnackbar.rawMaterialAppScaffoldKey,
@@ -1122,7 +1103,7 @@ class ErrorScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Hero(tag: "finamp_logo", child: SvgPicture.asset('images/finamp_cropped.svg', width: 75, height: 75)),
+              const Hero(tag: "finamp_logo", child: SombraMark(height: 75)),
               const SizedBox(height: 16.0),
               Text.rich(
                 TextSpan(
@@ -1131,11 +1112,11 @@ class ErrorScreen extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: "\n\n${error.toString()}",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.bold,
                         fontFamily: "monospace",
-                        color: Colors.red,
+                        color: Theme.of(context).colorScheme.error,
                       ),
                     ),
                     if (kDebugMode)

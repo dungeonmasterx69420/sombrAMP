@@ -1,9 +1,9 @@
-import 'package:finamp/color_schemes.g.dart';
 import 'package:finamp/extensions/color_extensions.dart';
 import 'package:finamp/extensions/string.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/widget_bindings_observer_provider.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -92,17 +92,15 @@ class _AccentColorPopupState extends ConsumerState<AccentColorPopup> {
 
   @override
   Widget build(BuildContext context) {
-    final previewTheme = Theme.of(
-      context,
-    ).withColorScheme(getColorScheme(previewColor, ref.watch(brightnessProvider), amoledTheme));
+    final previewTheme = systemSThemeData(ref.watch(brightnessProvider), accent: previewColor, amoled: amoledTheme);
 
     return Theme(
       data: previewTheme,
       child: Container(
         padding: EdgeInsets.only(left: 24, right: 24, top: 16, bottom: MediaQuery.viewPaddingOf(context).bottom + 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          color: previewTheme.colorScheme.surface,
+          color: previewTheme.colorScheme.surfaceContainer,
+          border: Border(top: BorderSide(color: previewTheme.colorScheme.outline)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -140,10 +138,37 @@ class _AccentColorPopupState extends ConsumerState<AccentColorPopup> {
                     filled: true,
                     labelText: AppLocalizations.of(context)!.colorCode,
                     hintText: AppLocalizations.of(context)!.colorCodeHint,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                     contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                   ),
                   onChanged: updatePreview,
+                ),
+                const SizedBox(height: 16),
+                // System S's phosphors, then any colour from the wheel.
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final (phosphor, name) in [
+                      (SystemSPhosphor.amber, AppLocalizations.of(context)!.phosphorAmber),
+                      (SystemSPhosphor.green, AppLocalizations.of(context)!.phosphorGreen),
+                      (SystemSPhosphor.cyan, AppLocalizations.of(context)!.phosphorCyan),
+                      (SystemSPhosphor.pink, AppLocalizations.of(context)!.phosphorPink),
+                    ])
+                      ChoiceChip(
+                        selected: (previewColor ?? SystemSPhosphor.amber.glow) == phosphor.glow,
+                        onSelected: (_) => changeColor(phosphor.glow),
+                        showCheckmark: false,
+                        avatar: Container(
+                          width: 14,
+                          height: 14,
+                          decoration: BoxDecoration(
+                            color: phosphor.glow,
+                            border: Border.all(color: previewTheme.colorScheme.outline),
+                          ),
+                        ),
+                        label: Text(name),
+                      ),
+                  ],
                 ),
                 ColorPicker(
                   onColorChanged: changeColor,

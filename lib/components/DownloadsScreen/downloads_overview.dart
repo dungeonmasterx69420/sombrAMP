@@ -76,7 +76,7 @@ class DownloadsOverview extends StatelessWidget {
                               if (downloadsService.serverMissingBlurhash)
                                 Text(
                                   AppLocalizations.of(context)!.missingBlurhashWarning,
-                                  style: const TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                                 ),
                             ],
                           ),
@@ -91,14 +91,14 @@ class DownloadsOverview extends StatelessWidget {
                                   (snapshot.data?[DownloadItemState.complete] ?? -1) +
                                       (snapshot.data?[DownloadItemState.needsRedownloadComplete] ?? -1),
                                 ),
-                                style: const TextStyle(color: Colors.blue),
+                                style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                               ),
                               Text(
                                 AppLocalizations.of(context)!.dlFailed(
                                   (snapshot.data?[DownloadItemState.syncFailed] ?? 0) +
                                       (snapshot.data?[DownloadItemState.failed] ?? -1),
                                 ),
-                                style: const TextStyle(color: Colors.red),
+                                style: TextStyle(color: Theme.of(context).colorScheme.error),
                               ),
                               Text(
                                 AppLocalizations.of(

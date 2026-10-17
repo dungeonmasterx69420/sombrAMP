@@ -200,7 +200,7 @@
     "music": "Музика",
     "clear": "Очистити",
     "shuffleAll": "Перемішати все",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Завантаження",
     "settings": "Налаштування",
     "budget": "Бюджет",
@@ -223,13 +223,13 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "Finamp не знайшов жодної музичної бібліотеки. Переконайтеся, що ваш сервер Jellyfin містить принаймні одну бібліотеку з типом вмісту \"Музика\".",
+    "noMusicLibrariesBody": "sombrAMP не знайшов жодної музичної бібліотеки. Переконайтеся, що ваш сервер Jellyfin містить принаймні одну бібліотеку з типом вмісту \"Музика\".",
     "showFastScroller": "Показувати швидку прокрутку",
     "playNext": "Відтворити наступним",
     "@playNext": {
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
-    "about": "Про Finamp",
+    "about": "Про sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -503,13 +503,13 @@
     },
     "aboutContributionLink": "Зробити внесок через GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "loginFlowWelcomeHeading": "Ласкаво просимо до {styledName}",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
-    "aboutThanks": "Дякуємо за використання Finamp!",
+    "aboutThanks": "Дякуємо за використання sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -786,7 +786,7 @@
             }
         }
     },
-    "playbackSpeedControlSettingDescription": "Автоматично:\nFinamp намагається визначити, чи є відтворюваний трек подкастом, чи аудіокнигою (ЇЇ частиною). Це визначається як таке, якщо трек довший за {trackDuration} хв., альбом трека довший за {albumDuration} год., або чи трек має хоча б один із перерахованих жанрів: {genreList}\nЕлементи керування швидкістю з'являться в меню програвача.\n\nПоказувати:\nЗавжди показувати елементи керування швидкості.\n\nПриховувати:\nЗавжди приховувати елементи керування швидкості.",
+    "playbackSpeedControlSettingDescription": "Автоматично:\nsombrAMP намагається визначити, чи є відтворюваний трек подкастом, чи аудіокнигою (ЇЇ частиною). Це визначається як таке, якщо трек довший за {trackDuration} хв., альбом трека довший за {albumDuration} год., або чи трек має хоча б один із перерахованих жанрів: {genreList}\nЕлементи керування швидкістю з'являться в меню програвача.\n\nПоказувати:\nЗавжди показувати елементи керування швидкості.\n\nПриховувати:\nЗавжди приховувати елементи керування швидкості.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -869,7 +869,7 @@
     "@autoloadLastQueueOnStartupSubtitle": {
         "description": "Description of the setting to restore last queue on startup"
     },
-    "reportQueueToServerSubtitle": "Якщо ввімкнено, Finamp надсилатиме поточну чергу на сервер. Це може покращити дистанційне керування та дозволить відновлювати чергу на стороні сервері. Завжди ввімкнено, якщо активовано функцію «Play On».",
+    "reportQueueToServerSubtitle": "Якщо ввімкнено, sombrAMP надсилатиме поточну чергу на сервер. Це може покращити дистанційне керування та дозволить відновлювати чергу на стороні сервері. Завжди ввімкнено, якщо активовано функцію «Play On».",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1646,7 +1646,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Вмикає функцію Jellyfin «Play On» (дистанційне керування Finamp з іншого клієнта). Вимкніть це, якщо ваш зворотний проксі або сервер не підтримує веб-сокети.",
+    "enablePlayonSubtitle": "Вмикає функцію Jellyfin «Play On» (дистанційне керування sombrAMP з іншого клієнта). Вимкніть це, якщо ваш зворотний проксі або сервер не підтримує веб-сокети.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1713,7 +1713,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Будь ласка, створіть проблему на \"github.com/jmshrv/finamp\" з логами (використовуйте кнопку нижче) та скріншотом цієї сторінки, щоб ми могли виправити її якомога швидше.",
+    "startupErrorCallToAction": "Будь ласка, створіть проблему на \"github.com/dungeonmasterx69420/sombrAMP\" з логами (використовуйте кнопку нижче) та скріншотом цієї сторінки, щоб ми могли виправити її якомога швидше.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1738,7 +1738,7 @@
     "@showFavoriteButtonOnMediaNotificationSubtitle": {
         "description": "Subtitle for the setting that controls if the media notification has a favorite button."
     },
-    "autoReloadQueueSubtitle": "Автоматично перезавантажувати чергу, коли змінюється джерело (наприклад, увімкнено автономний режим або змінено адресу сервера). Якщо вимкнено, Finamp натомість запитуватиме вас.",
+    "autoReloadQueueSubtitle": "Автоматично перезавантажувати чергу, коли змінюється джерело (наприклад, увімкнено автономний режим або змінено адресу сервера). Якщо вимкнено, sombrAMP натомість запитуватиме вас.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2125,7 +2125,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Ви впевнені, що хочете ввімкнути спільний доступ до сервера, навіть якщо ви перебуваєте в автономному режимі? Це призведе до того, що Finamp надсилатиме дані через локальну мережу.",
+    "serverSharingMenuConfirmationDialogText": "Ви впевнені, що хочете ввімкнути спільний доступ до сервера, навіть якщо ви перебуваєте в автономному режимі? Це призведе до того, що sombrAMP надсилатиме дані через локальну мережу.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2153,7 +2153,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Він працює, прослуховуючи запити на виявлення серверів від інших клієнтів у локальній мережі, а потім надсилаючи на ці запити налаштовану адресу вашого сервера Jellyfin.\nЯкщо у вас налаштовано як локальну, так і публічну адресу, Finamp надасть обидві клієнту, який надсилає запит.",
+    "serverSharingMenuDetails": "Він працює, прослуховуючи запити на виявлення серверів від інших клієнтів у локальній мережі, а потім надсилаючи на ці запити налаштовану адресу вашого сервера Jellyfin.\nЯкщо у вас налаштовано як локальну, так і публічну адресу, sombrAMP надасть обидві клієнту, який надсилає запит.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -2193,7 +2193,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "Якщо ви намагаєтеся увійти в інший клієнт Jellyfin через Quick Connect, ви можете ввести або вставити 6-значний код у поле вище. Це авторизує запит на вхід іншого клієнта та дозволить вам увійти в той самий обліковий запис, який ви використовуєте для Finamp.",
+    "quickConnectAuthorizationMenuDescription": "Якщо ви намагаєтеся увійти в інший клієнт Jellyfin через Quick Connect, ви можете ввести або вставити 6-значний код у поле вище. Це авторизує запит на вхід іншого клієнта та дозволить вам увійти в той самий обліковий запис, який ви використовуєте для sombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2359,7 +2359,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Попередження: Сервер Jellyfin, схоже, налаштований неправильно і не обчислює blurhashes.  Це заважає Finamp видаляти дублікати завантажених зображень.  Будь ласка, виправте налаштування сервера і запустіть відновлення завантажень.",
+    "missingBlurhashWarning": "Попередження: Сервер Jellyfin, схоже, налаштований неправильно і не обчислює blurhashes.  Це заважає sombrAMP видаляти дублікати завантажених зображень.  Будь ласка, виправте налаштування сервера і запустіть відновлення завантажень.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -2502,11 +2502,11 @@
     },
     "useMonochromeIcon": "Використовувати монохромний логотип",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Це впливає лише на значок у програмі, а не на значок панелі запуску.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "playbackActionPageMoveWithinQueue": "Переміщення в черзі",
     "@playbackActionPageMoveWithinQueue": {

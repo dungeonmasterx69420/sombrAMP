@@ -146,7 +146,7 @@
     "@selectMusicLibraries": {
         "description": "App bar title for library select screen"
     },
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "shuffleAll": "Tümünü karıştır",
     "playCount": "Oynatma Sayısı",
     "name": "Ad",
@@ -223,14 +223,14 @@
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
     "refresh": "Yenile",
-    "noMusicLibrariesBody": "Finamp herhangi bir müzik kütüphanesi bulamadı. Lütfen Jellyfin sunucunun içerik türü \"Müzik\" olarak ayarlanmış en az bir kütüphaneye sahip olduğundan emin ol.",
+    "noMusicLibrariesBody": "sombrAMP herhangi bir müzik kütüphanesi bulamadı. Lütfen Jellyfin sunucunun içerik türü \"Müzik\" olarak ayarlanmış en az bir kütüphaneye sahip olduğundan emin ol.",
     "noMusicLibrariesTitle": "Müzik Kütüphanesi Bulunamadı",
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
     "showFastScroller": "Hızlı kaydırıcıyı göster",
     "interactions": "Etkileşimler",
-    "about": "Finamp Hakkında",
+    "about": "sombrAMP Hakkında",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -292,9 +292,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "GitHub'da Finamp'a katkıda bulunun:",
+    "aboutContributionLink": "GitHub'da sombrAMP'a katkıda bulunun:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "En son sürüm notlarını okuyun:",
     "@aboutReleaseNotes": {
@@ -302,7 +302,7 @@
     },
     "loginFlowWelcomeHeading": "{styledName}'a Hoşgeldiniz",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowGetStarted": "Başlayın!",
     "@loginFlowGetStarted": {
@@ -316,7 +316,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Finamp'ı kullandığınız için teşekkürler!",
+    "aboutThanks": "sombrAMP'ı kullandığınız için teşekkürler!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -963,7 +963,7 @@
     "@defaultDownloadLocationButton": {
         "description": "Tooltip for button that sets a download location as the default."
     },
-    "reportQueueToServerSubtitle": "Etkinleştirildiğinde Finamp mevcut kuyruğu sunucuya gönderecektir. Bu uzaktan kontrolü iyileştirebilir ve sunucu-taraflı kuyruğun restore edilmesine izin verir. 'Şurda Oynat' özelliği açık ise bu da her zaman açıktır.",
+    "reportQueueToServerSubtitle": "Etkinleştirildiğinde sombrAMP mevcut kuyruğu sunucuya gönderecektir. Bu uzaktan kontrolü iyileştirebilir ve sunucu-taraflı kuyruğun restore edilmesine izin verir. 'Şurda Oynat' özelliği açık ise bu da her zaman açıktır.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -980,7 +980,7 @@
     "@playbackSpeedDecreaseLabel": {
         "description": "Label for the button in the speed menu that decreases the playback speed."
     },
-    "playbackSpeedControlSettingDescription": "Otomatik:\nFinamp, oynattığınız parçanın bir podcast mi yoksa sesli kitabın (bir parçası) mı olduğunu belirlemeye çalışır. Parçanın {trackDuration} dakikadan uzun olması, parçanın albümünün {albumDuration} saatten uzun olması veya parçaya şu türlerden en az birinin atanmış olması durumunda bu durum geçerli kabul edilir: {genreList}\nOynatma hızı kontrolleri oynatıcı ekranı menüsünde gösterilecektir.\n\nGöster:\nOynatma hızı kontrolleri her zaman oynatıcı ekranı menüsünde gösterilecektir.\n\nGizle:\nOynatıcı ekranı menüsündeki oynatma hızı kontrolleri her zaman gizlidir.",
+    "playbackSpeedControlSettingDescription": "Otomatik:\nsombrAMP, oynattığınız parçanın bir podcast mi yoksa sesli kitabın (bir parçası) mı olduğunu belirlemeye çalışır. Parçanın {trackDuration} dakikadan uzun olması, parçanın albümünün {albumDuration} saatten uzun olması veya parçaya şu türlerden en az birinin atanmış olması durumunda bu durum geçerli kabul edilir: {genreList}\nOynatma hızı kontrolleri oynatıcı ekranı menüsünde gösterilecektir.\n\nGöster:\nOynatma hızı kontrolleri her zaman oynatıcı ekranı menüsünde gösterilecektir.\n\nGizle:\nOynatıcı ekranı menüsündeki oynatma hızı kontrolleri her zaman gizlidir.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1393,7 +1393,7 @@
         "description": "Default sorting order for playlists (server order)"
     },
     "exportLogs": "Günlükleri kaydet",
-    "startupErrorCallToAction": "Günlükler ve bu sayfanın bir ekran görüntüsünü de ekleyerek \"github.com/jmshrv/finamp\" adresine lütfen bir sorun oluşturun, böylece mümkün olduğunca çabuk düzeltebiliriz.",
+    "startupErrorCallToAction": "Günlükler ve bu sayfanın bir ekran görüntüsünü de ekleyerek \"github.com/dungeonmasterx69420/sombrAMP\" adresine lütfen bir sorun oluşturun, böylece mümkün olduğunca çabuk düzeltebiliriz.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1590,11 +1590,11 @@
     },
     "useMonochromeIcon": "Tek Renkli Resim Kullan",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Bu sadece uygulama içerisindeki logoyu değiştirir, ana ekrandaki logoya dokunmaz.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Varsayılan",
     "useDefaultButton": "Varsayılan Tema Rengine dön",

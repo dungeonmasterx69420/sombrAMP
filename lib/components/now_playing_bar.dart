@@ -3,20 +3,18 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:finamp/color_schemes.g.dart';
 import 'package:finamp/components/AddToPlaylistScreen/add_to_playlist_button.dart';
 import 'package:finamp/components/audio_fade_progress_visualizer_container.dart';
 import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/components/one_line_marquee_helper.dart';
 import 'package:finamp/components/print_duration.dart';
-import 'package:finamp/extensions/color_extensions.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/services/current_track_metadata_provider.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:finamp/services/queue_service.dart';
 import 'package:finamp/services/theme_provider.dart';
-import 'package:finamp/services/widget_bindings_observer_provider.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,29 +39,25 @@ class NowPlayingBar extends ConsumerWidget {
   static const albumImageSize = 64.0;
   static const showPlayButtonAtEnd = false;
 
-  BoxDecoration? getShadow(BuildContext context) => BoxDecoration(
-    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-    boxShadow: [
-      BoxShadow(
-        blurRadius: 12.0,
-        spreadRadius: 8.0,
-        color: Theme.brightnessOf(context) == Brightness.light
-            ? darkColorScheme.surface.withValues(alpha: 0.15)
-            : darkColorScheme.surface.withValues(alpha: 0.7),
-      ),
-    ],
+  // System S: the bar is a small window, a pane with an ink edge and a hard shadow like a toast's.
+  BoxDecoration? getShadow(BuildContext context) => const BoxDecoration();
+
+  Decoration getWindowEdge(BuildContext context) => ShapeDecoration(
+    shape: SystemSWindowBorder(
+      side: BorderSide(color: ColorScheme.of(context).outline),
+      shadow: ColorScheme.of(context).outline,
+      depth: 3,
+      stepped: false,
+    ),
   );
 
+  /// Playback is live, so progress glows in the phosphor.
   Color getProgressForegroundColor(WidgetRef ref) {
-    return ColorScheme.of(ref.context).primary;
+    return SystemSTheme.of(ref.context).phosphor;
   }
 
   Color getProgressBackgroundColor(WidgetRef ref) {
-    return Color.alphaBlend(
-      getProgressForegroundColor(ref).withValues(alpha: 0.75),
-      // this is an approximation, the actual background has the blurred cover image
-      ref.watch(brightnessProvider) == Brightness.dark ? Colors.black : Colors.white,
-    );
+    return ColorScheme.of(ref.context).surfaceContainer;
   }
 
   Widget buildLoadingQueueBar(WidgetRef ref, void Function()? retryCallback) {
@@ -81,26 +75,18 @@ class NowPlayingBar extends ConsumerWidget {
         padding: const EdgeInsets.only(left: 12.0, bottom: 12.0, right: 12.0),
         child: Container(
           decoration: getShadow(ref.context),
+          foregroundDecoration: getWindowEdge(ref.context),
           child: Material(
-            shadowColor: ColorScheme.of(
-              context,
-            ).primary.withValues(alpha: Theme.brightnessOf(context) == Brightness.light ? 0.75 : 0.3),
-            borderRadius: BorderRadius.circular(12.0),
             clipBehavior: Clip.antiAlias,
-            color: Theme.brightnessOf(context) == Brightness.dark
-                ? IconTheme.of(context).color!.withValues(alpha: 0.1)
-                : Theme.of(context).cardColor,
-            elevation: 8.0,
+            color: ColorScheme.of(context).surfaceContainer,
+            elevation: 0,
             child: Container(
               width: MediaQuery.widthOf(context),
               height: albumImageSize,
               padding: EdgeInsets.zero,
               child: Container(
                 clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: progressBackgroundColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-                ),
+                decoration: ShapeDecoration(color: progressBackgroundColor, shape: const Border()),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -176,11 +162,7 @@ class NowPlayingBar extends ConsumerWidget {
 
     final elapsedPartBackgroundColor = getProgressForegroundColor(ref);
     final remainingPartBackgroundColor = getProgressBackgroundColor(ref);
-    final averageBackgroundColor = Color.alphaBlend(
-      elapsedPartBackgroundColor.withValues(alpha: 0.5),
-      remainingPartBackgroundColor,
-    );
-    Color primaryTextColor = AtContrast.getContrastiveTintedTextColor(onBackground: averageBackgroundColor);
+    Color primaryTextColor = ColorScheme.of(context).onSurface;
 
     final showPauseButton = ref.watch(
       mediaStateProvider.select((x) => x.playbackState.playing && x.fadeDirection != FadeDirection.fadeOut),
@@ -210,6 +192,7 @@ class NowPlayingBar extends ConsumerWidget {
             child: Container(
               clipBehavior: Clip.antiAlias,
               decoration: getShadow(context),
+              foregroundDecoration: getWindowEdge(context),
               //TODO use a PageView instead of a Dismissible, and only wrap dynamic items (not the buttons)
               child: Dismissible(
                 key: const Key("NowPlayingBar"),
@@ -227,15 +210,9 @@ class NowPlayingBar extends ConsumerWidget {
                   return false;
                 },
                 child: Material(
-                  shadowColor: ColorScheme.of(
-                    context,
-                  ).primary.withValues(alpha: Theme.brightnessOf(context) == Brightness.light ? 0.75 : 0.3),
-                  borderRadius: BorderRadius.circular(12.0),
                   clipBehavior: Clip.antiAlias,
-                  color: Theme.brightnessOf(context) == Brightness.dark
-                      ? IconTheme.of(context).color!.withValues(alpha: 0.1)
-                      : Theme.of(context).cardColor,
-                  elevation: 8.0,
+                  color: ColorScheme.of(context).surfaceContainer,
+                  elevation: 0,
                   // If we have a media item and the player hasn't finished, show
                   // the now playing bar.
                   child: //TODO move into separate component and share with queue list
@@ -244,10 +221,7 @@ class NowPlayingBar extends ConsumerWidget {
                     height: albumImageSize,
                     padding: EdgeInsets.zero,
                     clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      color: remainingPartBackgroundColor,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-                    ),
+                    decoration: ShapeDecoration(color: remainingPartBackgroundColor, shape: const Border()),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -268,10 +242,7 @@ class NowPlayingBar extends ConsumerWidget {
                                 key: const Key("AlbumArtAudioFadeProgressVisualizer"),
                                 width: albumImageSize,
                                 height: albumImageSize,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(12.0),
-                                  bottomLeft: Radius.circular(12.0),
-                                ),
+                                borderRadius: BorderRadius.zero,
                                 child: IconButton(
                                   tooltip: AppLocalizations.of(context)!.togglePlaybackButtonTooltip,
                                   onPressed: () {
@@ -305,15 +276,13 @@ class NowPlayingBar extends ConsumerWidget {
                                           widthFactor: itemLength == null
                                               ? 0
                                               : max(0, playbackPosition!.inMilliseconds / itemLength.inMilliseconds),
-                                          child: DecoratedBox(
-                                            decoration: ShapeDecoration(
-                                              color: elapsedPartBackgroundColor,
-                                              shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(12),
-                                                  bottomRight: Radius.circular(12),
-                                                ),
-                                              ),
+                                          // A phosphor strip along the bottom edge, so the text stays ink on pane.
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: SizedBox(
+                                              height: 4,
+                                              width: double.infinity,
+                                              child: ColoredBox(color: elapsedPartBackgroundColor),
                                             ),
                                           ),
                                         );

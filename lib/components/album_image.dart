@@ -10,13 +10,15 @@ import 'package:octo_image/src/image/fade_widget.dart';
 import 'package:uuid/v4.dart';
 
 import '../models/jellyfin_models.dart';
+import '../sombra/dithered_image.dart';
+import '../sombra/system_s.dart';
 import '../services/album_image_provider.dart';
 import '../services/theme_provider.dart';
 
 typedef ImageProviderCallback = void Function(ImageProvider theme);
 
-/// This widget provides the default look for album images throughout Finamp -
-/// Aspect ratio 1 with a circular border radius of 4. If you don't want these
+/// This widget provides the default look for album images throughout the app -
+/// aspect ratio 1, square, dithered to 1 bit as System S draws artwork. If you don't want these
 /// customisations, use [BareAlbumImage] or get an [ImageProvider] directly
 /// through [AlbumImageInfo.init].
 class AlbumImage extends ConsumerStatefulWidget {
@@ -59,7 +61,8 @@ class AlbumImage extends ConsumerStatefulWidget {
   /// look incorrect due to AlbumImage having an aspect ratio of 1:1
   final Decoration? decoration;
 
-  static final defaultBorderRadius = BorderRadius.circular(4);
+  // sombra System S: covers are square.
+  static const defaultBorderRadius = BorderRadius.zero;
 
   @override
   ConsumerState<AlbumImage> createState() => _AlbumImageState();
@@ -82,7 +85,8 @@ class _AlbumImageState extends ConsumerState<AlbumImage> {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = widget.borderRadius ?? AlbumImage.defaultBorderRadius;
+    // sombra System S: covers are square, whatever radius the caller asks for.
+    const borderRadius = AlbumImage.defaultBorderRadius;
     assert(widget.item == null || widget.imageListenable == null);
     assert(!(widget.disabled && widget.tapToZoom));
     if ((widget.item == null || widget.item!.imageId == null) && widget.imageListenable == null) {
@@ -230,43 +234,72 @@ class BareAlbumImage extends ConsumerWidget {
     final imageInfo = ref.watch(imageListenable);
     final blurHash = imageInfo.item?.blurHash;
     final image = imageInfo.image;
-    var localPlaceholder = placeholderBuilder;
-    if (blurHash != null) {
-      localPlaceholder ??= (_) => Image(
-        fit: BoxFit.contain,
-        image: BlurHashImage(
-          blurHash,
-          // Allow scaling blurhashes up to 3200 pixels wide by setting scale
-          scale: 0.01,
-        ),
-      );
-    }
-    localPlaceholder ??= defaultPlaceholderBuilder;
+    final palette = SystemSTheme.of(context).palette;
+    final inkIsLit = Theme.brightnessOf(context) == Brightness.dark;
 
-    if (image != null) {
-      final fadeTime = MediaQuery.disableAnimationsOf(context) || onZoomRoute
-          ? Duration.zero
-          : const Duration(milliseconds: 700);
+    // System S covers: 1-bit, dithered in ink on a pane with an ink edge, filling their square.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final side = constraints.biggest.shortestSide.isFinite ? constraints.biggest.shortestSide : 192.0;
+        final cells = DitheredImage.cellsFor(side);
+        ImageProvider dithered(ImageProvider source) =>
+            DitheredImage(source, cells: cells, ink: palette.ink, inkIsLit: inkIsLit);
+        return Container(
+          width: side,
+          height: side,
+          decoration: BoxDecoration(
+            color: palette.pane,
+            border: Border.all(color: palette.ink),
+          ),
+          padding: const EdgeInsets.all(1),
+          child: Builder(
+            builder: (context) {
+              var localPlaceholder = placeholderBuilder;
+              if (blurHash != null) {
+                localPlaceholder ??= (_) => Image(
+                  fit: BoxFit.contain,
+                  filterQuality: FilterQuality.none,
+                  image: dithered(
+                    BlurHashImage(
+                      blurHash,
+                      // Allow scaling blurhashes up to 3200 pixels wide by setting scale
+                      scale: 0.01,
+                    ),
+                  ),
+                );
+              }
+              localPlaceholder ??= defaultPlaceholderBuilder;
 
-      return Image(
-        key: ValueKey(image),
-        image: image,
-        frameBuilder: (_, child, frame, _) => ImageFader(
-          key: ValueKey(image),
-          fadeTime: fadeTime,
-          placeholder: localPlaceholder!(context),
-          image: frame != null ? child : null,
-        ),
-        fit: BoxFit.contain,
-        alignment: Alignment.center,
-        repeat: ImageRepeat.noRepeat,
-        matchTextDirection: false,
-        filterQuality: FilterQuality.medium,
-        errorBuilder: defaultErrorBuilder,
-      );
-    }
+              if (image != null) {
+                final fadeTime = MediaQuery.disableAnimationsOf(context) || onZoomRoute
+                    ? Duration.zero
+                    : const Duration(milliseconds: 700);
 
-    return Builder(builder: localPlaceholder);
+                return Image(
+                  key: ValueKey(image),
+                  image: dithered(image),
+                  frameBuilder: (_, child, frame, _) => ImageFader(
+                    key: ValueKey(image),
+                    fadeTime: fadeTime,
+                    placeholder: localPlaceholder!(context),
+                    image: frame != null ? child : null,
+                  ),
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
+                  repeat: ImageRepeat.noRepeat,
+                  matchTextDirection: false,
+                  // Keep the dithered pixels hard-edged when scaled up.
+                  filterQuality: FilterQuality.none,
+                  errorBuilder: defaultErrorBuilder,
+                );
+              }
+
+              return Builder(builder: localPlaceholder);
+            },
+          ),
+        );
+      },
+    );
   }
 }
 

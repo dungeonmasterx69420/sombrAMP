@@ -42,7 +42,6 @@ Future<T?> showThemedBottomSheet<T>({
   );
   return await showModalBottomSheet<T>(
     context: context,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20.0))),
     isScrollControlled: true,
     clipBehavior: Clip.hardEdge,
     constraints: BoxConstraints(
@@ -116,7 +115,7 @@ class _ThemedBottomSheetState extends ConsumerState<ThemedBottomSheet> {
     assert(widget.buildSlivers == null || widget.buildWrapper == null);
     assert(widget.buildSlivers != null || widget.buildWrapper != null);
     return Theme(
-      data: ThemeData(colorScheme: ref.watch(localThemeProvider)),
+      data: Theme.of(context).copyWith(colorScheme: ref.watch(localThemeProvider)),
       child: Builder(
         builder: (BuildContext context) {
           Widget child;
@@ -126,11 +125,7 @@ class _ThemedBottomSheetState extends ConsumerState<ThemedBottomSheet> {
             var (height, slivers) = widget.buildSlivers!(context);
             child = buildInternal(height, slivers);
           }
-          final colorScheme = ColorScheme.of(context);
-          return Material(
-            color: ElevationOverlay.applySurfaceTint(colorScheme.surface, colorScheme.surfaceTint, 1),
-            child: child,
-          );
+          return Material(color: ColorScheme.of(context).surfaceContainerLow, child: child);
         },
       ),
     );

@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';
+import 'package:finamp/sombra/system_s.dart';
 
 import 'login_flow.dart';
 
@@ -258,11 +259,27 @@ class JellyfinUserWidget extends StatelessWidget {
         if (avatarUrl != null) {
           return Image.network(avatarUrl, width: avatarSize, height: avatarSize);
         } else {
+          // System S's avatar: the first letter of the name on a pane.
+          final palette = SystemSTheme.of(context).palette;
           return Container(
+            width: avatarSize,
+            height: avatarSize,
+            alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Theme.brightnessOf(context) == Brightness.dark ? Colors.white : Colors.black,
+              color: palette.pane,
+              border: Border.all(color: palette.ink),
             ),
-            child: Image.asset('images/finamp.png', width: avatarSize, height: avatarSize),
+            child: Text(
+              user!.name?.characters.firstOrNull?.toUpperCase() ?? "?",
+              style: TextStyle(
+                fontFamily: SystemSFonts.pixel,
+                fontFeatures: SystemSFonts.pixelFeatures,
+                fontWeight: FontWeight.w600,
+                fontSize: avatarSize / 2,
+                height: 1,
+                color: palette.ink,
+              ),
+            ),
           );
         }
       } else {

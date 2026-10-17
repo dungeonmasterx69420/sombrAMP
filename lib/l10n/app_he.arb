@@ -7,7 +7,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "about": "אודות Finamp",
+    "about": "אודות sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -15,9 +15,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "תרמו לFinamp בGithub:",
+    "aboutContributionLink": "תרמו לsombrAMP בGithub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "קראו את הערות של הגרסא האחרונה:",
     "@aboutReleaseNotes": {
@@ -27,7 +27,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "תודה לכם שאתם משתמשים בFinamp!",
+    "aboutThanks": "תודה לכם שאתם משתמשים בsombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -37,7 +37,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -216,7 +216,7 @@
     "dark": "כהה",
     "useMonochromeIcon": "השתמש בלוגו שחור לבן",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "defaultWord": "ברירת מחדל",
     "save": "שמירה",
@@ -310,7 +310,7 @@
     "@playbackSpeedDecreaseLabel": {
         "description": "Label for the button in the speed menu that decreases the playback speed."
     },
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "@finamp": {
         "description": "App name, possibly translated"
     },
@@ -486,7 +486,7 @@
         "description": "Snackbar message that shows when the user presses the instant mix button with no genres selected"
     },
     "clear": "ניקוי",
-    "startupErrorCallToAction": "בבקשה תפתחו בעיה ב\"github.com/jmshrv/finamp\" עם היומנים (השתמשו בכפתור למטה) וצילום מסך של העמוד הזה, כדי שנוכל לתקן את זה כמה שיותר מהר.",
+    "startupErrorCallToAction": "בבקשה תפתחו בעיה ב\"github.com/dungeonmasterx69420/sombrAMP\" עם היומנים (השתמשו בכפתור למטה) וצילום מסך של העמוד הזה, כדי שנוכל לתקן את זה כמה שיותר מהר.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -531,7 +531,7 @@
     "@libraryDownloads": {
         "description": "Title for the library downloads section on the downloads screen."
     },
-    "noMusicLibrariesBody": "Finamp לא הצליח למצוא ספריות מוזיקה. בבקשה תוודאו שהשרת Jellyfin שלכם כולל לפחות ספרייה אחת עם סוג התוכן מוגדר ל\"מוסיקה\".",
+    "noMusicLibrariesBody": "sombrAMP לא הצליח למצוא ספריות מוזיקה. בבקשה תוודאו שהשרת Jellyfin שלכם כולל לפחות ספרייה אחת עם סוג התוכן מוגדר ל\"מוסיקה\".",
     "downloadLibraryPrompt": "האם להוריד את כל התוכן של הספרייה \"{libraryName}\"?",
     "@downloadLibraryPrompt": {
         "description": "Confirmation prompt before downloading entire library, which may be large.",
@@ -597,7 +597,7 @@
         "placeholders": {
             "sourceCodeLink": {
                 "type": "String",
-                "example": "https://github.com/jmshrv/finamp"
+                "example": "https://github.com/dungeonmasterx69420/sombrAMP"
             }
         }
     },
@@ -660,7 +660,7 @@
     },
     "useMonochromeIconSubtitle": "זה רק משפיע על הסמל בתוך האפליקציה, לא על סמל המשגר.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "useDefaultButton": "איפוס לצבע הדגשה ברירת מחדל",
     "colorCode": "קוד צבע (Hex)",
@@ -866,7 +866,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "כאשר מופעל, Finamp יישלח את התור הנוכחי לשרת. זה יכול לשפר שליטה מרחוק ומאפשר שחזור של התור מצד השרת. תמיד מופעל אם האפשרות 'נגן על' מופעלת.",
+    "reportQueueToServerSubtitle": "כאשר מופעל, sombrAMP יישלח את התור הנוכחי לשרת. זה יכול לשפר שליטה מרחוק ומאפשר שחזור של התור מצד השרת. תמיד מופעל אם האפשרות 'נגן על' מופעלת.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -895,7 +895,7 @@
         }
     },
     "shuffleAllTrackCount": "כמות ערבוב כל רצועות השמע",
-    "playbackSpeedControlSettingDescription": "אוטומטי:\nFinamp ינסה לזהות אם הרצועת שמע שמנוגנת הינה פודקאסט או (חלק מ…) ספר קולי. זה נחשב לכך אם הרצועת שמע ארוכה מ{trackDuration} דקות, אם האלבום של הרצועת שמע ארוך מ{albumDuration} שעות, או אם לרצועת שמע יש את אחד מהז'אנרים האלו מוגדרים: {genreList}\nבמצב כזה השליטה במהירות הנגינה תופיעה בתפריט מסך הנגן.\n\nמוצג:\nהשליטה במהירות הנגינה תמיד תופיעה בתפריט מסך הנגן.\n\nמוסתר:\nהשליטה במהירות הנגינה אף פעם לא תופיעה בתפריט מסך הנגן.",
+    "playbackSpeedControlSettingDescription": "אוטומטי:\nsombrAMP ינסה לזהות אם הרצועת שמע שמנוגנת הינה פודקאסט או (חלק מ…) ספר קולי. זה נחשב לכך אם הרצועת שמע ארוכה מ{trackDuration} דקות, אם האלבום של הרצועת שמע ארוך מ{albumDuration} שעות, או אם לרצועת שמע יש את אחד מהז'אנרים האלו מוגדרים: {genreList}\nבמצב כזה השליטה במהירות הנגינה תופיעה בתפריט מסך הנגן.\n\nמוצג:\nהשליטה במהירות הנגינה תמיד תופיעה בתפריט מסך הנגן.\n\nמוסתר:\nהשליטה במהירות הנגינה אף פעם לא תופיעה בתפריט מסך הנגן.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1544,7 +1544,7 @@
     "@playOnStaleDelaySubtitle": {
         "description": "Description of the setting that controls how long a PlayOn remote session is considered active"
     },
-    "enablePlayonSubtitle": "מפעיל את האפשרות 'נגן על' של Jellyfin (שליטה מרחוק הFinamp מלקוח אחר). יש לבטל את זה אם הreverse proxy או השרת לא תומכים בwebsockets.",
+    "enablePlayonSubtitle": "מפעיל את האפשרות 'נגן על' של Jellyfin (שליטה מרחוק הsombrAMP מלקוח אחר). יש לבטל את זה אם הreverse proxy או השרת לא תומכים בwebsockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -2327,7 +2327,7 @@
     "@autoReloadQueueTitle": {
         "description": "Title for the setting that controls if the queue is automatically reloaded when the source changes"
     },
-    "autoReloadQueueSubtitle": "טוען מחדש את התור אוטומטים כשהמקור משתנה (למשל בהפעלת מצב לא מקוון או בשינוי כתובת שרת). אם מבוטל, Finamp יודיע על כך במקום.",
+    "autoReloadQueueSubtitle": "טוען מחדש את התור אוטומטים כשהמקור משתנה (למשל בהפעלת מצב לא מקוון או בשינוי כתובת שרת). אם מבוטל, sombrAMP יודיע על כך במקום.",
     "@autoReloadQueueSubtitle": {
         "description": "Subtitle for the setting that controls if the queue is automatically reloaded when the source changes"
     },
@@ -2563,7 +2563,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "האם להפעיל שיתוף שרת למרות שמצב לא מקוון פועל? זה יגרום לFinamp לשלוח מידע דרך הרשת המקומית.",
+    "serverSharingMenuConfirmationDialogText": "האם להפעיל שיתוף שרת למרות שמצב לא מקוון פועל? זה יגרום לsombrAMP לשלוח מידע דרך הרשת המקומית.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -2627,7 +2627,7 @@
     "@quickConnectAuthorizationMenuStateSubtitleFailed": {
         "description": "Subtitle for the quick connect authorization menu state info (above the input field) when the authorization was unsuccessful"
     },
-    "quickConnectAuthorizationMenuDescription": "אם אתם מנסים להתחבר לתוכנת לקוח של Jellyfin נוספת דרך חיבור-מהיר, אתם יכולים להקליד או להדביק את הקוד באורך 6 ספרות לשדה למעלה. זה יאשר את בקשת החיבור של תוכנת הלקוח האחרת, ויחבר אתכם לאותו משתמש שמחובר לFinamp.",
+    "quickConnectAuthorizationMenuDescription": "אם אתם מנסים להתחבר לתוכנת לקוח של Jellyfin נוספת דרך חיבור-מהיר, אתם יכולים להקליד או להדביק את הקוד באורך 6 ספרות לשדה למעלה. זה יאשר את בקשת החיבור של תוכנת הלקוח האחרת, ויחבר אתכם לאותו משתמש שמחובר לsombrAMP.",
     "@quickConnectAuthorizationMenuDescription": {
         "description": "Description for the quick connect authorization menu, shown at the bottom"
     },
@@ -2866,11 +2866,11 @@
     "@androidGainDisabled": {
         "description": "Message presented when the android gain effect fallback is enabled after an error occurs."
     },
-    "serverSharingMenuDetails": "זה עובד על ידי הקשבה לבקשות גילוי השרת על ידי תוכנות לקוח אחרות על הרשת המקומית, ומשיב לבקשות אלו עם הכתובת המוגדרת של השרת Jellyfin.\nאם הגדרתם גם כתובת מקומית וגם כתובת ציבורית, Finamp יספק את שניהם לתוכנת לקוח המבקשת.",
+    "serverSharingMenuDetails": "זה עובד על ידי הקשבה לבקשות גילוי השרת על ידי תוכנות לקוח אחרות על הרשת המקומית, ומשיב לבקשות אלו עם הכתובת המוגדרת של השרת Jellyfin.\nאם הגדרתם גם כתובת מקומית וגם כתובת ציבורית, sombrAMP יספק את שניהם לתוכנת לקוח המבקשת.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
-    "missingBlurhashWarning": "אזהרה: נראה שהשרת Jellyfin לא מוגדר נכון והוא לא מחשב blurhashes.  זה מונע מFinamp למנוע כפילויות של תמונות בהורדה.  נא לתקן את השרת ולהריץ תיקון הורדות.",
+    "missingBlurhashWarning": "אזהרה: נראה שהשרת Jellyfin לא מוגדר נכון והוא לא מחשב blurhashes.  זה מונע מsombrAMP למנוע כפילויות של תמונות בהורדה.  נא לתקן את השרת ולהריץ תיקון הורדות.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },
@@ -3410,13 +3410,13 @@
     },
     "libraryQualifierActive": "פעיל",
     "@libraryQualifierActive": {
-        "description": "Label shown next to the currently selected library in the Finamp menu/drawer"
+        "description": "Label shown next to the currently selected library in the sombrAMP menu/drawer"
     },
     "voiceSearch": "חיפוש קולי",
     "@voiceSearch": {
         "description": "Heading for the page that prompts the user to perform a voice search."
     },
-    "carPlayLoginPrompt": "יש לפתוח את אפליקציית Finamp בטלפון שלך כדי להתחבר לשרת Jellyfin שלך.",
+    "carPlayLoginPrompt": "יש לפתוח את אפליקציית sombrAMP בטלפון שלך כדי להתחבר לשרת Jellyfin שלך.",
     "@carPlayLoginPrompt": {
         "description": "Label shown when the user is trying to use CarPlay without being logged in."
     },
@@ -3536,7 +3536,7 @@
     "@alreadyRandomized": {
         "description": "Tooltip for shuffle button on home screen sections using a random sort order, where it is disabled due to being unneeded"
     },
-    "carPlaySiriHint": "יש להגיד ״היי Siri, אני רוצה לשמוע את [רצועת שמע/אמן/אלבום] בFinamp״",
+    "carPlaySiriHint": "יש להגיד ״היי Siri, אני רוצה לשמוע את [רצועת שמע/אמן/אלבום] בsombrAMP״",
     "@carPlaySiriHint": {
         "description": "Hint text for how to use Siri to search in CarPlay."
     },

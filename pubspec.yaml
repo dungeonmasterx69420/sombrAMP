@@ -238,10 +238,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/finamp.png
     - images/album_white.png
     - images/finamp_cropped.png
-    - images/finamp_cropped.svg
     - images/jellyfin-icon-transparent.png
     - assets/icon/icon_square_bg-black.png # preview image for Discord RPC Fallback Icon Setting
     - assets/icon/icon_combined.png # preview image for Discord RPC Fallback Icon Setting
@@ -249,6 +247,10 @@ flutter:
     - images/finamp_cropped.png # preview image for Discord RPC Fallback Icon Setting
     - assets/icon/icon_white_noborder.png # preview image for Discord RPC Fallback Icon Setting
     - images/jellyfin-icon-transparent.png # preview image for Discord RPC Fallback Icon Setting
+    - images/sombra_s_mark.svg
+    - images/sombra_wordmark.svg
+    - assets/fonts/PixelifySans-OFL.txt
+    - assets/fonts/IBMPlexMono-OFL.txt
   #   - images/a_dot_ham.jpeg
 
   generate: true
@@ -278,24 +280,44 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  # The two System S typefaces (both SIL Open Font License 1.1, see assets/fonts/*-OFL.txt).
+  fonts:
+    - family: PixelifySans
+      fonts:
+        - asset: assets/fonts/PixelifySans-Regular.ttf
+        - asset: assets/fonts/PixelifySans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/PixelifySans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/PixelifySans-Bold.ttf
+          weight: 700
+    - family: IBMPlexMono
+      fonts:
+        - asset: assets/fonts/IBMPlexMono-Regular.ttf
+        - asset: assets/fonts/IBMPlexMono-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexMono-SemiBold.ttf
+          weight: 600
 
+# The icons are rendered from the S mark by tools/branding/generate_icons.py, which also writes the Android
+# adaptive foreground as a vector. These sources stay here for anyone regenerating with flutter_launcher_icons.
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icon/icon_combined.png"
-  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
-  adaptive_icon_background: "#000B25"
+  image_path: "assets/icon/sombra_icon.png"
+  adaptive_icon_foreground: "assets/icon/sombra_icon_foreground.png"
+  adaptive_icon_background: "#0A0A0A"
   remove_alpha_ios: true
   macos:
     generate: true
-    image_path: "assets/icon/icon_combined_macos.png"
+    image_path: "assets/icon/sombra_icon_tile.png"
 
 msix_config:
-  display_name: Finamp
-  publisher_display_name: Finamp
+  display_name: sombrAMP
+  publisher_display_name: Sombra
   identity_name: com.unicornsonlsd.finamp
   msix_version: 1.0.1.0
-  logo_path: ./images/finamp_cropped.png
+  logo_path: ./assets/icon/sombra_icon_tile.png
   trim_logo: false # don't force logo to be square, it will be stretched
   # backgroundMediaPlayback prevents apps from getting muted or killed when being in the background (won't build if included at the moment)
   # internetClient is used to allow access to remote Jellyfin servers through the internet

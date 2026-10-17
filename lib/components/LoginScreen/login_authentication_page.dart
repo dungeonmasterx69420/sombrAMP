@@ -92,12 +92,10 @@ class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
 
     InputDecoration inputFieldDecoration(String placeholder) {
       return InputDecoration(
-        filled: true,
-        fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+        // Fill and edges come from the System S theme.
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
         label: Text(placeholder),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(16)),
       );
     }
 
@@ -110,7 +108,11 @@ class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 2.0, left: 8.0),
-              child: Text(AppLocalizations.of(context)!.username, textAlign: TextAlign.start),
+              child: Text(
+                AppLocalizations.of(context)!.username,
+                textAlign: TextAlign.start,
+                style: TextTheme.of(context).labelMedium,
+              ),
             ),
             TextFormField(
               autocorrect: false,
@@ -130,7 +132,11 @@ class _LoginAuthenticationPageState extends State<LoginAuthenticationPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 2.0, left: 8.0),
-              child: Text(AppLocalizations.of(context)!.password, textAlign: TextAlign.start),
+              child: Text(
+                AppLocalizations.of(context)!.password,
+                textAlign: TextAlign.start,
+                style: TextTheme.of(context).labelMedium,
+              ),
             ),
             TextFormField(
               autocorrect: false,

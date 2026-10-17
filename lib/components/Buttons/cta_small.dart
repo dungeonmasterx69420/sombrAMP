@@ -1,4 +1,5 @@
 import 'package:finamp/services/feedback_helper.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:flutter/material.dart';
 
 class CTASmall extends StatelessWidget {
@@ -19,50 +20,27 @@ class CTASmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accentColor = disabled
-        ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
-        : Theme.of(context).colorScheme.primary;
-    return FilledButton(
+    // Styled by the theme: System S's small button.
+    return OutlinedButton(
       onPressed: disabled
           ? null
           : () {
               FeedbackHelper.feedback(FeedbackType.selection);
               onPressed();
             },
-      style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        ),
-        padding: WidgetStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 16, vertical: 10)),
-        backgroundColor: WidgetStateProperty.all<Color>(
-          Theme.brightnessOf(context) == Brightness.dark
-              ? accentColor.withValues(alpha: disabled ? 0.05 : 0.15)
-              : Color.alphaBlend(
-                  accentColor.withValues(alpha: 0.2),
-                  Colors.white,
-                ).withValues(alpha: disabled ? 0.5 : 1.0),
+      style: const ButtonStyle(
+        minimumSize: WidgetStatePropertyAll(Size(48, 34)),
+        shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)))),
+        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(fontFamily: SystemSFonts.pixel, fontFeatures: SystemSFonts.pixelFeatures, fontSize: 14, height: 1),
         ),
       ),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         direction: vertical ? Axis.vertical : Axis.horizontal,
         alignment: vertical ? WrapAlignment.center : WrapAlignment.start,
-        children: [
-          Icon(icon, size: 20, color: accentColor, weight: 1.0),
-          const SizedBox(width: 8, height: 4),
-          Text(
-            text,
-            style: TextStyle(
-              color:
-                  (Theme.brightnessOf(context) == Brightness.light
-                          ? Color.alphaBlend(accentColor.withValues(alpha: 0.33), Colors.black)
-                          : Colors.white)
-                      .withValues(alpha: disabled ? 0.5 : 1.0),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+        children: [Icon(icon, size: 20, weight: 1.0), const SizedBox(width: 8, height: 4), Text(text)],
       ),
     );
   }

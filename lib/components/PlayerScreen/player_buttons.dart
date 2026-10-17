@@ -10,6 +10,7 @@ import 'package:finamp/screens/player_screen.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:finamp/utils/locale_helper.dart';
 import 'package:finamp/utils/platform_helper.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -67,7 +68,7 @@ class PlayerButtons extends ConsumerWidget {
           child: _RoundedIconButton(
             width: controller.shouldShow(PlayerHideable.bigPlayButton) ? 62 : 48,
             height: controller.shouldShow(PlayerHideable.bigPlayButton) ? 62 : 48,
-            borderRadius: BorderRadius.circular(controller.shouldShow(PlayerHideable.bigPlayButton) ? 16 : 12),
+            borderRadius: BorderRadius.circular(10),
             onTap: () {
               FeedbackHelper.feedback(FeedbackType.light);
               unawaited(audioHandler.togglePlayback());
@@ -79,9 +80,7 @@ class PlayerButtons extends ConsumerWidget {
             ], separator: "\n"),
             icon: AudioFadeProgressVisualizerContainer(
               key: const Key("PlayerButtonAudioFadeProgressVisualizer"),
-              borderRadius: BorderRadius.all(
-                Radius.circular(controller.shouldShow(PlayerHideable.bigPlayButton) ? 16 : 12),
-              ),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               color: IconTheme.of(context).color!.withAlpha(128),
               child: Icon(showPauseButton ? TablerIcons.player_pause : TablerIcons.player_play, size: 32),
             ),
@@ -159,9 +158,15 @@ class _RoundedIconButton extends StatelessWidget {
     final button = SizedBox(
       width: width,
       height: height,
+      // System S's default button: a pane with an ink edge and the outer ring.
       child: Material(
-        borderRadius: actualBorderRadius,
-        color: IconTheme.of(context).color!.withValues(alpha: 0.15),
+        color: ColorScheme.of(context).surfaceContainer,
+        shape: SystemSButtonBorder(
+          radius: actualBorderRadius.topLeft.x,
+          side: BorderSide(color: ColorScheme.of(context).outline),
+          ringGap: ColorScheme.of(context).surfaceContainer,
+          ring: ColorScheme.of(context).outline,
+        ),
         child: InkWell(borderRadius: actualBorderRadius, onTap: onTap, child: actualIcon),
       ),
     );

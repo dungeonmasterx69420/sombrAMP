@@ -12,6 +12,7 @@ import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:finamp/color_schemes.g.dart';
 
 class DownloadsSettingsScreen extends StatefulWidget {
   const DownloadsSettingsScreen({super.key});
@@ -77,7 +78,7 @@ class _DownloadsSettingsScreenState extends State<DownloadsSettingsScreen> {
             title: Text(AppLocalizations.of(context)!.downloadAllPlaylistsSetting),
             subtitle: Text(
               AppLocalizations.of(context)!.downloadAllPlaylistsSettingWarning,
-              style: TextStyle(color: Colors.orange.shade700),
+              style: TextStyle(color: Theme.of(context).colorScheme.warning),
             ),
             trailing: DownloadButton(
               item: DownloadStub.fromFinampCollection(FinampCollection(type: FinampCollectionType.allPlaylists)),

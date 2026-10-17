@@ -33,7 +33,7 @@
         "description": "Snackbar message that shows when the user presses the instant mix button with no albums selected"
     },
     "music": "Μουσική",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "communityRating": "Βαθμολογία κοινότητας",
     "dlFailed": "{count} απέτυχαν",
     "@dlFailed": {
@@ -178,7 +178,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Παρακαλούμε δημιουργήστε ένα issue στο \"github.com/jmshrv/finamp\" με τα αρχεία καταγραφής (χρησιμοποιήστε το κουμπί παρακάτω) και ένα στιγμιότυπο οθόνης αυτής της σελίδας, ώστε να μπορέσουμε να το διορθώσουμε το συντομότερο δυνατό.",
+    "startupErrorCallToAction": "Παρακαλούμε δημιουργήστε ένα issue στο \"github.com/dungeonmasterx69420/sombrAMP\" με τα αρχεία καταγραφής (χρησιμοποιήστε το κουμπί παρακάτω) και ένα στιγμιότυπο οθόνης αυτής της σελίδας, ώστε να μπορέσουμε να το διορθώσουμε το συντομότερο δυνατό.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -186,7 +186,7 @@
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
     },
-    "about": "Σχετικά με το Finamp",
+    "about": "Σχετικά με το sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -194,9 +194,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Συνεισφέρετε στο Finamp στο GitHub:",
+    "aboutContributionLink": "Συνεισφέρετε στο sombrAMP στο GitHub:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Διαβάστε τις σημειώσεις της τελευταίας έκδοσης:",
     "@aboutReleaseNotes": {
@@ -206,7 +206,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Ευχαριστούμε που χρησιμοποιείτε το Finamp!",
+    "aboutThanks": "Ευχαριστούμε που χρησιμοποιείτε το sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -216,7 +216,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -436,7 +436,7 @@
     "@playbackSpeedControlSettingSubtitle": {
         "description": "Subtitle for the playback speed visibility setting"
     },
-    "playbackSpeedControlSettingDescription": "Αυτόματο:\nΤο Finamp προσπαθεί να αναγνωρίσει αν το κομμάτι που αναπαράγετε είναι podcast ή (μέρος) audiobook. Θεωρείται έτσι αν το κομμάτι διαρκεί πάνω από {trackDuration} λεπτά, αν το άλμπουμ του κομματιού είναι πάνω από {albumDuration} ώρες, ή αν έχει τουλάχιστον ένα από αυτά τα είδη: {genreList}.\nΟι έλεγχοι ταχύτητας αναπαραγωγής θα εμφανίζονται στο μενού της οθόνης αναπαραγωγής.\n\nΕμφανιζόμενο:\nΟι έλεγχοι ταχύτητας αναπαραγωγής εμφανίζονται πάντα στο μενού της οθόνης αναπαραγωγής.\n\nΚρυμμένο:\nΟι έλεγχοι ταχύτητας αναπαραγωγής στο μενού της οθόνης αναπαραγωγής είναι πάντα κρυφοί.",
+    "playbackSpeedControlSettingDescription": "Αυτόματο:\nΤο sombrAMP προσπαθεί να αναγνωρίσει αν το κομμάτι που αναπαράγετε είναι podcast ή (μέρος) audiobook. Θεωρείται έτσι αν το κομμάτι διαρκεί πάνω από {trackDuration} λεπτά, αν το άλμπουμ του κομματιού είναι πάνω από {albumDuration} ώρες, ή αν έχει τουλάχιστον ένα από αυτά τα είδη: {genreList}.\nΟι έλεγχοι ταχύτητας αναπαραγωγής θα εμφανίζονται στο μενού της οθόνης αναπαραγωγής.\n\nΕμφανιζόμενο:\nΟι έλεγχοι ταχύτητας αναπαραγωγής εμφανίζονται πάντα στο μενού της οθόνης αναπαραγωγής.\n\nΚρυμμένο:\nΟι έλεγχοι ταχύτητας αναπαραγωγής στο μενού της οθόνης αναπαραγωγής είναι πάντα κρυφοί.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -847,7 +847,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Όταν είναι ενεργοποιημένο, το Finamp θα στέλνει την τρέχουσα ουρά στον διακομιστή. Αυτό μπορεί να βελτιώσει τον απομακρυσμένο έλεγχο και να επιτρέψει την επαναφορά της ουράς από τον διακομιστή. Πάντα ενεργοποιημένο αν είναι ενεργοποιημένη η λειτουργία «Play On».",
+    "reportQueueToServerSubtitle": "Όταν είναι ενεργοποιημένο, το sombrAMP θα στέλνει την τρέχουσα ουρά στον διακομιστή. Αυτό μπορεί να βελτιώσει τον απομακρυσμένο έλεγχο και να επιτρέψει την επαναφορά της ουράς από τον διακομιστή. Πάντα ενεργοποιημένο αν είναι ενεργοποιημένη η λειτουργία «Play On».",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -875,7 +875,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Ενεργοποιεί τη λειτουργία «Play On» του Jellyfin (απομακρυσμένος έλεγχος του Finamp από άλλον πελάτη). Απενεργοποιήστε το αν ο reverse proxy ή ο διακομιστής σας δεν υποστηρίζει websockets.",
+    "enablePlayonSubtitle": "Ενεργοποιεί τη λειτουργία «Play On» του Jellyfin (απομακρυσμένος έλεγχος του sombrAMP από άλλον πελάτη). Απενεργοποιήστε το αν ο reverse proxy ή ο διακομιστής σας δεν υποστηρίζει websockets.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1015,7 +1015,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "Το Finamp δεν μπόρεσε να βρει καμία βιβλιοθήκη μουσικής. Βεβαιωθείτε ότι ο διακομιστής Jellyfin περιέχει τουλάχιστον μία βιβλιοθήκη με τον τύπο περιεχομένου ορισμένο σε \"Music/Μουσική\".",
+    "noMusicLibrariesBody": "Το sombrAMP δεν μπόρεσε να βρει καμία βιβλιοθήκη μουσικής. Βεβαιωθείτε ότι ο διακομιστής Jellyfin περιέχει τουλάχιστον μία βιβλιοθήκη με τον τύπο περιεχομένου ορισμένο σε \"Music/Μουσική\".",
     "refresh": "Ανανέωση",
     "moreInfo": "Περισσότερες Πληροφορίες",
     "volumeNormalizationSettingsTitle": "Ισοστάθμιση Έντασης",
@@ -1108,7 +1108,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Είστε σίγουροι ότι θέλετε να ενεργοποιήσετε την κοινή χρήση διακομιστή ενώ βρίσκεστε σε Λειτουργία Εκτός Σύνδεσης; Αυτό θα κάνει το Finamp να στείλει δεδομένα μέσω τοπικού δικτύου.",
+    "serverSharingMenuConfirmationDialogText": "Είστε σίγουροι ότι θέλετε να ενεργοποιήσετε την κοινή χρήση διακομιστή ενώ βρίσκεστε σε Λειτουργία Εκτός Σύνδεσης; Αυτό θα κάνει το sombrAMP να στείλει δεδομένα μέσω τοπικού δικτύου.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },
@@ -1136,7 +1136,7 @@
     "@serverSharingMenuDescription": {
         "description": "Description text shown in the server sharing menu, right below the controls"
     },
-    "serverSharingMenuDetails": "Λειτουργεί ακούγοντας αιτήματα ανίχνευσης διακομιστή από άλλους πελάτες στο τοπικό δίκτυο και απαντώντας σε αυτά τα αιτήματα με τη διαμορφωμένη διεύθυνση του διακομιστή Jellyfin σας.\nΕάν έχετε διαμορφώσει τόσο μια τοπική όσο και μια δημόσια διεύθυνση, το Finamp θα παρέχει και τις δύο στον πελάτη που ζητά την πληροφορία.",
+    "serverSharingMenuDetails": "Λειτουργεί ακούγοντας αιτήματα ανίχνευσης διακομιστή από άλλους πελάτες στο τοπικό δίκτυο και απαντώντας σε αυτά τα αιτήματα με τη διαμορφωμένη διεύθυνση του διακομιστή Jellyfin σας.\nΕάν έχετε διαμορφώσει τόσο μια τοπική όσο και μια δημόσια διεύθυνση, το sombrAMP θα παρέχει και τις δύο στον πελάτη που ζητά την πληροφορία.",
     "@serverSharingMenuDetails": {
         "description": "Description text shown in the server sharing menu, below the description"
     },
@@ -1515,11 +1515,11 @@
     },
     "useMonochromeIcon": "Χρήση Μονόχρωμου Λογοτύπου",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Αυτό επηρεάζει μόνο το εικονίδιο μέσα στην εφαρμογή, όχι το εικονίδιο του εκκινητή.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "shuffleSomeNext": "Ανακάτεμα μερικών ως επόμενο",
     "@shuffleSomeNext": {
@@ -1611,7 +1611,7 @@
     "@autoplayRestoredQueueSubtitle": {
         "description": "Subtitle for the setting that controls if restored queues automatically play."
     },
-    "missingBlurhashWarning": "Προειδοποίηση: Ο διακομιστής Jellyfin φαίνεται να είναι λανθασμένα ρυθμισμένος και δεν υπολογίζει τα blurhashes.  Αυτό εμποδίζει το Finamp να αποφύγει διπλές λήψεις εικόνων.  Παρακαλώ διορθώστε τον διακομιστή και εκτελέστε επιδιόρθωση λήψεων.",
+    "missingBlurhashWarning": "Προειδοποίηση: Ο διακομιστής Jellyfin φαίνεται να είναι λανθασμένα ρυθμισμένος και δεν υπολογίζει τα blurhashes.  Αυτό εμποδίζει το sombrAMP να αποφύγει διπλές λήψεις εικόνων.  Παρακαλώ διορθώστε τον διακομιστή και εκτελέστε επιδιόρθωση λήψεων.",
     "@missingBlurhashWarning": {
         "description": "A warning message displayed on the downloads screen if the jellyfin server is missing blurhashes."
     },

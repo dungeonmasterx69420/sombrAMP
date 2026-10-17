@@ -126,7 +126,8 @@ class DefaultSettings {
   // These consts are so that we can easily keep the same default for
   // FinampSettings's constructor and Hive's defaultValue.
   static const isOffline = false;
-  static const themeMode = ThemeMode.system;
+  // sombra System S: dark is the default.
+  static const themeMode = ThemeMode.dark;
   static const amoledTheme = false;
   static const Locale? locale = null;
   static const Color? accentColor = null;
@@ -156,7 +157,8 @@ class DefaultSettings {
   static const playbackSpeedVisibility = PlaybackSpeedVisibility.automatic;
   static const showTextOnGridView = true;
   static const sleepTimerDurationSeconds = 60 * 30;
-  static const useCoverAsBackground = true;
+  // sombra System S has flat panes, no blurred artwork behind them.
+  static const useCoverAsBackground = false;
   static const playerScreenCoverMinimumPadding = 1.5;
   static const showArtistsTracksSection = true;
   static const disableGesture = false;

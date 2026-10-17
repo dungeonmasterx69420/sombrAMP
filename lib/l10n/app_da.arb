@@ -19,7 +19,7 @@
     "music": "Musik",
     "clear": "Ryd",
     "shuffleAll": "Bland alle",
-    "finamp": "Finamp",
+    "finamp": "sombrAMP",
     "downloads": "Overførelser",
     "settings": "Indstillinger",
     "offlineMode": "Offline tilstand",
@@ -224,7 +224,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "Venligst opret et problem på \"github.com/jmshrv/finamp\" med log (brug knappen nedenunder) og et skærmbillede af denne side så vi kan fikse det hurtigst muligt.",
+    "startupErrorCallToAction": "Venligst opret et problem på \"github.com/dungeonmasterx69420/sombrAMP\" med log (brug knappen nedenunder) og et skærmbillede af denne side så vi kan fikse det hurtigst muligt.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -232,7 +232,7 @@
     "@startupErrorWorkaround": {
         "description": "The subtitle for how to manually recover from a startup error"
     },
-    "about": "Omkring Finamp",
+    "about": "Omkring sombrAMP",
     "@about": {
         "description": "Label for the about/info button on the settings screen"
     },
@@ -240,9 +240,9 @@
     "@aboutContributionPrompt": {
         "description": "Text shown in the about screen, explaining that the app is made by volunteers and that the user could be one of them."
     },
-    "aboutContributionLink": "Bidrag til Finamp på Github:",
+    "aboutContributionLink": "Bidrag til sombrAMP på Github:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "Læs de nyeste udgivelsesnoter:",
     "@aboutReleaseNotes": {
@@ -252,7 +252,7 @@
     "@aboutTranslations": {
         "description": "Link to the translation project, shown in the about screen."
     },
-    "aboutThanks": "Tak for at bruge Finamp!",
+    "aboutThanks": "Tak for at bruge sombrAMP!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -262,7 +262,7 @@
         "placeholders": {
             "styledName": {
                 "type": "String",
-                "example": "Finamp"
+                "example": "sombrAMP"
             }
         }
     },
@@ -566,11 +566,11 @@
     },
     "useMonochromeIcon": "Brug Monokrom Logo",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "Dette påvirker kun ikonet inde i appen, ikke launcher ikonet.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "defaultWord": "Standard",
     "useDefaultButton": "Nulstil til Standard Accent Farve",
@@ -794,7 +794,7 @@
     "@reportQueueToServer": {
         "description": "Label for the setting that toggles reporting of the current queue to the Jellyfin server"
     },
-    "reportQueueToServerSubtitle": "Når slået til, vil Finamp sende nuværende kø til server. Dette kan forbedre fjernstyring og tillade serveren at gendanne kø. Altid til hvis 'Play On' funktionen er aktiveret.",
+    "reportQueueToServerSubtitle": "Når slået til, vil sombrAMP sende nuværende kø til server. Dette kan forbedre fjernstyring og tillade serveren at gendanne kø. Altid til hvis 'Play On' funktionen er aktiveret.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1067,7 +1067,7 @@
         },
         "description": "Tooltip and accessibility label for the track progress. {currentTime} is the current position within the track, as a translated string like '2 minutes 40 seconds', and {totalTime} is the total duration of the track, also a translated string."
     },
-    "playbackSpeedControlSettingDescription": "Automatisk\nFinamp prøver at identificere om det spor du spiller er en podcast eller (del af) en lydbog. Dette er hvis sporet er længere end {trackDuration} minutter, hvis sporets album er længere end {albumDuration} timer, eller hvis sporet har mindst en af disse genre tildelt: {genreList}\nAfspilningshastighed vil derefter blive vist i afspilnings skærm menuen.\n\nVist:\nAfspilningshastighedens kontrol vil altid blive vist i afspilnings skærm menuen.\n\nSkjult:\nAfspilningshastighedens kontrol vil altid blive skjult i afspilnings skærm menuen.",
+    "playbackSpeedControlSettingDescription": "Automatisk\nsombrAMP prøver at identificere om det spor du spiller er en podcast eller (del af) en lydbog. Dette er hvis sporet er længere end {trackDuration} minutter, hvis sporets album er længere end {albumDuration} timer, eller hvis sporet har mindst en af disse genre tildelt: {genreList}\nAfspilningshastighed vil derefter blive vist i afspilnings skærm menuen.\n\nVist:\nAfspilningshastighedens kontrol vil altid blive vist i afspilnings skærm menuen.\n\nSkjult:\nAfspilningshastighedens kontrol vil altid blive skjult i afspilnings skærm menuen.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -1093,7 +1093,7 @@
     "@genreFilterPlaylistScreens": {
         "description": "Label for the setting that controls if a genreFilter should get applied to PlaylistScreens when accessing the PlaylistScreens through a Genre."
     },
-    "noMusicLibrariesBody": "Finamp kunne ikke finde flere musik biblioteker. Du bedes sikre dig at din Jellyfin server indeholder mindst et bibliotek med indholds typen sat til \"Music\".",
+    "noMusicLibrariesBody": "sombrAMP kunne ikke finde flere musik biblioteker. Du bedes sikre dig at din Jellyfin server indeholder mindst et bibliotek med indholds typen sat til \"Music\".",
     "volumeNormalizationSettingsTitle": "Lyd Normalisering",
     "@volumeNormalizationSettingsTitle": {
         "description": "Title for the replay gain settings screen"
@@ -1222,7 +1222,7 @@
     "@serverSharingMenuButtonTitle": {
         "description": "Title for the button in the drawer that opens the server sharing menu"
     },
-    "serverSharingMenuConfirmationDialogText": "Er du sikker på at du vil aktivere server deling selvom du er i offline tilstand? Dette vil få Finamp til at sende data over det lokale netværk.",
+    "serverSharingMenuConfirmationDialogText": "Er du sikker på at du vil aktivere server deling selvom du er i offline tilstand? Dette vil få sombrAMP til at sende data over det lokale netværk.",
     "@serverSharingMenuConfirmationDialogText": {
         "description": "Dialog text shown when enabling server sharing while offline mode is enabled"
     },

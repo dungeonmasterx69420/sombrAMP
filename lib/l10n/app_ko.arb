@@ -30,7 +30,7 @@
     "music": "음악",
     "clear": "삭제(비우기)",
     "shuffleAll": "임의 재생(모두)",
-    "finamp": "핀앰프(Finamp)",
+    "finamp": "핀앰프(sombrAMP)",
     "sortOrder": "순서",
     "sortBy": "정렬 기준",
     "budget": "예산",
@@ -182,7 +182,7 @@
     "@noMusicLibrariesTitle": {
         "description": "Title for message that shows on the views screen when no music libraries could be found."
     },
-    "noMusicLibrariesBody": "핀앰프 Finamp가 음악 라이브러리를 찾을 수 없습니다. 귀하의 젤리핀 Jellyfin 서버에 콘텐츠 유형이 \"음악\"으로 설정된 라이브러리가 하나 이상 있는지 확인하세요.",
+    "noMusicLibrariesBody": "핀앰프 sombrAMP가 음악 라이브러리를 찾을 수 없습니다. 귀하의 젤리핀 Jellyfin 서버에 콘텐츠 유형이 \"음악\"으로 설정된 라이브러리가 하나 이상 있는지 확인하세요.",
     "startMixNoTracksArtist": "믹스를 시작하기 전에 '아티스트'를 길게 탭하여 아티스트를 믹스 빌더에 추가하거나 빼세요",
     "@startMixNoTracksArtist": {
         "description": "Snackbar message that shows when the user presses the instant mix button with no artists selected"
@@ -230,7 +230,7 @@
         "description": "Popup menu item title for inserting an item into the play queue after the currently-playing item."
     },
     "confirm": "확인",
-    "about": "Finamp(핀앰프) 소개",
+    "about": "sombrAMP(핀앰프) 소개",
     "changeLanguage": "언어 변경",
     "@changeLanguage": {
         "description": "Label for button shown during the login process that allows the user to change the app language"
@@ -251,7 +251,7 @@
     "@maxConcurrentDownloads": {
         "description": "Title of setting controlling max concurrent downloads."
     },
-    "aboutThanks": "핀앰프 Finamp와 함께 해주셔서 고맙습니다!",
+    "aboutThanks": "핀앰프 sombrAMP와 함께 해주셔서 고맙습니다!",
     "@aboutThanks": {
         "description": "Thank you message shown in the about screen."
     },
@@ -263,9 +263,9 @@
     "@finampTagline": {
         "description": "Tagline / short description for the app"
     },
-    "aboutContributionLink": "Github의 핀앰프 Finamp에 기여하기:",
+    "aboutContributionLink": "Github의 핀앰프 sombrAMP에 기여하기:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "최신 릴리즈 노트 읽어보기:",
     "@aboutReleaseNotes": {
@@ -277,7 +277,7 @@
     },
     "loginFlowWelcomeHeading": "환영해요, {styledName} 입니다",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "loginFlowSlogan": "당신의 음악을 원하는 방식으로 들어보세요.",
     "@loginFlowSlogan": {
@@ -543,7 +543,7 @@
     "@hidden": {
         "description": "Used as an option in the playback speed visibility settings"
     },
-    "playbackSpeedControlSettingDescription": "자동:\n핀앰프 Finamp는 재생중인 곡이 팟캐스트나 오디오북인지 식별을 시도합니다. 곡이 {trackDuration} 분보다 길거나, 앨범이 {albumDuration} 시간보다 길거나, 곡에 장르가 {genreList}중 하나라도 지정된 경우,\n‘재생 속도 제어’가 재생 화면 메뉴에 나타납니다.\n\n보이기:\n‘재생 속도 제어’가 항상 재생 화면 메뉴에 나타납니다.\n\n숨기기:\n‘재생 속도 제어’가 항상 재생 화면 메뉴에 나타나지 않습니다.",
+    "playbackSpeedControlSettingDescription": "자동:\n핀앰프 sombrAMP는 재생중인 곡이 팟캐스트나 오디오북인지 식별을 시도합니다. 곡이 {trackDuration} 분보다 길거나, 앨범이 {albumDuration} 시간보다 길거나, 곡에 장르가 {genreList}중 하나라도 지정된 경우,\n‘재생 속도 제어’가 재생 화면 메뉴에 나타납니다.\n\n보이기:\n‘재생 속도 제어’가 항상 재생 화면 메뉴에 나타납니다.\n\n숨기기:\n‘재생 속도 제어’가 항상 재생 화면 메뉴에 나타나지 않습니다.",
     "@playbackSpeedControlSettingDescription": {
         "description": "Description for the dropdown that selects the replay gain mode, shown in a dialog that opens when the user presses the info icon next to the dropdown",
         "placeholders": {
@@ -681,7 +681,7 @@
     "@autoloadLastQueueOnStartup": {
         "description": "Setting to restore last queue on startup"
     },
-    "reportQueueToServerSubtitle": "활성화시 핀앰프 Finamp는 현재 대기열을 서버로 보냅니다. 이는 원격 제어를 개선하고 및 서버측이 대기열을 복원할 수 있습니다. '플레이 온' 기능이 활성화되면 본 기능도 항상 활성화됩니다.",
+    "reportQueueToServerSubtitle": "활성화시 핀앰프 sombrAMP는 현재 대기열을 서버로 보냅니다. 이는 원격 제어를 개선하고 및 서버측이 대기열을 복원할 수 있습니다. '플레이 온' 기능이 활성화되면 본 기능도 항상 활성화됩니다.",
     "@reportQueueToServerSubtitle": {
         "description": "Description of the setting that toggles reporting of the current queue to the Jellyfin server"
     },
@@ -1268,7 +1268,7 @@
     },
     "favorites": "즐겨찾기",
     "exportLogs": "로그 저장",
-    "startupErrorCallToAction": "\"github.com/jmshrv/finamp\"에 문제점을 등록해주세요. 로그와 스크린샷을 함께 등록하시면 우리가 최대한 빠르게 조치할 수 있습니다.",
+    "startupErrorCallToAction": "\"github.com/dungeonmasterx69420/sombrAMP\"에 문제점을 등록해주세요. 로그와 스크린샷을 함께 등록하시면 우리가 최대한 빠르게 조치할 수 있습니다.",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },
@@ -1325,7 +1325,7 @@
     "@enablePlayonTitle": {
         "description": "Label for the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
-    "enablePlayonSubtitle": "Jellyfin의 'Play On'기능 (다른 클라이언트에서 Finamp를 원격 제어함)을 활성화합니다. 리버스 프록시나 리버스 서버가 웹소켓을 지원하지 않을 경우 비활성화 하십시오.",
+    "enablePlayonSubtitle": "Jellyfin의 'Play On'기능 (다른 클라이언트에서 sombrAMP를 원격 제어함)을 활성화합니다. 리버스 프록시나 리버스 서버가 웹소켓을 지원하지 않을 경우 비활성화 하십시오.",
     "@enablePlayonSubtitle": {
         "description": "Description of the setting to enable Jellyfin's 'Play On' feature (remote control)"
     },
@@ -1946,11 +1946,11 @@
     "amoledThemeSubtitle": "검정 색상 구성을 순수한 검정 테마로 교체합니다.",
     "useMonochromeIcon": "흑백 로고를 사용합니다",
     "@useMonochromeIcon": {
-        "description": "Toggles the Finamp icon between classic and it being monochromic. This does not change the outside-app-icon"
+        "description": "Toggles the sombrAMP icon between classic and it being monochromic. This does not change the outside-app-icon"
     },
     "useMonochromeIconSubtitle": "이것은 앱 내의 아이콘에만 영향을 줍니다. 런처 아이콘은 바뀌지 않습니다.",
     "@useMonochromeIconSubtitle": {
-        "description": "Subtitle for the toggle that switches the Finamp icon between classic and it being monochromic."
+        "description": "Subtitle for the toggle that switches the sombrAMP icon between classic and it being monochromic."
     },
     "startRadio": "라디오를 시작합니다",
     "@startRadio": {

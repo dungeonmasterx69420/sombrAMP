@@ -486,7 +486,7 @@
     },
     "aboutContributionLink": "GitHub पर फ़िनएम्प के लिए योगदान करें:",
     "@aboutContributionLink": {
-        "description": "Link to the Finamp GitHub repository, shown in the about screen."
+        "description": "Link to the sombrAMP GitHub repository, shown in the about screen."
     },
     "aboutReleaseNotes": "नवीनतम रिलीज़ नोट्स पढ़ें:",
     "@aboutReleaseNotes": {
@@ -506,7 +506,7 @@
     },
     "loginFlowWelcomeHeading": "{styledName}स्वागत है,",
     "@loginFlowWelcomeHeading": {
-        "description": "Greeting shown on the login screen. The full message will be 'Welcome to Finamp'."
+        "description": "Greeting shown on the login screen. The full message will be 'Welcome to sombrAMP'."
     },
     "changeLanguage": "भाषा बदलें",
     "@changeLanguage": {
@@ -919,7 +919,7 @@
         "placeholders": {
             "sourceCodeLink": {
                 "type": "String",
-                "example": "https://github.com/jmshrv/finamp"
+                "example": "https://github.com/dungeonmasterx69420/sombrAMP"
             }
         }
     },
@@ -1602,7 +1602,7 @@
     "@startupErrorTitle": {
         "description": "The title for the error screen that shows when startup fails."
     },
-    "startupErrorCallToAction": "कृपया लॉग (नीचे दिए गए बटन का उपयोग करें) और इस पृष्ठ के स्क्रीनशॉट के साथ \"github.com/jmshrv/finamp\" पर एक समस्या बनाएं, ताकि हम इसे जल्द से जल्द ठीक कर सकें।",
+    "startupErrorCallToAction": "कृपया लॉग (नीचे दिए गए बटन का उपयोग करें) और इस पृष्ठ के स्क्रीनशॉट के साथ \"github.com/dungeonmasterx69420/sombrAMP\" पर एक समस्या बनाएं, ताकि हम इसे जल्द से जल्द ठीक कर सकें।",
     "@startupErrorCallToAction": {
         "description": "The subtitle / call to action for what to do after encountering a startup error"
     },

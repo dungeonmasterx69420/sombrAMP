@@ -19,9 +19,7 @@ class CTAHuge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accentColor = disabled
-        ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)
-        : Theme.of(context).colorScheme.primary;
+    // Styled by the theme: System S's default button, with the outer ring.
     return FilledButton(
       onPressed: disabled
           ? null
@@ -29,40 +27,15 @@ class CTAHuge extends StatelessWidget {
               FeedbackHelper.feedback(FeedbackType.selection);
               onPressed();
             },
-      style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        ),
-        padding: WidgetStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 24, vertical: 20)),
-        backgroundColor: WidgetStateProperty.all<Color>(
-          Theme.brightnessOf(context) == Brightness.dark
-              ? accentColor.withValues(alpha: disabled ? 0.05 : 0.15)
-              : Color.alphaBlend(
-                  accentColor.withValues(alpha: 0.2),
-                  Colors.white,
-                ).withValues(alpha: disabled ? 0.5 : 1.0),
-        ),
+      style: const ButtonStyle(
+        minimumSize: WidgetStatePropertyAll(Size(64, 48)),
+        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
       ),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         direction: vertical ? Axis.vertical : Axis.horizontal,
         alignment: vertical ? WrapAlignment.center : WrapAlignment.start,
-        children: [
-          Icon(icon, size: 28, color: accentColor, weight: 1.5),
-          const SizedBox(width: 12),
-          Text(
-            text,
-            style: TextStyle(
-              color:
-                  (Theme.brightnessOf(context) == Brightness.light
-                          ? Color.alphaBlend(accentColor.withValues(alpha: 0.33), Colors.black)
-                          : Colors.white)
-                      .withValues(alpha: disabled ? 0.5 : 1.0),
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+        children: [Icon(icon, size: 22, weight: 1.5), const SizedBox(width: 12), Text(text)],
       ),
     );
   }
