@@ -622,26 +622,37 @@ class JellyfinApiHelper {
     if (baseUrl == null) {
       return jellyfinApi.getPublicServerInfo();
     }
+    Object jellyfinError;
+    StackTrace jellyfinStackTrace;
     try {
       final response = await _jellyfinApi.getPublicServerInfo();
-      _detectedServerTypes[baseUrl.toString()] = ServerType.jellyfin;
-      return response;
-    } catch (jellyfinError, jellyfinStackTrace) {
-      PublicSystemInfoResult? subsonicInfo;
-      try {
-        subsonicInfo = await _subsonicApi.publicServerInfoFor(baseUrl);
-      } catch (e) {
-        _jellyfinApiHelperLogger.fine("No Subsonic server found at ${baseUrl.host} either: $e");
+      if (isJellyfinPublicInfo(response)) {
+        _detectedServerTypes[baseUrl.toString()] = ServerType.jellyfin;
+        return response;
       }
-      if (subsonicInfo == null) {
-        // Report why connecting as a Jellyfin server failed, since that's the more common kind of server
-        Error.throwWithStackTrace(jellyfinError, jellyfinStackTrace);
-      }
-      _jellyfinApiHelperLogger.info("Found a Subsonic server (${subsonicInfo.productName}) at ${baseUrl.host}");
-      _detectedServerTypes[baseUrl.toString()] = ServerType.subsonic;
-      return subsonicInfo.toJson();
+      throw const FormatException("Server did not return Jellyfin server info");
+    } catch (e, stackTrace) {
+      jellyfinError = e;
+      jellyfinStackTrace = stackTrace;
     }
+    PublicSystemInfoResult? subsonicInfo;
+    try {
+      subsonicInfo = await _subsonicApi.publicServerInfoFor(baseUrl);
+    } catch (e) {
+      _jellyfinApiHelperLogger.fine("No Subsonic server found at ${baseUrl.host} either: $e");
+    }
+    if (subsonicInfo == null) {
+      // Report why connecting as a Jellyfin server failed, since that's the more common kind of server
+      Error.throwWithStackTrace(jellyfinError, jellyfinStackTrace);
+    }
+    _jellyfinApiHelperLogger.info("Found a Subsonic server (${subsonicInfo.productName}) at ${baseUrl.host}");
+    _detectedServerTypes[baseUrl.toString()] = ServerType.subsonic;
+    return subsonicInfo.toJson();
   }
+
+  /// Whether [response] is Jellyfin's public server info.  Other servers may answer the request with something else,
+  /// e.g. Navidrome redirects it to its web app, which Chopper passes on as a plain string.
+  static bool isJellyfinPublicInfo(Object? response) => response is Map<String, dynamic> && response["Id"] is String;
 
   /// Fetch the public server info from a given URL.
   /// Can be used to check if the server is online / the URL is correct.
@@ -658,11 +669,20 @@ class JellyfinApiHelper {
     final response = await httpClient.get(requestUrl);
 
     if (response.statusCode == 200) {
-      final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
-      PublicSystemInfoResult publicSystemInfoResult = PublicSystemInfoResult.fromJson(responseJson);
-      _detectedServerTypes[customServerUrl.toString()] = ServerType.jellyfin;
+      Object? responseJson;
+      try {
+        responseJson = jsonDecode(response.body);
+      } on FormatException {
+        responseJson = null;
+      }
+      if (isJellyfinPublicInfo(responseJson)) {
+        PublicSystemInfoResult publicSystemInfoResult = PublicSystemInfoResult.fromJson(
+          responseJson as Map<String, dynamic>,
+        );
+        _detectedServerTypes[customServerUrl.toString()] = ServerType.jellyfin;
 
-      return publicSystemInfoResult;
+        return publicSystemInfoResult;
+      }
     }
 
     // Not a Jellyfin server, but it might be a Subsonic server shared by another Finamp client

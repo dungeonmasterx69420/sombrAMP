@@ -463,19 +463,11 @@ class SubsonicApi {
   static const originalFormat = "raw";
 
   /// URL to stream a song.  If [format] is given, the server transcodes the song.  [maxBitRate] is in kbps.
-  static Uri streamUri(SubsonicServer server, String id, {String? format, int? maxBitRate}) {
-    final transcoding = format != null && format != originalFormat;
-    return buildUri(server, "stream", {
-      "id": id,
-      "format": format,
-      "maxBitRate": maxBitRate,
-      // Lets the player know the length of transcoded streams, which is needed for seeking
-      if (transcoding) "estimateContentLength": true,
-    });
-  }
-
-  /// URL to download the original file of a song.
-  static Uri downloadUri(SubsonicServer server, String id) => buildUri(server, "download", {"id": id});
+  ///
+  /// We don't ask for an estimated content length when transcoding: Navidrome's estimate usually doesn't match the
+  /// actual length, which makes players and downloads fail when the stream ends "early".
+  static Uri streamUri(SubsonicServer server, String id, {String? format, int? maxBitRate}) =>
+      buildUri(server, "stream", {"id": id, "format": format, "maxBitRate": maxBitRate});
 
   /// URL of a cover art image.  [size] is the maximum width/height in pixels.
   static Uri coverArtUri(SubsonicServer server, String coverArtId, {int? size}) =>

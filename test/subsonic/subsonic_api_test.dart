@@ -55,15 +55,12 @@ void main() {
       expect(uri.queryParametersAll.containsKey("name"), isFalse);
     });
 
-    test("only transcoded streams estimate the content length", () {
-      expect(
-        SubsonicApi.streamUri(server, "1", format: "opus", maxBitRate: 128).queryParameters,
-        containsPair("estimateContentLength", "true"),
-      );
-      expect(
-        SubsonicApi.streamUri(server, "1", format: SubsonicApi.originalFormat).queryParameters,
-        isNot(contains("estimateContentLength")),
-      );
+    test("streams are transcoded with a format and bit rate", () {
+      final uri = SubsonicApi.streamUri(server, "1", format: "opus", maxBitRate: 128);
+      expect(uri.queryParameters, containsPair("format", "opus"));
+      expect(uri.queryParameters, containsPair("maxBitRate", "128"));
+      // Estimated lengths don't match the transcoded stream, which breaks players and downloads
+      expect(uri.queryParameters, isNot(contains("estimateContentLength")));
     });
   });
 

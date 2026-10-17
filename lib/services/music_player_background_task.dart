@@ -1459,7 +1459,7 @@ class MusicPlayerBackgroundTask extends BaseAudioHandler with SeekHandler, Queue
   }
 
   /// Subsonic servers stream and transcode tracks through a single endpoint.  Transcoded tracks are streamed
-  /// progressively instead of through HLS.
+  /// progressively instead of through HLS, so seeking in them only works once the server has cached the transcode.
   Uri _subsonicTrackUri(SubsonicServer server, MediaItem mediaItem) {
     final id = SubsonicIds.parse(mediaItem.extras!["itemJson"]["Id"] as String).id;
     if (!(mediaItem.extras!["shouldTranscode"] as bool)) {
