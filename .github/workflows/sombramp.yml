@@ -79,7 +79,9 @@ jobs:
             echo "keyPassword=$key_password"
           } > android/key.properties
 
-      - run: flutter build apk --release --no-pub
+      # Without --no-pub: the build's own pub step is what drops dev-only plugins (integration_test) from the
+      # release plugin registrant.
+      - run: flutter build apk --release
 
       - name: Name the APK
         run: mv build/app/outputs/flutter-apk/app-release.apk "sombrAMP-${GITHUB_REF_NAME//\//-}-android.apk"
@@ -112,7 +114,7 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter build windows --release --no-pub
+      - run: flutter build windows --release
 
       # The folder runs as is: unzip it and start Finamp.exe. No certificate needed.
       - uses: actions/upload-artifact@v6
