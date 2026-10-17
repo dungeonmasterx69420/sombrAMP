@@ -7,11 +7,13 @@ import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/quick_connect_authorization_menu.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
+import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/server_client_discovery_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:get_it/get_it.dart';
 
 const serverSharingPanelRouteName = "/server-sharing-panel";
 
@@ -49,19 +51,21 @@ Future<void> showServerSharingPanel({required BuildContext context}) async {
             ]),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: SimpleButton(
-              text: AppLocalizations.of(context)!.quickConnectAuthorizationMenuPrompt,
-              icon: TablerIcons.lock_bolt,
-              onPressed: () async {
-                Navigator.of(context).pop();
-                await showQuickConnectAuthorizationMenu(context: context);
-              },
+        // Quick Connect is a Jellyfin feature
+        if (!(GetIt.instance<FinampUserHelper>().currentUser?.isSubsonic ?? false))
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: SimpleButton(
+                text: AppLocalizations.of(context)!.quickConnectAuthorizationMenuPrompt,
+                icon: TablerIcons.lock_bolt,
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  await showQuickConnectAuthorizationMenu(context: context);
+                },
+              ),
             ),
           ),
-        ),
         SliverPadding(padding: EdgeInsets.only(bottom: 40.0)),
       ];
       var stackHeight = MediaQuery.heightOf(context) * 0.45;

@@ -22,6 +22,12 @@ Finamp is a **free** Jellyfin music player for Android, iOS and Desktop. It allo
 > You **need** access to a [Jellyfin](https://jellyfin.org) server or you **won't be able to use Finamp at all**.  
 > ([Navidrome](https://github.com/navidrome/navidrome/releases/tag/v0.64.0) and [Lyra](https://github.com/lyra-org/lyra) also work, but aren't actively supported)
 
+### Subsonic servers (Navidrome, Gonic, Airsonic, ...)
+
+Servers implementing the [Subsonic API](http://www.subsonic.org/pages/api.jsp) (including the [OpenSubsonic](https://opensubsonic.netlify.app) extensions) can be used directly. Just enter the server's address when logging in, Finamp detects the kind of server automatically and also tries Navidrome's default port `4533`.
+
+Some features are only available on Jellyfin: Quick Connect, remote control from other clients, editing metadata and playlist images, and favoriting playlists or genres. Lyrics of downloaded tracks aren't available offline, and "instant mixes" need the server to be configured with an external agent like Last.fm, otherwise they fall back to random tracks of the same genre.
+
 ## Features
 
 Finamp comes with a bunch of features, but here are the ones we think are **most interesting**:

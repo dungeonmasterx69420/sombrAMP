@@ -100,9 +100,11 @@ class PlayOnService {
   Future<void> startListener() async {
     abortConnect = false;
     try {
+      // Remote control relies on Jellyfin's websocket, which Subsonic servers don't have
       if (!FinampSettingsHelper.finampSettings.isOffline &&
           FinampSettingsHelper.finampSettings.enablePlayon &&
-          _finampUserHelper.currentUser != null) {
+          _finampUserHelper.currentUser != null &&
+          !_finampUserHelper.currentUser!.isSubsonic) {
         assert(socketState == SocketState.disconnected);
         _playOnServiceLogger.info("Attempting to start PlayOn listener");
         socketState = SocketState.connecting;

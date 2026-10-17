@@ -47,7 +47,16 @@ extension CensoredMessage on LogRecord {
           "PUBLICURL${useLocal ? "(INACTIVE)" : ""}",
         );
         workingLogString = workingLogString.replaceAll(CaseInsensitivePattern(user.accessToken), "TOKEN");
-        workingLogString = workingLogString.replaceAll(CaseInsensitivePattern(user.id), "USER_ID");
+        if (user.isSubsonic) {
+          // The id of a Subsonic user is their username, which could be any short word.  It only needs to be censored
+          // in URLs, which is where Subsonic sends it.
+          workingLogString = workingLogString.replaceAll(
+            CaseInsensitivePattern("u=${Uri.encodeQueryComponent(user.id)}&"),
+            "u=USER_ID&",
+          );
+        } else {
+          workingLogString = workingLogString.replaceAll(CaseInsensitivePattern(user.id), "USER_ID");
+        }
       }
     }
 

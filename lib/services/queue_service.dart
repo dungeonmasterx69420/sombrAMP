@@ -1563,6 +1563,8 @@ class QueueService {
           scheme: "content",
           host: packageInfo.packageName,
           path: artUri.path,
+          // Subsonic servers identify images and authenticate through query parameters
+          query: (_finampUserHelper.currentUser?.isSubsonic ?? false) && artUri.hasQuery ? artUri.query : null,
           fragment: ["http", "https"].contains(artUri.scheme) ? artUri.origin : null,
         );
       }

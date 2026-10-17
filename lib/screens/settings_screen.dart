@@ -20,6 +20,7 @@ import 'package:finamp/screens/view_selector.dart';
 import 'package:finamp/screens/volume_normalization_settings_screen.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
+import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -217,11 +218,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(AppLocalizations.of(context)!.serverSharingMenuButtonTitle),
             onTap: () => showServerSharingPanel(context: context),
           ),
-          ListTile(
-            leading: Icon(TablerIcons.lock_bolt),
-            title: Text(AppLocalizations.of(context)!.quickConnectAuthorizationMenuButtonTitle),
-            onTap: () => showQuickConnectAuthorizationMenu(context: context),
-          ),
+          // Quick Connect is a Jellyfin feature
+          if (!(ref.watch(FinampUserHelper.finampCurrentUserProvider)?.isSubsonic ?? false))
+            ListTile(
+              leading: Icon(TablerIcons.lock_bolt),
+              title: Text(AppLocalizations.of(context)!.quickConnectAuthorizationMenuButtonTitle),
+              onTap: () => showQuickConnectAuthorizationMenu(context: context),
+            ),
           ListTile(
             leading: Icon(TablerIcons.certificate),
             title: Text(AppLocalizations.of(context)!.clientCertificate),

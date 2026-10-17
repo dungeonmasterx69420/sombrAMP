@@ -3853,6 +3853,12 @@ const FinampUserSchema = CollectionSchema(
       name: r'serverId',
       type: IsarType.string,
     ),
+    r'serverType': PropertySchema(
+      id: 10,
+      name: r'serverType',
+      type: IsarType.byte,
+      enumMap: _FinampUserserverTypeEnumValueMap,
+    ),
   },
 
   estimateSize: _finampUserEstimateSize,
@@ -3908,6 +3914,7 @@ void _finampUserSerialize(
   writer.writeString(offsets[7], object.localAddress);
   writer.writeBool(offsets[8], object.preferLocalNetwork);
   writer.writeString(offsets[9], object.serverId);
+  writer.writeByte(offsets[10], object.serverType.index);
 }
 
 FinampUser _finampUserDeserialize(
@@ -3924,6 +3931,9 @@ FinampUser _finampUserDeserialize(
     localAddress: reader.readString(offsets[7]),
     preferLocalNetwork: reader.readBool(offsets[8]),
     serverId: reader.readString(offsets[9]),
+    serverType:
+        _FinampUserserverTypeValueEnumMap[reader.readByteOrNull(offsets[10])] ??
+        ServerType.jellyfin,
   );
   object.isarCurrentViewId = reader.readStringOrNull(offsets[3]);
   object.isarViews = reader.readString(offsets[6]);
@@ -3957,10 +3967,22 @@ P _finampUserDeserializeProp<P>(
       return (reader.readBool(offset)) as P;
     case 9:
       return (reader.readString(offset)) as P;
+    case 10:
+      return (_FinampUserserverTypeValueEnumMap[reader.readByteOrNull(
+                offset,
+              )] ??
+              ServerType.jellyfin)
+          as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _FinampUserserverTypeEnumValueMap = {'jellyfin': 0, 'subsonic': 1};
+const _FinampUserserverTypeValueEnumMap = {
+  0: ServerType.jellyfin,
+  1: ServerType.subsonic,
+};
 
 Id _finampUserGetId(FinampUser object) {
   return object.isarId;
@@ -5307,6 +5329,61 @@ extension FinampUserQueryFilter
       );
     });
   }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterFilterCondition> serverTypeEqualTo(
+    ServerType value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'serverType', value: value),
+      );
+    });
+  }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterFilterCondition>
+  serverTypeGreaterThan(ServerType value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'serverType',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterFilterCondition>
+  serverTypeLessThan(ServerType value, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'serverType',
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterFilterCondition> serverTypeBetween(
+    ServerType lower,
+    ServerType upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'serverType',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
+    });
+  }
 }
 
 extension FinampUserQueryObject
@@ -5437,6 +5514,18 @@ extension FinampUserQuerySortBy
   QueryBuilder<FinampUser, FinampUser, QAfterSortBy> sortByServerIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'serverId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterSortBy> sortByServerType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serverType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterSortBy> sortByServerTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serverType', Sort.desc);
     });
   }
 }
@@ -5577,6 +5666,18 @@ extension FinampUserQuerySortThenBy
       return query.addSortBy(r'serverId', Sort.desc);
     });
   }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterSortBy> thenByServerType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serverType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<FinampUser, FinampUser, QAfterSortBy> thenByServerTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serverType', Sort.desc);
+    });
+  }
 }
 
 extension FinampUserQueryWhereDistinct
@@ -5660,6 +5761,12 @@ extension FinampUserQueryWhereDistinct
       return query.addDistinctBy(r'serverId', caseSensitive: caseSensitive);
     });
   }
+
+  QueryBuilder<FinampUser, FinampUser, QDistinct> distinctByServerType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'serverType');
+    });
+  }
 }
 
 extension FinampUserQueryProperty
@@ -5729,6 +5836,12 @@ extension FinampUserQueryProperty
   QueryBuilder<FinampUser, String, QQueryOperations> serverIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'serverId');
+    });
+  }
+
+  QueryBuilder<FinampUser, ServerType, QQueryOperations> serverTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'serverType');
     });
   }
 }

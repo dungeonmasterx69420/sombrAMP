@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:finamp/components/LoginScreen/login_server_selection_page.dart';
+import 'package:finamp/models/finamp_models.dart' show ServerType;
 import 'package:finamp/models/jellyfin_models.dart';
 import 'package:finamp/screens/view_selector.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
@@ -96,7 +97,16 @@ class _LoginFlowState extends State<LoginFlow> {
                     serverState.selectedServer = server;
                     serverState.baseUrl = baseUrl;
                     serverState.clientDiscoveryHandler.stopDiscovery();
-                    loginNavigatorKey.currentState!.pushNamed(LoginUserSelectionPage.routeName);
+                    final jellyfinApiHelper = GetIt.instance<JellyfinApiHelper>();
+                    final baseUri = Uri.parse(baseUrl);
+                    if (jellyfinApiHelper.detectedServerType(baseUri.toString()) == ServerType.subsonic) {
+                      // Subsonic servers don't list their users or support Quick Connect, so go straight to the login
+                      jellyfinApiHelper.baseUrlTemp = baseUri;
+                      connectionState.selectedUser = null;
+                      loginNavigatorKey.currentState!.pushNamed(LoginAuthenticationPage.routeName);
+                    } else {
+                      loginNavigatorKey.currentState!.pushNamed(LoginUserSelectionPage.routeName);
+                    }
                   },
                 ),
               );
@@ -298,6 +308,21 @@ class ServerState {
           publicServerInfo = await jellyfinApiHelper.loadServerPublicInfo();
         } catch (error) {
           serverStateLogger.severe("Couldn't reach server at $baseUrlToTest (default port): $error");
+        }
+      }
+      if (this.baseUrlToTest != baseUrl) {
+        throw Exception("Server URL changed while testing");
+      }
+
+      if (publicServerInfo == null && unspecifiedPort) {
+        // try Navidrome's default port 4533
+        Uri url = Uri.parse(baseUrlToTest).replace(port: 4533);
+        baseUrlToTest = url.toString(); // update the local url
+        jellyfinApiHelper.baseUrlTemp = url;
+        try {
+          publicServerInfo = await jellyfinApiHelper.loadServerPublicInfo();
+        } catch (error) {
+          serverStateLogger.severe("Couldn't reach server at $baseUrlToTest (default Navidrome port): $error");
         }
       }
       if (this.baseUrlToTest != baseUrl) {
