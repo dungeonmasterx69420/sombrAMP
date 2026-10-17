@@ -606,13 +606,12 @@ ThemeData systemSThemeData(
       shadowColor: Colors.transparent,
       selectedShadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
-      labelStyle: WidgetStateTextStyle.resolveWith(
-        (states) => TextStyle(
-          fontFamily: SystemSFonts.pixel,
-          fontFeatures: SystemSFonts.pixelFeatures,
-          fontSize: 14,
-          color: states.contains(WidgetState.selected) ? p.pane : p.ink,
-        ),
+      // Chips resolve state on the label colour, not on the whole style.
+      labelStyle: TextStyle(
+        fontFamily: SystemSFonts.pixel,
+        fontFeatures: SystemSFonts.pixelFeatures,
+        fontSize: 14,
+        color: WidgetStateColor.resolveWith((states) => states.contains(WidgetState.selected) ? p.pane : p.ink),
       ),
       iconTheme: IconThemeData(color: p.ink, size: 18),
     ),

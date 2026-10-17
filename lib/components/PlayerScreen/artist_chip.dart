@@ -16,10 +16,10 @@ import '../album_image.dart';
 
 part 'artist_chip.g.dart';
 
-const _radius = Radius.circular(4);
+// System S tags are square.
+const _radius = Radius.zero;
 const _borderRadius = BorderRadius.all(_radius);
 const _height = 24.0; // I'm sure this magic number will work on all devices
-final _defaultBackgroundColour = Colors.white.withValues(alpha: 0.1);
 
 @riverpod
 Future<BaseItemDto?> artistItem(Ref ref, BaseItemId id) async {
@@ -81,7 +81,7 @@ class ArtistChip extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localBackgroundColor = backgroundColor ?? _defaultBackgroundColour;
+    final localBackgroundColor = backgroundColor ?? ColorScheme.of(context).surfaceContainer;
     final localColor = color ?? Theme.of(context).textTheme.bodySmall?.color ?? Colors.white;
     final BaseItemDto? localArtist;
     if (artist != null && ref.watch(finampSettingsProvider.showArtistChipImage)) {
@@ -114,7 +114,7 @@ class _ArtistChipContent extends StatelessWidget {
         height: _height,
         child: Material(
           color: backgroundColor,
-          borderRadius: _borderRadius,
+          shape: RoundedRectangleBorder(side: BorderSide(color: ColorScheme.of(context).outline)),
           child: InkWell(
             // We shouldn't click through to artists if not passed one
             onTap: !isArtist ? null : () => Navigator.of(context).pushNamed(ArtistScreen.routeName, arguments: item),

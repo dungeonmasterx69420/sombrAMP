@@ -627,22 +627,11 @@ class TrackListItem extends ConsumerWidget {
         ? PlayerScreenTheme(
             themeTransitionDuration: const Duration(milliseconds: 500),
             themeOverride: (imageTheme) {
+              // System S: what's playing is live, so its title glows in the phosphor (secondary).
               return imageTheme.copyWith(
-                colorScheme: imageTheme.colorScheme.copyWith(
-                  surfaceContainer: imageTheme.colorScheme.primary.withValues(
-                    alpha: imageTheme.brightness == Brightness.dark ? 0.35 : 0.3,
-                  ),
-                ),
+                colorScheme: imageTheme.colorScheme.copyWith(surfaceContainer: imageTheme.colorScheme.surfaceBright),
                 textTheme: imageTheme.textTheme.copyWith(
-                  bodyLarge: imageTheme.textTheme.bodyLarge?.copyWith(
-                    color: Color.alphaBlend(
-                      (imageTheme.colorScheme.secondary.withValues(
-                        alpha: imageTheme.brightness == Brightness.light ? 0.5 : 0.1,
-                      )),
-                      imageTheme.textTheme.bodyLarge?.color ??
-                          (imageTheme.brightness == Brightness.light ? Colors.black : Colors.white),
-                    ),
-                  ),
+                  bodyLarge: imageTheme.textTheme.bodyLarge?.copyWith(color: imageTheme.colorScheme.secondary),
                 ),
               );
             },

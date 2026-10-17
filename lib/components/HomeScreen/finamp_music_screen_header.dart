@@ -20,11 +20,11 @@ import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/music_providers.dart';
 import 'package:finamp/utils/platform_helper.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../extensions/localizations.dart';
 import '../../menus/home_section_menu.dart';
@@ -218,19 +218,13 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                   Expanded(
                     child: GestureDetector(
                       onTap: openMenu,
-                      child: FutureBuilder(
-                        future: PackageInfo.fromPlatform(),
-                        builder: (context, asyncSnapshot) {
-                          final appName = asyncSnapshot.data?.appName ?? AppLocalizations.of(context)!.finamp;
-                          return Text(
-                            singleTabConfig?.getTitle(context.l10n) ??
-                                finampUserHelper.currentUser?.currentView?.name ??
-                                appName,
-                            style: TextTheme.of(context).titleLarge,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        },
+                      child: Text(
+                        singleTabConfig?.getTitle(context.l10n) ??
+                            finampUserHelper.currentUser?.currentView?.name ??
+                            Sombra.productName,
+                        style: TextTheme.of(context).titleLarge,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),

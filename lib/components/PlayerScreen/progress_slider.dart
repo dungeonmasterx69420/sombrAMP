@@ -7,6 +7,7 @@ import 'package:finamp/services/progress_state_stream.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:finamp/sombra/system_s.dart';
 
 import '../../services/music_player_background_task.dart';
 
@@ -203,6 +204,8 @@ class __PlaybackProgressSliderState extends ConsumerState<_PlaybackProgressSlide
       data: widget.allowSeeking
           // ? _sliderThemeData.copyWith(
           ? SliderTheme.of(context).copyWith(
+              // Playback is live, so the elapsed part glows in the phosphor.
+              activeTrackColor: SystemSTheme.of(context).phosphor,
               inactiveTrackColor: IconTheme.of(context).color!.withValues(alpha: 0.35),
               secondaryActiveTrackColor: IconTheme.of(context).color!.withValues(alpha: 0.6),
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
@@ -210,6 +213,7 @@ class __PlaybackProgressSliderState extends ConsumerState<_PlaybackProgressSlide
           // )
           // : _sliderThemeData.copyWith(
           : SliderTheme.of(context).copyWith(
+              activeTrackColor: SystemSTheme.of(context).phosphor,
               inactiveTrackColor: IconTheme.of(context).color!.withValues(alpha: 0.35),
               secondaryActiveTrackColor: IconTheme.of(context).color!.withValues(alpha: 0.6),
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 0.1),

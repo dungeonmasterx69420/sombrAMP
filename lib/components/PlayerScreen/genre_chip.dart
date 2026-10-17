@@ -18,7 +18,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../models/jellyfin_models.dart';
 
-final _borderRadius = BorderRadius.circular(4);
+// System S tags are square.
+const _borderRadius = BorderRadius.zero;
 
 class GenreIconAndText extends StatelessWidget {
   const GenreIconAndText({super.key, required this.parent, this.sortConfig, this.sortConfigController});
@@ -224,8 +225,8 @@ class _GenreChipContent extends ConsumerWidget {
       excludeSemantics: true,
       container: true,
       child: Material(
-        color: backgroundColor ?? Colors.white.withValues(alpha: 0.1),
-        borderRadius: _borderRadius,
+        color: backgroundColor ?? ColorScheme.of(context).surfaceContainer,
+        shape: RoundedRectangleBorder(side: BorderSide(color: ColorScheme.of(context).outline)),
         child: InkWell(
           borderRadius: _borderRadius,
           onTap: () => _handleGenreTap(context, ref),

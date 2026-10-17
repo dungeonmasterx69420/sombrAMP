@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:finamp/components/HomeScreen/finamp_music_screen_header.dart';
@@ -17,12 +16,11 @@ import 'package:finamp/services/downloads_service.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/server_info_provider.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../extensions/localizations.dart';
 
@@ -71,10 +69,7 @@ class MusicScreenDrawer extends ConsumerWidget {
                                   : null,
                             ),
                             SizedBox(height: 8),
-                            Text(
-                              ref.watch(packageNameProvider).valueOrNull ?? AppLocalizations.of(context)!.finamp,
-                              style: const TextStyle(fontSize: 20),
-                            ),
+                            Text(Sombra.productName, style: const TextStyle(fontSize: 20)),
                             if (settings?.isOffline ?? false)
                               Text.rich(
                                 TextSpan(
@@ -230,13 +225,5 @@ class MusicScreenDrawer extends ConsumerWidget {
     );
   }
 }
-
-final packageNameProvider = FutureProvider((Ref ref) async {
-  final info = await PackageInfo.fromPlatform();
-  if (Platform.isLinux) {
-    return info.appName.capitalize;
-  }
-  return info.appName;
-});
 
 enum ConnectionStateInfo { syncing, downloading, deleting, connectedLocal, syncingLocal, downloadingLocal, other }

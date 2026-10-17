@@ -1112,11 +1112,11 @@ class ErrorScreen extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: "\n\n${error.toString()}",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.bold,
                         fontFamily: "monospace",
-                        color: Colors.red,
+                        color: Theme.of(context).colorScheme.error,
                       ),
                     ),
                     if (kDebugMode)

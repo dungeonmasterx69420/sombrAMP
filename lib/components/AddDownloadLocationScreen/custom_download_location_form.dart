@@ -124,7 +124,7 @@ class _CustomDownloadLocationFormState extends State<CustomDownloadLocationForm>
             Text(
               AppLocalizations.of(context)!.customLocationsBuggy,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.red),
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
         ],
       ),

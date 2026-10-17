@@ -560,13 +560,29 @@
     "system": "Follow system",
     "light": "Light",
     "dark": "Dark",
-    "accentColor": "Accent Color",
+    "accentColor": "Phosphor",
     "@accentColor": {
         "description": "Title of the accent color setting"
     },
-    "accentColorTitle": "Pick an Accent Color",
+    "accentColorTitle": "Phosphor",
     "@accentColorTitle": {
         "description": "Title for the accent color picker sheet"
+    },
+    "phosphorAmber": "Amber",
+    "@phosphorAmber": {
+        "description": "Name of the amber phosphor colour, one of the sombra System S accent colours."
+    },
+    "phosphorGreen": "Green",
+    "@phosphorGreen": {
+        "description": "Name of the green phosphor colour, one of the sombra System S accent colours."
+    },
+    "phosphorCyan": "Cyan",
+    "@phosphorCyan": {
+        "description": "Name of the cyan phosphor colour, one of the sombra System S accent colours."
+    },
+    "phosphorPink": "Pink",
+    "@phosphorPink": {
+        "description": "Name of the pink phosphor colour, one of the sombra System S accent colours."
     },
     "systemAccentColor": "Use System Accent Color",
     "@systemAccentColor": {
