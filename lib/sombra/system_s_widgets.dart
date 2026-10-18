@@ -7,7 +7,10 @@ abstract final class Sombra {
   static const productName = 'sombrAMP';
   static const website = 'https://sombra.wtf';
   static const domain = 'sombra.wtf';
-  static const sourceCode = 'https://github.com/dungeonmasterx69420/sombrAMP';
+
+  /// The GitHub repository sombrAMP is built and released from.
+  static const repository = 'dungeonmasterx69420/sombrAMP';
+  static const sourceCode = 'https://github.com/$repository';
 
   /// The project sombrAMP is built on.
   static const finampSourceCode = 'https://github.com/finamp-app/finamp';

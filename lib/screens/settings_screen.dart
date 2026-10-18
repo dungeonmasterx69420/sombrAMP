@@ -1,4 +1,5 @@
 import 'package:finamp/components/SettingsScreen/logout_list_tile.dart';
+import 'package:finamp/components/app_update.dart';
 import 'package:finamp/components/finamp_app_bar_back_button.dart';
 import 'package:finamp/components/finamp_icon.dart';
 import 'package:finamp/l10n/app_localizations.dart';
@@ -18,6 +19,7 @@ import 'package:finamp/screens/quick_settings_screen.dart';
 import 'package:finamp/screens/transcoding_settings_screen.dart';
 import 'package:finamp/screens/view_selector.dart';
 import 'package:finamp/screens/volume_normalization_settings_screen.dart';
+import 'package:finamp/services/app_update_service.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
@@ -203,6 +205,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             onTap: () => Navigator.of(context).pushNamed(LanguageSelectionScreen.routeName),
           ),
+          if (AppUpdateService.isSupported)
+            ListTile(
+              leading: const Icon(TablerIcons.download),
+              title: Text(AppLocalizations.of(context)!.appUpdates),
+              subtitle: FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) => Text(
+                  snapshot.data == null
+                      ? ""
+                      : AppLocalizations.of(
+                          context,
+                        )!.appUpdatesSubtitle(snapshot.data!.version, snapshot.data!.buildNumber),
+                ),
+              ),
+              onTap: () => checkForAppUpdate(),
+            ),
           Divider(),
           ListTile(
             leading: Icon(TablerIcons.access_point),

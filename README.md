@@ -45,7 +45,11 @@ attaches them to the run on the repository's Actions tab:
   (password `finamp`), so Windows only installs it after that certificate is added to *Local Machine → Trusted
   People*.
 
-Signing with your own keys is optional; the repository secrets it reads are listed at the top of the workflow.
+Android builds of the main branch are also published on the [Releases](https://github.com/dungeonmasterx69420/sombrAMP/releases)
+page, which needs no GitHub account. Once one is installed, the app offers newer releases itself, on startup and in
+Settings → Check for updates: it downloads them and opens Android's installer, which updates the app in place.
+Releases need the `ANDROID_KEYSTORE_*` repository secrets, so that every build is signed with the same key; without
+them, each build gets a throwaway key and nothing is released. The secrets the workflow reads are listed at its top.
 
 ## The design
 

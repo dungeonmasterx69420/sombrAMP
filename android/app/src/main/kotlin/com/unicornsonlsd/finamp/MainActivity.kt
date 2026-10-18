@@ -11,6 +11,7 @@ import android.system.ErrnoException
 import android.system.Os
 import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import androidx.mediarouter.app.SystemOutputSwitcherDialogController
@@ -42,6 +43,9 @@ class MainActivity : AudioServiceActivity() {
 
         private const val SET_NATIVE_THEME_CHANNEL = "com.unicornsonlsd.finamp/set_native_theme"
         private const val SET_NATIVE_THEME_CHANNEL_LOG_TAG = "setNativeThemeChannel"
+
+        private const val APP_UPDATES_CHANNEL = "com.unicornsonlsd.finamp/app_updates"
+        private const val APP_UPDATES_CHANNEL_LOG_TAG = "AppUpdatesChannel"
     }
 
     private lateinit var mediaRouter: MediaRouter
@@ -190,6 +194,31 @@ class MainActivity : AudioServiceActivity() {
         }
         MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
+            APP_UPDATES_CHANNEL,
+        ).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "installApk" -> {
+                    val path = call.argument<String>("path")
+                    if (path == null) {
+                        result.error("INVALID_ARGS", "path is required", null)
+                        return@setMethodCallHandler
+                    }
+                    try {
+                        installApk(File(path))
+                        result.success(null)
+                    } catch (e: Exception) {
+                        Log.e(APP_UPDATES_CHANNEL_LOG_TAG, "Failed to open the installer", e)
+                        result.error("INSTALL_ERROR", e.message, null)
+                    }
+                }
+                else -> {
+                    Log.e(APP_UPDATES_CHANNEL_LOG_TAG, "Method not found: '${call.method}'")
+                    result.notImplemented()
+                }
+            }
+        }
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
             OUTPUT_SWITCHER_CHANNEL,
         ).setMethodCallHandler { call, result ->
             Log.d(OUTPUT_SWITCHER_CHANNEL_LOG_TAG, "Calling method: '${call.method}'")
@@ -253,6 +282,19 @@ class MainActivity : AudioServiceActivity() {
                 }
             }
         }
+    }
+
+    /**
+     * Opens Android's installer for a downloaded update. The APK is shared through [UpdateFileProvider], and Android
+     * asks to allow installing apps from sombrAMP first, if that hasn't been allowed yet.
+     */
+    private fun installApk(apk: File) {
+        val uri = FileProvider.getUriForFile(this, "$packageName.updates", apk)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.android.package-archive")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(intent)
     }
 
     private fun installClientCertificate(bytes: ByteArray, password: String) {
