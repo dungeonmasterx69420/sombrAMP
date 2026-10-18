@@ -68,7 +68,8 @@ The same APK runs on Android TV and Google TV, where it's listed on the TV's hom
 
 On a TV, the remote drives everything:
 
-- The D-pad moves the focus, which is edged or tinted in the phosphor, and select opens or plays what has it.
+- The D-pad moves the focus, which is ringed in the phosphor, and select opens or plays what has it. Up and down
+  also leave text fields.
 - Holding select, or the menu key if the remote has one, does what a long press does on a phone: the menu of an album,
   artist or track, the other action of a button.
 - On the main screen, back takes the focus to the now playing bar, with play/pause and the player screen behind it;

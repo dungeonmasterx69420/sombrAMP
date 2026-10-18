@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:finamp/sombra/system_s.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 /// What a long press does, for a remote: holding select, or pressing the menu key.
@@ -45,6 +48,8 @@ class _LongPressAction extends Action<LongPressIntent> {
 ///
 /// - Navigation is [NavigationMode.directional]: sliders only take left and right, so up and down always move the
 ///   focus, and controls keep the focus when they're disabled.
+/// - What has the focus is ringed in the phosphor.
+/// - Up and down leave one-line text fields, instead of moving their cursor.
 /// - Select activates the focused widget when it's released, and holding it does what a long press does
 ///   ([LongPressIntent]). The menu key does that too. Without this, holding select would activate the widget again
 ///   with every key repeat.
@@ -89,6 +94,16 @@ class _TelevisionRemoteState extends State<TelevisionRemote> {
     if (key == LogicalKeyboardKey.contextMenu) {
       return event is KeyDownEvent && _longPress() ? KeyEventResult.handled : KeyEventResult.ignored;
     }
+    if (key == LogicalKeyboardKey.arrowUp || key == LogicalKeyboardKey.arrowDown) {
+      // A one-line text field takes up and down to move its cursor, which would leave a remote no way out of it.
+      final focused = FocusManager.instance.primaryFocus;
+      final editable = focused?.context?.findAncestorStateOfType<EditableTextState>();
+      if (focused == null || editable == null || editable.widget.maxLines != 1) return KeyEventResult.ignored;
+      if (event is! KeyUpEvent) {
+        focused.focusInDirection(key == LogicalKeyboardKey.arrowUp ? TraversalDirection.up : TraversalDirection.down);
+      }
+      return KeyEventResult.handled;
+    }
     if (!_selectKeys.contains(key)) return KeyEventResult.ignored;
 
     switch (event) {
@@ -123,7 +138,93 @@ class _TelevisionRemoteState extends State<TelevisionRemote> {
   Widget build(BuildContext context) {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(navigationMode: NavigationMode.directional),
-      child: Focus(canRequestFocus: false, skipTraversal: true, onKeyEvent: _onKeyEvent, child: widget.child),
+      child: Focus(
+        canRequestFocus: false,
+        skipTraversal: true,
+        onKeyEvent: _onKeyEvent,
+        child: _FocusRing(child: widget.child),
+      ),
     );
   }
+}
+
+/// Rings whatever has the focus in the phosphor, over everything else. Widgets show their focus themselves too, but
+/// some only faintly, and a TV is watched from across the room.
+class _FocusRing extends StatefulWidget {
+  const _FocusRing({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_FocusRing> createState() => _FocusRingState();
+}
+
+class _FocusRingState extends State<_FocusRing> {
+  final _rect = ValueNotifier<Rect?>(null);
+  bool _disposed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // After every frame the app draws, so the ring follows the focus as it scrolls and moves, without drawing frames
+    // of its own. Persistent callbacks can't be removed, so this one stops doing anything once disposed.
+    SchedulerBinding.instance.addPersistentFrameCallback((_) {
+      if (!_disposed) _update();
+    });
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _rect.dispose();
+    super.dispose();
+  }
+
+  void _update() {
+    final node = FocusManager.instance.primaryFocus;
+    final focused = node is FocusScopeNode || FocusManager.instance.highlightMode == FocusHighlightMode.touch
+        ? null
+        : node?.context?.findRenderObject();
+    final ring = context.findRenderObject();
+    Rect? rect;
+    if (focused is RenderBox && focused.attached && focused.hasSize && ring is RenderBox && ring.hasSize) {
+      rect = MatrixUtils.transformRect(
+        focused.getTransformTo(null),
+        Offset.zero & focused.size,
+      ).shift(-ring.localToGlobal(Offset.zero));
+    }
+    _rect.value = rect;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      foregroundPainter: _FocusRingPainter(_rect, SystemSTheme.of(context).phosphorInk),
+      child: RepaintBoundary(child: widget.child),
+    );
+  }
+}
+
+class _FocusRingPainter extends CustomPainter {
+  _FocusRingPainter(this.rect, this.color) : super(repaint: rect);
+
+  final ValueListenable<Rect?> rect;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = this.rect.value;
+    if (rect == null) return;
+    // Like the ring of a default button: a 1px gap, then 2px.
+    canvas.drawRect(
+      rect.inflate(2),
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_FocusRingPainter oldDelegate) => oldDelegate.rect != rect || oldDelegate.color != color;
 }

@@ -527,7 +527,8 @@ class NowPlayingBar extends ConsumerWidget {
                       !usingPlayerSplitScreen) {
                     return buildLoadingQueueBar(ref, queueService.retryQueueLoad);
                   } else if (snapshot.hasData && snapshot.data!.currentTrack != null && !usingPlayerSplitScreen) {
-                    return buildNowPlayingBar(ref, snapshot.data!.currentTrack!);
+                    final bar = buildNowPlayingBar(ref, snapshot.data!.currentTrack!);
+                    return isTelevision ? _RemoteFocusScope(child: bar) : bar;
                   } else {
                     return const SizedBox.shrink();
                   }
@@ -539,4 +540,34 @@ class NowPlayingBar extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Keeps a remote's left and right among the bar's buttons; up leaves it. The list above reaches down behind the bar,
+/// past what's visible, so moving sideways could otherwise take the focus to items that can't be seen.
+class _RemoteFocusScope extends StatefulWidget {
+  const _RemoteFocusScope({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_RemoteFocusScope> createState() => _RemoteFocusScopeState();
+}
+
+class _RemoteFocusScopeState extends State<_RemoteFocusScope> {
+  final _node = FocusScopeNode(
+    debugLabel: "NowPlayingBar",
+    // The focus goes to the buttons, not the bar as a whole
+    skipTraversal: true,
+    traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+    directionalTraversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+  );
+
+  @override
+  void dispose() {
+    _node.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => FocusScope(node: _node, child: widget.child);
 }

@@ -84,6 +84,31 @@ void main() {
       expect(longPresses, 0);
     });
 
+    testWidgets('up and down leave a one-line text field', (tester) async {
+      final username = FocusNode();
+      final password = FocusNode();
+      addTearDown(username.dispose);
+      addTearDown(password.dispose);
+      await tester.pumpWidget(
+        remote(
+          Column(
+            children: [
+              TextField(focusNode: username, autofocus: true),
+              TextField(focusNode: password),
+            ],
+          ),
+        ),
+      );
+      await tester.pump();
+      expect(username.hasFocus, isTrue);
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await tester.pump();
+      expect(password.hasFocus, isTrue);
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+      await tester.pump();
+      expect(username.hasFocus, isTrue);
+    });
+
     testWidgets('navigation is directional', (tester) async {
       late NavigationMode mode;
       await tester.pumpWidget(
