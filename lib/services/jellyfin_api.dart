@@ -587,6 +587,26 @@ abstract class JellyfinApi extends ChopperService {
   @GET(path: "/System/Endpoint", optionalBody: true)
   Future<Response<dynamic>> pingServer();
 
+  /// Gets a user's display preferences for a client, whose CustomPrefs can store any strings.
+  @FactoryConverter(request: JsonConverter.requestFactory, response: JsonConverter.responseFactory<dynamic, dynamic>)
+  @GET(path: "/DisplayPreferences/{displayPreferencesId}")
+  Future<dynamic> getDisplayPreferences({
+    @Path() required String displayPreferencesId,
+    @Query() required String userId,
+    // Not named client, which is the ChopperService's
+    @Query("client") required String clientName,
+  });
+
+  /// Replaces a user's display preferences for a client.
+  @FactoryConverter(request: JsonConverter.requestFactory, response: JsonConverter.responseFactory<dynamic, dynamic>)
+  @POST(path: "/DisplayPreferences/{displayPreferencesId}")
+  Future<Response<dynamic>> updateDisplayPreferences({
+    @Path() required String displayPreferencesId,
+    @Query() required String userId,
+    @Query("client") required String clientName,
+    @Body() required Map<String, dynamic> displayPreferences,
+  });
+
   static JellyfinApi create({required bool inForeground, required bool verboseLogging}) {
     // Body logging can be very excessive, so we do not perform it by default.  If in debug mode or configured for verbose
     // logging, body log foreground requests but keep disabled for verbose getItems calls in background.  If using verbose

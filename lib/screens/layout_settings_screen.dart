@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -10,10 +11,13 @@ import 'package:finamp/screens/customization_settings_screen.dart';
 import 'package:finamp/screens/genre_settings_screen.dart';
 import 'package:finamp/screens/lyrics_settings_screen.dart';
 import 'package:finamp/screens/player_settings_screen.dart';
+import 'package:finamp/services/layout_sync_service.dart';
+import 'package:finamp/services/subsonic/subsonic_layout_playlist.dart';
 import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:get_it/get_it.dart';
 
 import '../components/LayoutSettingsScreen/accent_color_selector.dart';
 import '../components/LayoutSettingsScreen/amoled_theme.dart';
@@ -48,6 +52,8 @@ class _LayoutSettingsScreenState extends ConsumerState<LayoutSettingsScreen> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 200.0),
         children: [
+          const SyncLayoutWithAccountSwitch(),
+          const Divider(),
           ListTile(
             leading: const Icon(TablerIcons.sparkles),
             title: Text(AppLocalizations.of(context)!.customizationSettingsTitle),
@@ -107,6 +113,25 @@ class _LayoutSettingsScreenState extends ConsumerState<LayoutSettingsScreen> {
           const ShowProgressOnNowPlayingBarToggle(),
         ],
       ),
+    );
+  }
+}
+
+class SyncLayoutWithAccountSwitch extends ConsumerWidget {
+  const SyncLayoutWithAccountSwitch({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SwitchListTile.adaptive(
+      title: Text(AppLocalizations.of(context)!.syncLayoutWithAccountTitle),
+      subtitle: Text(AppLocalizations.of(context)!.syncLayoutWithAccountSubtitle(SubsonicLayoutPlaylist.name)),
+      value: ref.watch(finampSettingsProvider.syncLayoutWithAccount),
+      onChanged: (value) {
+        FinampSetters.setSyncLayoutWithAccount(value);
+        if (value) {
+          unawaited(GetIt.instance<LayoutSyncService>().sync(interactive: true));
+        }
+      },
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:background_downloader/background_downloader.dart';
 import 'package:collection/collection.dart';
 import 'package:finamp/components/Buttons/cta_medium.dart';
 import 'package:finamp/components/app_update.dart';
+import 'package:finamp/components/layout_sync_prompt.dart';
 import 'package:finamp/gen/assets.gen.dart';
 import 'package:finamp/hive_registrar.g.dart';
 import 'package:finamp/l10n/app_localizations.dart';
@@ -51,6 +52,7 @@ import 'package:finamp/services/ios_helpers.dart';
 import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/item_helper.dart';
 import 'package:finamp/services/keep_screen_on_helper.dart';
+import 'package:finamp/services/layout_sync_service.dart';
 import 'package:finamp/services/music_providers.dart';
 import 'package:finamp/services/network_manager.dart';
 import 'package:finamp/services/offline_listen_helper.dart';
@@ -116,6 +118,7 @@ import 'screens/transcoding_settings_screen.dart';
 import 'screens/view_selector.dart';
 import 'screens/volume_normalization_settings_screen.dart';
 import 'services/audio_service_helper.dart';
+import 'services/jellyfin_api.dart' show getDeviceInfo;
 import 'services/jellyfin_api_helper.dart';
 import 'services/music_player_background_task.dart';
 import 'setup_logging.dart';
@@ -156,6 +159,9 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
     _migrateFeatureChips();
     _migrateDeviceId();
     await _migrateThemeModeLocale();
+    if (_settingsCreated) {
+      await LayoutSyncService.rememberPristineLayout(LayoutSyncState(Hive.box(LayoutSyncState.boxName)));
+    }
     _mainLog.info("Completed applicable migrations");
     await _trustAndroidUserCerts();
     await ClientCertificateInstaller().installClientCertificate();
@@ -164,6 +170,8 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
     _mainLog.info("Setup user helper");
     await _setupJellyfinApiData();
     _mainLog.info("setup jellyfin api");
+    _setupLayoutSync();
+    _mainLog.info("Setup layout sync");
     _setupOfflineListenLogHelper();
     _mainLog.info("Setup offline listen tracking");
     await _setupDownloadsHelper();
@@ -337,12 +345,14 @@ Future<void> setupHive() async {
     Hive.openBox<FinampStorableQueueInfo>("Queues", path: dir.path),
     Hive.openBox<OfflineListen>("OfflineListens", path: dir.path),
     Hive.openBox<RawThemeResult>("CachedThemes", path: dir.path),
+    Hive.openBox<String>(LayoutSyncState.boxName, path: dir.path),
   ]);
 
   // If the settings box is empty, we add an initial settings value here.
   Box<FinampSettings> finampSettingsBox = Hive.box("FinampSettings");
   if (finampSettingsBox.isEmpty) {
     await finampSettingsBox.put("FinampSettings", await FinampSettings.create());
+    _settingsCreated = true;
   }
 
   final compactFile = File(path_helper.join(dir.path, "$isarDatabaseName.isar.compact"));
@@ -357,6 +367,33 @@ Future<void> setupHive() async {
     relaxedDurability: true,
   );
   GetIt.instance.registerSingleton(isar);
+}
+
+/// Whether this is a new install, whose settings were just created
+bool _settingsCreated = false;
+
+void _setupLayoutSync() {
+  final layoutSync = LayoutSyncService(
+    store: _AccountLayoutStore(),
+    state: LayoutSyncState(Hive.box(LayoutSyncState.boxName)),
+    userKey: () {
+      final user = GetIt.instance<FinampUserHelper>().currentUser;
+      return user == null ? null : LayoutSyncService.keyFor(user);
+    },
+    askWhichLayout: askWhichLayout,
+    deviceName: () async => (await getDeviceInfo(deviceId: FinampSettingsHelper.finampSettings.deviceId)).name,
+  );
+  GetIt.instance.registerSingleton(layoutSync);
+  layoutSync.start();
+}
+
+/// Stores the layout with the current user's account on their server
+class _AccountLayoutStore implements LayoutStore {
+  @override
+  Future<String?> load() => GetIt.instance<JellyfinApiHelper>().loadAccountLayout();
+
+  @override
+  Future<void> save(String layout) => GetIt.instance<JellyfinApiHelper>().saveAccountLayout(layout);
 }
 
 Future<void> _setupProviders() async {

@@ -9,6 +9,7 @@ import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_logs_helper.dart';
 import 'package:finamp/services/http_aggregate_logging_interceptor.dart';
+import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -820,6 +821,50 @@ class JellyfinApiHelper {
 
     return QueryResult_BaseItemDto.fromJson(response as Map<String, dynamic>).items!;
   }
+
+  /// On Jellyfin, the layout saved with the account is a custom display preference of this client.  Subsonic servers
+  /// keep it in a playlist instead (see [SubsonicJellyfinApi.loadLayout]).
+  static const _layoutPreferencesId = "layout";
+  static const _layoutPreferenceKey = "layout";
+
+  /// The layout saved with the current user's account, or null if none was saved.
+  Future<String?> loadAccountLayout() async {
+    if (isSubsonic) {
+      return _subsonicApi.loadLayout();
+    }
+    final preferences = await _getLayoutPreferences();
+    return (preferences["CustomPrefs"] as Map<String, dynamic>?)?[_layoutPreferenceKey] as String?;
+  }
+
+  /// Saves [layout] with the current user's account.
+  Future<void> saveAccountLayout(String layout) async {
+    if (isSubsonic) {
+      return _subsonicApi.saveLayout(layout);
+    }
+    // Jellyfin replaces all the display preferences, so the others are sent back as they were
+    final preferences = await _getLayoutPreferences();
+    preferences["CustomPrefs"] = {
+      ...?preferences["CustomPrefs"] as Map<String, dynamic>?,
+      _layoutPreferenceKey: layout,
+    };
+    final response = await jellyfinApi.updateDisplayPreferences(
+      displayPreferencesId: _layoutPreferencesId,
+      userId: _finampUserHelper.currentUser!.id,
+      clientName: Sombra.productName,
+      displayPreferences: preferences,
+    );
+    if (!response.isSuccessful) {
+      throw response as Object;
+    }
+  }
+
+  Future<Map<String, dynamic>> _getLayoutPreferences() async =>
+      await jellyfinApi.getDisplayPreferences(
+            displayPreferencesId: _layoutPreferencesId,
+            userId: _finampUserHelper.currentUser!.id,
+            clientName: Sombra.productName,
+          )
+          as Map<String, dynamic>;
 
   static FutureProvider<List<BaseItemDto>> viewsProvider = FutureProvider(
     (Ref ref) => GetIt.instance<JellyfinApiHelper>().getViews(),

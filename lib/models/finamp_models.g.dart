@@ -464,6 +464,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
                 ContentType.genres: ContentViewType.list,
               }
             : (fields[160] as Map).cast<ContentType, ContentViewType>(),
+        syncLayoutWithAccount: fields[162] == null ? true : fields[162] as bool,
       )
       ..sortBy = fields[7] as SortBy?
       ..sortOrder = fields[8] as SortOrder?
@@ -487,7 +488,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
   @override
   void write(BinaryWriter writer, FinampSettings obj) {
     writer
-      ..writeByte(150)
+      ..writeByte(151)
       ..writeByte(0)
       ..write(obj.isOffline)
       ..writeByte(1)
@@ -787,7 +788,9 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
       ..writeByte(160)
       ..write(obj.perTabContentViewType)
       ..writeByte(161)
-      ..write(obj.lookUpLyricsOnline);
+      ..write(obj.lookUpLyricsOnline)
+      ..writeByte(162)
+      ..write(obj.syncLayoutWithAccount);
   }
 
   @override

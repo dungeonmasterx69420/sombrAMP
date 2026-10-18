@@ -8,6 +8,7 @@ import 'package:logging/logging.dart';
 
 import 'subsonic_api.dart';
 import 'subsonic_ids.dart';
+import 'subsonic_layout_playlist.dart';
 import 'subsonic_mapper.dart';
 
 /// The parameters of a Jellyfin item query (Jellyfin's /Items endpoint) that Finamp uses.
@@ -516,6 +517,7 @@ class _Request {
   Future<List<BaseItemDto>> playlists() async {
     final playlists = await _library._playlists.get("", () => _api.getPlaylists(server));
     return playlists
+        .whereNot(SubsonicLayoutPlaylist.keepsLayout)
         .map((playlist) => SubsonicMapper.playlist(playlist, username: server.credentials.username))
         .toList();
   }
