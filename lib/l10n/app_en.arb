@@ -3819,5 +3819,73 @@
     "quickSettingsLayoutLink": "All layout & theme settings",
     "quickSettingsAllSettingsLink": "All Settings",
     "quickSettingsNetworkLink": "Configure the local address for your server",
-  "loginFlowLocalNetworkServersNoResults": "No servers detected yet - you may need to manually enter the server address."
+  "loginFlowLocalNetworkServersNoResults": "No servers detected yet - you may need to manually enter the server address.",
+    "appUpdates": "Check for updates",
+    "@appUpdates": {
+        "description": "Title of the settings entry that checks GitHub for a newer build of the Android app."
+    },
+    "appUpdatesSubtitle": "Version {version}, build {buildNumber}",
+    "@appUpdatesSubtitle": {
+        "description": "Subtitle of the settings entry that checks for updates, showing the installed version.",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.1"
+            },
+            "buildNumber": {
+                "type": "String",
+                "example": "1042"
+            }
+        }
+    },
+    "appUpdateUpToDate": "{productName} is up to date",
+    "@appUpdateUpToDate": {
+        "description": "Message shown after checking for updates when the newest build is installed.",
+        "placeholders": {
+            "productName": {
+                "type": "String",
+                "example": "sombrAMP"
+            }
+        }
+    },
+    "appUpdateAvailable": "A new version of {productName} is available",
+    "@appUpdateAvailable": {
+        "description": "Message shown on startup when a newer build of the app is available.",
+        "placeholders": {
+            "productName": {
+                "type": "String",
+                "example": "sombrAMP"
+            }
+        }
+    },
+    "appUpdateAction": "Update",
+    "@appUpdateAction": {
+        "description": "Button on the message about an available update, which shows the update."
+    },
+    "appUpdateDialogTitle": "Build {buildNumber} is available",
+    "@appUpdateDialogTitle": {
+        "description": "Title of the dialog offering an update of the app.",
+        "placeholders": {
+            "buildNumber": {
+                "type": "int",
+                "example": "1042"
+            }
+        }
+    },
+    "appUpdateNoNotes": "Install the newest build?",
+    "@appUpdateNoNotes": {
+        "description": "Text of the update dialog when the release doesn't say what changed."
+    },
+    "appUpdateDownloading": "Downloading…",
+    "@appUpdateDownloading": {
+        "description": "Shown in the update dialog while the new build is downloading."
+    },
+    "appUpdateLater": "Later",
+    "@appUpdateLater": {
+        "description": "Button closing the update dialog without updating."
+    },
+    "appUpdateInstall": "Install",
+    "@appUpdateInstall": {
+        "description": "Button in the update dialog that downloads the new build and opens Android's installer."
+    }
 }

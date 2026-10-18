@@ -2,10 +2,13 @@ name: sombrAMP builds
 
 # Release builds of sombrAMP for Android and Windows, uploaded as artifacts of each run.
 #
+# Android builds of the main branch (redesign) signed with the key from the secrets are also published as GitHub
+# releases tagged build-<versionCode>, which the app offers as updates. The five newest are kept.
+#
 # Optional repository secrets:
 #   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD
 #     sign the APK with your own key. Without them each build gets a throwaway key, so a newer build only
-#     installs over an older one after uninstalling it.
+#     installs over an older one after uninstalling it, and nothing is released.
 #   WINDOWS_MSIX_CERTIFICATE_BASE64, WINDOWS_MSIX_CERTIFICATE_PASSWORD
 #     sign the MSIX with your own certificate instead of the test certificate in windows/runner/resources.
 
@@ -28,6 +31,8 @@ jobs:
   android:
     name: Android
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to publish releases
     steps:
       - name: Clone repository
         uses: actions/checkout@v6
@@ -62,6 +67,7 @@ jobs:
             alias="$KEY_ALIAS"
             store_password="$KEYSTORE_PASSWORD"
             key_password="${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+            echo "SIGNED=true" >> "$GITHUB_ENV"
             echo "The APK is signed with the release key from the repository secrets." >> "$GITHUB_STEP_SUMMARY"
           else
             alias=sombramp
@@ -79,9 +85,14 @@ jobs:
             echo "keyPassword=$key_password"
           } > android/key.properties
 
+      # Every build gets a higher versionCode than the last, so Android installs it as an update. 1000 keeps it above
+      # the build numbers of earlier builds (pubspec.yaml's).
+      - name: Number the build
+        run: echo "BUILD_NUMBER=$((1000 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
+
       # Without --no-pub: the build's own pub step is what drops dev-only plugins (integration_test) from the
       # release plugin registrant.
-      - run: flutter build apk --release
+      - run: flutter build apk --release --build-number="$BUILD_NUMBER"
 
       - name: Name the APK
         run: mv build/app/outputs/flutter-apk/app-release.apk "sombrAMP-${GITHUB_REF_NAME//\//-}-android.apk"
@@ -91,6 +102,29 @@ jobs:
           name: sombrAMP-android
           path: sombrAMP-*-android.apk
           compression-level: 0 # an APK is already compressed
+
+      - name: Publish the release
+        if: github.ref == 'refs/heads/redesign' && env.SIGNED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          tag="build-$BUILD_NUMBER"
+          # The notes say what changed: a merged pull request's title, or the commit's subject
+          subject="$(git log -1 --format=%s)"
+          case "$subject" in
+            "Merge pull request"*) notes="$(git log -1 --format=%b)" ;;
+            *) notes="$subject" ;;
+          esac
+          cp sombrAMP-*-android.apk "sombrAMP-$tag.apk"
+          gh release create "$tag" "sombrAMP-$tag.apk" --target "$GITHUB_SHA" --title "sombrAMP build $BUILD_NUMBER" \
+            --notes "$notes" --latest
+          echo "Released as [$tag](https://github.com/$GH_REPO/releases/tag/$tag)." >> "$GITHUB_STEP_SUMMARY"
+
+          # Keep the five newest builds
+          gh release list --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("build-"))] | sort_by(.createdAt) | reverse | .[5:][] | .tagName' |
+            while read -r old; do gh release delete "$old" --cleanup-tag --yes; done
 
   windows:
     name: Windows

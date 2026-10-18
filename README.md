@@ -45,7 +45,11 @@ attaches them to the run on the repository's Actions tab:
   (password `finamp`), so Windows only installs it after that certificate is added to *Local Machine → Trusted
   People*.
 
-Signing with your own keys is optional; the repository secrets it reads are listed at the top of the workflow.
+Android builds of the main branch are also published on the [Releases](https://github.com/dungeonmasterx69420/sombrAMP/releases)
+page, which needs no GitHub account. Once one is installed, the app offers newer releases itself, on startup and in
+Settings → Check for updates: it downloads them and opens Android's installer, which updates the app in place.
+Releases need the `ANDROID_KEYSTORE_*` repository secrets, so that every build is signed with the same key; without
+them, each build gets a throwaway key and nothing is released. The secrets the workflow reads are listed at its top.
 
 ## The design
 
@@ -53,14 +57,14 @@ Everything comes from System S; nothing in the look is new to this app.
 
 - **Colour.** Ink, pane and desk greys for everything, plus one phosphor (amber by default; green, cyan and pink
   in Settings → Layout & Theme → Phosphor) for what is live: playback progress, the playing track, downloads and
-  focus. Album art no longer tints the interface.
+  focus. The names under album covers are drawn in it too. Album art no longer tints the interface.
 - **Type.** Pixelify Sans for titles, buttons and labels; IBM Plex Mono for body text and figures. Both are
   bundled under the SIL Open Font License (`assets/fonts/`).
 - **Covers.** Artwork keeps its full colour, framed square on a pane with a 1px ink edge.
 - **Shapes.** 1px ink edges, square covers, buttons that invert while pressed and a ring on the default one,
   windows and dialogs with the extruded shadow, toasts and menus with a hard offset shadow.
 - **Mark.** The S mark is the in-app logo and every app icon; the sign-in flow is laid out like System S's
-  sign-in, with the sombra.wtf wordmark.
+  sign-in, with the sombra.wtf wordmark, and the music screen is titled sombra.wtf.
 
 The System S implementation lives in [`lib/sombra/`](lib/sombra): tokens and the Material theme in
 `system_s.dart`, and the marks, desk and window widgets in `system_s_widgets.dart`.

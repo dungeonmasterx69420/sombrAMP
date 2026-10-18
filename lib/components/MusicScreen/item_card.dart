@@ -8,6 +8,7 @@ import 'package:finamp/models/jellyfin_models.dart';
 import 'package:finamp/services/datetime_helper.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/generate_subtitle.dart';
+import 'package:finamp/sombra/system_s.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -120,7 +121,10 @@ class _ItemCollectionCardText extends ConsumerWidget {
               item.name ?? context.l10n.unknownName,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w500),
+              // Names under the covers are drawn in the phosphor chosen in the Layout & Theme settings.
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w500, color: SystemSTheme.of(context).phosphorInk),
               textAlign: onImage ? TextAlign.center : TextAlign.left,
             ),
             if (subtitle != null)

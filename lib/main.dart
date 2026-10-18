@@ -8,6 +8,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:collection/collection.dart';
 import 'package:finamp/components/Buttons/cta_medium.dart';
+import 'package:finamp/components/app_update.dart';
 import 'package:finamp/gen/assets.gen.dart';
 import 'package:finamp/hive_registrar.g.dart';
 import 'package:finamp/l10n/app_localizations.dart';
@@ -34,6 +35,7 @@ import 'package:finamp/screens/queue_restore_screen.dart';
 import 'package:finamp/screens/quick_settings_screen.dart';
 import 'package:finamp/services/album_image_provider.dart';
 import 'package:finamp/services/android_auto_helper.dart';
+import 'package:finamp/services/app_update_service.dart';
 import 'package:finamp/services/audio_service_smtc.dart';
 import 'package:finamp/services/carplay_helper.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
@@ -174,6 +176,8 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
     _mainLog.info("Setup KeepScreenOnHelper");
     await _setupDiscordRpc();
     _mainLog.info("Setup Discord RPC");
+    _setupAppUpdates();
+    _mainLog.info("Setup app updates");
   } catch (error, trace) {
     if (!integrationTesting) {
       Logger("ErrorApp").severe(error, null, trace);
@@ -216,6 +220,8 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
   // Integration testing will launch the widgets itself, so just return
   if (!integrationTesting) {
     runApp(const Finamp());
+    // Offer newer builds once the app has settled
+    unawaited(Future<void>.delayed(const Duration(seconds: 10), () => checkForAppUpdate(quiet: true)));
   }
 }
 
@@ -298,6 +304,10 @@ Future<void> _setupPlayOnService() async {
 
 Future<void> _setupDiscordRpc() async {
   DiscordRpc.initialize();
+}
+
+void _setupAppUpdates() {
+  GetIt.instance.registerSingleton(AppUpdateService());
 }
 
 Future<void> _setupKeepScreenOnHelper() async {
