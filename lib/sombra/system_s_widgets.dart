@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 abstract final class Sombra {
   static const productName = 'sombrAMP';
   static const website = 'https://sombra.wtf';
+  static const domain = 'sombra.wtf';
   static const sourceCode = 'https://github.com/dungeonmasterx69420/sombrAMP';
 
   /// The project sombrAMP is built on.
@@ -47,7 +48,7 @@ class SombraWordmark extends StatelessWidget {
       width: width,
       height: width * 110 / 621,
       colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-      semanticsLabel: 'sombra.wtf',
+      semanticsLabel: Sombra.domain,
     );
   }
 }

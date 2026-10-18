@@ -219,9 +219,8 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                     child: GestureDetector(
                       onTap: openMenu,
                       child: Text(
-                        singleTabConfig?.getTitle(context.l10n) ??
-                            finampUserHelper.currentUser?.currentView?.name ??
-                            Sombra.productName,
+                        // The music screen is titled sombra.wtf instead of the library's name
+                        singleTabConfig?.getTitle(context.l10n) ?? Sombra.domain,
                         style: TextTheme.of(context).titleLarge,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

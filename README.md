@@ -60,7 +60,7 @@ Everything comes from System S; nothing in the look is new to this app.
 - **Shapes.** 1px ink edges, square covers, buttons that invert while pressed and a ring on the default one,
   windows and dialogs with the extruded shadow, toasts and menus with a hard offset shadow.
 - **Mark.** The S mark is the in-app logo and every app icon; the sign-in flow is laid out like System S's
-  sign-in, with the sombra.wtf wordmark.
+  sign-in, with the sombra.wtf wordmark, and the music screen is titled sombra.wtf.
 
 The System S implementation lives in [`lib/sombra/`](lib/sombra): tokens and the Material theme in
 `system_s.dart`, and the marks, desk and window widgets in `system_s_widgets.dart`.
