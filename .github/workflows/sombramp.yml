@@ -5,8 +5,9 @@ name: sombrAMP builds
 # The iOS build is an unsigned IPA, for sideloading: tools like AltStore, SideStore or Sideloadly sign it with the
 # installer's own Apple ID.
 #
-# Android builds of the main branch (redesign) signed with the key from the secrets are also published as GitHub
-# releases tagged build-<versionCode>, which the app offers as updates. The five newest are kept.
+# Builds of the main branch (redesign) whose APK is signed with the key from the secrets are also published as GitHub
+# releases tagged build-<versionCode>, with the APK, the IPA, the Windows folder (zipped) and the MSIX. The Android
+# app offers them as updates. The five newest are kept.
 #
 # Optional repository secrets:
 #   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD
@@ -34,8 +35,8 @@ jobs:
   android:
     name: Android
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # to publish releases
+    outputs:
+      signed: ${{ steps.signing.outputs.signed }}
     steps:
       - name: Clone repository
         uses: actions/checkout@v6
@@ -58,6 +59,7 @@ jobs:
       - run: flutter pub get
 
       - name: Set up signing
+        id: signing
         env:
           KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -70,7 +72,7 @@ jobs:
             alias="$KEY_ALIAS"
             store_password="$KEYSTORE_PASSWORD"
             key_password="${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
-            echo "SIGNED=true" >> "$GITHUB_ENV"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
             echo "The APK is signed with the release key from the repository secrets." >> "$GITHUB_STEP_SUMMARY"
           else
             alias=sombramp
@@ -105,29 +107,6 @@ jobs:
           name: sombrAMP-android
           path: sombrAMP-*-android.apk
           compression-level: 0 # an APK is already compressed
-
-      - name: Publish the release
-        if: github.ref == 'refs/heads/redesign' && env.SIGNED == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          tag="build-$BUILD_NUMBER"
-          # The notes say what changed: a merged pull request's title, or the commit's subject
-          subject="$(git log -1 --format=%s)"
-          case "$subject" in
-            "Merge pull request"*) notes="$(git log -1 --format=%b)" ;;
-            *) notes="$subject" ;;
-          esac
-          cp sombrAMP-*-android.apk "sombrAMP-$tag.apk"
-          gh release create "$tag" "sombrAMP-$tag.apk" --target "$GITHUB_SHA" --title "sombrAMP build $BUILD_NUMBER" \
-            --notes "$notes" --latest
-          echo "Released as [$tag](https://github.com/$GH_REPO/releases/tag/$tag)." >> "$GITHUB_STEP_SUMMARY"
-
-          # Keep the five newest builds
-          gh release list --limit 100 --json tagName,createdAt \
-            --jq '[.[] | select(.tagName | startswith("build-"))] | sort_by(.createdAt) | reverse | .[5:][] | .tagName' |
-            while read -r old; do gh release delete "$old" --cleanup-tag --yes; done
 
   ios:
     name: iOS
@@ -220,3 +199,71 @@ jobs:
           name: sombrAMP-windows-msix
           path: sombrAMP-*-windows.msix
           compression-level: 0 # an MSIX is already compressed
+
+  release:
+    name: Release
+    needs: [android, ios, windows]
+    # Also when the iOS or Windows build failed, with the files that were built: the Android app updates itself from
+    # the releases.
+    if: ${{ !cancelled() && needs.android.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to publish releases
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: sombrAMP-*
+          path: artifacts
+
+      - name: Number the build
+        run: echo "BUILD_NUMBER=$((1000 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
+
+      # On every branch, so that changes to this job are tried before they reach redesign
+      - name: Gather the files
+        run: |
+          name="sombrAMP-build-$BUILD_NUMBER"
+          mkdir release
+          cp artifacts/sombrAMP-android/*.apk "release/$name-android.apk"
+          if [ -d artifacts/sombrAMP-ios ]; then
+            cp artifacts/sombrAMP-ios/*.ipa "release/$name-ios.ipa"
+          else
+            echo "::warning::The iOS build failed, so there's no IPA to release."
+          fi
+          # Zipped in a sombrAMP folder, so that it unzips into one
+          if [ -d artifacts/sombrAMP-windows ]; then
+            mv artifacts/sombrAMP-windows sombrAMP
+            zip -qr "release/$name-windows.zip" sombrAMP
+          else
+            echo "::warning::The Windows build failed, so there's no Windows folder to release."
+          fi
+          if [ -d artifacts/sombrAMP-windows-msix ]; then
+            cp artifacts/sombrAMP-windows-msix/*.msix "release/$name-windows.msix"
+          else
+            echo "::warning::The MSIX wasn't built, so there's no MSIX to release."
+          fi
+          ls -l release
+
+      - name: Publish the release
+        if: github.ref == 'refs/heads/redesign' && needs.android.outputs.signed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          tag="build-$BUILD_NUMBER"
+          # The notes say what changed: a merged pull request's title, or the commit's subject
+          subject="$(git log -1 --format=%s)"
+          case "$subject" in
+            "Merge pull request"*) notes="$(git log -1 --format=%b)" ;;
+            *) notes="$subject" ;;
+          esac
+          gh release create "$tag" release/* --target "$GITHUB_SHA" --title "sombrAMP build $BUILD_NUMBER" \
+            --notes "$notes" --latest
+          echo "Released as [$tag](https://github.com/$GH_REPO/releases/tag/$tag)." >> "$GITHUB_STEP_SUMMARY"
+
+          # Keep the five newest builds
+          gh release list --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("build-"))] | sort_by(.createdAt) | reverse | .[5:][] | .tagName' |
+            while read -r old; do gh release delete "$old" --cleanup-tag --yes; done
