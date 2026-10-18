@@ -141,6 +141,7 @@ class FinampSettingsHelper {
     finampSettingsTemp.showProgressOnNowPlayingBar = DefaultSettings.showProgressOnNowPlayingBar;
     finampSettingsTemp.autoSwitchItemCurationType = DefaultSettings.autoSwitchItemCurationType;
     finampSettingsTemp.useMonochromeIcon = DefaultSettings.useMonochromeIcon;
+    finampSettingsTemp.syncLayoutWithAccount = DefaultSettings.syncLayoutWithAccount;
 
     Hive.box<FinampSettings>("FinampSettings").put("FinampSettings", finampSettingsTemp);
   }
