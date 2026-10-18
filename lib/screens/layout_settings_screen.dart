@@ -102,7 +102,8 @@ class _LayoutSettingsScreenState extends ConsumerState<LayoutSettingsScreen> {
           const ShowTextOnGridViewSelector(),
           const UseCoverAsBackgroundToggle(),
           const ShowArtistChipImageToggle(),
-          const AllowSplitScreenSwitch(),
+          // TVs don't use the split screen (see FinampApp)
+          if (!isTelevision) const AllowSplitScreenSwitch(),
           const ShowProgressOnNowPlayingBarToggle(),
         ],
       ),
@@ -242,7 +243,7 @@ class _GenericImageSizeSliderState extends ConsumerState<GenericImageSizeSlider>
                 widget.onChanged(pixels.toInt());
               },
               autofocus: false,
-              focusNode: FocusNode(skipTraversal: true, canRequestFocus: false),
+              focusNode: keyboardSkippedSliderFocusNode(),
             ),
             Text(
               context.l10n.gridImageSizeLabel(sizeLabel, finalColCount, colCountExact ? 1 : 0),

@@ -7,6 +7,7 @@ import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/queue_service.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -92,7 +93,7 @@ class _SpeedSliderState extends State<SpeedSlider> {
           },
           label: (_dragValue ?? FinampSettingsHelper.finampSettings.playbackSpeed).toStringAsFixed(2),
           autofocus: false,
-          focusNode: FocusNode(skipTraversal: true, canRequestFocus: false),
+          focusNode: keyboardSkippedSliderFocusNode(),
         ),
       ),
     );

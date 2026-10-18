@@ -62,6 +62,7 @@ import 'package:finamp/sombra/system_s.dart';
 import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:finamp/services/ui_overlay_setter_observer.dart';
 import 'package:finamp/services/widget_bindings_observer_provider.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -89,6 +90,7 @@ import 'components/LogsScreen/copy_logs_button.dart';
 import 'components/LogsScreen/share_logs_button.dart';
 import 'components/PlayerScreen/player_split_screen_scaffold.dart';
 import 'components/Shortcuts/global_shortcut_manager.dart';
+import 'components/Shortcuts/television_remote.dart';
 import 'components/global_snackbar.dart';
 import 'models/finamp_models.dart';
 import 'models/migration_adapters.dart';
@@ -141,6 +143,8 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
     await setupLogging();
     await _setupEdgeToEdgeOverlayStyle();
     _mainLog.info("Setup edge-to-edge overlay");
+    await detectTelevision();
+    _mainLog.info("Running on a TV: $isTelevision");
     await setupHive();
     _mainLog.info("Setup hive and isar");
     // Apply the persisted verbose logging preference now that settings exist.
@@ -1040,7 +1044,8 @@ class FinampApp extends ConsumerWidget {
       },
       initialRoute: SplashScreen.routeName,
       navigatorObservers: [SplitScreenNavigatorObserver(), KeepScreenOnObserver()],
-      builder: buildPlayerSplitScreenScaffold,
+      // A remote can't move the focus between the two halves of the split screen, so TVs open the player instead.
+      builder: isTelevision ? (context, child) => TelevisionRemote(child: child!) : buildPlayerSplitScreenScaffold,
       theme: systemSThemeData(Brightness.light, accent: accentColor, pageTransitionsTheme: transitionBuilder),
       darkTheme: systemSThemeData(
         Brightness.dark,

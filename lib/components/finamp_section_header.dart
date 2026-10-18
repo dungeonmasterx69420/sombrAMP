@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:finamp/components/AlbumScreen/track_list_tile.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:flutter/material.dart';
@@ -48,84 +49,87 @@ class FinampSectionHeader extends ConsumerWidget {
     );
     return SliverStickyHeader(
       sticky: sticky,
-      header: GestureDetector(
-        onTap: onTap,
+      header: RemoteLongPress(
         onLongPress: onSecondaryTap,
-        onSecondaryTap: onSecondaryTap,
-        behavior: HitTestBehavior.opaque,
-        child: Padding(
-          padding: correctedHeaderPadding,
-          child: Dismissible(
-            key: Key("$key-dismissible"),
-            direction: ref.watch(finampSettingsProvider.disableGesture) || onDismiss == null
-                ? DismissDirection.none
-                : getAllowedDismissDirection(
-                    swipeLeftEnabled:
-                        ref.watch(finampSettingsProvider.itemSwipeActionLeftToRight) != ItemSwipeActions.nothing,
-                    swipeRightEnabled:
-                        ref.watch(finampSettingsProvider.itemSwipeActionRightToLeft) != ItemSwipeActions.nothing,
-                  ),
-            dismissThresholds: const {DismissDirection.startToEnd: 0.65, DismissDirection.endToStart: 0.65},
-            confirmDismiss: onDismiss != null
-                ? (direction) async {
-                    var followUpAction = (direction == DismissDirection.startToEnd)
-                        ? FinampSettingsHelper.finampSettings.itemSwipeActionLeftToRight
-                        : FinampSettingsHelper.finampSettings.itemSwipeActionRightToLeft;
-                    return await onDismiss!(followUpAction);
-                  }
-                : null,
-            background: buildSwipeActionBackground(
-              context: context,
-              direction: DismissDirection.startToEnd,
-              action: ref.watch(finampSettingsProvider.itemSwipeActionLeftToRight),
-            ),
-            secondaryBackground: buildSwipeActionBackground(
-              context: context,
-              direction: DismissDirection.endToStart,
-              action: ref.watch(finampSettingsProvider.itemSwipeActionRightToLeft),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Material(
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(6.0),
-                        // all handled by the [GestureDetector] above,
-                        // but kept here for the desktop hover effect
-                        onTap: onTap,
-                        onLongPress: onSecondaryTap,
-                        onSecondaryTap: onSecondaryTap,
-                        child: Padding(
-                          padding: hoverPadding,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  title,
-                                  semanticsLabel: label,
-                                  style: TextTheme.of(context).titleMedium,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+        child: GestureDetector(
+          onTap: onTap,
+          onLongPress: onSecondaryTap,
+          onSecondaryTap: onSecondaryTap,
+          behavior: HitTestBehavior.opaque,
+          child: Padding(
+            padding: correctedHeaderPadding,
+            child: Dismissible(
+              key: Key("$key-dismissible"),
+              direction: ref.watch(finampSettingsProvider.disableGesture) || onDismiss == null
+                  ? DismissDirection.none
+                  : getAllowedDismissDirection(
+                      swipeLeftEnabled:
+                          ref.watch(finampSettingsProvider.itemSwipeActionLeftToRight) != ItemSwipeActions.nothing,
+                      swipeRightEnabled:
+                          ref.watch(finampSettingsProvider.itemSwipeActionRightToLeft) != ItemSwipeActions.nothing,
+                    ),
+              dismissThresholds: const {DismissDirection.startToEnd: 0.65, DismissDirection.endToStart: 0.65},
+              confirmDismiss: onDismiss != null
+                  ? (direction) async {
+                      var followUpAction = (direction == DismissDirection.startToEnd)
+                          ? FinampSettingsHelper.finampSettings.itemSwipeActionLeftToRight
+                          : FinampSettingsHelper.finampSettings.itemSwipeActionRightToLeft;
+                      return await onDismiss!(followUpAction);
+                    }
+                  : null,
+              background: buildSwipeActionBackground(
+                context: context,
+                direction: DismissDirection.startToEnd,
+                action: ref.watch(finampSettingsProvider.itemSwipeActionLeftToRight),
+              ),
+              secondaryBackground: buildSwipeActionBackground(
+                context: context,
+                direction: DismissDirection.endToStart,
+                action: ref.watch(finampSettingsProvider.itemSwipeActionRightToLeft),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Material(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(6.0),
+                          // all handled by the [GestureDetector] above,
+                          // but kept here for the desktop hover effect
+                          onTap: onTap,
+                          onLongPress: onSecondaryTap,
+                          onSecondaryTap: onSecondaryTap,
+                          child: Padding(
+                            padding: hoverPadding,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    title,
+                                    semanticsLabel: label,
+                                    style: TextTheme.of(context).titleMedium,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 2.0),
-                              if (titleTrailingIcon != null)
-                                Icon(titleTrailingIcon, size: 20.0, applyTextScaling: true),
-                            ],
+                                SizedBox(width: 2.0),
+                                if (titleTrailingIcon != null)
+                                  Icon(titleTrailingIcon, size: 20.0, applyTextScaling: true),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                ...actions,
-              ],
+                  ...actions,
+                ],
+              ),
             ),
           ),
         ),

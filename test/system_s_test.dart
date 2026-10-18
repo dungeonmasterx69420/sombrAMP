@@ -23,6 +23,18 @@ void main() {
       expect(s.phosphorInk, SystemSPhosphor.cyan.inkOnLight);
     });
 
+    test('the focus is shown in the phosphor', () {
+      final theme = systemSThemeData(Brightness.dark);
+      final s = theme.extension<SystemSTheme>()!;
+      const focused = {WidgetState.focused};
+      expect(theme.focusColor, s.focus);
+      expect(theme.outlinedButtonTheme.style!.side!.resolve(focused), BorderSide(color: s.phosphorInk, width: 2));
+      expect(theme.filledButtonTheme.style!.side!.resolve({...focused, WidgetState.disabled})?.color, s.phosphorInk);
+      expect(theme.textButtonTheme.style!.backgroundColor!.resolve(focused), s.focus);
+      expect(theme.iconButtonTheme.style!.overlayColor!.resolve(focused), s.focus);
+      expect(theme.iconButtonTheme.style!.overlayColor!.resolve({WidgetState.hovered}), isNull);
+    });
+
     test('AMOLED only blackens the dark theme', () {
       expect(SystemSTheme.resolve(Brightness.dark, amoled: true).palette.pane, const Color(0xFF000000));
       expect(SystemSTheme.resolve(Brightness.light, amoled: true).palette.pane, const Color(0xFFFFFFFF));

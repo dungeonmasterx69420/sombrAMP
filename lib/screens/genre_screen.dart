@@ -1,5 +1,6 @@
 import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/genre_screen_provider.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -36,7 +37,8 @@ class _GenreScreenState extends ConsumerState<GenreScreen> {
     final BaseItemDto genre = widget.widgetGenre ?? ModalRoute.settingsOf(context)!.arguments as BaseItemDto;
 
     return Scaffold(
-      extendBody: true,
+      // On TVs the content stops above the now playing bar, so it doesn't cover what has the focus
+      extendBody: !isTelevision,
       body: RefreshIndicator(
         onRefresh: _refresh,
         child: GenreScreenContent(key: _contentKey, parent: genre, library: _finampUserHelper.currentUser?.currentView),

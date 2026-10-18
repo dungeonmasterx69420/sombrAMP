@@ -1,4 +1,5 @@
 import 'package:finamp/components/PlayerScreen/queue_source_helper.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/playlist_actions_menu.dart';
@@ -46,42 +47,41 @@ class AddToPlaylistButton extends ConsumerWidget {
       );
     }
 
-    return Semantics.fromProperties(
-      properties: SemanticsProperties(
-        label: AppLocalizations.of(context)!.addToPlaylistTooltip,
-        hint: AppLocalizations.of(context)!.playlistActionsMenuButtonTooltip,
-        button: true,
-      ),
-      excludeSemantics: true,
-      container: true,
-      child: GestureDetector(
-        onSecondaryTap: () async {
-          if (FinampSettingsHelper.finampSettings.preferAddingToFavoritesOverPlaylists) {
-            await openPlaylistActionsMenu();
-          } else {
-            toggleFavourite();
-          }
-        },
-        child: IconButton(
-          tooltip: AppLocalizations.of(context)!.addToPlaylistTooltip,
-          icon: Icon(isFav ? Icons.favorite : Icons.favorite_outline, size: size ?? 24.0),
-          color: color ?? IconTheme.of(context).color,
-          disabledColor: (color ?? IconTheme.of(context).color)!.withValues(alpha: 0.3),
-          visualDensity: visualDensity ?? VisualDensity.compact,
-          onPressed: () async {
-            if (FinampSettingsHelper.finampSettings.preferAddingToFavoritesOverPlaylists) {
-              toggleFavourite();
-            } else {
-              await openPlaylistActionsMenu();
-            }
-          },
-          onLongPress: () async {
-            if (FinampSettingsHelper.finampSettings.preferAddingToFavoritesOverPlaylists) {
-              await openPlaylistActionsMenu();
-            } else {
-              toggleFavourite();
-            }
-          },
+    Future<void> onLongPress() async {
+      if (FinampSettingsHelper.finampSettings.preferAddingToFavoritesOverPlaylists) {
+        await openPlaylistActionsMenu();
+      } else {
+        toggleFavourite();
+      }
+    }
+
+    return RemoteLongPress(
+      onLongPress: onLongPress,
+      child: Semantics.fromProperties(
+        properties: SemanticsProperties(
+          label: AppLocalizations.of(context)!.addToPlaylistTooltip,
+          hint: AppLocalizations.of(context)!.playlistActionsMenuButtonTooltip,
+          button: true,
+        ),
+        excludeSemantics: true,
+        container: true,
+        child: GestureDetector(
+          onSecondaryTap: onLongPress,
+          child: IconButton(
+            tooltip: AppLocalizations.of(context)!.addToPlaylistTooltip,
+            icon: Icon(isFav ? Icons.favorite : Icons.favorite_outline, size: size ?? 24.0),
+            color: color ?? IconTheme.of(context).color,
+            disabledColor: (color ?? IconTheme.of(context).color)!.withValues(alpha: 0.3),
+            visualDensity: visualDensity ?? VisualDensity.compact,
+            onPressed: () async {
+              if (FinampSettingsHelper.finampSettings.preferAddingToFavoritesOverPlaylists) {
+                toggleFavourite();
+              } else {
+                await openPlaylistActionsMenu();
+              }
+            },
+            onLongPress: onLongPress,
+          ),
         ),
       ),
     );

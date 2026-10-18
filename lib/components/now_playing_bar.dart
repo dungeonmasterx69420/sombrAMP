@@ -35,7 +35,10 @@ import 'PlayerScreen/player_split_screen_scaffold.dart';
 import 'album_image.dart';
 
 class NowPlayingBar extends ConsumerWidget {
-  const NowPlayingBar({super.key});
+  const NowPlayingBar({super.key, this.focusNode});
+
+  /// The focus node of the track's title and artist, which open the player screen.
+  final FocusNode? focusNode;
 
   static const horizontalPadding = 8.0;
   static const albumImageSize = 64.0;
@@ -299,127 +302,137 @@ class NowPlayingBar extends ConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: Container(
-                                      height: albumImageSize,
-                                      padding: const EdgeInsets.only(left: 12, right: 4),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          OneLineMarqueeHelper(
-                                            key: ValueKey(currentTrack.item.id),
-                                            text: currentTrack.item.title,
-                                            style: TextStyle(
-                                              fontSize: 14.5,
-                                              height: 26 / 20,
-                                              color: primaryTextColor,
-                                              fontWeight: Theme.brightnessOf(context) == Brightness.light
-                                                  ? FontWeight.w500
-                                                  : FontWeight.w600,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    // An ink well too, so a keyboard or remote can open the player screen. It gets
+                                    // its own material, since the bar's colour would cover the focus.
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: InkWell(
+                                        focusNode: focusNode,
+                                        onTap: () async => await openPlayerScreen(),
+                                        child: Container(
+                                          height: albumImageSize,
+                                          padding: const EdgeInsets.only(left: 12, right: 4),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Expanded(
-                                                child: Text(
-                                                  processArtist(currentTrack.item.artist, context),
-                                                  style: TextStyle(
-                                                    color: primaryTextColor,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w400,
-                                                    overflow: TextOverflow.ellipsis,
-                                                  ),
+                                              OneLineMarqueeHelper(
+                                                key: ValueKey(currentTrack.item.id),
+                                                text: currentTrack.item.title,
+                                                style: TextStyle(
+                                                  fontSize: 14.5,
+                                                  height: 26 / 20,
+                                                  color: primaryTextColor,
+                                                  fontWeight: Theme.brightnessOf(context) == Brightness.light
+                                                      ? FontWeight.w500
+                                                      : FontWeight.w600,
                                                 ),
                                               ),
-                                              StreamBuilder<Duration>(
-                                                stream: AudioService.position,
-                                                initialData: audioHandler.playbackState.value.position,
-                                                builder: (context, snapshot) {
-                                                  if (snapshot.hasData) {
-                                                    playbackPosition = snapshot.data;
-                                                    final showRemaining = Platform.isIOS || Platform.isMacOS;
-                                                    final positionFullMinutes = (playbackPosition?.inMinutes ?? 0) % 60;
-                                                    final positionFullHours = (playbackPosition?.inHours ?? 0);
-                                                    final positionSeconds = (playbackPosition?.inSeconds ?? 0) % 60;
-                                                    final durationFullHours =
-                                                        (currentTrack.item.duration?.inHours ?? 0);
-                                                    final durationFullMinutes =
-                                                        (currentTrack.item.duration?.inMinutes ?? 0) % 60;
-                                                    final durationSeconds =
-                                                        (currentTrack.item.duration?.inSeconds ?? 0) % 60;
-                                                    return Semantics.fromProperties(
-                                                      properties: SemanticsProperties(
-                                                        label:
-                                                            "${positionFullHours > 0 ? "$positionFullHours hours " : ""}${positionFullMinutes > 0 ? "$positionFullMinutes minutes " : ""}$positionSeconds seconds of ${durationFullHours > 0 ? "$durationFullHours hours " : ""}${durationFullMinutes > 0 ? "$durationFullMinutes minutes " : ""}$durationSeconds seconds",
+                                              const SizedBox(height: 4),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      processArtist(currentTrack.item.artist, context),
+                                                      style: TextStyle(
+                                                        color: primaryTextColor,
+                                                        fontSize: 13,
+                                                        fontWeight: FontWeight.w400,
+                                                        overflow: TextOverflow.ellipsis,
                                                       ),
-                                                      excludeSemantics: true,
-                                                      container: true,
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            printDuration(
-                                                              showRemaining
-                                                                  ? ((currentTrack.item.duration ?? Duration.zero) -
-                                                                        (playbackPosition ?? Duration.zero))
-                                                                  : playbackPosition,
-                                                              leadingZeroes: false,
-                                                              isRemaining: showRemaining,
-                                                            ),
-                                                            style: TextStyle(
-                                                              fontSize: 14,
-                                                              fontWeight: FontWeight.w400,
-                                                              color: primaryTextColor.withValues(alpha: 0.8),
-                                                              fontFeatures: const [
-                                                                // fixed-width digits
-                                                                FontFeature.tabularFigures(),
-                                                              ],
-                                                            ),
+                                                    ),
+                                                  ),
+                                                  StreamBuilder<Duration>(
+                                                    stream: AudioService.position,
+                                                    initialData: audioHandler.playbackState.value.position,
+                                                    builder: (context, snapshot) {
+                                                      if (snapshot.hasData) {
+                                                        playbackPosition = snapshot.data;
+                                                        final showRemaining = Platform.isIOS || Platform.isMacOS;
+                                                        final positionFullMinutes =
+                                                            (playbackPosition?.inMinutes ?? 0) % 60;
+                                                        final positionFullHours = (playbackPosition?.inHours ?? 0);
+                                                        final positionSeconds = (playbackPosition?.inSeconds ?? 0) % 60;
+                                                        final durationFullHours =
+                                                            (currentTrack.item.duration?.inHours ?? 0);
+                                                        final durationFullMinutes =
+                                                            (currentTrack.item.duration?.inMinutes ?? 0) % 60;
+                                                        final durationSeconds =
+                                                            (currentTrack.item.duration?.inSeconds ?? 0) % 60;
+                                                        return Semantics.fromProperties(
+                                                          properties: SemanticsProperties(
+                                                            label:
+                                                                "${positionFullHours > 0 ? "$positionFullHours hours " : ""}${positionFullMinutes > 0 ? "$positionFullMinutes minutes " : ""}$positionSeconds seconds of ${durationFullHours > 0 ? "$durationFullHours hours " : ""}${durationFullMinutes > 0 ? "$durationFullMinutes minutes " : ""}$durationSeconds seconds",
                                                           ),
-                                                          if (!showRemaining) ...[
-                                                            const SizedBox(width: 2),
-                                                            Text(
-                                                              '/',
-                                                              style: TextStyle(
-                                                                color: primaryTextColor.withValues(alpha: 0.8),
-                                                                fontSize: 14,
-                                                                fontWeight: FontWeight.w400,
-                                                                fontFeatures: const [
-                                                                  // fixed-width digits
-                                                                  FontFeature.tabularFigures(),
-                                                                ],
+                                                          excludeSemantics: true,
+                                                          container: true,
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                printDuration(
+                                                                  showRemaining
+                                                                      ? ((currentTrack.item.duration ?? Duration.zero) -
+                                                                            (playbackPosition ?? Duration.zero))
+                                                                      : playbackPosition,
+                                                                  leadingZeroes: false,
+                                                                  isRemaining: showRemaining,
+                                                                ),
+                                                                style: TextStyle(
+                                                                  fontSize: 14,
+                                                                  fontWeight: FontWeight.w400,
+                                                                  color: primaryTextColor.withValues(alpha: 0.8),
+                                                                  fontFeatures: const [
+                                                                    // fixed-width digits
+                                                                    FontFeature.tabularFigures(),
+                                                                  ],
+                                                                ),
                                                               ),
-                                                            ),
-                                                            const SizedBox(width: 2),
-                                                            Text(
-                                                              // '3:44',
-                                                              (currentTrack.item.duration?.inHours ?? 0.0) >= 1.0
-                                                                  ? "${currentTrack.item.duration?.inHours.toString()}:${((currentTrack.item.duration?.inMinutes ?? 0) % 60).toString().padLeft(2, '0')}:${((currentTrack.item.duration?.inSeconds ?? 0) % 60).toString().padLeft(2, '0')}"
-                                                                  : "${currentTrack.item.duration?.inMinutes.toString()}:${((currentTrack.item.duration?.inSeconds ?? 0) % 60).toString().padLeft(2, '0')}",
-                                                              style: TextStyle(
-                                                                color: primaryTextColor.withValues(alpha: 0.8),
-                                                                fontSize: 14,
-                                                                fontWeight: FontWeight.w400,
-                                                                fontFeatures: const [
-                                                                  // fixed-width digits
-                                                                  FontFeature.tabularFigures(),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ],
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const SizedBox.shrink();
-                                                  }
-                                                },
+                                                              if (!showRemaining) ...[
+                                                                const SizedBox(width: 2),
+                                                                Text(
+                                                                  '/',
+                                                                  style: TextStyle(
+                                                                    color: primaryTextColor.withValues(alpha: 0.8),
+                                                                    fontSize: 14,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    fontFeatures: const [
+                                                                      // fixed-width digits
+                                                                      FontFeature.tabularFigures(),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(width: 2),
+                                                                Text(
+                                                                  // '3:44',
+                                                                  (currentTrack.item.duration?.inHours ?? 0.0) >= 1.0
+                                                                      ? "${currentTrack.item.duration?.inHours.toString()}:${((currentTrack.item.duration?.inMinutes ?? 0) % 60).toString().padLeft(2, '0')}:${((currentTrack.item.duration?.inSeconds ?? 0) % 60).toString().padLeft(2, '0')}"
+                                                                      : "${currentTrack.item.duration?.inMinutes.toString()}:${((currentTrack.item.duration?.inSeconds ?? 0) % 60).toString().padLeft(2, '0')}",
+                                                                  style: TextStyle(
+                                                                    color: primaryTextColor.withValues(alpha: 0.8),
+                                                                    fontSize: 14,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    fontFeatures: const [
+                                                                      // fixed-width digits
+                                                                      FontFeature.tabularFigures(),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ],
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        return const SizedBox.shrink();
+                                                      }
+                                                    },
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -514,7 +527,8 @@ class NowPlayingBar extends ConsumerWidget {
                       !usingPlayerSplitScreen) {
                     return buildLoadingQueueBar(ref, queueService.retryQueueLoad);
                   } else if (snapshot.hasData && snapshot.data!.currentTrack != null && !usingPlayerSplitScreen) {
-                    return buildNowPlayingBar(ref, snapshot.data!.currentTrack!);
+                    final bar = buildNowPlayingBar(ref, snapshot.data!.currentTrack!);
+                    return isTelevision ? _RemoteFocusScope(child: bar) : bar;
                   } else {
                     return const SizedBox.shrink();
                   }
@@ -526,4 +540,34 @@ class NowPlayingBar extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Keeps a remote's left and right among the bar's buttons; up leaves it. The list above reaches down behind the bar,
+/// past what's visible, so moving sideways could otherwise take the focus to items that can't be seen.
+class _RemoteFocusScope extends StatefulWidget {
+  const _RemoteFocusScope({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_RemoteFocusScope> createState() => _RemoteFocusScopeState();
+}
+
+class _RemoteFocusScopeState extends State<_RemoteFocusScope> {
+  final _node = FocusScopeNode(
+    debugLabel: "NowPlayingBar",
+    // The focus goes to the buttons, not the bar as a whole
+    skipTraversal: true,
+    traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+    directionalTraversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+  );
+
+  @override
+  void dispose() {
+    _node.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => FocusScope(node: _node, child: widget.child);
 }

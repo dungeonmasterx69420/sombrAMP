@@ -1,3 +1,4 @@
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,36 +63,39 @@ class PlaybackAction extends ConsumerWidget {
 
     return Flexible(
       flex: 1,
-      child: IconButton(
-        icon: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: compactLayout ? 0 : 9,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: addShuffleIcon ? 10.0 : 0.0),
-              child: iconWidget,
-            ),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 12, height: 1.4, fontWeight: FontWeight.w300),
-            ),
-          ],
-        ),
-        onPressed: enabled
-            ? () {
-                FeedbackHelper.feedback(FeedbackType.selection);
-                onPressed();
-              }
-            : null,
+      child: RemoteLongPress(
         onLongPress: onLongPress,
-        visualDensity: VisualDensity.compact,
-        padding: compactLayout
-            ? EdgeInsets.only(top: 5.0, left: 4.0, right: 4.0, bottom: 5.0)
-            : EdgeInsets.only(top: 10.0, left: 8.0, right: 8.0, bottom: 12.0),
+        child: IconButton(
+          icon: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: compactLayout ? 0 : 9,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: addShuffleIcon ? 10.0 : 0.0),
+                child: iconWidget,
+              ),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12, height: 1.4, fontWeight: FontWeight.w300),
+              ),
+            ],
+          ),
+          onPressed: enabled
+              ? () {
+                  FeedbackHelper.feedback(FeedbackType.selection);
+                  onPressed();
+                }
+              : null,
+          onLongPress: onLongPress,
+          visualDensity: VisualDensity.compact,
+          padding: compactLayout
+              ? EdgeInsets.only(top: 5.0, left: 4.0, right: 4.0, bottom: 5.0)
+              : EdgeInsets.only(top: 10.0, left: 8.0, right: 8.0, bottom: 12.0),
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:finamp/l10n/app_localizations.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,7 +47,7 @@ class _BitrateSelectorState extends ConsumerState<BitrateSelector> {
                 FinampSetters.setTranscodeBitrate((value * 1000).toInt());
               },
               autofocus: false,
-              focusNode: FocusNode(skipTraversal: true, canRequestFocus: false),
+              focusNode: keyboardSkippedSliderFocusNode(),
             ),
             Text(
               enabled

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:finamp/components/MusicScreen/sort_and_filter_row.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/models/finamp_models.dart';
@@ -224,21 +225,24 @@ class _GenreChipContent extends ConsumerWidget {
       properties: SemanticsProperties(label: genreName, button: true),
       excludeSemantics: true,
       container: true,
-      child: Material(
-        color: backgroundColor ?? ColorScheme.of(context).surfaceContainer,
-        shape: RoundedRectangleBorder(side: BorderSide(color: ColorScheme.of(context).outline)),
-        child: InkWell(
-          borderRadius: _borderRadius,
-          onTap: () => _handleGenreTap(context, ref),
-          onLongPress: () => _handleGenreTap(context, ref, alternativeAction: true),
-          onSecondaryTap: () => _handleGenreTap(context, ref, alternativeAction: true),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-            child: Text(
-              genreName,
-              overflow: TextOverflow.ellipsis,
-              softWrap: false,
-              style: TextStyle(color: color ?? Theme.of(context).textTheme.bodySmall!.color ?? Colors.white),
+      child: RemoteLongPress(
+        onLongPress: () => _handleGenreTap(context, ref, alternativeAction: true),
+        child: Material(
+          color: backgroundColor ?? ColorScheme.of(context).surfaceContainer,
+          shape: RoundedRectangleBorder(side: BorderSide(color: ColorScheme.of(context).outline)),
+          child: InkWell(
+            borderRadius: _borderRadius,
+            onTap: () => _handleGenreTap(context, ref),
+            onLongPress: () => _handleGenreTap(context, ref, alternativeAction: true),
+            onSecondaryTap: () => _handleGenreTap(context, ref, alternativeAction: true),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+              child: Text(
+                genreName,
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                style: TextStyle(color: color ?? Theme.of(context).textTheme.bodySmall!.color ?? Colors.white),
+              ),
             ),
           ),
         ),

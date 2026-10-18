@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 
 import cairosvg
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
 RES = ROOT / "android/app/src/main/res"
@@ -73,6 +73,28 @@ def adaptive_mark(size, color):
     return render(mark_svg(size, size * 56 / 108, color), size)
 
 
+def tv_banner():
+    """Android TV's launcher banner: 320x180dp, drawn at xhdpi. The mark and the app's name, in Pixelify Sans."""
+    width, height = 640, 360
+    banner = Image.new("RGB", (width, height), DESK)
+    font = ImageFont.truetype(str(ROOT / "assets/fonts/PixelifySans-Bold.ttf"), 76)
+    name = "sombrAMP"
+    left, top, right, bottom = font.getbbox(name)
+    mark_height = 116
+    x0, y0, x1, y1 = MARK_BOX
+    mark_width = round(mark_height * (x1 - x0) / (y1 - y0))
+    gap = 24
+    x = (width - (mark_width + gap + right - left)) // 2
+    # The mark is rendered on a square canvas, centred, so it's cropped to its drawn extent.
+    square = render(mark_svg(mark_height, mark_height, INK), mark_height)
+    mark = square.crop(((mark_height - mark_width) // 2, 0, (mark_height + mark_width) // 2, mark_height))
+    banner.paste(mark, (x, (height - mark_height) // 2), mark)
+    ImageDraw.Draw(banner).text(
+        (x + mark_width + gap - left, (height - (bottom - top)) // 2 - top), name, font=font, fill=INK
+    )
+    return banner
+
+
 def main():
     # Sources, also referenced by flutter_launcher_icons / flutter_native_splash / msix in pubspec.yaml.
     save(full(1024), ROOT / "assets/icon/sombra_icon.png", rgb=True)
@@ -107,6 +129,7 @@ def main():
         save(render(mark_svg(round(48 * scale), 48 * scale * 0.92, "#FFFFFF"), round(48 * scale)),
              RES / f"mipmap-{density}/white.png")
     save(adaptive_mark(432, "#FFFFFF"), RES / "mipmap-anydpi-v26/ic_launcher_monochrome.png")
+    save(tv_banner(), RES / "drawable-xhdpi/tv_banner.png")
 
     # Android adaptive foreground, as a vector so it stays sharp at every size.
     x0, y0, x1, y1 = MARK_BOX

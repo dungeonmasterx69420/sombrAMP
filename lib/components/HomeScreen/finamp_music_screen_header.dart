@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:finamp/components/MusicScreen/item_wrapper.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/components/finamp_app_bar_back_button.dart';
 import 'package:finamp/components/finamp_icon.dart';
 import 'package:finamp/l10n/app_localizations.dart';
@@ -88,6 +89,14 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
         ? TablerIcons.wifi
         : null; // hide icon by default (remote connection)
 
+    final VoidCallback? openDownloads = ref.watch(isDownloadingOrSyncingPollingProvider)
+        ? () {
+            if (ref.read(isDownloadingOrSyncingPollingProvider)) {
+              Navigator.of(context).pushNamed(DownloadsScreen.routeName);
+            }
+          }
+        : null;
+
     void openMenu() async {
       final config = singleTabConfig;
       if (config != null) {
@@ -135,48 +144,43 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                       borderRadius: BorderRadiusGeometry.circular(10.0),
                       side: BorderSide(color: ColorScheme.of(context).outline),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5.0, right: 3.0, top: 5.0, bottom: 3.0),
-                      child: GestureDetector(
+                    // An ink well rather than a gesture detector, so a keyboard or remote can focus it.
+                    child: RemoteLongPress(
+                      onLongPress: openDownloads,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(10.0),
                         onTap: openMenu,
-                        onSecondaryTap: ref.watch(isDownloadingOrSyncingPollingProvider)
-                            ? () {
-                                if (ref.read(isDownloadingOrSyncingPollingProvider)) {
-                                  Navigator.of(context).pushNamed(DownloadsScreen.routeName);
-                                }
-                              }
-                            : null,
-                        onLongPress: ref.watch(isDownloadingOrSyncingPollingProvider)
-                            ? () {
-                                if (ref.read(isDownloadingOrSyncingPollingProvider)) {
-                                  Navigator.of(context).pushNamed(DownloadsScreen.routeName);
-                                }
-                              }
-                            : null,
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            FinampIcon(
-                              35,
-                              35,
-                              overrideColor: ref.watch(finampSettingsProvider.isOffline)
-                                  ? TextTheme.of(context).bodyMedium?.color?.withValues(alpha: 0.6)
-                                  : null,
-                            ),
-                            Positioned(bottom: -4, right: -2, child: Icon(statusIcon, size: 16)),
-                            if (ref.watch(isDownloadingOrSyncingPollingProvider))
-                              Positioned(
-                                bottom: statusIcon != null ? -6 : 1,
-                                right: statusIcon != null ? -4 : 3,
-                                child: SizedBox.square(
-                                  dimension: statusIcon != null ? 20.0 : 10.0,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 1,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onSurface),
+                        onSecondaryTap: openDownloads,
+                        onLongPress: openDownloads,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5.0, right: 3.0, top: 5.0, bottom: 3.0),
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              FinampIcon(
+                                35,
+                                35,
+                                overrideColor: ref.watch(finampSettingsProvider.isOffline)
+                                    ? TextTheme.of(context).bodyMedium?.color?.withValues(alpha: 0.6)
+                                    : null,
+                              ),
+                              Positioned(bottom: -4, right: -2, child: Icon(statusIcon, size: 16)),
+                              if (ref.watch(isDownloadingOrSyncingPollingProvider))
+                                Positioned(
+                                  bottom: statusIcon != null ? -6 : 1,
+                                  right: statusIcon != null ? -4 : 3,
+                                  child: SizedBox.square(
+                                    dimension: statusIcon != null ? 20.0 : 10.0,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 1,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -332,31 +336,34 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
             ),
           ),
         if (!backButtonInsteadOfTabs)
-          TabBar(
-            controller: tabController,
-            indicator: BoxDecoration(color: activeTabBackgroundColor),
-            indicatorPadding: EdgeInsets.zero,
-            labelColor: activeTabTextColor,
-            // unselectedLabelColor: Colors.red, //!!! the label color is specified below, along with the font
-            labelPadding: EdgeInsets.symmetric(horizontal: 4.0),
-            dividerHeight: 0.0,
-            dividerColor: Colors.transparent,
-            padding: EdgeInsets.only(top: 4.0, bottom: 0.0, left: 10.0, right: 6.0),
-            tabs: sortedTabs.map((tabType) {
-              final textStyle = tabController?.index == sortedTabs.indexOf(tabType)
-                  ? null
-                  : TextTheme.of(context).labelLarge!.copyWith(color: inactiveTabTextColor);
-              return Tab(
-                height: 32.0,
-                child: GestureDetector(
-                  onLongPress: () {
-                    Navigator.pushNamed(context, TabsSettingsScreen.routeName);
-                  },
-                  onSecondaryTap: () {
-                    Navigator.pushNamed(context, TabsSettingsScreen.routeName);
-                  },
-                  child: Container(
-                    /*decoration: ShapeDecoration(
+          // A tab's long press opens the tab settings; the focus is on the tab bar's own ink well, so it goes here.
+          RemoteLongPress(
+            onLongPress: () => Navigator.pushNamed(context, TabsSettingsScreen.routeName),
+            child: TabBar(
+              controller: tabController,
+              indicator: BoxDecoration(color: activeTabBackgroundColor),
+              indicatorPadding: EdgeInsets.zero,
+              labelColor: activeTabTextColor,
+              // unselectedLabelColor: Colors.red, //!!! the label color is specified below, along with the font
+              labelPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              dividerHeight: 0.0,
+              dividerColor: Colors.transparent,
+              padding: EdgeInsets.only(top: 4.0, bottom: 0.0, left: 10.0, right: 6.0),
+              tabs: sortedTabs.map((tabType) {
+                final textStyle = tabController?.index == sortedTabs.indexOf(tabType)
+                    ? null
+                    : TextTheme.of(context).labelLarge!.copyWith(color: inactiveTabTextColor);
+                return Tab(
+                  height: 32.0,
+                  child: GestureDetector(
+                    onLongPress: () {
+                      Navigator.pushNamed(context, TabsSettingsScreen.routeName);
+                    },
+                    onSecondaryTap: () {
+                      Navigator.pushNamed(context, TabsSettingsScreen.routeName);
+                    },
+                    child: Container(
+                      /*decoration: ShapeDecoration(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                           side: BorderSide(
@@ -368,56 +375,58 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                           ),
                         ),
                       ),*/
-                    padding: tabType == ContentType.home
-                        ? EdgeInsets.only(left: 4, right: 8, top: 3, bottom: 3)
-                        : EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    constraints: const BoxConstraints(minWidth: 50),
-                    alignment: Alignment.center,
-                    child: tabType == ContentType.home
-                        ? Row(
-                            spacing: 4.0,
-                            children: [
-                              Consumer(
-                                builder: (context, ref, _) {
-                                  if (ref.watch(finampSettingsProvider.isOffline)) return SizedBox.shrink();
-                                  final userInfo = ref.watch(UserInfoProviders.currentUserInfoProvider);
-                                  if (userInfo.value != null && userInfo.value!.jellyfinUser?.primaryImageTag != null) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(1.5),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(9999),
-                                        child: Image.network(
-                                          GetIt.instance<JellyfinApiHelper>()
-                                              .getUserImageUrl(
-                                                baseUrl: Uri.parse(finampUserHelper.currentUser!.baseURL),
-                                                user: userInfo.value!.jellyfinUser!,
-                                              )
-                                              .toString(),
-                                          fit: BoxFit.fitHeight,
+                      padding: tabType == ContentType.home
+                          ? EdgeInsets.only(left: 4, right: 8, top: 3, bottom: 3)
+                          : EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      constraints: const BoxConstraints(minWidth: 50),
+                      alignment: Alignment.center,
+                      child: tabType == ContentType.home
+                          ? Row(
+                              spacing: 4.0,
+                              children: [
+                                Consumer(
+                                  builder: (context, ref, _) {
+                                    if (ref.watch(finampSettingsProvider.isOffline)) return SizedBox.shrink();
+                                    final userInfo = ref.watch(UserInfoProviders.currentUserInfoProvider);
+                                    if (userInfo.value != null &&
+                                        userInfo.value!.jellyfinUser?.primaryImageTag != null) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(1.5),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(9999),
+                                          child: Image.network(
+                                            GetIt.instance<JellyfinApiHelper>()
+                                                .getUserImageUrl(
+                                                  baseUrl: Uri.parse(finampUserHelper.currentUser!.baseURL),
+                                                  user: userInfo.value!.jellyfinUser!,
+                                                )
+                                                .toString(),
+                                            fit: BoxFit.fitHeight,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  if (userInfo.value == null && userInfo.isLoading) {
-                                    return SizedBox(
-                                      width: 24,
-                                      height: 24,
-                                      child: CircularProgressIndicator(strokeWidth: 2, color: activeTabTextColor),
-                                    );
-                                  }
-                                  return SizedBox.shrink();
-                                },
-                              ),
-                              Text(tabType.toLocalisedString(context.l10n), style: textStyle),
-                            ],
-                          )
-                        : Text(tabType.toLocalisedString(context.l10n), style: textStyle),
+                                      );
+                                    }
+                                    if (userInfo.value == null && userInfo.isLoading) {
+                                      return SizedBox(
+                                        width: 24,
+                                        height: 24,
+                                        child: CircularProgressIndicator(strokeWidth: 2, color: activeTabTextColor),
+                                      );
+                                    }
+                                    return SizedBox.shrink();
+                                  },
+                                ),
+                                Text(tabType.toLocalisedString(context.l10n), style: textStyle),
+                              ],
+                            )
+                          : Text(tabType.toLocalisedString(context.l10n), style: textStyle),
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
+                );
+              }).toList(),
+              isScrollable: true,
+              tabAlignment: TabAlignment.start,
+            ),
           ),
       ],
     );

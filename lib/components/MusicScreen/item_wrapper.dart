@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:finamp/components/MusicScreen/item_card.dart';
 import 'package:finamp/components/MusicScreen/item_collection_list_tile.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/album_menu.dart';
 import 'package:finamp/menus/artist_menu.dart';
@@ -144,23 +145,26 @@ class _ItemCollectionWrapperState extends ConsumerState<ItemWrapper> {
   Widget build(BuildContext context) {
     local = AppLocalizations.of(context)!;
 
-    return GestureDetector(
-      onTapDown: (_) {
-        if (!widget.interactive) return;
-        // Begin precalculating theme for menu
-        ref.listenManual(finampThemeProvider(ThemeInfo(widget.item)), (_, _) {});
-      },
-      onLongPressStart: (details) => widget.interactive ? openItemMenu(context: context, item: widget.item) : null,
-      onSecondaryTapDown: (details) => widget.interactive ? openItemMenu(context: context, item: widget.item) : null,
-      child: widget.isGrid
-          ? ItemCard(item: mutableItem, onTap: onTap, forHomeScreen: widget.forHomeScreen)
-          : ItemCollectionListTile(
-              item: mutableItem,
-              onTap: onTap,
-              albumShowsYearAndDurationInstead: widget.albumShowsYearAndDurationInstead,
-              adaptiveAdditionalInfoSortBy: widget.adaptiveAdditionalInfoSortBy,
-              showFavoriteIconOnlyWhenFilterDisabled: widget.showFavoriteIconOnlyWhenFilterDisabled,
-            ),
+    return RemoteLongPress(
+      onLongPress: widget.interactive ? () => openItemMenu(context: context, item: widget.item) : null,
+      child: GestureDetector(
+        onTapDown: (_) {
+          if (!widget.interactive) return;
+          // Begin precalculating theme for menu
+          ref.listenManual(finampThemeProvider(ThemeInfo(widget.item)), (_, _) {});
+        },
+        onLongPressStart: (details) => widget.interactive ? openItemMenu(context: context, item: widget.item) : null,
+        onSecondaryTapDown: (details) => widget.interactive ? openItemMenu(context: context, item: widget.item) : null,
+        child: widget.isGrid
+            ? ItemCard(item: mutableItem, onTap: onTap, forHomeScreen: widget.forHomeScreen)
+            : ItemCollectionListTile(
+                item: mutableItem,
+                onTap: onTap,
+                albumShowsYearAndDurationInstead: widget.albumShowsYearAndDurationInstead,
+                adaptiveAdditionalInfoSortBy: widget.adaptiveAdditionalInfoSortBy,
+                showFavoriteIconOnlyWhenFilterDisabled: widget.showFavoriteIconOnlyWhenFilterDisabled,
+              ),
+      ),
     );
   }
 }

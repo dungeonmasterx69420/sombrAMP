@@ -1,5 +1,6 @@
 import 'package:finamp/components/Shortcuts/global_shortcut_manager.dart';
 import 'package:finamp/components/Shortcuts/music_control_shortcuts.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/components/radio_mode_menu.dart';
 import 'package:finamp/models/finamp_models.dart';
@@ -68,30 +69,34 @@ class PlayerButtonsLoopMode extends ConsumerWidget {
       builder: (BuildContext context, snapshot) {
         final shortcutHint = GlobalShortcuts.getDisplay(ToggleLoopModeIntent);
         final loopModeHint = getLocalizedLoopMode(context, snapshot.data!);
-        return IconButton(
-          tooltip: getStringComponentsInLocaleOrder(context, [
-            loopModeHint,
-            AppLocalizations.of(context)!.genericToggleButtonTooltip,
-            if (isDesktop) "($shortcutHint)",
-          ], separator: "\n"),
-          onPressed: () async {
-            if (radioEnabled) {
-              await showRadioMenu(
-                context,
-                subtitle: radioFailed ? AppLocalizations.of(context)!.radioFailedSubtitle : null,
-              );
-            } else {
-              FeedbackHelper.feedback(FeedbackType.light);
-              queueService.toggleLoopMode();
-            }
-          },
-          onLongPress: () => showRadioMenu(
-            context,
-            subtitle: radioFailed
-                ? AppLocalizations.of(context)!.radioFailedSubtitle
-                : AppLocalizations.of(context)!.loopingOverriddenByRadioSubtitle,
+        void showRadioOptions() => showRadioMenu(
+          context,
+          subtitle: radioFailed
+              ? AppLocalizations.of(context)!.radioFailedSubtitle
+              : AppLocalizations.of(context)!.loopingOverriddenByRadioSubtitle,
+        );
+        return RemoteLongPress(
+          onLongPress: showRadioOptions,
+          child: IconButton(
+            tooltip: getStringComponentsInLocaleOrder(context, [
+              loopModeHint,
+              AppLocalizations.of(context)!.genericToggleButtonTooltip,
+              if (isDesktop) "($shortcutHint)",
+            ], separator: "\n"),
+            onPressed: () async {
+              if (radioEnabled) {
+                await showRadioMenu(
+                  context,
+                  subtitle: radioFailed ? AppLocalizations.of(context)!.radioFailedSubtitle : null,
+                );
+              } else {
+                FeedbackHelper.feedback(FeedbackType.light);
+                queueService.toggleLoopMode();
+              }
+            },
+            onLongPress: showRadioOptions,
+            icon: Icon(getRepeatingIcon(snapshot.data!)),
           ),
-          icon: Icon(getRepeatingIcon(snapshot.data!)),
         );
       },
     );

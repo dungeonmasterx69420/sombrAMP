@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:finamp/components/AddToPlaylistScreen/add_to_playlist_button.dart';
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/extensions/string.dart';
 import 'package:finamp/l10n/app_localizations.dart';
@@ -586,39 +587,44 @@ class TrackListItem extends ConsumerWidget {
           }
         }
 
-        return GestureDetector(
-          onTapDown: (_) {
-            // Begin precalculating theme for song menu
-            ref.listenManual(finampThemeProvider(ThemeInfo(baseItem)), (_, _) {});
-          },
-          onLongPressStart: features.contains(TrackListItemFeatures.fullyDraggable)
-              ? null
-              : (details) => menuCallback(),
-          onSecondaryTapDown: features.contains(TrackListItemFeatures.fullyDraggable)
-              ? null
-              : (details) => menuCallback(),
-          child:
-              (features.contains(TrackListItemFeatures.swipeableInTrackList) ||
-                      features.contains(TrackListItemFeatures.swipeableInQueue)) &&
-                  !ref.watch(finampSettingsProvider.disableGesture)
-              ? Dismissible(
-                  key: Key(listIndex.toString()),
-                  direction: features.contains(TrackListItemFeatures.swipeableInQueue)
-                      ? DismissDirection.endToStart
-                      : getAllowedDismissDirection(
-                          swipeLeftEnabled:
-                              ref.watch(finampSettingsProvider.itemSwipeActionLeftToRight) != ItemSwipeActions.nothing,
-                          swipeRightEnabled:
-                              ref.watch(finampSettingsProvider.itemSwipeActionRightToLeft) != ItemSwipeActions.nothing,
-                        ),
-                  dismissThresholds: const {DismissDirection.startToEnd: 0.65, DismissDirection.endToStart: 0.65},
-                  // no background, dismissing really dismisses here
-                  confirmDismiss: confirmDismiss,
-                  background: leftSwipeBackground,
-                  secondaryBackground: rightSwipeBackground,
-                  child: listItem,
-                )
-              : listItem,
+        return RemoteLongPress(
+          onLongPress: features.contains(TrackListItemFeatures.fullyDraggable) ? null : menuCallback,
+          child: GestureDetector(
+            onTapDown: (_) {
+              // Begin precalculating theme for song menu
+              ref.listenManual(finampThemeProvider(ThemeInfo(baseItem)), (_, _) {});
+            },
+            onLongPressStart: features.contains(TrackListItemFeatures.fullyDraggable)
+                ? null
+                : (details) => menuCallback(),
+            onSecondaryTapDown: features.contains(TrackListItemFeatures.fullyDraggable)
+                ? null
+                : (details) => menuCallback(),
+            child:
+                (features.contains(TrackListItemFeatures.swipeableInTrackList) ||
+                        features.contains(TrackListItemFeatures.swipeableInQueue)) &&
+                    !ref.watch(finampSettingsProvider.disableGesture)
+                ? Dismissible(
+                    key: Key(listIndex.toString()),
+                    direction: features.contains(TrackListItemFeatures.swipeableInQueue)
+                        ? DismissDirection.endToStart
+                        : getAllowedDismissDirection(
+                            swipeLeftEnabled:
+                                ref.watch(finampSettingsProvider.itemSwipeActionLeftToRight) !=
+                                ItemSwipeActions.nothing,
+                            swipeRightEnabled:
+                                ref.watch(finampSettingsProvider.itemSwipeActionRightToLeft) !=
+                                ItemSwipeActions.nothing,
+                          ),
+                    dismissThresholds: const {DismissDirection.startToEnd: 0.65, DismissDirection.endToStart: 0.65},
+                    // no background, dismissing really dismisses here
+                    confirmDismiss: confirmDismiss,
+                    background: leftSwipeBackground,
+                    secondaryBackground: rightSwipeBackground,
+                    child: listItem,
+                  )
+                : listItem,
+          ),
         );
       },
     );

@@ -9,6 +9,7 @@ import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/music_player_background_task.dart';
 import 'package:finamp/services/progress_state_stream.dart';
 import 'package:finamp/services/queue_service.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
@@ -220,7 +221,7 @@ class _SleepTimerMenuState extends State<SleepTimerMenu> {
                             },
                             label: context.l10n.timerMinutes((newSleepTimer.secondsLength / 60).round()),
                             autofocus: false,
-                            focusNode: FocusNode(skipTraversal: true, canRequestFocus: false),
+                            focusNode: keyboardSkippedSliderFocusNode(),
                           ),
                         ),
                       ),
@@ -395,7 +396,7 @@ class _SleepTimerMenuState extends State<SleepTimerMenu> {
                             },
                             label: context.l10n.timerTracks(newSleepTimer.tracksLength),
                             autofocus: false,
-                            focusNode: FocusNode(skipTraversal: true, canRequestFocus: false),
+                            focusNode: keyboardSkippedSliderFocusNode(),
                           ),
                         ),
                       ),

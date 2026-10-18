@@ -1,3 +1,4 @@
+import 'package:finamp/components/Shortcuts/television_remote.dart';
 import 'package:finamp/services/feedback_helper.dart';
 import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
@@ -49,35 +50,38 @@ class HomeScreenQuickActionButton extends StatelessWidget {
       onLongPressHint: label,
       excludeSemantics: true, // replace child semantics with custom semantics
       container: true,
-      child: SizedBox(
-        width: width,
-        child: GestureDetector(
-          onLongPress: disabled || onSecondaryPressed == null
-              ? null
-              : () {
-                  FeedbackHelper.feedback(FeedbackType.selection);
-                  onSecondaryPressed!();
-                },
-          onSecondaryTap: disabled || onSecondaryPressed == null
-              ? null
-              : () {
-                  FeedbackHelper.feedback(FeedbackType.selection);
-                  onSecondaryPressed!();
-                },
-          child: OutlinedButton(
-            onPressed: disabled
+      child: RemoteLongPress(
+        onLongPress: disabled ? null : onSecondaryPressed,
+        child: SizedBox(
+          width: width,
+          child: GestureDetector(
+            onLongPress: disabled || onSecondaryPressed == null
                 ? null
                 : () {
                     FeedbackHelper.feedback(FeedbackType.selection);
-                    onPressed();
+                    onSecondaryPressed!();
                   },
+            onSecondaryTap: disabled || onSecondaryPressed == null
+                ? null
+                : () {
+                    FeedbackHelper.feedback(FeedbackType.selection);
+                    onSecondaryPressed!();
+                  },
+            child: OutlinedButton(
+              onPressed: disabled
+                  ? null
+                  : () {
+                      FeedbackHelper.feedback(FeedbackType.selection);
+                      onPressed();
+                    },
 
-            style: ButtonStyle(
-              padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
-                EdgeInsets.symmetric(horizontal: 8, vertical: isDesktop ? 16 : 8),
+              style: ButtonStyle(
+                padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+                  EdgeInsets.symmetric(horizontal: 8, vertical: isDesktop ? 16 : 8),
+                ),
               ),
+              child: buttonContent,
             ),
-            child: buttonContent,
           ),
         ),
       ),
