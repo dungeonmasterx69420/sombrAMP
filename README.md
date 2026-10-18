@@ -38,6 +38,20 @@ and playlist images, and favoriting playlists or genres. Lyrics of downloaded tr
 "instant mixes" need the server to be configured with an external agent like Last.fm, otherwise they fall back to
 random tracks of the same genre.
 
+### The same layout on every device
+
+The layout is saved with your account on the server, so it follows you to every device you log in on: everything in
+Settings → Layout & Theme (theme, phosphor, player screen, lyrics, album, artist and genre screens, tabs, grid or list
+for each tab), the home screen, and how each tab is sorted. Changes are saved a few seconds after they're made, and
+picked up by the other devices when the app is opened or comes back to the foreground. A new install takes the saved
+layout straight away. A device that was already set up and has a different layout asks once which one to keep. Settings
+of the device itself, like downloads, playback, transcoding or the volume, stay on each device.
+
+Jellyfin keeps the layout in your display preferences. Navidrome and other Subsonic servers have nothing like that, so
+it's kept in a private playlist named "sombrAMP layout", which sombrAMP doesn't show; other apps and Navidrome's web
+interface show it as an empty playlist. Deleting it only forgets the saved layout. Syncing can be turned off at the top
+of Settings → Layout & Theme.
+
 ## Downloads
 
 The **sombrAMP builds** workflow (`.github/workflows/sombramp.yml`) builds Android, iOS and Windows on every push

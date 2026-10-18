@@ -15,6 +15,7 @@ import '../jellyfin_api.dart';
 import 'lrclib_lyrics.dart';
 import 'subsonic_api.dart';
 import 'subsonic_ids.dart';
+import 'subsonic_layout_playlist.dart';
 import 'subsonic_library.dart';
 import 'subsonic_mapper.dart';
 
@@ -190,6 +191,21 @@ class SubsonicJellyfinApi implements JellyfinApi {
     await _api.ping(server);
     return _emptyResponse(statusCode: 200);
   }
+
+  @override
+  Future<dynamic> getDisplayPreferences({
+    required String displayPreferencesId,
+    required String userId,
+    required String clientName,
+  }) => throw const SubsonicUnsupportedException("Display preferences");
+
+  @override
+  Future<Response<dynamic>> updateDisplayPreferences({
+    required String displayPreferencesId,
+    required String userId,
+    required String clientName,
+    required Map<String, dynamic> displayPreferences,
+  }) => throw const SubsonicUnsupportedException("Display preferences");
 
   @override
   Future<dynamic> updateCapabilities({
@@ -794,6 +810,40 @@ class SubsonicJellyfinApi implements JellyfinApi {
     for (final batch in sorted.slices(_playlistBatchSize)) {
       await _api.updatePlaylist(server, playlistId: playlistId, songIndexesToRemove: batch);
     }
+  }
+
+  // Layout
+
+  /// The layout saved with the account, in the playlist that keeps it (see [SubsonicLayoutPlaylist]).
+  Future<String?> loadLayout() async =>
+      SubsonicLayoutPlaylist.layoutIn((await _layoutPlaylist())?["comment"] as String?);
+
+  Future<void> saveLayout(String layout) async {
+    final server = this.server;
+    var playlistId = (await _layoutPlaylist())?["id"] as String?;
+    if (playlistId == null) {
+      final created = await _api.createPlaylist(server, name: SubsonicLayoutPlaylist.name);
+      // Servers implementing API versions before 1.14.0 don't return the new playlist
+      playlistId = created?["id"] as String? ?? (await _layoutPlaylist())?["id"] as String?;
+      if (playlistId == null) {
+        throw const SubsonicException(SubsonicException.notFound, "Couldn't find the new layout playlist");
+      }
+    }
+    await _api.updatePlaylist(
+      server,
+      playlistId: playlistId,
+      comment: SubsonicLayoutPlaylist.commentFor(layout),
+      public: false,
+    );
+  }
+
+  /// The user's playlist keeping the layout, the most recently changed one if a race created several.
+  Future<Map<String, dynamic>?> _layoutPlaylist() async {
+    final username = server.credentials.username;
+    return (await _api.getPlaylists(server))
+        .where((playlist) => SubsonicLayoutPlaylist.isOwnedBy(playlist, username: username))
+        .sortedBy((playlist) => playlist["changed"] as String? ?? "")
+        .lastOrNull;
   }
 
   // Helpers

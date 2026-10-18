@@ -869,4 +869,56 @@ final class _$JellyfinApi extends JellyfinApi {
     final Request $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<dynamic> getDisplayPreferences({
+    required String displayPreferencesId,
+    required String userId,
+    required String clientName,
+  }) async {
+    final Uri $url = Uri.parse('/DisplayPreferences/${displayPreferencesId}');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'userId': userId,
+      'client': clientName,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    final Response $response = await client.send<dynamic, dynamic>(
+      $request,
+      requestConverter: JsonConverter.requestFactory,
+      responseConverter: JsonConverter.responseFactory,
+    );
+    return $response.bodyOrThrow;
+  }
+
+  @override
+  Future<Response<dynamic>> updateDisplayPreferences({
+    required String displayPreferencesId,
+    required String userId,
+    required String clientName,
+    required Map<String, dynamic> displayPreferences,
+  }) {
+    final Uri $url = Uri.parse('/DisplayPreferences/${displayPreferencesId}');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'userId': userId,
+      'client': clientName,
+    };
+    final $body = displayPreferences;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+      parameters: $params,
+    );
+    return client.send<dynamic, dynamic>(
+      $request,
+      requestConverter: JsonConverter.requestFactory,
+      responseConverter: JsonConverter.responseFactory,
+    );
+  }
 }

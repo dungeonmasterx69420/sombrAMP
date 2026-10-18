@@ -219,6 +219,7 @@ class DefaultSettings {
   static const lyricsFontSize = LyricsFontSize.medium;
   static const showLyricsScreenAlbumPrelude = true;
   static const lookUpLyricsOnline = true;
+  static const syncLayoutWithAccount = true;
   static const showStopButtonOnMediaNotification = false;
   static const showShuffleButtonOnMediaNotification = true;
   static const showFavoriteButtonOnMediaNotification = true;
@@ -488,6 +489,7 @@ class FinampSettings {
     this.clientCertificate = DefaultSettings.clientCertificate,
     this.showQuickActionsBanner = DefaultSettings.showQuickActionsBanner,
     this.perTabContentViewType = DefaultSettings.perTabContentViewType,
+    this.syncLayoutWithAccount = DefaultSettings.syncLayoutWithAccount,
   });
 
   @HiveField(0, defaultValue: DefaultSettings.isOffline)
@@ -995,6 +997,10 @@ class FinampSettings {
   @HiveField(160, defaultValue: DefaultSettings.perTabContentViewType)
   @SettingsHelperMap("tabContentType")
   Map<ContentType, ContentViewType> perTabContentViewType;
+
+  /// Whether the layout is stored with the user's account, so that it follows them to their other devices.
+  @HiveField(162, defaultValue: DefaultSettings.syncLayoutWithAccount)
+  bool syncLayoutWithAccount;
 
   static Future<FinampSettings> create() async {
     final downloadLocation = await DownloadLocation.create(

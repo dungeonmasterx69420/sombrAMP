@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:finamp/components/HomeScreen/finamp_music_screen_header.dart';
@@ -16,6 +17,7 @@ import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
+import 'package:finamp/services/layout_sync_service.dart';
 import 'package:finamp/services/music_providers.dart';
 import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/gestures.dart';
@@ -113,6 +115,10 @@ class _MusicScreenState extends ConsumerState<MusicScreen> with TickerProviderSt
   @override
   void initState() {
     super.initState();
+    if (widget.showHeader) {
+      // Once the main screen is shown, so that a question about which layout to keep isn't closed by navigating to it
+      WidgetsBinding.instance.addPostFrameCallback((_) => unawaited(GetIt.instance<LayoutSyncService>().refresh()));
+    }
   }
 
   @override

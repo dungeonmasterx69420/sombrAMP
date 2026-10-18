@@ -1325,6 +1325,14 @@ extension FinampSetters on FinampSettingsHelper {
     ).put("FinampSettings", finampSettingsTemp);
   }
 
+  static void setSyncLayoutWithAccount(bool newSyncLayoutWithAccount) {
+    FinampSettings finampSettingsTemp = FinampSettingsHelper.finampSettings;
+    finampSettingsTemp.syncLayoutWithAccount = newSyncLayoutWithAccount;
+    Hive.box<FinampSettings>(
+      "FinampSettings",
+    ).put("FinampSettings", finampSettingsTemp);
+  }
+
   static void setBufferDuration(Duration newBufferDuration) {
     FinampSettings finampSettingsTemp = FinampSettingsHelper.finampSettings;
     finampSettingsTemp.bufferDuration = newBufferDuration;
@@ -1773,6 +1781,8 @@ extension FinampSettingsProviderSelectors on StreamProvider<FinampSettings> {
   ) => finampSettingsProvider.select(
     (value) => value.requireValue.perTabContentViewType[tabContentType],
   );
+  ProviderListenable<bool> get syncLayoutWithAccount => finampSettingsProvider
+      .select((value) => value.requireValue.syncLayoutWithAccount);
   ProviderListenable<DownloadProfile> get downloadTranscodingProfile =>
       finampSettingsProvider.select(
         (value) => value.requireValue.downloadTranscodingProfile,

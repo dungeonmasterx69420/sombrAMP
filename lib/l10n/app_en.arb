@@ -3903,5 +3903,45 @@
     "lookUpLyricsOnlineSubtitle": "When your server has no lyrics for a track, look them up on LRCLIB (lrclib.net). This sends the track's title, artist, album and length there.",
     "@lookUpLyricsOnlineSubtitle": {
         "description": "Subtitle of the setting that looks up lyrics on LRCLIB when the Subsonic server has none."
+    },
+    "syncLayoutWithAccountTitle": "Same layout on all your devices",
+    "@syncLayoutWithAccountTitle": {
+        "description": "Title of the setting that saves the layout with the user's account on the server, so that every device they log in on uses it."
+    },
+    "syncLayoutWithAccountSubtitle": "Saves the layout, theme, tabs and home screen with your account, so that they follow you to every device you log in on. Navidrome and other Subsonic servers keep them in a private playlist named \"{playlistName}\".",
+    "@syncLayoutWithAccountSubtitle": {
+        "description": "Subtitle of the setting that saves the layout with the user's account on the server.",
+        "placeholders": {
+            "playlistName": {
+                "type": "String",
+                "example": "sombrAMP layout"
+            }
+        }
+    },
+    "layoutSyncPromptTitle": "Use your saved layout?",
+    "@layoutSyncPromptTitle": {
+        "description": "Title of the question asked the first time a device syncs its layout with the account, when the two differ."
+    },
+    "layoutSyncPromptMessage": "Your account has a layout that was saved on {device} ({date}), which is different from this device's. Use it here too, or keep this device's layout and save it to your account instead?",
+    "@layoutSyncPromptMessage": {
+        "description": "Question asked the first time a device syncs its layout with the account, when the two differ.",
+        "placeholders": {
+            "device": {
+                "type": "String",
+                "example": "Pixel 8"
+            },
+            "date": {
+                "type": "String",
+                "example": "Oct 18, 2026 1:10 PM"
+            }
+        }
+    },
+    "layoutSyncUseSavedLayout": "Use saved layout",
+    "@layoutSyncUseSavedLayout": {
+        "description": "Button that applies the layout saved with the account to this device."
+    },
+    "layoutSyncKeepDeviceLayout": "Keep this device's",
+    "@layoutSyncKeepDeviceLayout": {
+        "description": "Button that keeps this device's layout, and saves it with the account in place of the saved one."
     }
 }
