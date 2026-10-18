@@ -88,6 +88,7 @@ class FinampSettingsHelper {
     finampSettingsTemp.showLyricsScreenAlbumPrelude = DefaultSettings.showLyricsScreenAlbumPrelude;
     finampSettingsTemp.lyricsAlignment = DefaultSettings.lyricsAlignment;
     finampSettingsTemp.lyricsFontSize = DefaultSettings.lyricsFontSize;
+    finampSettingsTemp.lookUpLyricsOnline = DefaultSettings.lookUpLyricsOnline;
 
     Hive.box<FinampSettings>("FinampSettings").put("FinampSettings", finampSettingsTemp);
   }

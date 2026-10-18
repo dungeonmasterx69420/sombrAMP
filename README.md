@@ -28,6 +28,11 @@ Servers implementing the [Subsonic API](http://www.subsonic.org/pages/api.jsp) (
 directly. Just enter the server's address when logging in: sombrAMP detects the kind of server automatically and
 also tries Navidrome's default port `4533`.
 
+When the server has no lyrics for a track, sombrAMP looks them up on [LRCLIB](https://lrclib.net), a free lyrics
+database, sending it the track's title, artist, album and length. This can be turned off in Settings → Layout &
+Theme → Lyrics. Lyrics can also be stored with the music, as `.lrc` files next to the tracks or embedded in them,
+which Navidrome picks up on its next scan.
+
 Some features are only available on Jellyfin: Quick Connect, remote control from other clients, editing metadata
 and playlist images, and favoriting playlists or genres. Lyrics of downloaded tracks aren't available offline, and
 "instant mixes" need the server to be configured with an external agent like Last.fm, otherwise they fall back to

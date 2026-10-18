@@ -8,6 +8,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import '../extensions/localizations.dart';
 import '../models/finamp_models.dart';
 import '../services/finamp_settings_helper.dart';
+import '../services/finamp_user_helper.dart';
 
 class LyricsSettingsScreen extends StatefulWidget {
   const LyricsSettingsScreen({super.key});
@@ -34,8 +35,27 @@ class _LyricsSettingsScreenState extends State<LyricsSettingsScreen> {
           ShowLyricsScreenAlbumPreludeToggle(),
           LyricsAlignmentSelector(),
           LyricsFontSizeSelector(),
+          LookUpLyricsOnlineToggle(),
         ],
       ),
+    );
+  }
+}
+
+/// Only Subsonic servers (like Navidrome) are covered: Jellyfin servers get lyrics from LRCLIB through a plugin.
+class LookUpLyricsOnlineToggle extends ConsumerWidget {
+  const LookUpLyricsOnlineToggle({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (!(ref.watch(FinampUserHelper.finampCurrentUserProvider)?.isSubsonic ?? false)) {
+      return const SizedBox.shrink();
+    }
+    return SwitchListTile.adaptive(
+      title: Text(AppLocalizations.of(context)!.lookUpLyricsOnlineTitle),
+      subtitle: Text(AppLocalizations.of(context)!.lookUpLyricsOnlineSubtitle),
+      value: ref.watch(finampSettingsProvider.lookUpLyricsOnline),
+      onChanged: FinampSetters.setLookUpLyricsOnline,
     );
   }
 }

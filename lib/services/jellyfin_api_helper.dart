@@ -44,6 +44,7 @@ class JellyfinApiHelper {
     baseUrl: () => baseUrlTemp ?? Uri.parse(_finampUserHelper.currentUser!.baseURL),
     // While logging in, there are no stored credentials yet.  They're passed to the authentication request instead.
     credentials: () => baseUrlTemp == null ? _finampUserHelper.currentUser?.subsonicCredentials : null,
+    lookUpLyricsOnline: () => FinampSettingsHelper.finampSettings.lookUpLyricsOnline,
   );
 
   /// The API for the server we're currently talking to.

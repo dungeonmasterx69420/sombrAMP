@@ -218,6 +218,7 @@ class DefaultSettings {
   static const lyricsAlignment = LyricsAlignment.start;
   static const lyricsFontSize = LyricsFontSize.medium;
   static const showLyricsScreenAlbumPrelude = true;
+  static const lookUpLyricsOnline = true;
   static const showStopButtonOnMediaNotification = false;
   static const showShuffleButtonOnMediaNotification = true;
   static const showFavoriteButtonOnMediaNotification = true;
@@ -416,6 +417,7 @@ class FinampSettings {
     this.lyricsAlignment = DefaultSettings.lyricsAlignment,
     this.lyricsFontSize = DefaultSettings.lyricsFontSize,
     this.showLyricsScreenAlbumPrelude = DefaultSettings.showLyricsScreenAlbumPrelude,
+    this.lookUpLyricsOnline = DefaultSettings.lookUpLyricsOnline,
     this.showStopButtonOnMediaNotification = DefaultSettings.showStopButtonOnMediaNotification,
     this.showShuffleButtonOnMediaNotification = DefaultSettings.showShuffleButtonOnMediaNotification,
     this.showFavoriteButtonOnMediaNotification = DefaultSettings.showFavoriteButtonOnMediaNotification,
@@ -712,6 +714,10 @@ class FinampSettings {
 
   @HiveField(71, defaultValue: DefaultSettings.showLyricsScreenAlbumPrelude)
   bool showLyricsScreenAlbumPrelude;
+
+  /// Whether lyrics a Subsonic server doesn't have are looked up on LRCLIB.
+  @HiveField(161, defaultValue: DefaultSettings.lookUpLyricsOnline)
+  bool lookUpLyricsOnline;
 
   @HiveField(72, defaultValue: DefaultSettings.keepScreenOnOption)
   KeepScreenOnOption keepScreenOnOption;

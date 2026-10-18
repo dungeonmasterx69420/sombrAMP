@@ -12,6 +12,7 @@ import 'package:logging/logging.dart';
 import 'package:uuid/uuid.dart';
 
 import '../jellyfin_api.dart';
+import 'lrclib_lyrics.dart';
 import 'subsonic_api.dart';
 import 'subsonic_ids.dart';
 import 'subsonic_library.dart';
@@ -50,11 +51,18 @@ class SubsonicJellyfinApi implements JellyfinApi {
     required Uri Function() baseUrl,
     required SubsonicCredentials? Function() credentials,
     SubsonicApi? api,
+    this.lookUpLyricsOnline,
+    LrclibLyrics? onlineLyrics,
   }) : _baseUrl = baseUrl,
        _credentials = credentials,
-       _api = api ?? SubsonicApi() {
+       _api = api ?? SubsonicApi(),
+       _onlineLyrics = onlineLyrics ?? LrclibLyrics() {
     library = SubsonicLibrary(_api);
   }
+
+  /// Whether lyrics the server doesn't have are looked up on LRCLIB.  Never, if not given.
+  final bool Function()? lookUpLyricsOnline;
+  final LrclibLyrics _onlineLyrics;
 
   static final _logger = Logger("SubsonicJellyfinApi");
 
@@ -594,12 +602,19 @@ class SubsonicJellyfinApi implements JellyfinApi {
     }
     return _lyrics[id] ??= Future.sync(() async {
       try {
-        final server = this.server;
-        if ((await library.openSubsonicExtensions(server)).contains("songLyrics")) {
-          return SubsonicMapper.structuredLyrics(await _api.getLyricsBySongId(server, id));
+        final lyrics = await _serverLyricsFor(song);
+        if (lyrics != null || !(lookUpLyricsOnline?.call() ?? false)) {
+          return lyrics;
         }
-        final lyrics = await _api.getLyrics(server, artist: song["artist"] as String?, title: song["title"] as String?);
-        return SubsonicMapper.plainLyrics(lyrics);
+        final artists = SubsonicApi.asList(song["artists"]);
+        final durationSeconds = (song["duration"] as num?)?.toInt();
+        return await _onlineLyrics.find(
+          title: song["title"] as String? ?? "",
+          artist: song["artist"] as String? ?? "",
+          primaryArtist: artists.firstOrNull?["name"] as String?,
+          album: song["album"] as String?,
+          duration: durationSeconds == null ? null : Duration(seconds: durationSeconds),
+        );
       } catch (e) {
         _logger.warning("Couldn't fetch lyrics for $id", e);
         // Don't remember failures, so the lyrics are fetched again next time
@@ -607,6 +622,15 @@ class SubsonicJellyfinApi implements JellyfinApi {
         return null;
       }
     });
+  }
+
+  Future<LyricDto?> _serverLyricsFor(SubsonicJson song) async {
+    final server = this.server;
+    if ((await library.openSubsonicExtensions(server)).contains("songLyrics")) {
+      return SubsonicMapper.structuredLyrics(await _api.getLyricsBySongId(server, song["id"] as String));
+    }
+    final lyrics = await _api.getLyrics(server, artist: song["artist"] as String?, title: song["title"] as String?);
+    return SubsonicMapper.plainLyrics(lyrics);
   }
 
   // Playlists
