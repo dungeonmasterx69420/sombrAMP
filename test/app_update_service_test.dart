@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-Map<String, dynamic> release(String tag, {List<String> assets = const ["sombrAMP-build-1010.apk"]}) => {
+Map<String, dynamic> release(String tag, {List<String> assets = const ["sombrAMP-build-1010-android.apk"]}) => {
   "tag_name": tag,
   "body": "Draw the names under album covers in the phosphor",
   "assets": [
@@ -21,8 +21,30 @@ void main() {
       final update = AppUpdateService.updateFromRelease(release("build-1010"), 1005);
       expect(update?.buildNumber, 1010);
       expect(update?.notes, "Draw the names under album covers in the phosphor");
-      expect(update?.apkUrl.toString(), "https://github.com/o/r/releases/download/build-1010/sombrAMP-build-1010.apk");
+      expect(
+        update?.apkUrl.toString(),
+        "https://github.com/o/r/releases/download/build-1010/sombrAMP-build-1010-android.apk",
+      );
       expect(update?.apkSize, 1234);
+    });
+
+    test("picks the APK among the other platforms' files", () {
+      final update = AppUpdateService.updateFromRelease(
+        release(
+          "build-1010",
+          assets: [
+            "sombrAMP-build-1010-ios.ipa",
+            "sombrAMP-build-1010-windows.zip",
+            "sombrAMP-build-1010-android.apk",
+            "sombrAMP-build-1010-windows.msix",
+          ],
+        ),
+        1005,
+      );
+      expect(
+        update?.apkUrl.toString(),
+        "https://github.com/o/r/releases/download/build-1010/sombrAMP-build-1010-android.apk",
+      );
     });
 
     test("ignores the running build and older ones", () {
