@@ -53,7 +53,7 @@ Everything comes from System S; nothing in the look is new to this app.
 
 - **Colour.** Ink, pane and desk greys for everything, plus one phosphor (amber by default; green, cyan and pink
   in Settings → Layout & Theme → Phosphor) for what is live: playback progress, the playing track, downloads and
-  focus. Album art no longer tints the interface.
+  focus. The names under album covers are drawn in it too. Album art no longer tints the interface.
 - **Type.** Pixelify Sans for titles, buttons and labels; IBM Plex Mono for body text and figures. Both are
   bundled under the SIL Open Font License (`assets/fonts/`).
 - **Covers.** Artwork keeps its full colour, framed square on a pane with a 1px ink edge.
