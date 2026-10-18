@@ -3905,6 +3905,10 @@ class FinampStorableQueueInfo extends FinampStorableQueueInfoLegacy {
     required this.sourceIndex,
     required this.trackSourceIndexes,
     required this.packedShuffleOrder,
+    this.previousTrackIds,
+    this.currentTrackId,
+    this.nextUpIds,
+    this.queueIds,
   });
 
   factory FinampStorableQueueInfo.fromQueueInfo(
@@ -3965,38 +3969,51 @@ class FinampStorableQueueInfo extends FinampStorableQueueInfoLegacy {
     final packedOrder = info.trackCount <= 1
         ? BitBuffer()
         : BitBuffer.fromBits(shuffleOrder, bitsPerIndex: (info.trackCount - 1).bitLength);
+
+    // Ids that aren't Jellyfin's (like those of Subsonic servers) can't be packed, so they're stored as strings.
+    final packable = info.fullQueue.every((track) => canPackId(track.baseItemId));
+    Uint8List pack(List<FinampQueueItem> tracks) =>
+        packable ? packIds(tracks.map<BaseItemId>((track) => track.baseItemId).toList()) : Uint8List(0);
+    List<String>? unpacked(List<FinampQueueItem> tracks) =>
+        packable ? null : tracks.map((track) => track.baseItemId.raw).toList();
+
     return FinampStorableQueueInfo(
-      packedPreviousTracks: packIds(info.previousTracks.map<BaseItemId>((track) => track.baseItemId).toList()),
-      packedCurrentTrack: info.currentTrack == null ? Uint8List(0) : packIds([info.currentTrack!.baseItemId]),
+      packedPreviousTracks: pack(info.previousTracks),
+      packedCurrentTrack: info.currentTrack == null ? Uint8List(0) : pack([info.currentTrack!]),
       currentTrackSeek: seek,
-      packedNextUp: packIds(info.nextUp.map<BaseItemId>((track) => track.baseItemId).toList()),
-      packedQueue: packIds(info.queue.map<BaseItemId>((track) => track.baseItemId).toList()),
+      packedNextUp: pack(info.nextUp),
+      packedQueue: pack(info.queue),
       creation: DateTime.now().millisecondsSinceEpoch,
       sourceList: sourceList,
       sourceIndex: queueSource,
       trackSourceIndexes: buffer.toUInt8List(),
       packedShuffleOrder: order == FinampPlaybackOrder.shuffled ? packedOrder.toUInt8List() : null,
+      previousTrackIds: unpacked(info.previousTracks),
+      currentTrackId: packable ? null : info.currentTrack?.baseItemId.raw,
+      nextUpIds: unpacked(info.nextUp),
+      queueIds: unpacked(info.queue),
     );
   }
 
   @HiveField(0)
   final Uint8List packedPreviousTracks;
-  List<BaseItemId> get previousTracks => _unpackIds(packedPreviousTracks);
+  List<BaseItemId> get previousTracks => _unpackIds(packedPreviousTracks, previousTrackIds);
 
   @HiveField(1)
   final Uint8List packedCurrentTrack;
-  BaseItemId? get currentTrack => _unpackIds(packedCurrentTrack).firstOrNull;
+  BaseItemId? get currentTrack =>
+      currentTrackId == null ? _unpackIds(packedCurrentTrack, null).firstOrNull : BaseItemId(currentTrackId!);
 
   @HiveField(2)
   final int? currentTrackSeek;
 
   @HiveField(3)
   final Uint8List packedNextUp;
-  List<BaseItemId> get nextUp => _unpackIds(packedNextUp);
+  List<BaseItemId> get nextUp => _unpackIds(packedNextUp, nextUpIds);
 
   @HiveField(4)
   final Uint8List packedQueue;
-  List<BaseItemId> get queue => _unpackIds(packedQueue);
+  List<BaseItemId> get queue => _unpackIds(packedQueue, queueIds);
 
   @HiveField(5)
   // timestamp, milliseconds since epoch
@@ -4014,6 +4031,19 @@ class FinampStorableQueueInfo extends FinampStorableQueueInfoLegacy {
   @HiveField(9)
   final Uint8List? packedShuffleOrder;
 
+  /// The ids of the tracks, if they can't be packed (see [canPackId]).  The packed lists are empty then.
+  @HiveField(10)
+  final List<String>? previousTrackIds;
+
+  @HiveField(11)
+  final String? currentTrackId;
+
+  @HiveField(12)
+  final List<String>? nextUpIds;
+
+  @HiveField(13)
+  final List<String>? queueIds;
+
   QueueItemSource get source => sourceList[sourceIndex];
 
   List<QueueItemSource> get trackSources =>
@@ -4023,7 +4053,11 @@ class FinampStorableQueueInfo extends FinampStorableQueueInfoLegacy {
       packedShuffleOrder == null ? null : _unpackIntList(packedShuffleOrder!, max(0, trackCount - 1)).toList();
 
   int get trackCount =>
-      (packedPreviousTracks.length + packedCurrentTrack.length + packedNextUp.length + packedQueue.length) ~/ 16;
+      (packedPreviousTracks.length + packedCurrentTrack.length + packedNextUp.length + packedQueue.length) ~/ 16 +
+      (previousTrackIds?.length ?? 0) +
+      (currentTrackId == null ? 0 : 1) +
+      (nextUpIds?.length ?? 0) +
+      (queueIds?.length ?? 0);
 
   /// Source indexes in trackSourceIndexes are stored as n bit unsigned ints packed
   /// into a Uint8List, where n is the smallest number that can index into all entries
@@ -4043,7 +4077,8 @@ class FinampStorableQueueInfo extends FinampStorableQueueInfoLegacy {
     }
   }
 
-  static List<BaseItemId> _unpackIds(Uint8List ids) {
+  static List<BaseItemId> _unpackIds(Uint8List ids, List<String>? unpackedIds) {
+    if (unpackedIds != null) return unpackedIds.map(BaseItemId.new).toList();
     List<BaseItemId> out = [];
     for (int i = 0; i < ids.length; i += 16) {
       String id = "";
@@ -4054,6 +4089,11 @@ class FinampStorableQueueInfo extends FinampStorableQueueInfoLegacy {
     }
     return out;
   }
+
+  static final _packableId = RegExp(r"^[0-9a-fA-F]{32}$");
+
+  /// Whether [id] is a 16 byte value formatted as a hexadecimal string, like Jellyfin's ids, so it can be packed.
+  static bool canPackId(BaseItemId id) => _packableId.hasMatch(id.raw);
 
   /// Pack a list of BaseItemIds into a Uint8Lis.  BaseItemIds are assumed to be
   /// 16 byte values formatted as a hexadecimal string.

@@ -1523,13 +1523,17 @@ class FinampStorableQueueInfoAdapter
       sourceIndex: (fields[7] as num).toInt(),
       trackSourceIndexes: fields[8] as Uint8List,
       packedShuffleOrder: fields[9] as Uint8List?,
+      previousTrackIds: (fields[10] as List?)?.cast<String>(),
+      currentTrackId: fields[11] as String?,
+      nextUpIds: (fields[12] as List?)?.cast<String>(),
+      queueIds: (fields[13] as List?)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, FinampStorableQueueInfo obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.packedPreviousTracks)
       ..writeByte(1)
@@ -1549,7 +1553,15 @@ class FinampStorableQueueInfoAdapter
       ..writeByte(8)
       ..write(obj.trackSourceIndexes)
       ..writeByte(9)
-      ..write(obj.packedShuffleOrder);
+      ..write(obj.packedShuffleOrder)
+      ..writeByte(10)
+      ..write(obj.previousTrackIds)
+      ..writeByte(11)
+      ..write(obj.currentTrackId)
+      ..writeByte(12)
+      ..write(obj.nextUpIds)
+      ..writeByte(13)
+      ..write(obj.queueIds);
   }
 
   @override
