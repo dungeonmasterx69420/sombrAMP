@@ -2,6 +2,7 @@ import 'package:finamp/components/ArtistScreen/artist_screen_content.dart';
 import 'package:finamp/components/now_playing_bar.dart';
 import 'package:finamp/models/jellyfin_models.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -23,7 +24,8 @@ class ArtistScreen extends ConsumerWidget {
     final finampUserHelper = GetIt.instance<FinampUserHelper>();
 
     return Scaffold(
-      extendBody: true,
+      // On TVs the content stops above the now playing bar, so it doesn't cover what has the focus
+      extendBody: !isTelevision,
       body: ArtistScreenContent(
         parent: artist,
         library: finampUserHelper.currentUser?.currentView,

@@ -424,7 +424,7 @@ class _VolumeSliderState extends ConsumerState<VolumeSlider> {
                       });
                     },
                     autofocus: false,
-                    focusNode: FocusNode(skipTraversal: true, canRequestFocus: false),
+                    focusNode: keyboardSkippedSliderFocusNode(),
                   ),
                 ),
               ),

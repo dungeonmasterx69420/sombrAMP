@@ -118,60 +118,63 @@ class _TracksSectionState extends ConsumerState<TracksSection> {
       header: Container(
         padding: EdgeInsets.fromLTRB(6, widget.parent.type == "MusicGenre" ? 12 : 0, 6, 0),
         color: Theme.of(context).colorScheme.surface,
-        child: GestureDetector(
-          onTap: () {
-            if (_isExpandable) {
-              setState(() {
-                _manuallyClosed = _showTracks;
-                _showTracks = !_showTracks;
-              });
-            }
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (_isExpandable)
-                        Transform.rotate(
-                          angle: _showTracks ? 0 : -math.pi / 2,
-                          child: const Icon(Icons.arrow_drop_down, size: 24),
-                        ),
-                      if (_isExpandable) const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          widget.tracksText,
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                if (widget.seeAllCallbackFunction != null)
-                  GestureDetector(
-                    onTap: widget.seeAllCallbackFunction,
+        // Ink wells rather than gesture detectors, so a keyboard or remote can focus them. They get their own
+        // material, since the header's colour would cover the focus.
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: _isExpandable
+                ? () => setState(() {
+                    _manuallyClosed = _showTracks;
+                    _showTracks = !_showTracks;
+                  })
+                : null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          AppLocalizations.of(context)!.seeAll,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
+                        if (_isExpandable)
+                          Transform.rotate(
+                            angle: _showTracks ? 0 : -math.pi / 2,
+                            child: const Icon(Icons.arrow_drop_down, size: 24),
+                          ),
+                        if (_isExpandable) const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            widget.tracksText,
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        const SizedBox(width: 4),
-                        Icon(Icons.chevron_right, size: 20, color: Theme.of(context).colorScheme.primary),
                       ],
                     ),
                   ),
-              ],
+                  if (widget.seeAllCallbackFunction != null)
+                    InkWell(
+                      onTap: widget.seeAllCallbackFunction,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.seeAll,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Icon(Icons.chevron_right, size: 20, color: Theme.of(context).colorScheme.primary),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -321,61 +324,64 @@ class _ItemsSectionState extends ConsumerState<CollectionsSection> {
       header: Container(
         padding: EdgeInsets.fromLTRB(6, widget.parent.type == "MusicGenre" ? 12 : 0, 6, 0),
         color: Theme.of(context).colorScheme.surface,
-        child: GestureDetector(
-          onTap: () {
-            if (_isExpandable) {
-              setState(() {
-                _manuallyClosed = _showItems;
-                _showItems = !_showItems;
-              });
-            }
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (_isExpandable)
-                        Transform.rotate(
-                          angle: _showItems ? 0 : -math.pi / 2,
-                          child: const Icon(Icons.arrow_drop_down, size: 24),
-                        ),
-                      if (_isExpandable) const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          widget.itemsText,
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // "See All"
-                if (widget.seeAllCallbackFunction != null)
-                  GestureDetector(
-                    onTap: widget.seeAllCallbackFunction,
+        // Ink wells rather than gesture detectors, so a keyboard or remote can focus them. They get their own
+        // material, since the header's colour would cover the focus.
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: _isExpandable
+                ? () => setState(() {
+                    _manuallyClosed = _showItems;
+                    _showItems = !_showItems;
+                  })
+                : null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          AppLocalizations.of(context)!.seeAll,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.w500,
+                        if (_isExpandable)
+                          Transform.rotate(
+                            angle: _showItems ? 0 : -math.pi / 2,
+                            child: const Icon(Icons.arrow_drop_down, size: 24),
+                          ),
+                        if (_isExpandable) const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            widget.itemsText,
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        const SizedBox(width: 4),
-                        Icon(Icons.chevron_right, size: 20, color: Theme.of(context).colorScheme.primary),
                       ],
                     ),
                   ),
-              ],
+                  // "See All"
+                  if (widget.seeAllCallbackFunction != null)
+                    InkWell(
+                      onTap: widget.seeAllCallbackFunction,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.seeAll,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Icon(Icons.chevron_right, size: 20, color: Theme.of(context).colorScheme.primary),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),

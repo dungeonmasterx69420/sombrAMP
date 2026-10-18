@@ -17,8 +17,10 @@ import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/music_providers.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
@@ -49,6 +51,7 @@ class MusicScreen extends ConsumerStatefulWidget {
 class _MusicScreenState extends ConsumerState<MusicScreen> with TickerProviderStateMixin {
   bool isSearching = false;
   TextEditingController textEditingController = TextEditingController();
+  final _nowPlayingBarFocus = FocusNode(debugLabel: "NowPlayingBar");
   String? searchQuery;
   final Map<ContentType, MusicRefreshCallback> refreshMap = {};
   final Map<ContentType, SortAndFilterController> sortAndFilterControllerMap = {};
@@ -116,6 +119,7 @@ class _MusicScreenState extends ConsumerState<MusicScreen> with TickerProviderSt
   void dispose() {
     _tabController?.dispose();
     textEditingController.dispose();
+    _nowPlayingBarFocus.dispose();
     super.dispose();
   }
 
@@ -226,15 +230,27 @@ class _MusicScreenState extends ConsumerState<MusicScreen> with TickerProviderSt
     // If this setting changes, the appbar will change its preferred height, so we need to rebuild the scaffold.
     ref.watch(finampSettingsProvider.showQuickActionsBanner);
 
+    // On TVs, back on the main screen first takes the focus to the now playing bar: the playback controls are there,
+    // and the remote can't get to it from the middle of a long list.
+    final backFocusesNowPlayingBar = isTelevision && widget.showHeader;
     return PopScope(
-      canPop: !isSearching,
+      canPop: !isSearching && !backFocusesNowPlayingBar,
       onPopInvokedWithResult: (popped, result) {
-        if (isSearching) {
+        if (popped) return;
+        if (ModalRoute.of(context)?.willHandlePopInternally ?? false) {
+          // The drawer is open: this pop only closes it.
+          Navigator.of(context).pop();
+        } else if (isSearching) {
           _stopSearching();
+        } else if (_nowPlayingBarFocus.context != null && !_nowPlayingBarFocus.hasFocus) {
+          _nowPlayingBarFocus.requestFocus();
+        } else {
+          SystemNavigator.pop();
         }
       },
       child: Scaffold(
-        extendBody: true,
+        // On TVs the content stops above the now playing bar, so it doesn't cover what has the focus
+        extendBody: !isTelevision,
         appBar: FinampMusicScreenHeader(
           singleTabConfig: widget.singleTabConfig,
           sortedTabs: sortedTabs.toList(),
@@ -260,7 +276,7 @@ class _MusicScreenState extends ConsumerState<MusicScreen> with TickerProviderSt
           textEditingController: textEditingController,
           isSearching: isSearching,
         ),
-        bottomNavigationBar: NowPlayingBar(),
+        bottomNavigationBar: NowPlayingBar(focusNode: _nowPlayingBarFocus),
         drawerEnableOpenDragGesture: widget.showHeader,
         drawer: widget.showHeader ? const MusicScreenDrawer() : null,
         floatingActionButton: Padding(

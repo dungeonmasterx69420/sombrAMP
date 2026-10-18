@@ -56,6 +56,26 @@ Settings → Check for updates: it downloads them and opens Android's installer,
 Releases need the `ANDROID_KEYSTORE_*` repository secrets, so that every build is signed with the same key; without
 them, each build gets a throwaway key and nothing is released. The secrets the workflow reads are listed at its top.
 
+### Android TV
+
+The same APK runs on Android TV and Google TV, where it's listed on the TV's home screen. To install it, either:
+
+- On the TV, install **Downloader** (by AFTVnews) from the Play Store, open
+  `https://github.com/dungeonmasterx69420/sombrAMP/releases/latest` in it, download the `.apk` and allow Downloader to
+  install unknown apps when it asks; or
+- From a computer, turn on network debugging in the TV's developer options, then
+  `adb connect <the TV's address>` and `adb install <the .apk>`.
+
+On a TV, the remote drives everything:
+
+- The D-pad moves the focus, which is edged or tinted in the phosphor, and select opens or plays what has it.
+- Holding select, or the menu key if the remote has one, does what a long press does on a phone: the menu of an album,
+  artist or track, the other action of a button.
+- On the main screen, back takes the focus to the now playing bar, with play/pause and the player screen behind it;
+  back again leaves the app. Media keys on the remote control playback anywhere.
+- Sliders, like the seek bar and the settings, move with left and right.
+- There's no split screen: select the now playing bar to open the player, and back to return.
+
 ## The design
 
 Everything comes from System S; nothing in the look is new to this app.

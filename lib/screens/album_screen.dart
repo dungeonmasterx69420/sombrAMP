@@ -1,6 +1,7 @@
 import 'package:finamp/components/AlbumScreen/album_screen_content.dart';
 import 'package:finamp/components/now_playing_bar.dart';
 import 'package:finamp/models/jellyfin_models.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +21,8 @@ class AlbumScreen extends ConsumerWidget {
     final BaseItemDto resolvedParent = parent ?? ModalRoute.settingsOf(context)!.arguments as BaseItemDto;
 
     return Scaffold(
-      extendBody: true,
+      // On TVs the content stops above the now playing bar, so it doesn't cover what has the focus
+      extendBody: !isTelevision,
       body: AlbumScreenContent(parent: resolvedParent, genreFilter: genreFilter),
       bottomNavigationBar: const NowPlayingBar(),
     );

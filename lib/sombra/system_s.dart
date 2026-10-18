@@ -174,6 +174,9 @@ class SystemSTheme extends ThemeExtension<SystemSTheme> {
   /// Text on a phosphor fill (`--on-phosphor`).
   final Color onPhosphor;
 
+  /// The tint over what has the keyboard or remote focus: the focus is live too, so it's the phosphor.
+  Color get focus => phosphor.withValues(alpha: 0.3);
+
   static SystemSTheme of(BuildContext context) =>
       Theme.of(context).extension<SystemSTheme>() ?? SystemSTheme.resolve(Theme.brightnessOf(context));
 
@@ -308,9 +311,11 @@ ButtonStyle systemSButtonStyle(SystemSTheme s, {bool isDefault = false}) {
       if (states.contains(WidgetState.pressed)) return p.pane;
       return p.ink;
     }),
-    side: WidgetStateProperty.resolveWith(
-      (states) => BorderSide(color: states.contains(WidgetState.disabled) ? p.faint : p.ink),
-    ),
+    side: WidgetStateProperty.resolveWith((states) {
+      // The focus edges a button in the phosphor, like a focused text field. A remote can focus disabled buttons too.
+      if (states.contains(WidgetState.focused)) return BorderSide(color: s.phosphorInk, width: 2);
+      return BorderSide(color: states.contains(WidgetState.disabled) ? p.faint : p.ink);
+    }),
     shape: WidgetStatePropertyAll(
       SystemSButtonBorder(radius: 10, ringGap: isDefault ? p.pane : null, ring: isDefault ? p.ink : null),
     ),
@@ -337,9 +342,10 @@ ButtonStyle systemSTextButtonStyle(SystemSTheme s) {
     overlayColor: const WidgetStatePropertyAll(Colors.transparent),
     splashFactory: NoSplash.splashFactory,
     backgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.focused)) return s.focus;
       if (states.contains(WidgetState.disabled)) return Colors.transparent;
       if (states.contains(WidgetState.pressed)) return p.inset;
-      if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) return p.hover;
+      if (states.contains(WidgetState.hovered)) return p.hover;
       return Colors.transparent;
     }),
     foregroundColor: WidgetStateProperty.resolveWith(
@@ -388,7 +394,7 @@ ThemeData systemSThemeData(
     disabledColor: p.faint,
     hoverColor: p.hover,
     highlightColor: p.inset,
-    focusColor: s.phosphor.withValues(alpha: 0.3),
+    focusColor: s.focus,
     splashColor: Colors.transparent,
     splashFactory: NoSplash.splashFactory,
     applyElevationOverlayColor: false,
@@ -413,6 +419,12 @@ ThemeData systemSThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(style: button),
     outlinedButtonTheme: OutlinedButtonThemeData(style: button),
     textButtonTheme: TextButtonThemeData(style: systemSTextButtonStyle(s)),
+    // Icon buttons have no edge of their own, so the focus tints them like a list row. Other states keep Material's.
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        overlayColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.focused) ? s.focus : null),
+      ),
+    ),
     filledButtonTheme: FilledButtonThemeData(style: systemSButtonStyle(s, isDefault: true)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: p.pane,
