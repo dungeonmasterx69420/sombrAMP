@@ -40,11 +40,15 @@ random tracks of the same genre.
 
 ## Downloads
 
-The **sombrAMP builds** workflow (`.github/workflows/sombramp.yml`) builds Android and Windows on every push and
-attaches them to the run on the repository's Actions tab:
+The **sombrAMP builds** workflow (`.github/workflows/sombramp.yml`) builds Android, iOS and Windows on every push
+and attaches them to the run on the repository's Actions tab:
 
 - **sombrAMP-android**: a release APK. Allow installing from your browser or file manager, then open it. It has
   the same app ID as Finamp, so uninstall Finamp first if you have it.
+- **sombrAMP-ios**: an unsigned IPA, for sideloading with a tool that signs it with your own Apple ID, like
+  [AltStore](https://altstore.io), [SideStore](https://sidestore.io) or [Sideloadly](https://sideloadly.io). With
+  a free Apple ID the app has to be signed again every 7 days (AltStore and SideStore do that in the background).
+  CarPlay and Siri need entitlements a personal Apple ID doesn't get, so they don't work in a sideloaded build.
 - **sombrAMP-windows**: the app folder. Unzip it anywhere and run `Finamp.exe`; nothing to install.
 - **sombrAMP-windows-msix**: an installer. It is signed with the test certificate in `windows/runner/resources`
   (password `finamp`), so Windows only installs it after that certificate is added to *Local Machine → Trusted

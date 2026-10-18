@@ -1,6 +1,9 @@
 name: sombrAMP builds
 
-# Release builds of sombrAMP for Android and Windows, uploaded as artifacts of each run.
+# Release builds of sombrAMP for Android, iOS and Windows, uploaded as artifacts of each run.
+#
+# The iOS build is an unsigned IPA, for sideloading: tools like AltStore, SideStore or Sideloadly sign it with the
+# installer's own Apple ID.
 #
 # Android builds of the main branch (redesign) signed with the key from the secrets are also published as GitHub
 # releases tagged build-<versionCode>, which the app offers as updates. The five newest are kept.
@@ -125,6 +128,46 @@ jobs:
           gh release list --limit 100 --json tagName,createdAt \
             --jq '[.[] | select(.tagName | startswith("build-"))] | sort_by(.createdAt) | reverse | .[5:][] | .tagName' |
             while read -r old; do gh release delete "$old" --cleanup-tag --yes; done
+
+  ios:
+    name: iOS
+    runs-on: macos-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v6
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - run: flutter pub get
+
+      # The same numbering as the Android build, so both carry the same build number
+      - name: Number the build
+        run: echo "BUILD_NUMBER=$((1000 + GITHUB_RUN_NUMBER))" >> "$GITHUB_ENV"
+
+      # Unsigned: whoever sideloads it signs it with their own Apple ID. Without --no-pub, as on Android.
+      - run: flutter build ios --release --no-codesign --build-number="$BUILD_NUMBER"
+
+      # An IPA is the app bundle in a Payload folder, zipped
+      - name: Package the IPA
+        run: |
+          mkdir Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/
+          zip -qry "sombrAMP-${GITHUB_REF_NAME//\//-}-ios.ipa" Payload
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: sombrAMP-ios
+          path: sombrAMP-*-ios.ipa
+          compression-level: 0 # an IPA is already compressed
 
   windows:
     name: Windows
