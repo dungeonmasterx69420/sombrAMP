@@ -56,15 +56,14 @@ Everything comes from System S; nothing in the look is new to this app.
   focus. Album art no longer tints the interface.
 - **Type.** Pixelify Sans for titles, buttons and labels; IBM Plex Mono for body text and figures. Both are
   bundled under the SIL Open Font License (`assets/fonts/`).
-- **Covers.** Artwork is dithered to 1 bit with the same Atkinson diffusion System S uses, drawn in ink on a pane.
+- **Covers.** Artwork keeps its full colour, framed square on a pane with a 1px ink edge.
 - **Shapes.** 1px ink edges, square covers, buttons that invert while pressed and a ring on the default one,
   windows and dialogs with the extruded shadow, toasts and menus with a hard offset shadow.
 - **Mark.** The S mark is the in-app logo and every app icon; the sign-in flow is laid out like System S's
   sign-in, with the sombra.wtf wordmark.
 
 The System S implementation lives in [`lib/sombra/`](lib/sombra): tokens and the Material theme in
-`system_s.dart`, the marks, desk and window widgets in `system_s_widgets.dart`, the cover dithering in
-`dithered_image.dart`.
+`system_s.dart`, and the marks, desk and window widgets in `system_s_widgets.dart`.
 
 ### Regenerating the marks and icons
 

@@ -10,7 +10,6 @@ import 'package:octo_image/src/image/fade_widget.dart';
 import 'package:uuid/v4.dart';
 
 import '../models/jellyfin_models.dart';
-import '../sombra/dithered_image.dart';
 import '../sombra/system_s.dart';
 import '../services/album_image_provider.dart';
 import '../services/theme_provider.dart';
@@ -18,7 +17,7 @@ import '../services/theme_provider.dart';
 typedef ImageProviderCallback = void Function(ImageProvider theme);
 
 /// This widget provides the default look for album images throughout the app -
-/// aspect ratio 1, square, dithered to 1 bit as System S draws artwork. If you don't want these
+/// aspect ratio 1, square, in a System S frame. If you don't want these
 /// customisations, use [BareAlbumImage] or get an [ImageProvider] directly
 /// through [AlbumImageInfo.init].
 class AlbumImage extends ConsumerStatefulWidget {
@@ -235,15 +234,11 @@ class BareAlbumImage extends ConsumerWidget {
     final blurHash = imageInfo.item?.blurHash;
     final image = imageInfo.image;
     final palette = SystemSTheme.of(context).palette;
-    final inkIsLit = Theme.brightnessOf(context) == Brightness.dark;
 
-    // System S covers: 1-bit, dithered in ink on a pane with an ink edge, filling their square.
+    // System S covers: in full colour on a pane with an ink edge, filling their square.
     return LayoutBuilder(
       builder: (context, constraints) {
         final side = constraints.biggest.shortestSide.isFinite ? constraints.biggest.shortestSide : 192.0;
-        final cells = DitheredImage.cellsFor(side);
-        ImageProvider dithered(ImageProvider source) =>
-            DitheredImage(source, cells: cells, ink: palette.ink, inkIsLit: inkIsLit);
         return Container(
           width: side,
           height: side,
@@ -258,13 +253,10 @@ class BareAlbumImage extends ConsumerWidget {
               if (blurHash != null) {
                 localPlaceholder ??= (_) => Image(
                   fit: BoxFit.contain,
-                  filterQuality: FilterQuality.none,
-                  image: dithered(
-                    BlurHashImage(
-                      blurHash,
-                      // Allow scaling blurhashes up to 3200 pixels wide by setting scale
-                      scale: 0.01,
-                    ),
+                  image: BlurHashImage(
+                    blurHash,
+                    // Allow scaling blurhashes up to 3200 pixels wide by setting scale
+                    scale: 0.01,
                   ),
                 );
               }
@@ -277,7 +269,7 @@ class BareAlbumImage extends ConsumerWidget {
 
                 return Image(
                   key: ValueKey(image),
-                  image: dithered(image),
+                  image: image,
                   frameBuilder: (_, child, frame, _) => ImageFader(
                     key: ValueKey(image),
                     fadeTime: fadeTime,
@@ -288,8 +280,7 @@ class BareAlbumImage extends ConsumerWidget {
                   alignment: Alignment.center,
                   repeat: ImageRepeat.noRepeat,
                   matchTextDirection: false,
-                  // Keep the dithered pixels hard-edged when scaled up.
-                  filterQuality: FilterQuality.none,
+                  filterQuality: FilterQuality.medium,
                   errorBuilder: defaultErrorBuilder,
                 );
               }
