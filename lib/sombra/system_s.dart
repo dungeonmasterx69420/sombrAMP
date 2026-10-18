@@ -422,7 +422,9 @@ ThemeData systemSThemeData(
     // Icon buttons have no edge of their own, so the focus tints them like a list row. Other states keep Material's.
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        overlayColor: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.focused) ? s.focus : null),
+        overlayColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.focused) ? s.focus : null,
+        ),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(style: systemSButtonStyle(s, isDefault: true)),
