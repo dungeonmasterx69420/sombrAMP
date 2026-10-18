@@ -6,8 +6,10 @@ import 'package:audio_service/audio_service.dart';
 import 'package:finamp/components/AddToPlaylistScreen/add_to_playlist_button.dart';
 import 'package:finamp/components/audio_fade_progress_visualizer_container.dart';
 import 'package:finamp/components/global_snackbar.dart';
+import 'package:finamp/components/now_playing_volume_slider.dart';
 import 'package:finamp/components/one_line_marquee_helper.dart';
 import 'package:finamp/components/print_duration.dart';
+import 'package:finamp/utils/platform_helper.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/services/current_track_metadata_provider.dart';
@@ -426,6 +428,9 @@ class NowPlayingBar extends ConsumerWidget {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
+                                        // Desktops have no volume buttons, so the bar gets a slider when there's room
+                                        if (isDesktop && MediaQuery.widthOf(context) >= 600)
+                                          NowPlayingVolumeSlider(color: primaryTextColor),
                                         AddToPlaylistButton(
                                           item: currentTrackBaseItem,
                                           queueItem: currentTrack,

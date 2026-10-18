@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:finamp/models/jellyfin_models.dart';
+import 'package:finamp/services/subsonic/lrclib_lyrics.dart';
 import 'package:finamp/services/subsonic/subsonic_api.dart';
 import 'package:finamp/services/subsonic/subsonic_ids.dart';
 import 'package:finamp/services/subsonic/subsonic_jellyfin_api.dart';
+import 'package:finamp/services/subsonic/subsonic_mapper.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 
 import 'fake_subsonic_server.dart';
 
@@ -400,6 +406,51 @@ void main() {
       final lyrics = LyricDto.fromJson(await api.getLyrics(itemId: SubsonicIds.track("s1")) as Map<String, dynamic>);
       expect(lyrics.lyrics?.single.text, "La la la");
       await expectLater(api.getLyrics(itemId: SubsonicIds.track("s2")), throwsA(isA<SubsonicException>()));
+    });
+
+    test("lyrics the server doesn't have are looked up online", () async {
+      final lrclibRequests = <Uri>[];
+      SubsonicJellyfinApi onlineApi({required bool enabled}) => SubsonicJellyfinApi(
+        baseUrl: () => FakeSubsonicServer.baseUrl,
+        credentials: () => credentials,
+        api: SubsonicApi(httpClient: server.client),
+        lookUpLyricsOnline: () => enabled,
+        onlineLyrics: LrclibLyrics(
+          httpClient: MockClient((request) async {
+            lrclibRequests.add(request.url);
+            return http.Response(
+              jsonEncode({
+                "trackName": "Bravo",
+                "artistName": "The Artist",
+                "instrumental": false,
+                "plainLyrics": "Bravo",
+                "syncedLyrics": "[00:01.50] Bravo",
+              }),
+              200,
+            );
+          }),
+        ),
+      );
+
+      final lyrics = LyricDto.fromJson(
+        await onlineApi(enabled: true).getLyrics(itemId: SubsonicIds.track("s2")) as Map<String, dynamic>,
+      );
+      expect(lyrics.lyrics?.single.text, "Bravo");
+      expect(lyrics.lyrics?.single.start, 1500 * SubsonicMapper.ticksPerMillisecond);
+      expect(lrclibRequests.single.queryParameters, {
+        "track_name": "Bravo",
+        "artist_name": "The Artist",
+        "album_name": "First Album",
+        "duration": "200",
+      });
+
+      // Lyrics the server has, and every track while it's turned off, aren't looked up
+      await onlineApi(enabled: true).getLyrics(itemId: SubsonicIds.track("s1"));
+      await expectLater(
+        onlineApi(enabled: false).getLyrics(itemId: SubsonicIds.track("s2")),
+        throwsA(isA<SubsonicException>()),
+      );
+      expect(lrclibRequests, hasLength(1));
     });
 
     PlaybackProgressInfo progress(Duration position) => PlaybackProgressInfo(

@@ -3887,5 +3887,21 @@
     "appUpdateInstall": "Install",
     "@appUpdateInstall": {
         "description": "Button in the update dialog that downloads the new build and opens Android's installer."
+    },
+    "volumeMute": "Mute",
+    "@volumeMute": {
+        "description": "Tooltip of the speaker button next to the volume slider, which mutes playback."
+    },
+    "volumeUnmute": "Unmute",
+    "@volumeUnmute": {
+        "description": "Tooltip of the speaker button next to the volume slider while playback is muted."
+    },
+    "lookUpLyricsOnlineTitle": "Find lyrics online",
+    "@lookUpLyricsOnlineTitle": {
+        "description": "Title of the setting that looks up lyrics on LRCLIB when the Subsonic server has none."
+    },
+    "lookUpLyricsOnlineSubtitle": "When your server has no lyrics for a track, look them up on LRCLIB (lrclib.net). This sends the track's title, artist, album and length there.",
+    "@lookUpLyricsOnlineSubtitle": {
+        "description": "Subtitle of the setting that looks up lyrics on LRCLIB when the Subsonic server has none."
     }
 }

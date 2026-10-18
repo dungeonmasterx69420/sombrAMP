@@ -538,6 +538,14 @@ extension FinampSetters on FinampSettingsHelper {
     ).put("FinampSettings", finampSettingsTemp);
   }
 
+  static void setLookUpLyricsOnline(bool newLookUpLyricsOnline) {
+    FinampSettings finampSettingsTemp = FinampSettingsHelper.finampSettings;
+    finampSettingsTemp.lookUpLyricsOnline = newLookUpLyricsOnline;
+    Hive.box<FinampSettings>(
+      "FinampSettings",
+    ).put("FinampSettings", finampSettingsTemp);
+  }
+
   static void setKeepScreenOnOption(KeepScreenOnOption newKeepScreenOnOption) {
     FinampSettings finampSettingsTemp = FinampSettingsHelper.finampSettings;
     finampSettingsTemp.keepScreenOnOption = newKeepScreenOnOption;
@@ -1504,6 +1512,8 @@ extension FinampSettingsProviderSelectors on StreamProvider<FinampSettings> {
       finampSettingsProvider.select(
         (value) => value.requireValue.showLyricsScreenAlbumPrelude,
       );
+  ProviderListenable<bool> get lookUpLyricsOnline => finampSettingsProvider
+      .select((value) => value.requireValue.lookUpLyricsOnline);
   ProviderListenable<KeepScreenOnOption> get keepScreenOnOption =>
       finampSettingsProvider.select(
         (value) => value.requireValue.keepScreenOnOption,

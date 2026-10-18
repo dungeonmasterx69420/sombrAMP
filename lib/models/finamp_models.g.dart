@@ -247,6 +247,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
         showLyricsScreenAlbumPrelude: fields[71] == null
             ? true
             : fields[71] as bool,
+        lookUpLyricsOnline: fields[161] == null ? true : fields[161] as bool,
         showStopButtonOnMediaNotification: fields[68] == null
             ? false
             : fields[68] as bool,
@@ -486,7 +487,7 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
   @override
   void write(BinaryWriter writer, FinampSettings obj) {
     writer
-      ..writeByte(149)
+      ..writeByte(150)
       ..writeByte(0)
       ..write(obj.isOffline)
       ..writeByte(1)
@@ -784,7 +785,9 @@ class FinampSettingsAdapter extends TypeAdapter<FinampSettings> {
       ..writeByte(159)
       ..write(obj.showQuickActionsBanner)
       ..writeByte(160)
-      ..write(obj.perTabContentViewType);
+      ..write(obj.perTabContentViewType)
+      ..writeByte(161)
+      ..write(obj.lookUpLyricsOnline);
   }
 
   @override
