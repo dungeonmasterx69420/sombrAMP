@@ -99,77 +99,32 @@ class _MusicScreenTabViewState extends ConsumerState<MusicScreenTabView>
     super.initState();
   }
 
-  // Scrolls the list to the first occurrence of the letter in the list
-  // If clicked in the # element, it goes to the first or last one item, depending on sort order
+  // Scrolls the list to the first item starting with the letter, or to the next letter that has items if there are none.
+  // If clicked in the # element, it goes to the items that don't start with a letter, at the top or the end of the
+  // list depending on sort order
   void scrollToLetter(String letter) async {
     if (letter.isEmpty) return;
 
     letterToSearch = letter;
-    var codePointToScrollTo = (widget.contentType == ContentType.tracks ? letter.toUpperCase() : letter.toLowerCase())
-        .codeUnitAt(0);
-
-    if (letter == '#') {
-      codePointToScrollTo = 0;
-    }
 
     //TODO use binary search to improve performance for already loaded pages
     final state = ref.read(pageControl);
     final itemList = state.items ?? [];
-    SortBy? tabSortBy = widget.sortConfig.sortBy;
-    bool reversed = widget.sortConfig.sortOrder == SortOrder.descending;
-    for (var i = 0; i < itemList.length; i++) {
-      String sortName;
-      switch (itemList[i]) {
-        case FinampPlayableDto(item: var baseItem):
-          switch (tabSortBy) {
-            case SortBy.albumArtist:
-              sortName =
-                  baseItem.albumArtists?.sortedBy((e) => e.name ?? '').map((e) => e.name ?? '').join(", ") ??
-                  baseItem.albumArtist ??
-                  "";
-              // TODO how does jellyfin sort handle this?  Do we match?
-              sortName = removeDiacritics(sortName).toLowerCase();
-              break;
-            default:
-              // Any modification throws us off from server sorting.  Assume sortName is already stripped and lowercase.
-              sortName = baseItem.nameForSorting ?? "";
-              break;
-          }
-        case FinampPlayable playable:
-          sortName = playable.source.name.getLocalized(context.l10n);
-        case LatestQueues():
-        case UnavailableHomeSectionPlayable():
-          // TODO: Handle this case.
-          throw UnsupportedError("This shouldn't happen.");
-      }
-      sortName = removeDiacritics(sortName).toLowerCase();
-      if (sortName.isEmpty) continue; // assume empty names are at the start
-      int itemCodePoint = sortName.codeUnitAt(0);
-      final comparisonResult = itemCodePoint - codePointToScrollTo;
-      if (comparisonResult == 0) {
-        timer?.cancel();
-        await controller.scrollToIndex(
-          i,
-          duration: _getAnimationDurationForOffsetToIndex(i),
-          preferPosition: AutoScrollPosition.begin,
-        );
+    final index = indexForLetter(
+      itemList.map(_sortKeyOf).toList(),
+      letter,
+      descending: widget.sortConfig.sortOrder == SortOrder.descending,
+    );
+    if (index != null) {
+      timer?.cancel();
+      await controller.scrollToIndex(
+        index,
+        duration: _getAnimationDurationForOffsetToIndex(index),
+        preferPosition: AutoScrollPosition.begin,
+      );
 
-        letterToSearch = null;
-        return;
-      } else if (reversed ? comparisonResult < 0 : comparisonResult > 0) {
-        // If the letter is before the current item, there was no previous match (letter doesn't seem to exist in library)
-        // scroll to the previous item instead
-        timer?.cancel();
-        await controller.scrollToIndex(
-          (i - 1).clamp(0, itemList.length - 1),
-          // duration: scrollDuration,
-          duration: _getAnimationDurationForOffsetToIndex(i),
-          preferPosition: AutoScrollPosition.middle,
-        );
-
-        letterToSearch = null;
-        return;
-      }
+      letterToSearch = null;
+      return;
     }
 
     timer?.cancel();
@@ -191,6 +146,19 @@ class _MusicScreenTabViewState extends ConsumerState<MusicScreenTabView>
         duration: const Duration(milliseconds: 500),
         curve: Curves.ease,
       );
+    }
+  }
+
+  String _sortKeyOf(FinampDisplayableOrPlayable item) {
+    switch (item) {
+      case FinampPlayableDto(item: var baseItem):
+        return sortKeyForLetterJump(baseItem, widget.sortConfig.sortBy);
+      case FinampPlayable playable:
+        return removeDiacritics(playable.source.name.getLocalized(context.l10n)).toLowerCase();
+      case LatestQueues():
+      case UnavailableHomeSectionPlayable():
+        // TODO: Handle this case.
+        throw UnsupportedError("This shouldn't happen.");
     }
   }
 
@@ -448,6 +416,39 @@ class _MusicScreenTabViewState extends ConsumerState<MusicScreenTabView>
           : tabContent,
     );
   }
+}
+
+/// The name [item] is sorted by when sorting by [sortBy], without diacritics and in lower case like the Subsonic
+/// library and Jellyfin's sort names, so it can be compared with the letter to jump to.
+@visibleForTesting
+String sortKeyForLetterJump(BaseItemDto item, SortBy? sortBy) {
+  final sortName = switch (sortBy) {
+    // What the Subsonic library and offline mode sort by, which starts with the first album artist
+    SortBy.albumArtist => item.albumArtist ?? item.albumArtists?.firstOrNull?.name ?? "",
+    _ => item.nameForSorting ?? "",
+  };
+  return removeDiacritics(sortName).toLowerCase();
+}
+
+/// The index to jump to for [letter] from the alphabet scroller, in a list sorted by [sortKeys] (without diacritics and
+/// in lower case): the first item starting with the letter, or the item after where those would be if there are none.
+/// For "#" it's the first item, or the first one sorting before "a" (numbers and punctuation) in a [descending] list.
+/// Null if the item isn't in [sortKeys] yet, so it's on a page that isn't loaded or past the end of the list.
+@visibleForTesting
+int? indexForLetter(List<String> sortKeys, String letter, {required bool descending}) {
+  if (letter == "#" && !descending) {
+    return sortKeys.isEmpty ? null : 0;
+  }
+  final target = (letter == "#" ? "a" : letter.toLowerCase()).codeUnitAt(0);
+  for (var i = 0; i < sortKeys.length; i++) {
+    if (sortKeys[i].isEmpty) continue; // assume empty names are at the start
+    final codeUnit = sortKeys[i].codeUnitAt(0);
+    final reached = letter == "#" ? codeUnit < target : (descending ? codeUnit <= target : codeUnit >= target);
+    if (reached) {
+      return i;
+    }
+  }
+  return null;
 }
 
 class MusicRefreshCallback {
