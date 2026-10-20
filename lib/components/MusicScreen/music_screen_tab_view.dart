@@ -149,25 +149,17 @@ class _MusicScreenTabViewState extends ConsumerState<MusicScreenTabView>
     }
   }
 
-  /// The name [item] is sorted by in this tab, without diacritics and in lower case like the Subsonic library and
-  /// Jellyfin's sort names, so it can be compared with the letter to jump to.
   String _sortKeyOf(FinampDisplayableOrPlayable item) {
-    final String sortName;
     switch (item) {
       case FinampPlayableDto(item: var baseItem):
-        sortName = switch (widget.sortConfig.sortBy) {
-          // What the Subsonic library and offline mode sort by, which starts with the first album artist
-          SortBy.albumArtist => baseItem.albumArtist ?? baseItem.albumArtists?.firstOrNull?.name ?? "",
-          _ => baseItem.nameForSorting ?? "",
-        };
+        return sortKeyForLetterJump(baseItem, widget.sortConfig.sortBy);
       case FinampPlayable playable:
-        sortName = playable.source.name.getLocalized(context.l10n);
+        return removeDiacritics(playable.source.name.getLocalized(context.l10n)).toLowerCase();
       case LatestQueues():
       case UnavailableHomeSectionPlayable():
         // TODO: Handle this case.
         throw UnsupportedError("This shouldn't happen.");
     }
-    return removeDiacritics(sortName).toLowerCase();
   }
 
   Duration _getAnimationDurationForOffsetToIndex(int index) {
@@ -424,6 +416,18 @@ class _MusicScreenTabViewState extends ConsumerState<MusicScreenTabView>
           : tabContent,
     );
   }
+}
+
+/// The name [item] is sorted by when sorting by [sortBy], without diacritics and in lower case like the Subsonic
+/// library and Jellyfin's sort names, so it can be compared with the letter to jump to.
+@visibleForTesting
+String sortKeyForLetterJump(BaseItemDto item, SortBy? sortBy) {
+  final sortName = switch (sortBy) {
+    // What the Subsonic library and offline mode sort by, which starts with the first album artist
+    SortBy.albumArtist => item.albumArtist ?? item.albumArtists?.firstOrNull?.name ?? "",
+    _ => item.nameForSorting ?? "",
+  };
+  return removeDiacritics(sortName).toLowerCase();
 }
 
 /// The index to jump to for [letter] from the alphabet scroller, in a list sorted by [sortKeys] (without diacritics and
