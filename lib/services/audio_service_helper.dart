@@ -10,11 +10,15 @@ import 'package:logging/logging.dart';
 
 import '../models/finamp_models.dart';
 import '../models/jellyfin_models.dart' as jellyfin_models;
+import '../models/music_slices.dart';
 import 'downloads_service.dart';
 import 'finamp_settings_helper.dart';
 import 'finamp_user_helper.dart';
 import 'jellyfin_api_helper.dart';
 import 'queue_service.dart';
+
+/// How many random tracks are queued after a track played from the home screen.
+const homeScreenTrackRandomFollowupCount = 50;
 
 /// Just some functions to make talking to AudioService a bit neater.
 class AudioServiceHelper {
@@ -92,6 +96,44 @@ class AudioServiceHelper {
       );
       return (record.items ?? [], record.totalRecordCount);
     }
+  }
+
+  /// Starts playing [slice], followed by [count] random tracks from the current library.
+  /// Playback starts straight away, the random tracks are queued once they've loaded.
+  Future<void> startSlicePlaybackWithRandomTracks(BasePlayableSlice slice, {required int count}) async {
+    final library = _finampUserHelper.currentUser?.currentView;
+    if (library == null || slice.items.isEmpty) {
+      return _queueService.startSlicePlayback(slice);
+    }
+    final playingIds = slice.items.map((track) => track.id).toSet();
+
+    Future<List<BaseItemDto>> fetchRandomTracks() async {
+      try {
+        // Ask for a few extra, in case the random pick includes the tracks that are already playing
+        final tracks =
+            (await getShuffleAllTracks(
+              onlyShowFavorites: false,
+              library: library,
+              itemCount: count + playingIds.length,
+            ))?.$1 ??
+            [];
+        return tracks.where((track) => !playingIds.contains(track.id)).take(count).toList();
+      } catch (e) {
+        audioServiceHelperLogger.warning("Couldn't load random tracks to follow the played track", e);
+        return [];
+      }
+    }
+
+    await _queueService.startSlicePlayback(
+      PreCachedPlayableSlice(
+        source: slice.source,
+        shuffleState: SliceShuffleState.linear,
+        cachedTracks: slice.items,
+        fetchTracks: fetchRandomTracks(),
+        combineTracks: true,
+        startingOffset: slice.startingIndex,
+      ),
+    );
   }
 
   /// Start instant mix from item.

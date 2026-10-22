@@ -146,15 +146,19 @@ class _ItemCollectionWrapperState extends ConsumerState<ItemWrapper> {
     local = AppLocalizations.of(context)!;
 
     return RemoteLongPress(
-      onLongPress: widget.interactive ? () => openItemMenu(context: context, item: widget.item) : null,
+      onLongPress: widget.interactive
+          ? () => openItemMenu(context: context, item: widget.item, source: widget.source)
+          : null,
       child: GestureDetector(
         onTapDown: (_) {
           if (!widget.interactive) return;
           // Begin precalculating theme for menu
           ref.listenManual(finampThemeProvider(ThemeInfo(widget.item)), (_, _) {});
         },
-        onLongPressStart: (details) => widget.interactive ? openItemMenu(context: context, item: widget.item) : null,
-        onSecondaryTapDown: (details) => widget.interactive ? openItemMenu(context: context, item: widget.item) : null,
+        onLongPressStart: (details) =>
+            widget.interactive ? openItemMenu(context: context, item: widget.item, source: widget.source) : null,
+        onSecondaryTapDown: (details) =>
+            widget.interactive ? openItemMenu(context: context, item: widget.item, source: widget.source) : null,
         child: widget.isGrid
             ? ItemCard(item: mutableItem, onTap: onTap, forHomeScreen: widget.forHomeScreen)
             : ItemCollectionListTile(
@@ -173,6 +177,7 @@ void openItemMenu({
   required BuildContext context,
   required BaseItemDto item,
   FinampStorableQueueInfo? queueInfo,
+  QueueItemSource? source,
 }) async {
   unawaited(Feedback.forLongPress(context));
 
@@ -187,7 +192,7 @@ void openItemMenu({
       await showModalPlaylistMenu(context: context, item: item, queueInfo: queueInfo);
       break;
     case BaseItemDtoType.track:
-      await showModalTrackMenu(context: context, item: item, queueInfo: queueInfo);
+      await showModalTrackMenu(context: context, item: item, queueInfo: queueInfo, source: source);
       break;
     case BaseItemDtoType.album:
       await showModalAlbumMenu(context: context, album: Album.fromItem(item), queueInfo: queueInfo);

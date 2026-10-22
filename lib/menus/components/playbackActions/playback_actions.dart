@@ -5,6 +5,7 @@ import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/menus/components/playbackActions/playback_action.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/models/music_models.dart';
+import 'package:finamp/services/audio_service_helper.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/queue_service.dart';
 import 'package:flutter/material.dart';
@@ -179,9 +180,16 @@ class PlayPlaybackAction extends ConsumerWidget {
           Navigator.pop(context);
         }
 
-        await queueService.startSlicePlayback(
-          await ref.watch(getPlayableSliceProvider(item: item, startingOffset: 0).future),
-        );
+        final slice = await ref.watch(getPlayableSliceProvider(item: item, startingOffset: 0).future);
+        // A track played from the home screen keeps going with random tracks instead of stopping after it
+        if (item is Track && item.source.type == QueueItemSourceType.homeScreenSection && slice is BasePlayableSlice) {
+          await GetIt.instance<AudioServiceHelper>().startSlicePlaybackWithRandomTracks(
+            slice,
+            count: homeScreenTrackRandomFollowupCount,
+          );
+        } else {
+          await queueService.startSlicePlayback(slice);
+        }
       },
       iconColor: Theme.of(context).textTheme.bodyMedium?.color ?? Colors.white,
     );
