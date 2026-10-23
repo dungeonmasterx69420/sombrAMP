@@ -135,11 +135,14 @@ jobs:
       # Unsigned: whoever sideloads it signs it with their own Apple ID. Without --no-pub, as on Android.
       - run: flutter build ios --release --no-codesign --build-number="$BUILD_NUMBER"
 
-      # An IPA is the app bundle in a Payload folder, zipped
+      # An IPA is the app bundle in a Payload folder, zipped. Flutter.framework comes out of the build readable by its
+      # owner only (0700 folders, 0600 files), and the zip keeps that. On the phone the app's files belong to the
+      # installer, not to the app, so they're made readable by everyone first, as in an IPA that Xcode exports.
       - name: Package the IPA
         run: |
           mkdir Payload
           cp -R build/ios/iphoneos/Runner.app Payload/
+          chmod -R u+rwX,go+rX Payload
           zip -qry "sombrAMP-${GITHUB_REF_NAME//\//-}-ios.ipa" Payload
 
       - uses: actions/upload-artifact@v6
