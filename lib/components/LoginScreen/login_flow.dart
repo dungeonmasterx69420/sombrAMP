@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:finamp/components/LoginScreen/login_server_selection_page.dart';
+import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/models/finamp_models.dart' show ServerType;
 import 'package:finamp/models/jellyfin_models.dart';
 import 'package:finamp/screens/view_selector.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/server_client_discovery_service.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
@@ -24,6 +26,8 @@ class LoginFlow extends StatefulWidget {
 }
 
 final loginNavigatorKey = GlobalKey<NavigatorState>();
+
+final _loginFlowLogger = Logger("LoginFlow");
 
 class _LoginFlowState extends State<LoginFlow> {
   ServerState serverState = ServerState(discoveredServers: {});
@@ -86,6 +90,20 @@ class _LoginFlowState extends State<LoginFlow> {
                 LoginSplashPage(
                   onGetStartedPressed: () =>
                       loginNavigatorKey.currentState!.pushNamed(LoginServerSelectionPage.routeName),
+                  onSombrioAccountPressed: SombrioHost.isEmbedded
+                      ? (account) async {
+                          try {
+                            await GetIt.instance<JellyfinApiHelper>().authenticateWithSombrio(account);
+                          } catch (e) {
+                            _loginFlowLogger.warning("Couldn't sign in with Sombrio's account", e);
+                            GlobalSnackbar.error(e);
+                            return;
+                          }
+                          if (!context.mounted) return;
+                          Navigator.of(context).pushReplacementNamed(ViewSelector.routeName);
+                          _updateCapabilities();
+                        }
+                      : null,
                 ),
               );
               break;
@@ -132,59 +150,7 @@ class _LoginFlowState extends State<LoginFlow> {
                   connectionState: connectionState,
                   onAuthenticated: () {
                     Navigator.of(context).popAndPushNamed(ViewSelector.routeName);
-                    final jellyfinApiHelper = GetIt.instance<JellyfinApiHelper>();
-                    jellyfinApiHelper.updateCapabilities(
-                      ClientCapabilities(
-                        supportsMediaControl: true,
-                        supportsPersistentIdentifier: true,
-                        playableMediaTypes: ["Audio"],
-                        supportedCommands: [
-                          "MoveUp",
-                          "MoveDown",
-                          "MoveLeft",
-                          "MoveRight",
-                          "PageUp",
-                          "PageDown",
-                          "PreviousLetter",
-                          "NextLetter",
-                          "ToggleOsd",
-                          "ToggleContextMenu",
-                          "Select",
-                          "Back",
-                          "TakeScreenshot",
-                          "SendKey",
-                          "SendString",
-                          "GoHome",
-                          "GoToSettings",
-                          "VolumeUp",
-                          "VolumeDown",
-                          "Mute",
-                          "Unmute",
-                          "ToggleMute",
-                          "SetVolume",
-                          "SetAudioStreamIndex",
-                          "SetSubtitleStreamIndex",
-                          "ToggleFullscreen",
-                          "DisplayContent",
-                          "GoToSearch",
-                          "DisplayMessage",
-                          "SetRepeatMode",
-                          "ChannelUp",
-                          "ChannelDown",
-                          "Guide",
-                          "ToggleStats",
-                          "PlayMediaSource",
-                          "PlayTrailers",
-                          "SetShuffleQueue",
-                          "PlayState",
-                          "PlayNext",
-                          "ToggleOsdMenu",
-                          "Play",
-                          "SetMaxStreamingBitrate",
-                          "SetPlaybackOrder",
-                        ],
-                      ),
-                    );
+                    _updateCapabilities();
                   },
                 ),
               );
@@ -195,6 +161,62 @@ class _LoginFlowState extends State<LoginFlow> {
           // return MaterialPageRoute<void>(builder: builder, settings: settings);
           return route;
         },
+      ),
+    );
+  }
+
+  /// Tells the server what this client can do, once signed in.
+  void _updateCapabilities() {
+    GetIt.instance<JellyfinApiHelper>().updateCapabilities(
+      ClientCapabilities(
+        supportsMediaControl: true,
+        supportsPersistentIdentifier: true,
+        playableMediaTypes: ["Audio"],
+        supportedCommands: [
+          "MoveUp",
+          "MoveDown",
+          "MoveLeft",
+          "MoveRight",
+          "PageUp",
+          "PageDown",
+          "PreviousLetter",
+          "NextLetter",
+          "ToggleOsd",
+          "ToggleContextMenu",
+          "Select",
+          "Back",
+          "TakeScreenshot",
+          "SendKey",
+          "SendString",
+          "GoHome",
+          "GoToSettings",
+          "VolumeUp",
+          "VolumeDown",
+          "Mute",
+          "Unmute",
+          "ToggleMute",
+          "SetVolume",
+          "SetAudioStreamIndex",
+          "SetSubtitleStreamIndex",
+          "ToggleFullscreen",
+          "DisplayContent",
+          "GoToSearch",
+          "DisplayMessage",
+          "SetRepeatMode",
+          "ChannelUp",
+          "ChannelDown",
+          "Guide",
+          "ToggleStats",
+          "PlayMediaSource",
+          "PlayTrailers",
+          "SetShuffleQueue",
+          "PlayState",
+          "PlayNext",
+          "ToggleOsdMenu",
+          "Play",
+          "SetMaxStreamingBitrate",
+          "SetPlaybackOrder",
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +29,8 @@ class AppUpdate {
 class AppUpdateService {
   AppUpdateService({http.Client? httpClient}) : _httpClient = httpClient ?? http.Client();
 
-  static final isSupported = Platform.isAndroid;
+  /// Inside Sombrio, the app is Sombrio's APK, which Sombrio updates itself.
+  static final isSupported = Platform.isAndroid && !SombrioHost.isEmbedded;
 
   static final _logger = Logger("AppUpdateService");
   static const _channel = MethodChannel("com.unicornsonlsd.finamp/app_updates");

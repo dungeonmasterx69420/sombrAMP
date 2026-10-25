@@ -9,6 +9,7 @@ import 'package:finamp/components/global_snackbar.dart';
 import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_logs_helper.dart';
 import 'package:finamp/services/http_aggregate_logging_interceptor.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -768,6 +769,23 @@ class JellyfinApiHelper {
     await _finampUserHelper.saveUser(newUser);
     baseUrlTemp =
         null; // Clear the temporary base URL after authentication, since this has priority over the regular URL
+  }
+
+  /// Signs in to the account Sombrio is signed in to.  sombrAMP asks for a Quick Connect code like any other client,
+  /// and Sombrio authorizes it with its own session, so the music player gets a session of its own: signing out of
+  /// one doesn't sign out the other.
+  Future<void> authenticateWithSombrio(SombrioAccount account) async {
+    baseUrlTemp = Uri.parse(account.baseUrl);
+    if (!await checkQuickConnect()) {
+      throw StateError("Quick Connect is disabled on this server");
+    }
+    var quickConnectState = await initiateQuickConnect();
+    await SombrioHost.authorizeQuickConnect(quickConnectState.code!);
+    quickConnectState = await updateQuickConnect(quickConnectState) ?? quickConnectState;
+    if (!quickConnectState.authenticated) {
+      throw StateError("Sombrio couldn't authorize the Quick Connect request");
+    }
+    await authenticateWithQuickConnect(quickConnectState);
   }
 
   /// Authenticates a user and saves the login details
