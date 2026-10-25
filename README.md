@@ -127,6 +127,14 @@ python3 tools/branding/generate_icons.py    # Android, iOS, macOS, Linux and Win
 dart run flutter_native_splash:create --path=flutter_native_splash.yaml
 ```
 
+## Inside Sombrio
+
+[Sombrio](https://github.com/dungeonmasterx69420/Sombrio) is the Sombra app for films and shows, and sombrAMP is its
+Music tab: Sombrio builds this repository as a Flutter module, with `--dart-define=SOMBRIO=true`
+(`lib/sombra/sombrio_host.dart`). Built that way, the sign-in first offers to continue as the Jellyfin account Sombrio
+is signed in to (Sombrio authorizes a Quick Connect request for it, so sombrAMP gets a session of its own), and the app
+doesn't look for updates itself, since Sombrio updates the whole APK. The standalone app is unchanged.
+
 ## Building
 
 sombrAMP is a Flutter app; see [CONTRIBUTING.md](CONTRIBUTING.md) for the toolchain and platform setup it
