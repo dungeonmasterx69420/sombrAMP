@@ -65,6 +65,34 @@
     "@loginFlowGetStarted": {
         "description": "Button label for the login/splash screen."
     },
+    "loginFlowContinueAs": "Continue as {userName}",
+    "@loginFlowContinueAs": {
+        "description": "Button on the login screen of the music player inside Sombrio, which signs in to the Jellyfin account Sombrio is signed in to.",
+        "placeholders": {
+            "userName": {
+                "type": "String",
+                "example": "alex"
+            }
+        }
+    },
+    "loginFlowHostAccount": "The account {hostName} is signed in to on {serverName}.",
+    "@loginFlowHostAccount": {
+        "description": "Explains the 'Continue as' button on the login screen of the music player inside Sombrio.",
+        "placeholders": {
+            "hostName": {
+                "type": "String",
+                "example": "Sombrio"
+            },
+            "serverName": {
+                "type": "String",
+                "example": "Jellyfin"
+            }
+        }
+    },
+    "loginFlowUseAnotherServer": "Use another server",
+    "@loginFlowUseAnotherServer": {
+        "description": "Button on the login screen of the music player inside Sombrio, for signing in to another server, e.g. Navidrome, instead of Sombrio's account."
+    },
     "viewLogs": "View Logs",
     "@viewLogs": {
         "description": "Label for button shown during the login process that allows the user to view the app logs"
