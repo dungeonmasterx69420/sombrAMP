@@ -129,11 +129,20 @@ dart run flutter_native_splash:create --path=flutter_native_splash.yaml
 
 ## Inside Sombrio
 
-[Sombrio](https://github.com/dungeonmasterx69420/Sombrio) is the Sombra app for films and shows, and sombrAMP is its
-Music tab: Sombrio builds this repository as a Flutter module, with `--dart-define=SOMBRIO=true`
-(`lib/sombra/sombrio_host.dart`). Built that way, the sign-in first offers to continue as the Jellyfin account Sombrio
-is signed in to (Sombrio authorizes a Quick Connect request for it, so sombrAMP gets a session of its own), and the app
-doesn't look for updates itself, since Sombrio updates the whole APK. The standalone app is unchanged.
+[Sombrio](https://github.com/dungeonmasterx69420/Sombrio) is the Sombra app for films, shows and Live TV, and sombrAMP is
+its Music tab. Sombrio is a Flutter app as well and has this repository as a package (`finamp`), built with
+`--dart-define=SOMBRIO=true` (`lib/sombra/sombrio_host.dart`): it starts sombrAMP with `startInSombrio()` and shows it next
+to its own screens, in the same engine, so switching between the two is instant and each keeps its place. Built that way:
+
+- the sign-in first offers to continue as the Jellyfin account Sombrio is signed in to (Sombrio authorizes a Quick
+  Connect request for it, so sombrAMP gets a session of its own);
+- the **Films and shows** button at the top of the music screen, the same entry in the menu, and back on the music
+  screen go back to Sombrio, and the music keeps playing;
+- sombrAMP plays through Sombrio's audio service, which is one for the whole app, and its assets and fonts are the
+  package's;
+- the app doesn't look for updates itself, since Sombrio updates the whole APK.
+
+The standalone app is unchanged.
 
 ## Building
 

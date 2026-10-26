@@ -1,4 +1,5 @@
 import 'package:finamp/extensions/color_extensions.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,14 +11,14 @@ import 'package:flutter/services.dart';
 
 abstract final class SystemSFonts {
   /// Titles, labels, buttons and menus (`--pixel`).
-  static const pixel = 'PixelifySans';
+  static const pixel = '${SombrioHost.fontPrefix}PixelifySans';
 
   /// Pixelify Sans's "fi" and "fl" ligatures draw as broken glyphs ("Jellyfin" reads "JellyÆn"), so every
   /// Pixelify style turns them off.
   static const pixelFeatures = [FontFeature.disable('liga')];
 
   /// Body text and figures (`--mono`).
-  static const mono = 'IBMPlexMono';
+  static const mono = '${SombrioHost.fontPrefix}IBMPlexMono';
 }
 
 @immutable

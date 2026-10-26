@@ -60,6 +60,7 @@ import 'package:finamp/services/playback_history_service.dart';
 import 'package:finamp/services/playon_service.dart';
 import 'package:finamp/services/queue_service.dart';
 import 'package:finamp/services/theme_provider.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/sombra/system_s.dart';
 import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:finamp/services/ui_overlay_setter_observer.dart';
@@ -142,54 +143,7 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
   _registerFontLicenses();
 
   try {
-    startTime = DateTime.now();
-    await setupLogging();
-    await _setupEdgeToEdgeOverlayStyle();
-    _mainLog.info("Setup edge-to-edge overlay");
-    await detectTelevision();
-    _mainLog.info("Running on a TV: $isTelevision");
-    await setupHive();
-    _mainLog.info("Setup hive and isar");
-    // Apply the persisted verbose logging preference now that settings exist.
-    applyLogLevel();
-    _migrateDownloadLocations();
-    _migrateSortOptions();
-    _migrateGridSize();
-    _migrateHomescreen();
-    _migrateFeatureChips();
-    _migrateDeviceId();
-    await _migrateThemeModeLocale();
-    if (_settingsCreated) {
-      await LayoutSyncService.rememberPristineLayout(LayoutSyncState(Hive.box(LayoutSyncState.boxName)));
-    }
-    _mainLog.info("Completed applicable migrations");
-    await _trustAndroidUserCerts();
-    await ClientCertificateInstaller().installClientCertificate();
-    _mainLog.info("Installed client certificate");
-    await _setupFinampUserHelper();
-    _mainLog.info("Setup user helper");
-    await _setupJellyfinApiData();
-    _mainLog.info("setup jellyfin api");
-    _setupLayoutSync();
-    _mainLog.info("Setup layout sync");
-    _setupOfflineListenLogHelper();
-    _mainLog.info("Setup offline listen tracking");
-    await _setupDownloadsHelper();
-    _mainLog.info("Setup downloads service");
-    await _setupProviders();
-    _mainLog.info("Setup providers");
-    await _setupOSIntegration(args);
-    _mainLog.info("Setup os integrations");
-    await _setupPlayOnService();
-    _mainLog.info("Setup PlayOnService");
-    await _setupPlaybackServices();
-    _mainLog.info("Setup audio player");
-    await _setupKeepScreenOnHelper();
-    _mainLog.info("Setup KeepScreenOnHelper");
-    await _setupDiscordRpc();
-    _mainLog.info("Setup Discord RPC");
-    _setupAppUpdates();
-    _mainLog.info("Setup app updates");
+    await _setup(args);
   } catch (error, trace) {
     if (!integrationTesting) {
       Logger("ErrorApp").severe(error, null, trace);
@@ -237,7 +191,84 @@ Future<void> main(List<String> args, {bool integrationTesting = false, bool logi
   }
 }
 
+/// Sets sombrAMP up: its settings and databases, the Jellyfin session, downloads and the player.
+Future<void> _setup(List<String> args) async {
+  startTime = DateTime.now();
+  await setupLogging();
+  await _setupEdgeToEdgeOverlayStyle();
+  _mainLog.info("Setup edge-to-edge overlay");
+  await detectTelevision();
+  _mainLog.info("Running on a TV: $isTelevision");
+  await setupHive();
+  _mainLog.info("Setup hive and isar");
+  // Apply the persisted verbose logging preference now that settings exist.
+  applyLogLevel();
+  _migrateDownloadLocations();
+  _migrateSortOptions();
+  _migrateGridSize();
+  _migrateHomescreen();
+  _migrateFeatureChips();
+  _migrateDeviceId();
+  await _migrateThemeModeLocale();
+  if (_settingsCreated) {
+    await LayoutSyncService.rememberPristineLayout(LayoutSyncState(Hive.box(LayoutSyncState.boxName)));
+  }
+  _mainLog.info("Completed applicable migrations");
+  await _trustAndroidUserCerts();
+  await ClientCertificateInstaller().installClientCertificate();
+  _mainLog.info("Installed client certificate");
+  await _setupFinampUserHelper();
+  _mainLog.info("Setup user helper");
+  await _setupJellyfinApiData();
+  _mainLog.info("setup jellyfin api");
+  _setupLayoutSync();
+  _mainLog.info("Setup layout sync");
+  _setupOfflineListenLogHelper();
+  _mainLog.info("Setup offline listen tracking");
+  await _setupDownloadsHelper();
+  _mainLog.info("Setup downloads service");
+  await _setupProviders();
+  _mainLog.info("Setup providers");
+  await _setupOSIntegration(args);
+  _mainLog.info("Setup os integrations");
+  await _setupPlayOnService();
+  _mainLog.info("Setup PlayOnService");
+  await _setupPlaybackServices();
+  _mainLog.info("Setup audio player");
+  await _setupKeepScreenOnHelper();
+  _mainLog.info("Setup KeepScreenOnHelper");
+  await _setupDiscordRpc();
+  _mainLog.info("Setup Discord RPC");
+  _setupAppUpdates();
+  _mainLog.info("Setup app updates");
+}
+
+/// Starts sombrAMP inside Sombrio (see [SombrioHost]), which shows the returned app next to its own once it has set
+/// [SombrioHost.delegate]. Sombrio has its own error handlers, system UI and updates, so sombrAMP leaves those alone.
+/// Starting it again returns the same app.
+Future<Widget> startInSombrio() => _sombrioApp ??= _startInSombrio();
+
+Future<Widget>? _sombrioApp;
+
+Future<Widget> _startInSombrio() async {
+  assert(SombrioHost.isEmbedded, "Sombrio builds sombrAMP with --dart-define=SOMBRIO=true");
+  _registerFontLicenses();
+  try {
+    await _setup(const []);
+    await findSystemLocale();
+    await initializeDateFormatting();
+    unawaited(fetchSystemPalette());
+  } catch (error, trace) {
+    Logger("ErrorApp").severe(error, null, trace);
+    return FinampErrorApp(error: error, trace: trace);
+  }
+  _mainLog.info("Launching sombrAMP inside Sombrio");
+  return const Finamp();
+}
+
 Future<void> _setupEdgeToEdgeOverlayStyle() async {
+  // Sombrio lays out its windows edge to edge itself.
+  if (SombrioHost.isEmbedded) return;
   if (Platform.isAndroid) {
     unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent));
@@ -263,7 +294,8 @@ Future<void> _setupDownloadsHelper() async {
   await Future.wait(
     FinampSettingsHelper.finampSettings.downloadLocationsMap.values.map((element) => element.updateCurrentPath()),
   );
-  final fileDownloader = FileDownloader(persistentStorage: IsarPersistentStorage());
+  // Inside Sombrio, whose downloads go through the same downloader, its records are kept with Sombrio's.
+  final fileDownloader = FileDownloader(persistentStorage: SombrioHost.isEmbedded ? null : IsarPersistentStorage());
   await fileDownloader.ready;
   WidgetsFlutterBinding.ensureInitialized();
   // There is additional FileDownloader setup inside downloadsService constructor
@@ -456,7 +488,7 @@ Future<void> _setupOSIntegration(List<String> commandLineArgs) async {
     path_helper.join(applicationSupportDirectory.absolute.path, Assets.images.albumWhite.path),
   );
   if (!(await albumImageFile.exists())) {
-    final albumImageBytes = await rootBundle.load(Assets.images.albumWhite.path);
+    final albumImageBytes = await rootBundle.load(SombrioHost.asset(Assets.images.albumWhite.path));
     final albumBuffer = albumImageBytes.buffer;
     await albumImageFile.create(recursive: true);
     await albumImageFile.writeAsBytes(
@@ -464,7 +496,8 @@ Future<void> _setupOSIntegration(List<String> commandLineArgs) async {
     );
   }
 
-  if (Platform.isAndroid) {
+  // Inside Sombrio, the app's night mode follows Sombrio's theme, not the music player's.
+  if (Platform.isAndroid && !SombrioHost.isEmbedded) {
     var themeModeChannel = MethodChannel("com.unicornsonlsd.finamp/set_native_theme");
     GetIt.instance<ProviderContainer>().listen(finampSettingsProvider.themeMode, (_, mode) {
       _mainLog.info("Setting android native theme to $mode");
@@ -489,35 +522,42 @@ Future<void> _setupPlaybackServices() async {
 
   GetIt.instance.registerSingleton<AndroidAutoHelper>(AndroidAutoHelper());
 
-  final audioHandler = await AudioService.init(
-    builder: () => MusicPlayerBackgroundTask(),
-    config: AudioServiceConfig(
-      androidStopForegroundOnPause: FinampSettingsHelper.finampSettings.androidStopForegroundOnPause,
-      androidNotificationChannelName: Sombra.productName,
-      androidNotificationIcon: "mipmap/white",
-      androidNotificationChannelId: "com.unicornsonlsd.finamp.audio",
-      // notificationColor: TODO use the theme color for older versions of Android,
-      // We will handle preloading artwork ourselves
-      preloadArtwork: false,
-      // Keep iOS now playing info + remote command handlers registered when
-      // the service stops, so Finamp stays the system's resume candidate for
-      // CarPlay/Bluetooth reconnects instead of losing now-playing status to
-      // whichever app had it before. Requires the audio_service fork
-      // overrides in pubspec.yaml (the flag spans audio_service and
-      // audio_service_platform_interface).
-      iosKeepNowPlayingOnStop: true,
-      androidBrowsableRootExtras: <String, dynamic>{
-        // support showing search button on Android Auto as well as alternative search results on the player screen after voice search
-        "android.media.browse.SEARCH_SUPPORTED": true,
-        // see https://developer.android.com/reference/androidx/media/utils/MediaConstants#DESCRIPTION_EXTRAS_VALUE_CONTENT_STYLE_GRID_ITEM()
-        "android.media.browse.CONTENT_STYLE_BROWSABLE_HINT":
-            FinampSettingsHelper.finampSettings.contentViewType == ContentViewType.list ? 1 : 2,
-        "android.media.browse.CONTENT_STYLE_PLAYABLE_HINT":
-            FinampSettingsHelper.finampSettings.contentViewType == ContentViewType.list ? 1 : 2,
-      },
-    ),
-    cacheManager: StubImageCache(),
-  );
+  final MusicPlayerBackgroundTask audioHandler;
+  if (SombrioHost.isEmbedded) {
+    // Sombrio has started the app's audio service already, for its own player too
+    audioHandler = MusicPlayerBackgroundTask();
+    await SombrioHost.delegate!.attachAudioHandler(audioHandler);
+  } else {
+    audioHandler = await AudioService.init(
+      builder: () => MusicPlayerBackgroundTask(),
+      config: AudioServiceConfig(
+        androidStopForegroundOnPause: FinampSettingsHelper.finampSettings.androidStopForegroundOnPause,
+        androidNotificationChannelName: Sombra.productName,
+        androidNotificationIcon: "mipmap/white",
+        androidNotificationChannelId: "com.unicornsonlsd.finamp.audio",
+        // notificationColor: TODO use the theme color for older versions of Android,
+        // We will handle preloading artwork ourselves
+        preloadArtwork: false,
+        // Keep iOS now playing info + remote command handlers registered when
+        // the service stops, so Finamp stays the system's resume candidate for
+        // CarPlay/Bluetooth reconnects instead of losing now-playing status to
+        // whichever app had it before. Requires the audio_service fork
+        // overrides in pubspec.yaml (the flag spans audio_service and
+        // audio_service_platform_interface).
+        iosKeepNowPlayingOnStop: true,
+        androidBrowsableRootExtras: <String, dynamic>{
+          // support showing search button on Android Auto as well as alternative search results on the player screen after voice search
+          "android.media.browse.SEARCH_SUPPORTED": true,
+          // see https://developer.android.com/reference/androidx/media/utils/MediaConstants#DESCRIPTION_EXTRAS_VALUE_CONTENT_STYLE_GRID_ITEM()
+          "android.media.browse.CONTENT_STYLE_BROWSABLE_HINT":
+              FinampSettingsHelper.finampSettings.contentViewType == ContentViewType.list ? 1 : 2,
+          "android.media.browse.CONTENT_STYLE_PLAYABLE_HINT":
+              FinampSettingsHelper.finampSettings.contentViewType == ContentViewType.list ? 1 : 2,
+        },
+      ),
+      cacheManager: StubImageCache(),
+    );
+  }
 
   GetIt.instance.registerSingleton<MusicPlayerBackgroundTask>(audioHandler);
   var queueService = QueueService();
@@ -1008,7 +1048,7 @@ void _registerFontLicenses() {
     ('IBM Plex Mono', 'assets/fonts/IBMPlexMono-OFL.txt'),
   ]) {
     LicenseRegistry.addLicense(() async* {
-      yield LicenseEntryWithLineBreaks([font], await rootBundle.loadString(file));
+      yield LicenseEntryWithLineBreaks([font], await rootBundle.loadString(SombrioHost.asset(file)));
     });
   }
 }
@@ -1034,9 +1074,14 @@ class FinampApp extends ConsumerWidget {
               (previousValue, element) => previousValue..[element] = const NoTransitionPageTransitionsBuilder(),
             ),
           )
+        : SombrioHost.isEmbedded
+        // Sombrio shows sombrAMP next to its own screens and decides where back goes, so pages don't follow the
+        // predictive back gesture there: hidden ones would follow it too.
+        ? const PageTransitionsTheme(builders: {TargetPlatform.android: FadeForwardsPageTransitionsBuilder()})
         : null;
     return MaterialApp(
-      title: Sombra.productName,
+      // The app's name in the recent apps list
+      title: SombrioHost.isEmbedded ? SombrioHost.hostName : Sombra.productName,
       routes: {
         SplashScreen.routeName: (context) => const SplashScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),

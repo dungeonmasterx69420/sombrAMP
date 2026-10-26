@@ -29,7 +29,9 @@ dependencies:
   background_downloader: ^9.2.3
   json_annotation: ^4.8.1
   chopper: ^8.0.0
-  get_it: ^8.2.0
+  # get_it, package_info_plus, device_info_plus and app_links also take the versions Sombrio, which has sombrAMP as a
+  # package, resolves for its own side
+  get_it: ">=8.2.0 <10.0.0"
   # just_audio: ^0.10.5
   just_audio:
     # TODO switch back to official just_audio once https://github.com/ryanheise/just_audio/pull/1555 is merged
@@ -88,8 +90,8 @@ dependencies:
     git:
       url: https://github.com/jfly/flutter_user_certificates_android.git
       ref: db81e4ff3222a7db1308ed03c4bc3142c0d271d5
-  device_info_plus: ^12.1.0
-  package_info_plus: ^9.0.0
+  device_info_plus: ">=11.5.0 <13.0.0"
+  package_info_plus: ">=8.3.1 <10.0.0"
   octo_image: ^2.0.0
   # Main split view package does not seem actively maintained.  Use fork with ability to specify
   # handle visual vs grabbable sizes separately.
@@ -151,7 +153,7 @@ dependencies:
   http: ^1.4.0
   # Used for Subsonic token authentication
   crypto: ^3.0.6
-  app_links: ^6.4.0
+  app_links: ">=6.4.0 <8.0.0"
   flutter_discord_rpc: ^1.0.0
   shared_preferences: ^2.5.3
   flex_color_picker: ^3.7.1

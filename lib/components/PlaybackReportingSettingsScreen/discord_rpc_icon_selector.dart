@@ -2,6 +2,7 @@ import 'package:finamp/components/SettingsScreen/finamp_settings_dropdown.dart';
 import 'package:finamp/l10n/app_localizations.dart';
 import 'package:finamp/models/finamp_models.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +26,7 @@ class DiscordRpcIconSelector extends ConsumerWidget {
                   (e) => DropdownMenuEntry<DiscordRpcIcon>(
                     value: e,
                     label: e.toLocalisedString(context),
-                    leadingIcon: Image.asset(e.toImage(), width: 32, height: 32),
+                    leadingIcon: Image.asset(SombrioHost.asset(e.toImage()), width: 32, height: 32),
                   ),
                 )
                 .toList(),

@@ -20,6 +20,7 @@ import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/music_providers.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/utils/platform_helper.dart';
 import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/material.dart';
@@ -239,6 +240,14 @@ class FinampMusicScreenHeader extends ConsumerWidget implements PreferredSizeWid
                       onPressed: () {
                         refreshTab();
                       },
+                    ),
+                  // Inside Sombrio, the way back to its films and shows
+                  if (SombrioHost.isEmbedded && singleTabConfig == null)
+                    IconButtonWithSemantics(
+                      label: context.l10n.sombrioFilmsAndShows,
+                      icon: TablerIcons.movie,
+                      iconSize: 28.0,
+                      onPressed: SombrioHost.leave,
                     ),
                   if (singleTabConfig == null || singleTabConfig?.base is TabsHomeSection)
                     IconButtonWithSemantics(
