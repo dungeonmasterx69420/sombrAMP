@@ -19,10 +19,10 @@ import 'package:finamp/services/item_by_id_provider.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/layout_sync_service.dart';
 import 'package:finamp/services/music_providers.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/utils/platform_helper.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:get_it/get_it.dart';
@@ -251,7 +251,8 @@ class _MusicScreenState extends ConsumerState<MusicScreen> with TickerProviderSt
         } else if (_nowPlayingBarFocus.context != null && !_nowPlayingBarFocus.hasFocus) {
           _nowPlayingBarFocus.requestFocus();
         } else {
-          SystemNavigator.pop();
+          // Inside Sombrio, back to films and shows
+          SombrioHost.leave();
         }
       },
       child: Scaffold(

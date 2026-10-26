@@ -1,3 +1,4 @@
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/sombra/system_s.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,6 +29,7 @@ class SombraMark extends StatelessWidget {
     final color = this.color ?? DefaultTextStyle.of(context).style.color ?? SystemSTheme.of(context).palette.ink;
     return SvgPicture.asset(
       'images/sombra_s_mark.svg',
+      package: SombrioHost.assetPackage,
       height: height,
       width: height * 61 / 116,
       colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
@@ -48,6 +50,7 @@ class SombraWordmark extends StatelessWidget {
     final color = this.color ?? DefaultTextStyle.of(context).style.color ?? SystemSTheme.of(context).palette.ink;
     return SvgPicture.asset(
       'images/sombra_wordmark.svg',
+      package: SombrioHost.assetPackage,
       width: width,
       height: width * 110 / 621,
       colorFilter: ColorFilter.mode(color, BlendMode.srcIn),

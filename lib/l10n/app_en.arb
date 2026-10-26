@@ -89,6 +89,10 @@
             }
         }
     },
+    "sombrioFilmsAndShows": "Films and shows",
+    "@sombrioFilmsAndShows": {
+        "description": "The button of the music player inside Sombrio that goes back to Sombrio's films and shows."
+    },
     "loginFlowUseAnotherServer": "Use another server",
     "@loginFlowUseAnotherServer": {
         "description": "Button on the login screen of the music player inside Sombrio, for signing in to another server, e.g. Navidrome, instead of Sombrio's account."

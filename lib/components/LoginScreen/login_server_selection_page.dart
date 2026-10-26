@@ -8,6 +8,7 @@ import 'package:finamp/services/client_certificate_installer.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/jellyfin_api_helper.dart';
 import 'package:finamp/services/server_client_discovery_service.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -342,7 +343,7 @@ class JellyfinServerSelectionWidget extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('images/jellyfin-icon-transparent.png', width: 36, height: 36),
+          Image.asset(SombrioHost.asset('images/jellyfin-icon-transparent.png'), width: 36, height: 36),
           const SizedBox(width: 12.0),
           Expanded(
             child: Column(

@@ -16,6 +16,7 @@ import 'package:finamp/services/downloads_service.dart';
 import 'package:finamp/services/finamp_settings_helper.dart';
 import 'package:finamp/services/finamp_user_helper.dart';
 import 'package:finamp/services/server_info_provider.dart';
+import 'package:finamp/sombra/sombrio_host.dart';
 import 'package:finamp/sombra/system_s_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -130,6 +131,20 @@ class MusicScreenDrawer extends ConsumerWidget {
                           ],
                         ),
                       ),
+                      // Inside Sombrio, the way back to its films and shows
+                      if (SombrioHost.isEmbedded)
+                        ListTile(
+                          leading: const Padding(
+                            padding: EdgeInsets.only(left: 2.0, right: 12.0),
+                            child: Icon(TablerIcons.movie, size: 20.0),
+                          ),
+                          title: Text(context.l10n.sombrioFilmsAndShows, style: TextStyle(fontSize: 15.0)),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            SombrioHost.leave();
+                          },
+                          dense: true,
+                        ),
                       const OfflineModeSwitchListTile(),
                       const OfflineModeStatusLabel(),
                       ListTile(
