@@ -524,9 +524,9 @@ Future<void> _setupPlaybackServices() async {
 
   final MusicPlayerBackgroundTask audioHandler;
   if (SombrioHost.isEmbedded) {
-    // Sombrio has started the app's audio service already, for its own player too
+    // Sombrio runs the app's audio service, for its own player too, and plays this one through it once the queue
+    // below is set up: the player's events read the queue, so nothing may wait between building one and the other.
     audioHandler = MusicPlayerBackgroundTask();
-    await SombrioHost.delegate!.attachAudioHandler(audioHandler);
   } else {
     audioHandler = await AudioService.init(
       builder: () => MusicPlayerBackgroundTask(),
@@ -568,6 +568,10 @@ Future<void> _setupPlaybackServices() async {
 
   if (Platform.isIOS) {
     GetIt.instance.registerSingleton<CarPlayHelper>(CarPlayHelper());
+  }
+
+  if (SombrioHost.isEmbedded) {
+    await SombrioHost.delegate!.attachAudioHandler(audioHandler);
   }
 
   // Begin to restore queue
