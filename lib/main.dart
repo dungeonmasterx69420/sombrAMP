@@ -1074,6 +1074,10 @@ class FinampApp extends ConsumerWidget {
               (previousValue, element) => previousValue..[element] = const NoTransitionPageTransitionsBuilder(),
             ),
           )
+        : SombrioHost.isEmbedded
+        // Sombrio shows sombrAMP next to its own screens and decides where back goes, so pages don't follow the
+        // predictive back gesture there: hidden ones would follow it too.
+        ? const PageTransitionsTheme(builders: {TargetPlatform.android: FadeForwardsPageTransitionsBuilder()})
         : null;
     return MaterialApp(
       // The app's name in the recent apps list
